@@ -61,7 +61,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\JoinAsGuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\JoinParty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Launcher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Lobby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -80,8 +100,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Pages\JoinAsGuest.xaml.cs">
+      <DependentUpon>JoinAsGuest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\JoinParty.xaml.cs">
+      <DependentUpon>JoinParty.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Launcher.xaml.cs">
       <DependentUpon>Launcher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Lobby.xaml.cs">
+      <DependentUpon>Lobby.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -115,13 +150,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Connected Services\DataService\DatabaseService.wsdl" />
-    <None Include="Connected Services\DataService\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\DataService\item1.xsd">
       <SubType>Designer</SubType>
     </None>

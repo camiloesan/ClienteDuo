@@ -27,7 +27,7 @@ namespace ClienteDuo.Pages
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnNewAccount(object sender, RoutedEventArgs e)
         {
             NewAccount newAccount = new NewAccount();
             App.Current.MainWindow.Content = newAccount;
@@ -43,6 +43,20 @@ namespace ClienteDuo.Pages
         private void ButtonLocalizationEsMX(object sender, RoutedEventArgs e)
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
+            Launcher launcher = new Launcher();
+            App.Current.MainWindow.Content = launcher;
+        }
+
+        private void BtnLogin(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            App.Current.MainWindow.Content = login;
+        }
+
+        private void BtnJoinAsGuest(object sender, RoutedEventArgs e)
+        {
+            JoinAsGuest joinAsGuest = new JoinAsGuest();
+            App.Current.MainWindow.Content = joinAsGuest;
         }
     }
 }

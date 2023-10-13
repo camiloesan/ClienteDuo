@@ -1,0 +1,21 @@
+﻿<Page x:Class="ClienteDuo.Pages.MainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ClienteDuo.Pages"
+      xmlns:p="clr-namespace:ClienteDuo.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="MainMenu">
+
+    <Grid Background="#FF263E54">
+        <Border HorizontalAlignment="Center" Height="65" Margin="0,0,0,0" Width="184" VerticalAlignment="Center">
+            <Grid>
+                <Button Content="{x:Static p:Resources.BtnNewParty}" Click="BtnNewParty" Width="87" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Content="{x:Static p:Resources.BtnJoinParty}" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Top" Click="BtnJoinParty" Width="87"/>
+                <Button Content="{x:Static p:Resources.BtnQuitGame}" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Click="BtnQuitGame" Width="184"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

@@ -12,12 +12,14 @@
     <Grid Background="#FF263E54">
         <Border HorizontalAlignment="Center" Height="69" Margin="0,259,0,0" VerticalAlignment="Top" Width="260">
             <Grid>
-                <Button Content="{x:Static p:Resources.BtnNewAccount}" Margin="0,0,135,0" VerticalAlignment="Top" Cursor="Hand" HorizontalAlignment="Right" Width="125" Height="28" Click="Button_Click"/>
-                <Button Content="{x:Static p:Resources.BtnLogin}" HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Top" Width="125" Height="28"/>
-                <Button Content="{x:Static p:Resources.BtnJoinAsGuest}" Margin="0,41,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="260"/>
+                <Button Content="{x:Static p:Resources.BtnNewAccount}" Margin="0,0,135,0" VerticalAlignment="Top" Cursor="Hand" HorizontalAlignment="Right" Width="125" Height="28" Click="BtnNewAccount"/>
+                <Button Content="{x:Static p:Resources.BtnLogin}" HorizontalAlignment="Left" Margin="135,0,0,0" VerticalAlignment="Top" Width="125" Height="28" Click="BtnLogin"/>
+                <Button Content="{x:Static p:Resources.BtnJoinAsGuest}" Margin="0,41,0,0" VerticalAlignment="Top" Height="28" HorizontalAlignment="Left" Width="260" Click="BtnJoinAsGuest"/>
             </Grid>
         </Border>
         <Button Content="en_US" HorizontalAlignment="Left" Margin="30,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEnUS" Width="60"/>
         <Button Content="es_MX" HorizontalAlignment="Left" Margin="112,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEsMX" Width="60"/>
+        <Button Content="ja_JP" HorizontalAlignment="Left" Margin="195,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEsMX" Width="60"/>
+        <Button Content="fr_FR" HorizontalAlignment="Left" Margin="278,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEsMX" Width="60"/>
     </Grid>
 </Page>

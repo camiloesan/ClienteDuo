@@ -27,5 +27,14 @@ namespace ClienteDuo.Pages
             Launcher launcher = new Launcher();
             this.Content = launcher;
         }
+        public static void ShowMessageBox(string message)
+        {
+            string messageBoxText = message;
+            string caption = "Alert *internacionalizar*";
+
+            MessageBoxButton okButton = MessageBoxButton.OK;
+            MessageBoxImage warningIcon = MessageBoxImage.Warning;
+            MessageBox.Show(messageBoxText, caption, okButton, warningIcon);
+        }
     }
 }

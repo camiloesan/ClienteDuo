@@ -79,11 +79,38 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JoinAsGuest.
+        ///   Looks up a localized string similar to Exit Lobby.
+        /// </summary>
+        public static string BtnExitLobby {
+            get {
+                return ResourceManager.GetString("BtnExitLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join.
+        /// </summary>
+        public static string BtnJoin {
+            get {
+                return ResourceManager.GetString("BtnJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join As Guest.
         /// </summary>
         public static string BtnJoinAsGuest {
             get {
                 return ResourceManager.GetString("BtnJoinAsGuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join Party.
+        /// </summary>
+        public static string BtnJoinParty {
+            get {
+                return ResourceManager.GetString("BtnJoinParty", resourceCulture);
             }
         }
         
@@ -106,6 +133,33 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Party.
+        /// </summary>
+        public static string BtnNewParty {
+            get {
+                return ResourceManager.GetString("BtnNewParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quit Game.
+        /// </summary>
+        public static string BtnQuitGame {
+            get {
+                return ResourceManager.GetString("BtnQuitGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string LblChat {
+            get {
+                return ResourceManager.GetString("LblChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         public static string LblConfirmPassword {
@@ -124,11 +178,47 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game Settings.
+        /// </summary>
+        public static string LblGameSettings {
+            get {
+                return ResourceManager.GetString("LblGameSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In-Game Username.
+        /// </summary>
+        public static string LblInGameUsername {
+            get {
+                return ResourceManager.GetString("LblInGameUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PartyCode.
+        /// </summary>
+        public static string LblPartyCode {
+            get {
+                return ResourceManager.GetString("LblPartyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string LblPassword {
             get {
                 return ResourceManager.GetString("LblPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        public static string LblPlayers {
+            get {
+                return ResourceManager.GetString("LblPlayers", resourceCulture);
             }
         }
         
@@ -147,6 +237,15 @@ namespace ClienteDuo.Properties {
         public static string TItleLauncher {
             get {
                 return ResourceManager.GetString("TItleLauncher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string TitleLogin {
+            get {
+                return ResourceManager.GetString("TitleLogin", resourceCulture);
             }
         }
         

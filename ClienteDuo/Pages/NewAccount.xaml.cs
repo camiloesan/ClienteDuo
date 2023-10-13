@@ -41,15 +41,8 @@ namespace ClienteDuo
             if (AreFieldsValid())
             {
                 AddUserExternally();
-                ShowUsersOnServer();
-                ShowMessageBox("El usuario fue registrado exitosamente");
+                MainWindow.ShowMessageBox("El usuario fue registrado exitosamente");
             }
-        }
-
-        private void ShowUsersOnServer()
-        {
-            DataService.DatabaseServiceClient client = new DataService.DatabaseServiceClient();
-            client.ShowUsers();
         }
 
         private bool AreFieldsValid()
@@ -75,17 +68,17 @@ namespace ClienteDuo
 
             if (usernameField.Length > 30)
             {
-                ShowMessageBox("el maximo de caracteres para el username es de 30 ***");
+                MainWindow.ShowMessageBox("el maximo de caracteres para el username es de 30 ***");
                 return false;
             } 
             else if (emailField.Length > 30)
             {
-                ShowMessageBox("el maximo de caracteres para el correo electronico es de 30***");
+                MainWindow.ShowMessageBox("el maximo de caracteres para el correo electronico es de 30***");
                 return false;
             }
             else if (passwordField.Length < 8)
             {
-                ShowMessageBox("La contraseña debe tener un minimo de 8 caracteres***");
+                MainWindow.ShowMessageBox("La contraseña debe tener un minimo de 8 caracteres***");
                 return false;
             }
             return true;
@@ -103,21 +96,10 @@ namespace ClienteDuo
                 || string.IsNullOrEmpty(passwordField)
                 || string.IsNullOrEmpty(confirmPasswordField))
             {
-                ShowMessageBox("Todos los campos deben estar llenos *pendiente internacionalizar*");
+                MainWindow.ShowMessageBox("Todos los campos deben estar llenos *pendiente internacionalizar*");
                 return true;
             }
             return false;
-        }
-
-        private void ShowMessageBox(string message)
-        {
-            //ResourceManager resourceManager = new ResourceManager("resx", Assembly.GetExecutingAssembly());
-            string messageBoxText = message;
-            string caption = "Alert *internacionalizar*";
-
-            MessageBoxButton okButton = MessageBoxButton.OK;
-            MessageBoxImage warningIcon = MessageBoxImage.Warning;
-            MessageBox.Show(messageBoxText, caption, okButton, warningIcon);
         }
 
         private void AddUserExternally()
@@ -125,7 +107,7 @@ namespace ClienteDuo
             string username = TBoxUsername.Text;
             string email = TBoxEmail.Text;
             string password = TBoxPassword.Password;
-            DataService.DatabaseServiceClient client = new DataService.DatabaseServiceClient();
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
             client.AddUserToDatabase(username, email, password);
         }
     }

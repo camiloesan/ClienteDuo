@@ -123,8 +123,17 @@
   <data name="BtnContinue" xml:space="preserve">
     <value>Continue</value>
   </data>
+  <data name="BtnExitLobby" xml:space="preserve">
+    <value>Exit Lobby</value>
+  </data>
+  <data name="BtnJoin" xml:space="preserve">
+    <value>Join</value>
+  </data>
   <data name="BtnJoinAsGuest" xml:space="preserve">
-    <value>JoinAsGuest</value>
+    <value>Join As Guest</value>
+  </data>
+  <data name="BtnJoinParty" xml:space="preserve">
+    <value>Join Party</value>
   </data>
   <data name="BtnLogin" xml:space="preserve">
     <value>Login</value>
@@ -132,20 +141,44 @@
   <data name="BtnNewAccount" xml:space="preserve">
     <value>New Account</value>
   </data>
+  <data name="BtnNewParty" xml:space="preserve">
+    <value>New Party</value>
+  </data>
+  <data name="BtnQuitGame" xml:space="preserve">
+    <value>Quit Game</value>
+  </data>
+  <data name="LblChat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
   <data name="LblConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
   <data name="LblEmail" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="LblGameSettings" xml:space="preserve">
+    <value>Game Settings</value>
+  </data>
+  <data name="LblInGameUsername" xml:space="preserve">
+    <value>In-Game Username</value>
+  </data>
+  <data name="LblPartyCode" xml:space="preserve">
+    <value>PartyCode</value>
+  </data>
   <data name="LblPassword" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="LblPlayers" xml:space="preserve">
+    <value>Players</value>
   </data>
   <data name="LblUsername" xml:space="preserve">
     <value>Username</value>
   </data>
   <data name="TItleLauncher" xml:space="preserve">
     <value>Launcher</value>
+  </data>
+  <data name="TitleLogin" xml:space="preserve">
+    <value>Login</value>
   </data>
   <data name="TitleNewAccount" xml:space="preserve">
     <value>New Account</value>

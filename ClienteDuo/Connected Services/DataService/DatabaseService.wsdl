@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="DatabaseService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsp:Policy wsu:Id="NetTcpBinding_IDatabaseService_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IUsersManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IMessageService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
@@ -33,56 +62,53 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IDatabaseService_AddUserToDatabase_InputMessage">
+  <wsdl:message name="IUsersManager_AddUserToDatabase_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUserToDatabase" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseService_AddUserToDatabase_OutputMessage">
+  <wsdl:message name="IUsersManager_AddUserToDatabase_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserToDatabaseResponse" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseService_ShowUsers_InputMessage">
-    <wsdl:part name="parameters" element="tns:ShowUsers" />
+  <wsdl:message name="IUsersManager_IsLoginValid_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsLoginValid" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseService_ShowUsers_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ShowUsersResponse" />
+  <wsdl:message name="IUsersManager_IsLoginValid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsLoginValidResponse" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseService_GetData_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetData" />
+  <wsdl:message name="IMessageService_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseService_GetData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  <wsdl:message name="IMessageService_MessageReceived_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageReceived" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseService_GetDataUsingDataContract_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  <wsdl:message name="IMessageService_MessageReceived_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageReceivedResponse" />
   </wsdl:message>
-  <wsdl:message name="IDatabaseService_GetDataUsingDataContract_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
-  </wsdl:message>
-  <wsdl:portType name="IDatabaseService">
+  <wsdl:portType name="IUsersManager">
     <wsdl:operation name="AddUserToDatabase">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddUserToDatabase" message="tns:IDatabaseService_AddUserToDatabase_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddUserToDatabaseResponse" message="tns:IDatabaseService_AddUserToDatabase_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabase" message="tns:IUsersManager_AddUserToDatabase_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse" message="tns:IUsersManager_AddUserToDatabase_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ShowUsers">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/ShowUsers" message="tns:IDatabaseService_ShowUsers_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/ShowUsersResponse" message="tns:IDatabaseService_ShowUsers_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetData">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetData" message="tns:IDatabaseService_GetData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetDataResponse" message="tns:IDatabaseService_GetData_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetDataUsingDataContract" message="tns:IDatabaseService_GetDataUsingDataContract_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetDataUsingDataContractResponse" message="tns:IDatabaseService_GetDataUsingDataContract_OutputMessage" />
+    <wsdl:operation name="IsLoginValid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValid" message="tns:IUsersManager_IsLoginValid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValidResponse" message="tns:IUsersManager_IsLoginValid_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="NetTcpBinding_IDatabaseService" type="tns:IDatabaseService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IDatabaseService_policy" />
+  <wsdl:portType name="IMessageService">
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessageService/SendMessage" message="tns:IMessageService_SendMessage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MessageReceived">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessageService/MessageReceived" message="tns:IMessageService_MessageReceived_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessageService/MessageReceivedResponse" message="tns:IMessageService_MessageReceived_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IUsersManager" type="tns:IUsersManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUsersManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="AddUserToDatabase">
-      <soap12:operation soapAction="http://tempuri.org/IDatabaseService/AddUserToDatabase" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/AddUserToDatabase" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -90,8 +116,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ShowUsers">
-      <soap12:operation soapAction="http://tempuri.org/IDatabaseService/ShowUsers" style="document" />
+    <wsdl:operation name="IsLoginValid">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsLoginValid" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -99,17 +125,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetData">
-      <soap12:operation soapAction="http://tempuri.org/IDatabaseService/GetData" style="document" />
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IMessageService" type="tns:IMessageService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMessageService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/IMessageService/SendMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <soap12:operation soapAction="http://tempuri.org/IDatabaseService/GetDataUsingDataContract" style="document" />
+    <wsdl:operation name="MessageReceived">
+      <soap12:operation soapAction="http://tempuri.org/IMessageService/MessageReceived" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -119,10 +146,19 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="DatabaseService">
-    <wsdl:port name="NetTcpBinding_IDatabaseService" binding="tns:NetTcpBinding_IDatabaseService">
-      <soap12:address location="net.tcp://localhost:8081/MessageService" />
+    <wsdl:port name="NetTcpBinding_IUsersManager" binding="tns:NetTcpBinding_IUsersManager">
+      <soap12:address location="net.tcp://localhost:8081/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8081/MessageService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>MATEBOOK\camil</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IMessageService" binding="tns:NetTcpBinding_IMessageService">
+      <soap12:address location="net.tcp://localhost:8081/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8081/Service</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Upn>MATEBOOK\camil</Upn>
         </Identity>
