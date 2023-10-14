@@ -40,8 +40,14 @@ namespace ClienteDuo
         {
             if (AreFieldsValid())
             {
-                AddUserExternally();
-                MainWindow.ShowMessageBox("El usuario fue registrado exitosamente");
+                if (AddUserExternally())
+                {
+                    MainWindow.ShowMessageBox("El usuario fue registrado exitosamente");
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox("Ocurrió un error en la basa de datos, no se pudo registrar el usuario");
+                }
             }
         }
 
@@ -102,13 +108,13 @@ namespace ClienteDuo
             return false;
         }
 
-        private void AddUserExternally()
+        private bool AddUserExternally()
         {
             string username = TBoxUsername.Text;
             string email = TBoxEmail.Text;
             string password = TBoxPassword.Password;
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            client.AddUserToDatabase(username, email, password);
+            return client.AddUserToDatabase(username, email, password);
         }
     }
 }

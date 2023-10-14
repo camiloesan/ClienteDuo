@@ -16,16 +16,16 @@ namespace ClienteDuo.DataService {
     public interface IUsersManager {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
-        void AddUserToDatabase(string username, string email, string password);
+        bool AddUserToDatabase(string username, string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
-        System.Threading.Tasks.Task AddUserToDatabaseAsync(string username, string email, string password);
+        System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(string username, string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsLoginValid", ReplyAction="http://tempuri.org/IUsersManager/IsLoginValidResponse")]
-        bool IsLoginValid(string username, string password);
+        bool IsLoginValid(string email, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsLoginValid", ReplyAction="http://tempuri.org/IUsersManager/IsLoginValidResponse")]
-        System.Threading.Tasks.Task<bool> IsLoginValidAsync(string username, string password);
+        System.Threading.Tasks.Task<bool> IsLoginValidAsync(string email, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,20 +55,20 @@ namespace ClienteDuo.DataService {
                 base(binding, remoteAddress) {
         }
         
-        public void AddUserToDatabase(string username, string email, string password) {
-            base.Channel.AddUserToDatabase(username, email, password);
+        public bool AddUserToDatabase(string username, string email, string password) {
+            return base.Channel.AddUserToDatabase(username, email, password);
         }
         
-        public System.Threading.Tasks.Task AddUserToDatabaseAsync(string username, string email, string password) {
+        public System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(string username, string email, string password) {
             return base.Channel.AddUserToDatabaseAsync(username, email, password);
         }
         
-        public bool IsLoginValid(string username, string password) {
-            return base.Channel.IsLoginValid(username, password);
+        public bool IsLoginValid(string email, string password) {
+            return base.Channel.IsLoginValid(email, password);
         }
         
-        public System.Threading.Tasks.Task<bool> IsLoginValidAsync(string username, string password) {
-            return base.Channel.IsLoginValidAsync(username, password);
+        public System.Threading.Tasks.Task<bool> IsLoginValidAsync(string email, string password) {
+            return base.Channel.IsLoginValidAsync(email, password);
         }
     }
     

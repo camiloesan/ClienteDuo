@@ -20,8 +20,8 @@
         <Label Content="{x:Static p:Resources.LblGameSettings}" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="2"/>
         <TextBlock x:Name="TBlockChat" HorizontalAlignment="Center" Margin="0,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="330" Width="244" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Text=""/>
         <TextBox x:Name="TBoxMessage" HorizontalAlignment="Center" Margin="0,466,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" KeyDown="SendMessage"/>
-        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="245,550,0,0" VerticalAlignment="Top"/>
-        <Button Grid.Column="2" Content="Button" HorizontalAlignment="Left" Margin="23,550,0,0" VerticalAlignment="Top"/>
-        <Button Grid.Column="2" Content="{x:Static p:Resources.BtnExitLobby}" HorizontalAlignment="Left" Margin="131,550,0,0" VerticalAlignment="Top" Click="BtnExitLobby"/>
+        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="252,525,0,0" VerticalAlignment="Top"/>
+        <Button Grid.Column="2" Content="Button" HorizontalAlignment="Left" Margin="29,525,0,0" VerticalAlignment="Top"/>
+        <Button Grid.Column="2" Content="{x:Static p:Resources.BtnExitLobby}" HorizontalAlignment="Center" Margin="0,525,0,0" VerticalAlignment="Top" Click="BtnExitLobby"/>
     </Grid>
 </Page>
