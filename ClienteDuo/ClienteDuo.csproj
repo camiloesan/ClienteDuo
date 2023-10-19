@@ -124,7 +124,6 @@
     <Compile Include="Pages\NewAccount.xaml.cs">
       <DependentUpon>NewAccount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Patterns\SingletonLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
