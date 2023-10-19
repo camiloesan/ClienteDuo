@@ -12,7 +12,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="NetTcpBinding_IMessageService_policy">
+  <wsp:Policy wsu:Id="NetTcpBinding_IPartyManager_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
@@ -28,6 +28,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUsersManager_AddUserToDatabase_InputMessage">
@@ -42,14 +43,32 @@
   <wsdl:message name="IUsersManager_IsLoginValid_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsLoginValidResponse" />
   </wsdl:message>
-  <wsdl:message name="IMessageService_SendMessage_InputMessage">
+  <wsdl:message name="IPartyManager_JoinParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinParty" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
-  <wsdl:message name="IMessageService_MessageReceived_OutputCallbackMessage">
+  <wsdl:message name="IPartyManager_LeaveParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveParty" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_PlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoined" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_PlayerJoined_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoinedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_MessageReceived_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MessageReceived" />
   </wsdl:message>
-  <wsdl:message name="IMessageService_MessageReceived_InputCallbackMessage">
+  <wsdl:message name="IPartyManager_MessageReceived_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:MessageReceivedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_PlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeft" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_PlayerLeft_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
   </wsdl:message>
   <wsdl:portType name="IUsersManager">
     <wsdl:operation name="AddUserToDatabase">
@@ -61,13 +80,27 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValidResponse" message="tns:IUsersManager_IsLoginValid_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:portType name="IMessageService">
+  <wsdl:portType name="IPartyManager">
+    <wsdl:operation name="JoinParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/JoinParty" message="tns:IPartyManager_JoinParty_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SendMessage">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMessageService/SendMessage" message="tns:IMessageService_SendMessage_InputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/SendMessage" message="tns:IPartyManager_SendMessage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/LeaveParty" message="tns:IPartyManager_LeaveParty_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerJoined" message="tns:IPartyManager_PlayerJoined_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerJoinedResponse" message="tns:IPartyManager_PlayerJoined_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="MessageReceived">
-      <wsdl:output wsaw:Action="http://tempuri.org/IMessageService/MessageReceived" message="tns:IMessageService_MessageReceived_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IMessageService/MessageReceivedResponse" message="tns:IMessageService_MessageReceived_InputCallbackMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/MessageReceived" message="tns:IPartyManager_MessageReceived_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/MessageReceivedResponse" message="tns:IPartyManager_MessageReceived_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeft" message="tns:IPartyManager_PlayerLeft_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeftResponse" message="tns:IPartyManager_PlayerLeft_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUsersManager" type="tns:IUsersManager">
@@ -92,17 +125,47 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="NetTcpBinding_IMessageService" type="tns:IMessageService">
-    <wsp:PolicyReference URI="#NetTcpBinding_IMessageService_policy" />
+  <wsdl:binding name="NetTcpBinding_IPartyManager" type="tns:IPartyManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPartyManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="SendMessage">
-      <soap12:operation soapAction="http://tempuri.org/IMessageService/SendMessage" style="document" />
+    <wsdl:operation name="JoinParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/JoinParty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/LeaveParty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerJoined" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="MessageReceived">
-      <soap12:operation soapAction="http://tempuri.org/IMessageService/MessageReceived" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/MessageReceived" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerLeft" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -118,7 +181,7 @@
         <wsa10:Address>net.tcp://192.168.1.64:8080/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
-    <wsdl:port name="NetTcpBinding_IMessageService" binding="tns:NetTcpBinding_IMessageService">
+    <wsdl:port name="NetTcpBinding_IPartyManager" binding="tns:NetTcpBinding_IPartyManager">
       <soap12:address location="net.tcp://192.168.1.64:8080/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://192.168.1.64:8080/Service</wsa10:Address>

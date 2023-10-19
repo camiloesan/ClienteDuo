@@ -1,37 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for Lobby.xaml
-    /// </summary>
-    public partial class Lobby : Page, DataService.IMessageServiceCallback
+    public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
+        private Dictionary<string, object> playersInLobby = new Dictionary<string, object>();
+
         public Lobby()
         {
             InitializeComponent();
-            Console.WriteLine(this.GetHashCode());
-            //try connection and register user in hashmap
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            client.JoinParty(Login.ACTIVE_EMAIL);
         }
 
         public void MessageReceived(string messageSent)
         {
-            TBlockChat.Text = messageSent;
-            // GUARDAR EN UN HASHMAP LOS CONTEXTOS (o lista) Y DESPUES RECORRERLOS PARA MANDAR EL MESSAGE RECEIVED
+            Label labelMessageReceived = new Label();
+            labelMessageReceived.HorizontalAlignment = HorizontalAlignment.Left;
+            labelMessageReceived.Foreground = new SolidColorBrush(Colors.White);
+            labelMessageReceived.Content = messageSent;
+
+            chatPanel.Children.Add(labelMessageReceived);
+            chatScrollViewer.ScrollToEnd();
         }
         
         private void SendMessage(object sender, KeyEventArgs e)
@@ -39,8 +35,10 @@ namespace ClienteDuo.Pages
             if (e.Key == Key.Return)
             {
                 InstanceContext instanceContext = new InstanceContext(this);
-                DataService.MessageServiceClient client = new DataService.MessageServiceClient(instanceContext); //instance, address???
-                string message = TBoxMessage.Text;
+                DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+
+                string message = Login.ACTIVE_EMAIL + ": " + TBoxMessage.Text;
+                TBoxMessage.Text = "";
                 client.SendMessage(message);
             }
         }
@@ -49,7 +47,31 @@ namespace ClienteDuo.Pages
         {
             MainMenu mainMenu = new MainMenu();
             App.Current.MainWindow.Content = mainMenu;
-            //disconnect
+
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            client.LeaveParty(Login.ACTIVE_EMAIL);
+        }
+
+        public void PlayerJoined(Dictionary<string, object> playersInLobby)
+        {
+            this.playersInLobby = playersInLobby;
+
+            foreach (KeyValuePair<string, object> keyValuePair in playersInLobby)
+            {
+                Label label = new Label();
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                label.Foreground = new SolidColorBrush(Colors.White);
+                label.Content = keyValuePair.Key;
+
+                playersPanel.Children.Add(label);
+            }
+        }
+
+        public void PlayerLeft(Dictionary<string, object> playersInLobby)
+        {
+            
+            //update labels 
         }
     }
 }

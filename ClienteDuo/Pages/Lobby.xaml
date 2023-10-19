@@ -5,23 +5,32 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ClienteDuo.Pages"
       xmlns:p="clr-namespace:ClienteDuo.Properties"
+      
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="Lobby">
 
-    <Grid Background="#FF263E54">
+    <Grid x:Name="mainGrid" Background="#FF263E54">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="134*"/>
+            <RowDefinition Height="33*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="333*"/>
             <ColumnDefinition Width="333*"/>
             <ColumnDefinition Width="333*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="{x:Static p:Resources.LblChat}" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="0"/>
-        <Label Content="{x:Static p:Resources.LblPlayers}" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
-        <Label Content="{x:Static p:Resources.LblGameSettings}" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="2"/>
-        <TextBlock x:Name="TBlockChat" HorizontalAlignment="Center" Margin="0,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="330" Width="244" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Text=""/>
-        <TextBox x:Name="TBoxMessage" HorizontalAlignment="Center" Margin="0,466,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" KeyDown="SendMessage"/>
-        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="252,525,0,0" VerticalAlignment="Top"/>
-        <Button Grid.Column="2" Content="Button" HorizontalAlignment="Left" Margin="29,525,0,0" VerticalAlignment="Top"/>
-        <Button Grid.Column="2" Content="{x:Static p:Resources.BtnExitLobby}" HorizontalAlignment="Center" Margin="0,525,0,0" VerticalAlignment="Top" Click="BtnExitLobby"/>
+        <Label Content="{x:Static p:Resources.LblChat}" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Foreground="White" Height="26" Width="35"/>
+        <Label Content="{x:Static p:Resources.LblPlayers}" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1" Height="26" Width="48"/>
+        <Label Content="{x:Static p:Resources.LblGameSettings}" HorizontalAlignment="Center" Margin="0,46,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="2" Height="26" Width="87"/>
+        <TextBox x:Name="TBoxMessage" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="244" KeyDown="SendMessage" Grid.Row="2" Height="18"/>
+        <Button Grid.Column="1" Content="Button" HorizontalAlignment="Left" Margin="260,0,0,0" VerticalAlignment="Center" Grid.Row="2" Height="20" Width="40"/>
+        <Button Grid.Column="2" Content="Button" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center" Grid.Row="2" Height="20" Width="39"/>
+        <Button Grid.Column="2" Content="{x:Static p:Resources.BtnExitLobby}" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" Click="BtnExitLobby" Grid.Row="2" Height="20" Width="59"/>
+        <ScrollViewer x:Name="chatScrollViewer" Grid.Row="1" Margin="20,20,20,20">
+            <StackPanel x:Name="chatPanel" Margin="20,20,20,20"/>
+        </ScrollViewer>
+        <StackPanel x:Name="playersPanel" Grid.Column="1" Grid.Row="1" Margin="40,40,40,40"/>
     </Grid>
 </Page>

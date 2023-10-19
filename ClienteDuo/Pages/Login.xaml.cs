@@ -15,11 +15,10 @@ using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Login : Page
     {
+        public static string ACTIVE_EMAIL;
+
         public Login()
         {
             InitializeComponent();
@@ -28,11 +27,13 @@ namespace ClienteDuo.Pages
         private void BtnLogin(object sender, RoutedEventArgs e)
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            string username = TBoxEmail.Text;
+            string email = TBoxEmail.Text;
             string password = TBoxPassword.Text;
-            bool isLoginValid = client.IsLoginValid(username, password);
+
+            bool isLoginValid = client.IsLoginValid(email, password);
             if (isLoginValid)
             {
+                ACTIVE_EMAIL = email;
                 MainMenu mainMenu = new MainMenu();
                 App.Current.MainWindow.Content = mainMenu;
             }

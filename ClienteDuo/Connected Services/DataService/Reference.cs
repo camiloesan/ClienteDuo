@@ -73,49 +73,75 @@ namespace ClienteDuo.DataService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IMessageService", CallbackContract=typeof(ClienteDuo.DataService.IMessageServiceCallback))]
-    public interface IMessageService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IPartyManager", CallbackContract=typeof(ClienteDuo.DataService.IPartyManagerCallback))]
+    public interface IPartyManager {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessageService/SendMessage")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/JoinParty")]
+        void JoinParty(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/JoinParty")]
+        System.Threading.Tasks.Task JoinPartyAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/SendMessage")]
         void SendMessage(string message);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessageService/SendMessage")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(string message);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMessageServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessageService/MessageReceived", ReplyAction="http://tempuri.org/IMessageService/MessageReceivedResponse")]
-        void MessageReceived(string messageSent);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
+        void LeaveParty(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
+        System.Threading.Tasks.Task LeavePartyAsync(string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMessageServiceChannel : ClienteDuo.DataService.IMessageService, System.ServiceModel.IClientChannel {
+    public interface IPartyManagerCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerJoined", ReplyAction="http://tempuri.org/IPartyManager/PlayerJoinedResponse")]
+        void PlayerJoined(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/MessageReceived", ReplyAction="http://tempuri.org/IPartyManager/MessageReceivedResponse")]
+        void MessageReceived(string messageSent);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerLeft", ReplyAction="http://tempuri.org/IPartyManager/PlayerLeftResponse")]
+        void PlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPartyManagerChannel : ClienteDuo.DataService.IPartyManager, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MessageServiceClient : System.ServiceModel.DuplexClientBase<ClienteDuo.DataService.IMessageService>, ClienteDuo.DataService.IMessageService {
+    public partial class PartyManagerClient : System.ServiceModel.DuplexClientBase<ClienteDuo.DataService.IPartyManager>, ClienteDuo.DataService.IPartyManager {
         
-        public MessageServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+        public PartyManagerClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
         }
         
-        public MessageServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+        public PartyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
                 base(callbackInstance, endpointConfigurationName) {
         }
         
-        public MessageServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+        public PartyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public MessageServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PartyManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public MessageServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public PartyManagerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void JoinParty(string email) {
+            base.Channel.JoinParty(email);
+        }
+        
+        public System.Threading.Tasks.Task JoinPartyAsync(string email) {
+            return base.Channel.JoinPartyAsync(email);
         }
         
         public void SendMessage(string message) {
@@ -124,6 +150,14 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task SendMessageAsync(string message) {
             return base.Channel.SendMessageAsync(message);
+        }
+        
+        public void LeaveParty(string email) {
+            base.Channel.LeaveParty(email);
+        }
+        
+        public System.Threading.Tasks.Task LeavePartyAsync(string email) {
+            return base.Channel.LeavePartyAsync(email);
         }
     }
 }

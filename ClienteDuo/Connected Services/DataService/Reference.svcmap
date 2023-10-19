@@ -26,6 +26,7 @@
     <MetadataFile FileName="ServiceImplementation.wsdl" MetadataType="Wsdl" ID="3982b7d5-efd3-423d-b56c-239539ce51af" SourceId="1" SourceUrl="http://192.168.1.64:8082/?wsdl" />
     <MetadataFile FileName="item.disco" MetadataType="Disco" ID="667cd5ed-7153-48d8-99f0-271f5b96f092" SourceId="1" SourceUrl="http://192.168.1.64:8082/?disco" />
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="dcc39acd-4dc0-4f14-aa55-4780dcc5f43f" SourceId="1" SourceUrl="http://192.168.1.64:8082/?xsd=xsd0" />
+    <MetadataFile FileName="item22.xsd" MetadataType="Schema" ID="a49f91c4-99dc-417a-90bf-c954a4e56ef4" SourceId="1" SourceUrl="http://192.168.1.64:8082/?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

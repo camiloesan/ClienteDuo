@@ -114,7 +114,17 @@ namespace ClienteDuo
             string email = TBoxEmail.Text;
             string password = TBoxPassword.Password;
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            return client.AddUserToDatabase(username, email, password);
+
+            bool result = false;
+            try
+            {
+                result = client.AddUserToDatabase(username, email, password);
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return result;
         }
     }
 }
