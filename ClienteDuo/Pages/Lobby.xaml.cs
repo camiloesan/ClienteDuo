@@ -9,7 +9,7 @@ namespace ClienteDuo.Pages
 {
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
-        private Dictionary<string, object> playersInLobby = new Dictionary<string, object>();
+        private Dictionary<string, object> players = new Dictionary<string, object>();
 
         public Lobby()
         {
@@ -55,8 +55,19 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            this.playersInLobby = playersInLobby;
+            players = playersInLobby;
 
+            UpdatePlayerList(playersInLobby);
+        }
+
+        public void PlayerLeft(Dictionary<string, object> playersInLobby)
+        {
+            UpdatePlayerList(playersInLobby);
+        }
+
+        private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
+        {
+            playersPanel.Children.Clear();
             foreach (KeyValuePair<string, object> keyValuePair in playersInLobby)
             {
                 Label label = new Label();
@@ -66,12 +77,6 @@ namespace ClienteDuo.Pages
 
                 playersPanel.Children.Add(label);
             }
-        }
-
-        public void PlayerLeft(Dictionary<string, object> playersInLobby)
-        {
-            
-            //update labels 
         }
     }
 }
