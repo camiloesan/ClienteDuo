@@ -1,28 +1,10 @@
-﻿using ClienteDuo.DataService;
-using ClienteDuo.Pages;
+﻿using ClienteDuo.Pages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClienteDuo
 {
-    /// <summary>
-    /// Interaction logic for NewAccount.xaml
-    /// </summary>
     public partial class NewAccount : Page
     {
         public NewAccount()
@@ -30,17 +12,17 @@ namespace ClienteDuo
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnCancel(object sender, RoutedEventArgs e)
         {
             Launcher launcher = new Launcher();
             App.Current.MainWindow.Content = launcher;
         }
 
-        private void BtnContinue_Click(object sender, RoutedEventArgs e)
+        private void BtnContinue(object sender, RoutedEventArgs e)
         {
             if (AreFieldsValid())
             {
-                if (AddUserExternally())
+                if (AddUserToDatabase())
                 {
                     MainWindow.ShowMessageBox("El usuario fue registrado exitosamente");
                 }
@@ -108,7 +90,7 @@ namespace ClienteDuo
             return false;
         }
 
-        private bool AddUserExternally()
+        private bool AddUserToDatabase()
         {
             string username = TBoxUsername.Text;
             string email = TBoxEmail.Text;

@@ -24,6 +24,7 @@ namespace ClienteDuo.Pages
             Label labelMessageReceived = new Label();
             labelMessageReceived.HorizontalAlignment = HorizontalAlignment.Left;
             labelMessageReceived.Foreground = new SolidColorBrush(Colors.White);
+            labelMessageReceived.FontSize = 14;
             labelMessageReceived.Content = messageSent;
 
             chatPanel.Children.Add(labelMessageReceived);
@@ -73,6 +74,7 @@ namespace ClienteDuo.Pages
                 Label label = new Label();
                 label.HorizontalAlignment = HorizontalAlignment.Center;
                 label.Foreground = new SolidColorBrush(Colors.White);
+                label.FontSize = 14;
                 label.Content = keyValuePair.Key;
 
                 playersPanel.Children.Add(label);

@@ -10,18 +10,18 @@
       Title="NewAccount">
 
     <Grid Background="#FF263E54">
-        <Label x:Name="LblNewAccountTitle" Content="{x:Static p:Resources.TitleNewAccount}" HorizontalAlignment="Center" Margin="0,62,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Grid HorizontalAlignment="Center" Height="224" VerticalAlignment="Center" Width="180">
-            <Label x:Name="LblUsername" Content="{x:Static p:Resources.LblUsername}" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White"/>
-            <TextBox x:Name="TBoxUsername" HorizontalAlignment="Left" Margin="6,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
-            <Label x:Name="LblEmail" Content="{x:Static p:Resources.LblEmail}" HorizontalAlignment="Left" Margin="0,58,0,0" VerticalAlignment="Top" Foreground="White"/>
-            <TextBox x:Name="TBoxEmail" HorizontalAlignment="Left" Margin="6,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
-            <Label x:Name="LblPassword" Content="{x:Static p:Resources.LblPassword}" HorizontalAlignment="Left" Margin="0,115,0,0" VerticalAlignment="Top" Foreground="White"/>
-            <PasswordBox x:Name="TBoxPassword" HorizontalAlignment="Left" Margin="6,146,0,0" VerticalAlignment="Top" Width="174"/>
-            <Label x:Name="LblConfirmPassword" Content="{x:Static p:Resources.LblConfirmPassword}" HorizontalAlignment="Left" Margin="0,174,0,0" VerticalAlignment="Top" Foreground="White"/>
-            <PasswordBox x:Name="TBoxConfirmPassword" HorizontalAlignment="Left" Margin="6,205,0,0" VerticalAlignment="Top" Width="174"/>
-        </Grid>
-        <Button x:Name="BtnCancel" Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="520,445,0,0" VerticalAlignment="Top" Click="Button_Click" Width="70"/>
-        <Button x:Name="BtnContinue" Content="{x:Static p:Resources.BtnContinue}" HorizontalAlignment="Left" Margin="430,445,0,0" VerticalAlignment="Top" Width="70" Click="BtnContinue_Click"/>
+        <Label x:Name="LblNewAccountTitle" Content="{x:Static p:Resources.TitleNewAccount}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="LblUsername" Content="{x:Static p:Resources.LblUsername}" Foreground="White" FontSize="14"/>
+            <TextBox x:Name="TBoxUsername" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14"/>
+            <Label x:Name="LblEmail" Content="{x:Static p:Resources.LblEmail}" Foreground="White" FontSize="14"/>
+            <TextBox x:Name="TBoxEmail" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14"/>
+            <Label x:Name="LblPassword" Content="{x:Static p:Resources.LblPassword}" Foreground="White" FontSize="14"/>
+            <PasswordBox x:Name="TBoxPassword" Width="174" Margin="0,5,0,5" Height="20"/>
+            <Label x:Name="LblConfirmPassword" Content="{x:Static p:Resources.LblConfirmPassword}" Foreground="White" Margin="0,5,0,5" FontSize="14"/>
+            <PasswordBox x:Name="TBoxConfirmPassword" Width="174" Height="20" FontSize="14"/>
+        </StackPanel>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="520,445,0,0" VerticalAlignment="Top" Click="BtnCancel" Width="70" Height="25" FontSize="14"/>
+        <Button Content="{x:Static p:Resources.BtnContinue}" HorizontalAlignment="Left" Margin="430,445,0,0" VerticalAlignment="Top" Width="70" Click="BtnContinue" Height="25" FontSize="14" Padding="1,1,1,1"/>
     </Grid>
 </Page>

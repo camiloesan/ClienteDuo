@@ -10,12 +10,14 @@
       Title="Login">
 
     <Grid Background="#FF263E54">
-        <TextBox x:Name="TBoxEmail" HorizontalAlignment="Center" Margin="0,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="{x:Static p:Resources.LblEmail}" HorizontalAlignment="Left" Margin="441,221,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBox x:Name="TBoxPassword" HorizontalAlignment="Center" Margin="0,306,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="{x:Static p:Resources.LblPassword}" HorizontalAlignment="Left" Margin="441,275,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="521,351,0,0" VerticalAlignment="Top" Click="BtnCancel"/>
-        <Button Content="{x:Static p:Resources.BtnContinue}" HorizontalAlignment="Left" Margin="448,351,0,0" VerticalAlignment="Top" Click="BtnLogin"/>
-        <Label Content="{x:Static p:Resources.TitleLogin}" HorizontalAlignment="Center" Margin="0,71,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Width="180">
+            <Label Content="{x:Static p:Resources.LblEmail}" Foreground="White" FontSize="14"/>
+            <TextBox x:Name="TBoxEmail" TextWrapping="Wrap" Width="184" FontSize="14" Margin="0,5,0,5"/>
+            <Label Content="{x:Static p:Resources.LblPassword}" Foreground="White" FontSize="14"/>
+            <PasswordBox x:Name="TBoxPassword" Width="184" FontSize="14" Margin="0,5,0,5"/>
+        </StackPanel>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="520,388,0,0" VerticalAlignment="Top" Click="BtnCancel" FontSize="14" Width="70"/>
+        <Button Content="{x:Static p:Resources.BtnContinue}" HorizontalAlignment="Left" Margin="420,388,0,0" VerticalAlignment="Top" Click="BtnLogin" FontSize="14" Width="80"/>
+        <Label Content="{x:Static p:Resources.TitleLogin}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
     </Grid>
 </Page>

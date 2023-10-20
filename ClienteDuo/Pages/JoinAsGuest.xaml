@@ -11,11 +11,13 @@
       Title="JoinAsGuest">
 
     <Grid Background="#FF263E54">
-        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,233,0,0"/>
-        <Label Content="{x:Static p:Resources.LblPartyCode}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Margin="0,264,0,0"/>
-        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,295,0,0"/>
-        <Label Content="{x:Static p:Resources.LblInGameUsername}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Margin="0,202,0,0"/>
-        <Button Content="{x:Static p:Resources.BtnJoin}" HorizontalAlignment="Left" Margin="440,342,0,0" VerticalAlignment="Top" Width="60" Click="BtnJoin"/>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="520,342,0,0" VerticalAlignment="Top" Width="60" Click="BtnCancel"/>
+        <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0" Orientation="Vertical" VerticalAlignment="Center">
+            <Label Content="{x:Static p:Resources.LblInGameUsername}" Foreground="White" FontSize="14" Width="200"/>
+            <TextBox TextWrapping="Wrap" Width="200" Margin="0,5,0,5" FontSize="14"/>
+            <Label Content="{x:Static p:Resources.LblPartyCode}" Foreground="White" FontSize="14" Width="200"/>
+            <TextBox TextWrapping="Wrap" Width="200" Margin="0,5,0,5" FontSize="14"/>
+        </StackPanel>
+        <Button Content="{x:Static p:Resources.BtnJoin}" HorizontalAlignment="Left" Margin="458,387,0,0" VerticalAlignment="Top" Width="60" Click="BtnJoin" FontSize="14"/>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="538,387,0,0" VerticalAlignment="Top" Width="60" Click="BtnCancel" FontSize="14"/>
     </Grid>
 </Page>

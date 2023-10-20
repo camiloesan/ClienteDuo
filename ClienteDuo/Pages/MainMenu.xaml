@@ -10,12 +10,14 @@
       Title="MainMenu">
 
     <Grid Background="#FF263E54">
-        <Border HorizontalAlignment="Center" Height="65" Margin="0,0,0,0" Width="184" VerticalAlignment="Center">
-            <Grid>
-                <Button Content="{x:Static p:Resources.BtnNewParty}" Click="BtnNewParty" Width="87" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Content="{x:Static p:Resources.BtnJoinParty}" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Top" Click="BtnJoinParty" Width="87"/>
-                <Button Content="{x:Static p:Resources.BtnQuitGame}" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Click="BtnQuitGame" Width="184"/>
-            </Grid>
-        </Border>
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="336" Height="98">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="33*"/>
+                <RowDefinition Height="32*"/>
+            </Grid.RowDefinitions>
+            <Button Content="{x:Static p:Resources.BtnNewParty}" Margin="5,5,5,5" Click="BtnNewParty" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Height="33"/>
+            <Button Content="{x:Static p:Resources.BtnJoinParty}" Margin="5,5,5,5" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="BtnJoinParty" Width="155" FontSize="14" Height="33"/>
+            <Button Content="{x:Static p:Resources.BtnQuitGame}" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnQuitGame" Width="336" Grid.Row="1" FontSize="14" Height="33"/>
+        </Grid>
     </Grid>
 </Page>
