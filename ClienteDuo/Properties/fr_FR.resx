@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BtnAddFriend" xml:space="preserve">
+    <value>Ajouter ami</value>
+    <comment>SidebarFriends</comment>
+  </data>
+  <data name="BtnCancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>WinLogin</comment>
+  </data>
+  <data name="BtnCancelJoinLogged" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>WinJoinPartyLogged</comment>
+  </data>
+  <data name="BtnChangePassword" xml:space="preserve">
+    <value>Changer mot de passe</value>
+    <comment>SidebarMyProfile</comment>
+  </data>
+  <data name="BtnContinue" xml:space="preserve">
+    <value>Continuer</value>
+    <comment>WinLogin</comment>
+  </data>
+  <data name="BtnExit" xml:space="preserve">
+    <value>Sortir</value>
+    <comment>WinLobby</comment>
+  </data>
+  <data name="BtnJoin" xml:space="preserve">
+    <value>Rejoindre</value>
+    <comment>WinJoinAsGuest</comment>
+  </data>
+  <data name="BtnJoinAsGuest" xml:space="preserve">
+    <value>Rejoindre comme invité</value>
+    <comment>WinLauncher</comment>
+  </data>
+  <data name="BtnJoinLogged" xml:space="preserve">
+    <value>Rejoindre</value>
+    <comment>WinJoinPartyLogged</comment>
+  </data>
+  <data name="BtnJoinParty" xml:space="preserve">
+    <value>Rejoindre groupe</value>
+    <comment>WinMainMenu</comment>
+  </data>
+  <data name="BtnLogin" xml:space="preserve">
+    <value>Rejoindre</value>
+    <comment>WinLauncher</comment>
+  </data>
+  <data name="BtnNewAccount" xml:space="preserve">
+    <value>Nouvelle compte</value>
+    <comment>WinLauncher</comment>
+  </data>
+  <data name="BtnNewParty" xml:space="preserve">
+    <value>Nouvel groupe</value>
+    <comment>WinMainMenu</comment>
+  </data>
+  <data name="BtnNotReady" xml:space="preserve">
+    <value>Pas prêt</value>
+    <comment>WinLobby</comment>
+  </data>
+  <data name="BtnQuitGame" xml:space="preserve">
+    <value>Sortir</value>
+    <comment>WinMainMenu</comment>
+  </data>
+  <data name="BtnReady" xml:space="preserve">
+    <value>Prêt</value>
+    <comment>WinLobby</comment>
+  </data>
+  <data name="BtnSendFriendRequest" xml:space="preserve">
+    <value>Envoyer demande d'ami</value>
+    <comment>SidebarAddFriend</comment>
+  </data>
+  <data name="BtnStartGame" xml:space="preserve">
+    <value>Commencer partie</value>
+    <comment>WinHostLobby</comment>
+  </data>
+  <data name="BtnUnfriend" xml:space="preserve">
+    <value>Supprimer l'ami</value>
+    <comment>SidebarFriendsInfo</comment>
+  </data>
+  <data name="LblAddNewFriend" xml:space="preserve">
+    <value>Ajouter nouvel ami</value>
+    <comment>SidebarAddFriend</comment>
+  </data>
+  <data name="LblChatSection" xml:space="preserve">
+    <value>Chat</value>
+    <comment>WinLobby</comment>
+  </data>
+  <data name="LblConfirmPassword" xml:space="preserve">
+    <value>Confirmer mot de passe</value>
+    <comment>WinCreateAcc</comment>
+  </data>
+  <data name="LblEmail" xml:space="preserve">
+    <value>Courriel</value>
+    <comment>WinCreateAcc</comment>
+  </data>
+  <data name="LblEmailLogin" xml:space="preserve">
+    <value>Courriel</value>
+    <comment>WinLogin</comment>
+  </data>
+  <data name="LblFriends" xml:space="preserve">
+    <value>Amis</value>
+    <comment>WinMainMenu</comment>
+  </data>
+  <data name="LblFriendStatus" xml:space="preserve">
+    <value>État</value>
+    <comment>SidebarFriendsInfo</comment>
+  </data>
+  <data name="LblFriendsTitleSidebar" xml:space="preserve">
+    <value>Amis</value>
+    <comment>SidebarFriends</comment>
+  </data>
+  <data name="LblFriendsTrophies" xml:space="preserve">
+    <value>Prix</value>
+    <comment>SidebarFriendsInfo</comment>
+  </data>
+  <data name="LblGameSettingsSection" xml:space="preserve">
+    <value>Configuration de jeu</value>
+    <comment>WinHostLobby</comment>
+  </data>
+  <data name="LblJoinPartyTitle" xml:space="preserve">
+    <value>Rejoindre groupe</value>
+    <comment>WinJoinPartyLogged</comment>
+  </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+    <comment>WinMainMenu</comment>
+  </data>
+  <data name="LblLeaderboardTitle" xml:space="preserve">
+    <value>Leaderboard</value>
+    <comment>SidebarLeaderboard</comment>
+  </data>
+  <data name="LblMyProfile" xml:space="preserve">
+    <value>My Profile</value>
+    <comment>WinMainMenu</comment>
+  </data>
+  <data name="LblMyProfileSidebar" xml:space="preserve">
+    <value>My Profile</value>
+    <comment>SidebarMyProfile</comment>
+  </data>
+  <data name="LblNotReady" xml:space="preserve">
+    <value>Pas prêt</value>
+    <comment>WinLobby</comment>
+  </data>
+  <data name="LblOwnerLobby" xml:space="preserve">
+    <value>Your Lobby</value>
+    <comment>WinHostLobby</comment>
+  </data>
+  <data name="LblPartyCode" xml:space="preserve">
+    <value>Party Code</value>
+    <comment>WinJoinAsGuest</comment>
+  </data>
+  <data name="LblPartyCodeLogged" xml:space="preserve">
+    <value>Party Code</value>
+    <comment>WinJoinPartyLogged</comment>
+  </data>
+  <data name="LblPassword" xml:space="preserve">
+    <value>Mot de passe</value>
+    <comment>WinLogin</comment>
+  </data>
+  <data name="LblPlayersSection" xml:space="preserve">
+    <value>Joueurs</value>
+    <comment>WinLobby</comment>
+  </data>
+  <data name="LblReady" xml:space="preserve">
+    <value>Prêt</value>
+    <comment>WinLobby</comment>
+  </data>
+  <data name="LblTemporalName" xml:space="preserve">
+    <value>Nom de jeu</value>
+    <comment>WinJoinAsGuest</comment>
+  </data>
+  <data name="LblTrophies" xml:space="preserve">
+    <value>Prix</value>
+    <comment>SidebarMyProfile</comment>
+  </data>
+  <data name="LblUserID" xml:space="preserve">
+    <value>ID d'utilisateur</value>
+    <comment>SidebarFriendsInfo</comment>
+  </data>
+  <data name="LblUserIDNewFriend" xml:space="preserve">
+    <value>ID d'utilisateur</value>
+    <comment>SidebarAddFriend</comment>
+  </data>
+  <data name="LblUsername" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+    <comment>WinCreateAcc</comment>
+  </data>
+  <data name="LblUsernameSideBar" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+    <comment>SidebarMyProfile</comment>
+  </data>
+</root>
