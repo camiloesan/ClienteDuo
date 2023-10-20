@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ClienteDuo.Pages.GameMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClienteDuo.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="585" d:DesignWidth="450">
+    <Grid Background="White" Height="585">
+        <Button x:Name="_hideMenuButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="61" Margin="10,10,0,0" Click="_hideMenuButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Pages/ExpandMenuIcon.png"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="_exitButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="61" Margin="379,10,0,0" Click="_exitButton_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/Pages/ExitButtonIcon.png"/>
+            </Button.Background>
+        </Button>
+        <Label Content="Party settings" HorizontalAlignment="Left" Margin="111,10,0,0" VerticalAlignment="Top" Width="234" Height="80" FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+
+    </Grid>
+</UserControl>
