@@ -147,6 +147,12 @@
   <data name="BtnQuitGame" xml:space="preserve">
     <value>Quit Game</value>
   </data>
+  <data name="BtnStartGame" xml:space="preserve">
+    <value>Start Game</value>
+  </data>
+  <data name="DlgNewAccountSuccess" xml:space="preserve">
+    <value>The user has been registered succesfully</value>
+  </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>
   </data>

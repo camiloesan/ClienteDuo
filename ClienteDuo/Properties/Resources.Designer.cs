@@ -151,6 +151,24 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Game.
+        /// </summary>
+        public static string BtnStartGame {
+            get {
+                return ResourceManager.GetString("BtnStartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user has been registered succesfully.
+        /// </summary>
+        public static string DlgNewAccountSuccess {
+            get {
+                return ResourceManager.GetString("DlgNewAccountSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chat.
         /// </summary>
         public static string LblChat {

@@ -24,7 +24,7 @@ namespace ClienteDuo
             {
                 if (AddUserToDatabase())
                 {
-                    MainWindow.ShowMessageBox("El usuario fue registrado exitosamente");
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess);
                 }
                 else
                 {

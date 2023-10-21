@@ -25,6 +25,8 @@ namespace ClienteDuo.Pages
         {
             InitializeComponent();
             Launcher launcher = new Launcher();
+            this.ResizeMode = ResizeMode.NoResize;
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.Content = launcher;
         }
         public static void ShowMessageBox(string message)

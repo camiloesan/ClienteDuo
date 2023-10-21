@@ -10,7 +10,12 @@
       Title="MainMenu">
 
     <Grid Background="#FF263E54">
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="336" Height="98">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="428*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Width="336" Height="98" Margin="0,162,0,0" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="33*"/>
                 <RowDefinition Height="32*"/>
@@ -19,5 +24,22 @@
             <Button Content="{x:Static p:Resources.BtnJoinParty}" Margin="5,5,5,5" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="BtnJoinParty" Width="155" FontSize="14" Height="33"/>
             <Button Content="{x:Static p:Resources.BtnQuitGame}" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnQuitGame" Width="336" Grid.Row="1" FontSize="14" Height="33"/>
         </Grid>
+        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,0,0,0" Height="52" Width="52" Grid.Row="0">
+            <Image Source="/Images/profile-user.png"></Image>
+        </Button>
+
+        <Button x:Name="ToggleFriends" Width="52" Height="52" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,16,0">
+            <Image Source="/Images/friends.png"></Image>
+        </Button>
+        
+        
+
+        <Button Margin="0,0,16,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="52" Height="52" Grid.Row="2" Background="#FFDDDDDD">
+            <Image Source="/Images/trophy.png"></Image>
+        </Button>
+
+        <Label Content="Label" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Width="118" FontSize="14" Foreground="White" Grid.Row="0"/>
+        <Label Content="Label" HorizontalAlignment="Right" Margin="0,28,100,0" VerticalAlignment="Top" Width="118" FontSize="14" Foreground="White" HorizontalContentAlignment="Right" Grid.Row="0"/>
+        <Label Content="Label" Margin="782,27,100,28" FontSize="14" Foreground="White" HorizontalContentAlignment="Right" Grid.Row="2"/>
     </Grid>
 </Page>

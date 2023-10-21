@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Media;
+using System.Resources;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -57,7 +61,7 @@ namespace ClienteDuo.Pages
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
             players = playersInLobby;
-
+            //PlayPlayerJoinedAudio();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -79,6 +83,15 @@ namespace ClienteDuo.Pages
 
                 playersPanel.Children.Add(label);
             }
+        }
+
+        private void PlayPlayerJoinedAudio()
+        {
+
+            MediaPlayer player = new MediaPlayer();
+
+            //player.Open(new System.Uri("fullpathx"));
+            player.Play();
         }
     }
 }

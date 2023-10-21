@@ -237,5 +237,17 @@
   <ItemGroup>
     <Resource Include="Pages\ExitButtonIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\profile-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\trophy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\friends.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SFX\playerJoinedSound.mp3" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
