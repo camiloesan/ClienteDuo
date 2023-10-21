@@ -150,6 +150,12 @@
   <data name="BtnStartGame" xml:space="preserve">
     <value>Iniciar Partida</value>
   </data>
+  <data name="DlgEmailMaxCharacters" xml:space="preserve">
+    <value>El máximo de caracteres para el nombre de correo electrónico es de 30</value>
+  </data>
+  <data name="DlgEmptyFields" xml:space="preserve">
+    <value>Todos los campos deben estar llenos antes de continuar</value>
+  </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
     <value>La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula</value>
   </data>
@@ -158,6 +164,9 @@
   </data>
   <data name="DlgServiceException" xml:space="preserve">
     <value>Hubo un error con el servicio, inténtelo de nuevo más tarde</value>
+  </data>
+  <data name="DlgUsernameMaxCharacters" xml:space="preserve">
+    <value>El máximo de caracteres para el nombre de usuario es de 30</value>
   </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>

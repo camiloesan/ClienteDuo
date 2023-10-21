@@ -150,6 +150,12 @@
   <data name="BtnStartGame" xml:space="preserve">
     <value>Start Game</value>
   </data>
+  <data name="DlgEmailMaxCharacters" xml:space="preserve">
+    <value>Max characters for email is 30</value>
+  </data>
+  <data name="DlgEmptyFields" xml:space="preserve">
+    <value>All fields must be completed</value>
+  </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
     <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter</value>
   </data>
@@ -158,6 +164,9 @@
   </data>
   <data name="DlgServiceException" xml:space="preserve">
     <value>There was an error connecting with the service, try again later</value>
+  </data>
+  <data name="DlgUsernameMaxCharacters" xml:space="preserve">
+    <value>Max characters for username is 30</value>
   </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>

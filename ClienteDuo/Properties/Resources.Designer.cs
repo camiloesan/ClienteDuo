@@ -160,6 +160,24 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max characters for email is 30.
+        /// </summary>
+        public static string DlgEmailMaxCharacters {
+            get {
+                return ResourceManager.GetString("DlgEmailMaxCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All fields must be completed.
+        /// </summary>
+        public static string DlgEmptyFields {
+            get {
+                return ResourceManager.GetString("DlgEmptyFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter.
         /// </summary>
         public static string DlgInsecurePassword {
@@ -183,6 +201,15 @@ namespace ClienteDuo.Properties {
         public static string DlgServiceException {
             get {
                 return ResourceManager.GetString("DlgServiceException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max characters for username is 30.
+        /// </summary>
+        public static string DlgUsernameMaxCharacters {
+            get {
+                return ResourceManager.GetString("DlgUsernameMaxCharacters", resourceCulture);
             }
         }
         

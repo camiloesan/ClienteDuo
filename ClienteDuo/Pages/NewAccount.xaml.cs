@@ -69,12 +69,12 @@ namespace ClienteDuo
 
             if (usernameField.Length > 30)
             {
-                MainWindow.ShowMessageBox("el maximo de caracteres para el username es de 30 ***");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameMaxCharacters);
                 return false;
             } 
             else if (emailField.Length > 30)
             {
-                MainWindow.ShowMessageBox("el maximo de caracteres para el correo electronico es de 30***");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailMaxCharacters);
                 return false;
             }
             return true;
@@ -106,7 +106,7 @@ namespace ClienteDuo
                 || string.IsNullOrEmpty(passwordField)
                 || string.IsNullOrEmpty(confirmPasswordField))
             {
-                MainWindow.ShowMessageBox("Todos los campos deben estar llenos *pendiente internacionalizar*");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields);
                 return true;
             }
             return false;
