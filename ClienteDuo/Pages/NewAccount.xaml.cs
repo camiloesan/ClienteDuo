@@ -1,5 +1,6 @@
 ﻿using ClienteDuo.Pages;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,6 +8,8 @@ namespace ClienteDuo
 {
     public partial class NewAccount : Page
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public NewAccount()
         {
             InitializeComponent();
@@ -28,14 +31,25 @@ namespace ClienteDuo
                 }
                 else
                 {
-                    MainWindow.ShowMessageBox("Ocurrió un error en la basa de datos, no se pudo registrar el usuario");
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException);
                 }
             }
         }
 
+        private void IsUsernameAvailable()
+        {
+            //todo
+        }
+
+        private void IsEmailAvailable()
+        {
+            //todo
+        }
+
         private bool AreFieldsValid()
         {
-            if (!AreFieldsEmpty() && AreFieldsLengthValid() && IsPasswordMatch())
+            string password = TBoxPassword.Password.Trim();
+            if (!AreFieldsEmpty() && AreFieldsLengthValid() && IsPasswordMatch() && IsPasswordSecure(password))
             {
                 return true;
             }
@@ -52,7 +66,6 @@ namespace ClienteDuo
         {
             string usernameField = TBoxUsername.Text.Trim();
             string emailField = TBoxEmail.Text.Trim();
-            string passwordField = TBoxPassword.Password.Trim();
 
             if (usernameField.Length > 30)
             {
@@ -64,12 +77,21 @@ namespace ClienteDuo
                 MainWindow.ShowMessageBox("el maximo de caracteres para el correo electronico es de 30***");
                 return false;
             }
-            else if (passwordField.Length < 8)
+            return true;
+        }
+
+        private bool IsPasswordSecure(string password)
+        {
+            Regex regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,}$");
+            if (regex.IsMatch(password))
             {
-                MainWindow.ShowMessageBox("La contraseña debe tener un minimo de 8 caracteres***");
+                return true;
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword);
                 return false;
             }
-            return true;
         }
 
         private bool AreFieldsEmpty()
@@ -103,7 +125,7 @@ namespace ClienteDuo
                 result = client.AddUserToDatabase(username, email, password);
             } catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                log.Error(ex);
             }
 
             return result;

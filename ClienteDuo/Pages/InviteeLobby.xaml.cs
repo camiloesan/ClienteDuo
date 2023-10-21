@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for InviteeLobby.xaml
-    /// </summary>
     public partial class InviteeLobby : Page, DataService.IPartyManagerCallback
     {
         public InviteeLobby()

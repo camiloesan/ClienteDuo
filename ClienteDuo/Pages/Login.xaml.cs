@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.ServiceModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ClienteDuo.Pages
 {
@@ -13,6 +15,19 @@ namespace ClienteDuo.Pages
         }
 
         private void BtnLogin(object sender, RoutedEventArgs e)
+        {
+            AttemptLogin();
+        }
+
+        private void EnterKey(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                AttemptLogin();
+            }
+        }
+
+        private void AttemptLogin()
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
             string email = TBoxEmail.Text;

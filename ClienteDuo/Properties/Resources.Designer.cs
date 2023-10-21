@@ -160,11 +160,29 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter.
+        /// </summary>
+        public static string DlgInsecurePassword {
+            get {
+                return ResourceManager.GetString("DlgInsecurePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user has been registered succesfully.
         /// </summary>
         public static string DlgNewAccountSuccess {
             get {
                 return ResourceManager.GetString("DlgNewAccountSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error connecting with the service, try again later.
+        /// </summary>
+        public static string DlgServiceException {
+            get {
+                return ResourceManager.GetString("DlgServiceException", resourceCulture);
             }
         }
         
