@@ -1,4 +1,7 @@
-﻿using System.ServiceModel;
+﻿using System.Security.Cryptography;
+using System;
+using System.ServiceModel;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,7 +36,7 @@ namespace ClienteDuo.Pages
             string email = TBoxEmail.Text;
             string password = TBoxPassword.Password;
 
-            bool isLoginValid = client.IsLoginValid(email, password);
+            bool isLoginValid = client.IsLoginValid(email, Sha256_hash(password));
             if (isLoginValid)
             {
                 ACTIVE_EMAIL = email;
@@ -50,6 +53,22 @@ namespace ClienteDuo.Pages
         {
             Launcher launcher = new Launcher();
             App.Current.MainWindow.Content = launcher;
+        }
+
+        public static String Sha256_hash(String value)
+        {
+            StringBuilder Sb = new StringBuilder();
+
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
     }
 }

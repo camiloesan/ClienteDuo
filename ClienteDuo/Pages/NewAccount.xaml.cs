@@ -1,8 +1,11 @@
 ﻿using ClienteDuo.Pages;
 using System;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace ClienteDuo
 {
@@ -122,13 +125,31 @@ namespace ClienteDuo
             bool result = false;
             try
             {
-                result = client.AddUserToDatabase(username, email, password);
+                result = client.AddUserToDatabase(username, email, Sha256_hash(password));
+                Console.WriteLine(Sha256_hash(password));
+                Console.WriteLine(Sha256_hash(password).Length);
             } catch (Exception ex)
             {
                 log.Error(ex);
             }
 
             return result;
+        }
+
+        public static String Sha256_hash(String value)
+        {
+            StringBuilder Sb = new StringBuilder();
+
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
     }
 }
