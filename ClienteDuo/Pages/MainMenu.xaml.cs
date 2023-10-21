@@ -23,7 +23,8 @@ namespace ClienteDuo.Pages
 
         private void BtnJoinParty(object sender, RoutedEventArgs e)
         {
-
+            JoinParty joinParty = new JoinParty();
+            App.Current.MainWindow.Content = joinParty;
         }
 
         private void fillActiveFriends()

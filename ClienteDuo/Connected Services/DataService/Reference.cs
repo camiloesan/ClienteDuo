@@ -26,6 +26,12 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsLoginValid", ReplyAction="http://tempuri.org/IUsersManager/IsLoginValidResponse")]
         System.Threading.Tasks.Task<bool> IsLoginValidAsync(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
+        string[] GetOnlineFriends(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
+        System.Threading.Tasks.Task<string[]> GetOnlineFriendsAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -70,33 +76,50 @@ namespace ClienteDuo.DataService {
         public System.Threading.Tasks.Task<bool> IsLoginValidAsync(string email, string password) {
             return base.Channel.IsLoginValidAsync(email, password);
         }
+        
+        public string[] GetOnlineFriends(string username) {
+            return base.Channel.GetOnlineFriends(username);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetOnlineFriendsAsync(string username) {
+            return base.Channel.GetOnlineFriendsAsync(username);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IPartyManager", CallbackContract=typeof(ClienteDuo.DataService.IPartyManagerCallback))]
     public interface IPartyManager {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/JoinParty")]
-        void JoinParty(string email);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NewParty")]
+        void NewParty(int partyCode, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NewParty")]
+        System.Threading.Tasks.Task NewPartyAsync(int partyCode, string email);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/JoinParty")]
-        System.Threading.Tasks.Task JoinPartyAsync(string email);
+        void JoinParty(int partyCode, string email);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/JoinParty")]
+        System.Threading.Tasks.Task JoinPartyAsync(int partyCode, string email);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/SendMessage")]
-        void SendMessage(string message);
+        void SendMessage(int partyCode, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/SendMessage")]
-        System.Threading.Tasks.Task SendMessageAsync(string message);
+        System.Threading.Tasks.Task SendMessageAsync(int partyCode, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
-        void LeaveParty(string email);
+        void LeaveParty(int partyCode, string email);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
-        System.Threading.Tasks.Task LeavePartyAsync(string email);
+        System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string email);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPartyManagerCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PartyCreated", ReplyAction="http://tempuri.org/IPartyManager/PartyCreatedResponse")]
+        void PartyCreated(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerJoined", ReplyAction="http://tempuri.org/IPartyManager/PlayerJoinedResponse")]
         void PlayerJoined(System.Collections.Generic.Dictionary<string, object> playersInLobby);
@@ -136,28 +159,36 @@ namespace ClienteDuo.DataService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void JoinParty(string email) {
-            base.Channel.JoinParty(email);
+        public void NewParty(int partyCode, string email) {
+            base.Channel.NewParty(partyCode, email);
         }
         
-        public System.Threading.Tasks.Task JoinPartyAsync(string email) {
-            return base.Channel.JoinPartyAsync(email);
+        public System.Threading.Tasks.Task NewPartyAsync(int partyCode, string email) {
+            return base.Channel.NewPartyAsync(partyCode, email);
         }
         
-        public void SendMessage(string message) {
-            base.Channel.SendMessage(message);
+        public void JoinParty(int partyCode, string email) {
+            base.Channel.JoinParty(partyCode, email);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(string message) {
-            return base.Channel.SendMessageAsync(message);
+        public System.Threading.Tasks.Task JoinPartyAsync(int partyCode, string email) {
+            return base.Channel.JoinPartyAsync(partyCode, email);
         }
         
-        public void LeaveParty(string email) {
-            base.Channel.LeaveParty(email);
+        public void SendMessage(int partyCode, string message) {
+            base.Channel.SendMessage(partyCode, message);
         }
         
-        public System.Threading.Tasks.Task LeavePartyAsync(string email) {
-            return base.Channel.LeavePartyAsync(email);
+        public System.Threading.Tasks.Task SendMessageAsync(int partyCode, string message) {
+            return base.Channel.SendMessageAsync(partyCode, message);
+        }
+        
+        public void LeaveParty(int partyCode, string email) {
+            base.Channel.LeaveParty(partyCode, email);
+        }
+        
+        public System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string email) {
+            return base.Channel.LeavePartyAsync(partyCode, email);
         }
     }
 }

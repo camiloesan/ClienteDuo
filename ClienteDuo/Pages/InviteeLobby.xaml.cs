@@ -1,37 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Media;
-using System.Resources;
+using System.Linq;
 using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
-    public partial class Lobby : Page, DataService.IPartyManagerCallback
+    /// <summary>
+    /// Interaction logic for InviteeLobby.xaml
+    /// </summary>
+    public partial class InviteeLobby : Page, DataService.IPartyManagerCallback
     {
-        private Dictionary<string, object> players = new Dictionary<string, object>();
-        int partyCode = 0;
-
-        public Lobby()
+        public InviteeLobby()
         {
             InitializeComponent();
-            CreateNewParty();
-        }
-
-        private void CreateNewParty()
-        {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
-            Random rand = new Random();
-            partyCode = rand.Next(0, 10000);
-
-            client.NewParty(partyCode, Login.ACTIVE_EMAIL);
-            LblPartyCode.Content = "Code: " + partyCode;
         }
 
         public void MessageReceived(string messageSent)
@@ -45,7 +37,6 @@ namespace ClienteDuo.Pages
             chatPanel.Children.Add(labelMessageReceived);
             chatScrollViewer.ScrollToEnd();
         }
-        
         private void SendMessage(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -55,24 +46,17 @@ namespace ClienteDuo.Pages
 
                 string message = Login.ACTIVE_EMAIL + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
-                client.SendMessage(partyCode, message);
+                client.SendMessage(JoinParty.PARTY_CODE, message); //partycode no good
             }
         }
 
-        private void BtnExitLobby(object sender, RoutedEventArgs e)
+        public void PartyCreated(Dictionary<string, object> playersInLobby)
         {
-            MainMenu mainMenu = new MainMenu();
-            App.Current.MainWindow.Content = mainMenu;
-
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.LeaveParty(partyCode, Login.ACTIVE_EMAIL);
+            throw new NotImplementedException();
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            players = playersInLobby;
-            //PlayPlayerJoinedAudio();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -96,18 +80,15 @@ namespace ClienteDuo.Pages
             }
         }
 
-        private void PlayPlayerJoinedAudio()
+        private void BtnExitLobby(object sender, RoutedEventArgs e)
         {
+            MainMenu mainMenu = new MainMenu();
+            App.Current.MainWindow.Content = mainMenu;
 
-            MediaPlayer player = new MediaPlayer();
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            //player.Open(new System.Uri("fullpathx"));
-            player.Play();
-        }
-
-        public void PartyCreated(Dictionary<string, object> playersInLobby)
-        {
-            UpdatePlayerList(playersInLobby);
+            client.LeaveParty(JoinParty.PARTY_CODE, Login.ACTIVE_EMAIL);
         }
     }
 }

@@ -81,6 +81,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\InviteeLobby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\JoinAsGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +135,9 @@
     </Compile>
     <Compile Include="Pages\GameMenu.xaml.cs">
       <DependentUpon>GameMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InviteeLobby.xaml.cs">
+      <DependentUpon>InviteeLobby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\JoinAsGuest.xaml.cs">
       <DependentUpon>JoinAsGuest.xaml</DependentUpon>

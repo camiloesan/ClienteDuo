@@ -43,6 +43,15 @@
   <wsdl:message name="IUsersManager_IsLoginValid_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsLoginValidResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersManager_GetOnlineFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineFriends" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_GetOnlineFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnlineFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_NewParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewParty" />
+  </wsdl:message>
   <wsdl:message name="IPartyManager_JoinParty_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinParty" />
   </wsdl:message>
@@ -51,6 +60,12 @@
   </wsdl:message>
   <wsdl:message name="IPartyManager_LeaveParty_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveParty" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_PartyCreated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreated" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_PartyCreated_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreatedResponse" />
   </wsdl:message>
   <wsdl:message name="IPartyManager_PlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerJoined" />
@@ -79,8 +94,15 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValid" message="tns:IUsersManager_IsLoginValid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValidResponse" message="tns:IUsersManager_IsLoginValid_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetOnlineFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriends" message="tns:IUsersManager_GetOnlineFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse" message="tns:IUsersManager_GetOnlineFriends_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyManager">
+    <wsdl:operation name="NewParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NewParty" message="tns:IPartyManager_NewParty_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="JoinParty">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/JoinParty" message="tns:IPartyManager_JoinParty_InputMessage" />
     </wsdl:operation>
@@ -89,6 +111,10 @@
     </wsdl:operation>
     <wsdl:operation name="LeaveParty">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/LeaveParty" message="tns:IPartyManager_LeaveParty_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PartyCreated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PartyCreated" message="tns:IPartyManager_PartyCreated_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PartyCreatedResponse" message="tns:IPartyManager_PartyCreated_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerJoined" message="tns:IPartyManager_PlayerJoined_OutputCallbackMessage" />
@@ -124,10 +150,25 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetOnlineFriends">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/GetOnlineFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IPartyManager" type="tns:IPartyManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IPartyManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="NewParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NewParty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="JoinParty">
       <soap12:operation soapAction="http://tempuri.org/IPartyManager/JoinParty" style="document" />
       <wsdl:input>
@@ -145,6 +186,15 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="PartyCreated">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PartyCreated" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="PlayerJoined">
       <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerJoined" style="document" />
