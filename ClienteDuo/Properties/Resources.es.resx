@@ -156,6 +156,9 @@
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>Todos los campos deben estar llenos antes de continuar</value>
   </data>
+  <data name="DlgFailedLogin" xml:space="preserve">
+    <value>Correo electrónico o contraseña incorrectos</value>
+  </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
     <value>La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula</value>
   </data>

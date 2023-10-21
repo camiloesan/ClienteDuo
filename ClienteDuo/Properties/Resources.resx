@@ -156,6 +156,9 @@
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>All fields must be completed</value>
   </data>
+  <data name="DlgFailedLogin" xml:space="preserve">
+    <value>Incorrect email or password</value>
+  </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
     <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter</value>
   </data>

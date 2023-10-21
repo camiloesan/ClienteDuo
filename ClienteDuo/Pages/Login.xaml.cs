@@ -42,7 +42,7 @@ namespace ClienteDuo.Pages
             }
             else
             {
-                MainWindow.ShowMessageBox("El correo o contraseña no son validos *pendiente internacionalizar*");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
             }
         }
 

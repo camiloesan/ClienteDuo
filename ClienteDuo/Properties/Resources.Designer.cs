@@ -178,6 +178,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incorrect email or password.
+        /// </summary>
+        public static string DlgFailedLogin {
+            get {
+                return ResourceManager.GetString("DlgFailedLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter.
         /// </summary>
         public static string DlgInsecurePassword {
