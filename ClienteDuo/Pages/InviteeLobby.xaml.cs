@@ -24,6 +24,15 @@ namespace ClienteDuo.Pages
         public InviteeLobby()
         {
             InitializeComponent();
+            Join();
+        }
+
+        private void Join()
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+
+            client.JoinParty(JoinParty.PARTY_CODE, Login.ACTIVE_EMAIL);
         }
 
         public void MessageReceived(string messageSent)
