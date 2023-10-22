@@ -55,6 +55,18 @@
   <wsdl:message name="IUsersManager_IsLoginValid_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsLoginValidResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersManager_IsUsernameTaken_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsernameTaken" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_IsUsernameTaken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsernameTakenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_IsEmailTaken_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailTaken" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_IsEmailTaken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsEmailTakenResponse" />
+  </wsdl:message>
   <wsdl:message name="IUsersManager_GetOnlineFriends_InputMessage">
     <wsdl:part name="parameters" element="tns:GetOnlineFriends" />
   </wsdl:message>
@@ -118,6 +130,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValid" message="tns:IUsersManager_IsLoginValid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValidResponse" message="tns:IUsersManager_IsLoginValid_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsUsernameTaken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsUsernameTaken" message="tns:IUsersManager_IsUsernameTaken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsUsernameTakenResponse" message="tns:IUsersManager_IsUsernameTaken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsEmailTaken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsEmailTaken" message="tns:IUsersManager_IsEmailTaken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsEmailTakenResponse" message="tns:IUsersManager_IsEmailTaken_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetOnlineFriends">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriends" message="tns:IUsersManager_GetOnlineFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse" message="tns:IUsersManager_GetOnlineFriends_OutputMessage" />
@@ -177,6 +197,24 @@
     </wsdl:operation>
     <wsdl:operation name="IsLoginValid">
       <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsLoginValid" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUsernameTaken">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsUsernameTaken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsEmailTaken">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsEmailTaken" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

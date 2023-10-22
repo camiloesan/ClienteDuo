@@ -39,20 +39,64 @@ namespace ClienteDuo
             }
         }
 
-        private void IsUsernameAvailable()
+        private bool IsUsernameAvailable(String username)
         {
-            //todo
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+
+            bool isTaken = false;
+            try
+            {
+                isTaken = client.IsUsernameTaken(username);
+                
+            } 
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+            }
+            
+            if (isTaken)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken);
+            }
+
+            return !isTaken;
         }
 
-        private void IsEmailAvailable()
+        private bool IsEmailAvailable(string email)
         {
-            //todo
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+            
+            bool isTaken = false;
+            try
+            {
+                isTaken = client.IsEmailTaken(email);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+            }
+
+            if (isTaken)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailTaken);
+            }
+
+            return !isTaken;
         }
 
         private bool AreFieldsValid()
         {
+            string username = TBoxUsername.Text.Trim();
+            string email = TBoxEmail.Text.Trim();
             string password = TBoxPassword.Password.Trim();
-            if (!AreFieldsEmpty() && AreFieldsLengthValid() && IsPasswordMatch() && IsPasswordSecure(password))
+            if (!AreFieldsEmpty() 
+                && AreFieldsLengthValid() 
+                && IsPasswordMatch() 
+                && IsPasswordSecure(password)
+                && IsUsernameAvailable(username)
+                && IsEmailAvailable(email))
             {
                 return true;
             }
@@ -126,7 +170,8 @@ namespace ClienteDuo
             try
             {
                 result = client.AddUserToDatabase(username, email, Sha256_hash(password));
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 log.Error(ex);
             }

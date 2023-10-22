@@ -27,6 +27,18 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsLoginValid", ReplyAction="http://tempuri.org/IUsersManager/IsLoginValidResponse")]
         System.Threading.Tasks.Task<bool> IsLoginValidAsync(string email, string password);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsUsernameTaken", ReplyAction="http://tempuri.org/IUsersManager/IsUsernameTakenResponse")]
+        bool IsUsernameTaken(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsUsernameTaken", ReplyAction="http://tempuri.org/IUsersManager/IsUsernameTakenResponse")]
+        System.Threading.Tasks.Task<bool> IsUsernameTakenAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsEmailTaken", ReplyAction="http://tempuri.org/IUsersManager/IsEmailTakenResponse")]
+        bool IsEmailTaken(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsEmailTaken", ReplyAction="http://tempuri.org/IUsersManager/IsEmailTakenResponse")]
+        System.Threading.Tasks.Task<bool> IsEmailTakenAsync(string email);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
         string[] GetOnlineFriends(string username);
         
@@ -75,6 +87,22 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task<bool> IsLoginValidAsync(string email, string password) {
             return base.Channel.IsLoginValidAsync(email, password);
+        }
+        
+        public bool IsUsernameTaken(string username) {
+            return base.Channel.IsUsernameTaken(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsUsernameTakenAsync(string username) {
+            return base.Channel.IsUsernameTakenAsync(username);
+        }
+        
+        public bool IsEmailTaken(string email) {
+            return base.Channel.IsEmailTaken(email);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsEmailTakenAsync(string email) {
+            return base.Channel.IsEmailTakenAsync(email);
         }
         
         public string[] GetOnlineFriends(string username) {

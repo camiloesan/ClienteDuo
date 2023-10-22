@@ -160,11 +160,29 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an error connecting with the service, try again later.
+        /// </summary>
+        public static string DlgConnectionError {
+            get {
+                return ResourceManager.GetString("DlgConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max characters for email is 30.
         /// </summary>
         public static string DlgEmailMaxCharacters {
             get {
                 return ResourceManager.GetString("DlgEmailMaxCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An account with that email is already registered.
+        /// </summary>
+        public static string DlgEmailTaken {
+            get {
+                return ResourceManager.GetString("DlgEmailTaken", resourceCulture);
             }
         }
         
@@ -255,6 +273,15 @@ namespace ClienteDuo.Properties {
         public static string DlgUsernameMaxCharacters {
             get {
                 return ResourceManager.GetString("DlgUsernameMaxCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username is already taken.
+        /// </summary>
+        public static string DlgUsernameTaken {
+            get {
+                return ResourceManager.GetString("DlgUsernameTaken", resourceCulture);
             }
         }
         

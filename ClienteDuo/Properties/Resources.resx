@@ -150,8 +150,14 @@
   <data name="BtnStartGame" xml:space="preserve">
     <value>Start Game</value>
   </data>
+  <data name="DlgConnectionError" xml:space="preserve">
+    <value>There was an error connecting with the service, try again later</value>
+  </data>
   <data name="DlgEmailMaxCharacters" xml:space="preserve">
     <value>Max characters for email is 30</value>
+  </data>
+  <data name="DlgEmailTaken" xml:space="preserve">
+    <value>An account with that email is already registered</value>
   </data>
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>All fields must be completed</value>
@@ -182,6 +188,9 @@
   </data>
   <data name="DlgUsernameMaxCharacters" xml:space="preserve">
     <value>Max characters for username is 30</value>
+  </data>
+  <data name="DlgUsernameTaken" xml:space="preserve">
+    <value>Username is already taken</value>
   </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>

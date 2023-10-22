@@ -10,6 +10,7 @@ namespace ClienteDuo.Pages
 {
     public partial class Login : Page
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static string ACTIVE_EMAIL;
 
         public Login()
@@ -36,7 +37,19 @@ namespace ClienteDuo.Pages
             string email = TBoxEmail.Text;
             string password = TBoxPassword.Password;
 
-            bool isLoginValid = client.IsLoginValid(email, Sha256_hash(password));
+
+            bool isLoginValid = false;
+            try
+            {
+                isLoginValid = client.IsLoginValid(email, Sha256_hash(password));
+            } 
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+            }
+            
+
             if (isLoginValid)
             {
                 ACTIVE_EMAIL = email;
