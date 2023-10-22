@@ -126,8 +126,6 @@ namespace ClienteDuo
             try
             {
                 result = client.AddUserToDatabase(username, email, Sha256_hash(password));
-                Console.WriteLine(Sha256_hash(password));
-                Console.WriteLine(Sha256_hash(password).Length);
             } catch (Exception ex)
             {
                 log.Error(ex);
