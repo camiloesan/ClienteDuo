@@ -20,6 +20,8 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class JoinAsGuest : Page
     {
+        public static int PARTY_CODE = 0;
+
         public JoinAsGuest()
         {
             InitializeComponent();
@@ -33,7 +35,46 @@ namespace ClienteDuo.Pages
 
         private void BtnJoin(object sender, RoutedEventArgs e)
         {
+            bool isInteger = false;
+            try
+            {
+                PARTY_CODE = Int32.Parse(TBoxPartyCode.Text.Trim());
+                isInteger = true;
+            }
+            catch (Exception ex)
+            {
+                isInteger = false;
+            }
 
+            if (!isInteger)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
+            }
+            else if (!IsPartyCodeCorrect(PARTY_CODE))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
+            }
+            else if (!IsSpaceAvailable(PARTY_CODE))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
+            }
+            else
+            {
+                InviteeLobby inviteeLobby = new InviteeLobby();
+                App.Current.MainWindow.Content = inviteeLobby;
+            }
+        }
+
+        private bool IsPartyCodeCorrect(int partyCode)
+        {
+            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
+            return client.IsPartyExistent(partyCode);
+        }
+
+        private bool IsSpaceAvailable(int partyCode) //thread insecure?
+        {
+            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
+            return client.IsSpaceAvailable(partyCode);
         }
     }
 }

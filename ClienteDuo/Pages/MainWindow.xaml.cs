@@ -29,10 +29,16 @@ namespace ClienteDuo.Pages
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.Content = launcher;
         }
+
+        public void OnClosing(object sender, CancelEventArgs e)
+        {
+
+        }
+
         public static void ShowMessageBox(string message)
         {
             string messageBoxText = message;
-            string caption = "Alert *internacionalizar*";
+            string caption = Properties.Resources.TitleAlert;
 
             MessageBoxButton okButton = MessageBoxButton.OK;
             MessageBoxImage warningIcon = MessageBoxImage.Warning;

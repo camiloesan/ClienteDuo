@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -18,6 +19,8 @@ namespace ClienteDuo.Pages
 {
     public partial class InviteeLobby : Page, DataService.IPartyManagerCallback
     {
+        const int MESSAGE_MAX_LENGTH = 250;
+
         public InviteeLobby()
         {
             InitializeComponent();
@@ -43,9 +46,10 @@ namespace ClienteDuo.Pages
             chatPanel.Children.Add(labelMessageReceived);
             chatScrollViewer.ScrollToEnd();
         }
+
         private void SendMessage(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            if (e.Key == Key.Return && TBoxMessage.Text.Trim() != null)
             {
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
@@ -53,6 +57,10 @@ namespace ClienteDuo.Pages
                 string message = Login.ACTIVE_EMAIL + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
                 client.SendMessage(JoinParty.PARTY_CODE, message); //partycode no good
+            } 
+            else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters);
             }
         }
 

@@ -159,11 +159,23 @@
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Correo electrónico o contraseña incorrectos</value>
   </data>
+  <data name="DlgFullParty" xml:space="preserve">
+    <value>La partida ya está llena, inténtalo de nuevo más tarde</value>
+  </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
     <value>La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula</value>
   </data>
+  <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
+    <value>El código de partida debe ser un numero con máximo 4 dígitos</value>
+  </data>
+  <data name="DlgMessageMaxCharacters" xml:space="preserve">
+    <value>Un mensaje solo puede contener 250 caracteres</value>
+  </data>
   <data name="DlgNewAccountSuccess" xml:space="preserve">
     <value>Se ha registrado el usuario correctamente</value>
+  </data>
+  <data name="DlgPartyNotFound" xml:space="preserve">
+    <value>El código de partida no es correcto</value>
   </data>
   <data name="DlgServiceException" xml:space="preserve">
     <value>Hubo un error con el servicio, inténtelo de nuevo más tarde</value>
@@ -197,6 +209,9 @@
   </data>
   <data name="LblUsername" xml:space="preserve">
     <value>Nombre de Usuario</value>
+  </data>
+  <data name="TitleAlert" xml:space="preserve">
+    <value>Alerta</value>
   </data>
   <data name="TitleLauncher" xml:space="preserve">
     <value>Launcher</value>

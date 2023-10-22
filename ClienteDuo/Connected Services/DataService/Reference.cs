@@ -191,4 +191,65 @@ namespace ClienteDuo.DataService {
             return base.Channel.LeavePartyAsync(partyCode, email);
         }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IPartyValidator")]
+    public interface IPartyValidator {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyValidator/IsPartyExistent", ReplyAction="http://tempuri.org/IPartyValidator/IsPartyExistentResponse")]
+        bool IsPartyExistent(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyValidator/IsPartyExistent", ReplyAction="http://tempuri.org/IPartyValidator/IsPartyExistentResponse")]
+        System.Threading.Tasks.Task<bool> IsPartyExistentAsync(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyValidator/IsSpaceAvailable", ReplyAction="http://tempuri.org/IPartyValidator/IsSpaceAvailableResponse")]
+        bool IsSpaceAvailable(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyValidator/IsSpaceAvailable", ReplyAction="http://tempuri.org/IPartyValidator/IsSpaceAvailableResponse")]
+        System.Threading.Tasks.Task<bool> IsSpaceAvailableAsync(int partyCode);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IPartyValidatorChannel : ClienteDuo.DataService.IPartyValidator, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PartyValidatorClient : System.ServiceModel.ClientBase<ClienteDuo.DataService.IPartyValidator>, ClienteDuo.DataService.IPartyValidator {
+        
+        public PartyValidatorClient() {
+        }
+        
+        public PartyValidatorClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public PartyValidatorClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PartyValidatorClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public PartyValidatorClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool IsPartyExistent(int partyCode) {
+            return base.Channel.IsPartyExistent(partyCode);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsPartyExistentAsync(int partyCode) {
+            return base.Channel.IsPartyExistentAsync(partyCode);
+        }
+        
+        public bool IsSpaceAvailable(int partyCode) {
+            return base.Channel.IsSpaceAvailable(partyCode);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsSpaceAvailableAsync(int partyCode) {
+            return base.Channel.IsSpaceAvailableAsync(partyCode);
+        }
+    }
 }

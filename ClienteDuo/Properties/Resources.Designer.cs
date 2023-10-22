@@ -187,6 +187,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The party is full already, try again later.
+        /// </summary>
+        public static string DlgFullParty {
+            get {
+                return ResourceManager.GetString("DlgFullParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter.
         /// </summary>
         public static string DlgInsecurePassword {
@@ -196,11 +205,38 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Party code needs to be a number with a max of 4 digits.
+        /// </summary>
+        public static string DlgInvalidPartyCodeFormat {
+            get {
+                return ResourceManager.GetString("DlgInvalidPartyCodeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A message can only contain 250 characters.
+        /// </summary>
+        public static string DlgMessageMaxCharacters {
+            get {
+                return ResourceManager.GetString("DlgMessageMaxCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user has been registered succesfully.
         /// </summary>
         public static string DlgNewAccountSuccess {
             get {
                 return ResourceManager.GetString("DlgNewAccountSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The party code is incorrect.
+        /// </summary>
+        public static string DlgPartyNotFound {
+            get {
+                return ResourceManager.GetString("DlgPartyNotFound", resourceCulture);
             }
         }
         
@@ -300,6 +336,15 @@ namespace ClienteDuo.Properties {
         public static string LblUsername {
             get {
                 return ResourceManager.GetString("LblUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alert.
+        /// </summary>
+        public static string TitleAlert {
+            get {
+                return ResourceManager.GetString("TitleAlert", resourceCulture);
             }
         }
         

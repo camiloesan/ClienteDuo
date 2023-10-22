@@ -24,6 +24,18 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IPartyValidator_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -85,6 +97,18 @@
   <wsdl:message name="IPartyManager_PlayerLeft_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
   </wsdl:message>
+  <wsdl:message name="IPartyValidator_IsPartyExistent_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsPartyExistent" />
+  </wsdl:message>
+  <wsdl:message name="IPartyValidator_IsPartyExistent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsPartyExistentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyValidator_IsSpaceAvailable_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsSpaceAvailable" />
+  </wsdl:message>
+  <wsdl:message name="IPartyValidator_IsSpaceAvailable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsSpaceAvailableResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUsersManager">
     <wsdl:operation name="AddUserToDatabase">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabase" message="tns:IUsersManager_AddUserToDatabase_InputMessage" />
@@ -127,6 +151,16 @@
     <wsdl:operation name="PlayerLeft">
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeft" message="tns:IPartyManager_PlayerLeft_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeftResponse" message="tns:IPartyManager_PlayerLeft_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IPartyValidator">
+    <wsdl:operation name="IsPartyExistent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyValidator/IsPartyExistent" message="tns:IPartyValidator_IsPartyExistent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyValidator/IsPartyExistentResponse" message="tns:IPartyValidator_IsPartyExistent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsSpaceAvailable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyValidator/IsSpaceAvailable" message="tns:IPartyValidator_IsSpaceAvailable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyValidator/IsSpaceAvailableResponse" message="tns:IPartyValidator_IsSpaceAvailable_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUsersManager" type="tns:IUsersManager">
@@ -224,6 +258,28 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IPartyValidator" type="tns:IPartyValidator">
+    <wsp:PolicyReference URI="#NetTcpBinding_IPartyValidator_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="IsPartyExistent">
+      <soap12:operation soapAction="http://tempuri.org/IPartyValidator/IsPartyExistent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsSpaceAvailable">
+      <soap12:operation soapAction="http://tempuri.org/IPartyValidator/IsSpaceAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServiceImplementation">
     <wsdl:port name="NetTcpBinding_IUsersManager" binding="tns:NetTcpBinding_IUsersManager">
       <soap12:address location="net.tcp://192.168.1.64:8080/Service" />
@@ -232,6 +288,12 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPartyManager" binding="tns:NetTcpBinding_IPartyManager">
+      <soap12:address location="net.tcp://192.168.1.64:8080/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://192.168.1.64:8080/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IPartyValidator" binding="tns:NetTcpBinding_IPartyValidator">
       <soap12:address location="net.tcp://192.168.1.64:8080/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://192.168.1.64:8080/Service</wsa10:Address>

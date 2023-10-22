@@ -38,12 +38,36 @@ namespace ClienteDuo.Pages
                 isInteger = false;
             }
 
-            if (isInteger)
+            if (!isInteger)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
+            } 
+            else if (!IsPartyCodeCorrect(PARTY_CODE))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
+            }
+            else if (!IsSpaceAvailable(PARTY_CODE))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
+            }
+            else
             {
                 InviteeLobby inviteeLobby = new InviteeLobby();
                 App.Current.MainWindow.Content = inviteeLobby;
             }
 
+        }
+
+        private bool IsPartyCodeCorrect(int partyCode)
+        {
+            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
+            return client.IsPartyExistent(partyCode);
+        }
+
+        private bool IsSpaceAvailable(int partyCode) //thread insecure?
+        {
+            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
+            return client.IsSpaceAvailable(partyCode);
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
