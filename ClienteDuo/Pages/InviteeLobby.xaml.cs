@@ -25,15 +25,15 @@ namespace ClienteDuo.Pages
         public InviteeLobby()
         {
             InitializeComponent();
-            Join();
+            JoinGame();
         }
 
-        private void Join()
+        private void JoinGame()
         {
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.JoinParty(JoinParty.PARTY_CODE, Login.ACTIVE_USERNAME);
+            client.JoinParty(JoinParty.PARTY_CODE, SessionDetails.username);
         }
 
         public void MessageReceived(string messageSent)
@@ -57,7 +57,7 @@ namespace ClienteDuo.Pages
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-                string message = Login.ACTIVE_USERNAME + ": " + TBoxMessage.Text;
+                string message = SessionDetails.username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
                 client.SendMessage(JoinParty.PARTY_CODE, message); //partycode no good
             } 
@@ -108,7 +108,7 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.LeaveParty(JoinParty.PARTY_CODE, Login.ACTIVE_USERNAME);
+            client.LeaveParty(JoinParty.PARTY_CODE, SessionDetails.username);
         }
 
         private void PlayPlayerJoinedAudio()

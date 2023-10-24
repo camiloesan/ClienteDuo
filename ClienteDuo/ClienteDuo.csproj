@@ -101,6 +101,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\MusicManager.cs" />
+    <Compile Include="Utilities\SessionDetails.cs" />
     <Page Include="Pages\CardTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

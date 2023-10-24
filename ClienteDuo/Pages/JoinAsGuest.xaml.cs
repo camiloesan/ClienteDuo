@@ -35,10 +35,21 @@ namespace ClienteDuo.Pages
 
         private void BtnJoin(object sender, RoutedEventArgs e)
         {
-            bool isInteger = false;
+            string partyCodeString = TBoxPartyCode.Text.Trim();
+
+            if (IsPartyCodeStringValid(partyCodeString))
+            {
+                InviteeLobby inviteeLobby = new InviteeLobby();
+                App.Current.MainWindow.Content = inviteeLobby;
+            }
+        }
+
+        private bool IsPartyCodeStringValid(string partyCode)
+        {
+            bool isInteger;
             try
             {
-                PARTY_CODE = Int32.Parse(TBoxPartyCode.Text.Trim());
+                PARTY_CODE = Int32.Parse(partyCode);
                 isInteger = true;
             }
             catch (Exception ex)
@@ -49,20 +60,19 @@ namespace ClienteDuo.Pages
             if (!isInteger)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
+                return false;
             }
             else if (!IsPartyCodeCorrect(PARTY_CODE))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
+                return false;
             }
             else if (!IsSpaceAvailable(PARTY_CODE))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
+                return false;
             }
-            else
-            {
-                InviteeLobby inviteeLobby = new InviteeLobby();
-                App.Current.MainWindow.Content = inviteeLobby;
-            }
+            return true;
         }
 
         private bool IsPartyCodeCorrect(int partyCode)

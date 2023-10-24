@@ -33,7 +33,7 @@ namespace ClienteDuo.Pages
             Random rand = new Random();
             partyCode = rand.Next(0, 10000);
 
-            client.NewParty(partyCode, Login.ACTIVE_USERNAME);
+            client.NewParty(partyCode, SessionDetails.username);
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
         }
 
@@ -56,7 +56,7 @@ namespace ClienteDuo.Pages
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-                string message = Login.ACTIVE_USERNAME + ": " + TBoxMessage.Text;
+                string message = SessionDetails.username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
                 client.SendMessage(partyCode, message); //partycode no good
             }
@@ -73,7 +73,7 @@ namespace ClienteDuo.Pages
 
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.LeaveParty(partyCode, Login.ACTIVE_USERNAME);
+            client.LeaveParty(partyCode, SessionDetails.username);
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)

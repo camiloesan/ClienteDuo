@@ -38,8 +38,8 @@ namespace ClienteDuo.Pages
 
         private void BtnJoinAsGuest(object sender, RoutedEventArgs e)
         {
-            JoinAsGuest joinAsGuest = new JoinAsGuest();
-            App.Current.MainWindow.Content = joinAsGuest;
+            JoinParty joinParty = new JoinParty();
+            App.Current.MainWindow.Content = joinParty;
         }
     }
 }

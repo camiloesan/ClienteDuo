@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ClienteDuo.Utilities;
 
 namespace ClienteDuo.Pages
 {
@@ -54,7 +55,8 @@ namespace ClienteDuo.Pages
             {
                 if (isLoginValid)
                 {
-                    ACTIVE_USERNAME = username;
+                    SessionDetails.username = username;
+                    SessionDetails.isGuest = false;
                     MainMenu mainMenu = new MainMenu();
                     App.Current.MainWindow.Content = mainMenu;
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClienteDuo.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -23,6 +24,16 @@ namespace ClienteDuo.Pages
         public JoinParty()
         {
             InitializeComponent();
+            EnableOrDisableGuestFields();
+        }
+
+        private void EnableOrDisableGuestFields()
+        {
+            if (SessionDetails.isGuest)
+            {
+                LblUsername.Visibility = Visibility.Visible;
+                TBoxUsername.Visibility = Visibility.Visible;
+            }
         }
 
         private void BtnJoin(object sender, RoutedEventArgs e)
@@ -72,8 +83,17 @@ namespace ClienteDuo.Pages
 
         private void BtnCancel(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
-            App.Current.MainWindow.Content = mainMenu;
+
+            if (SessionDetails.isGuest)
+            {
+                Launcher launcher = new Launcher();
+                App.Current.MainWindow.Content = launcher;
+            }
+            else
+            {
+                MainMenu mainMenu = new MainMenu();
+                App.Current.MainWindow.Content = mainMenu;
+            }
         }
     }
 }
