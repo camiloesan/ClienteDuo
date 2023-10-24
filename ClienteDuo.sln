@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClienteDuo", "ClienteDuo\ClienteDuo.csproj", "{BBD33E8B-D17E-463D-A81A-83A7B02019B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNO_DUO_UnitTests", "UNO_DUO_UnitTests\UNO_DUO_UnitTests.csproj", "{55B0E65D-5744-4407-B667-2E0F4E81DDB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BBD33E8B-D17E-463D-A81A-83A7B02019B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBD33E8B-D17E-463D-A81A-83A7B02019B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBD33E8B-D17E-463D-A81A-83A7B02019B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55B0E65D-5744-4407-B667-2E0F4E81DDB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55B0E65D-5744-4407-B667-2E0F4E81DDB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55B0E65D-5744-4407-B667-2E0F4E81DDB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55B0E65D-5744-4407-B667-2E0F4E81DDB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

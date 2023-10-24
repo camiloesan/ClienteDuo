@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,15 +21,16 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class CardTable : Window
     {
-        static List<string> _cardColors = new List<string>()
+        GameMenu _gameMenu;
+        Random _numberGenerator;
+        static readonly List<string> _cardColors = new List<string>()
         {
             "#0000FF", //Blue
             "#FFFF00", //Yellow
             "#008000", //Green
             "#FF0000"  //Red
         };
-
-        static List<(string, int)> _cardNumbers = new List<(string, int)>()
+        static readonly List<(string, int)> _cardNumbers = new List<(string, int)>()
         {
             ("1", 12),
             ("2", 12),
@@ -43,117 +45,108 @@ namespace ClienteDuo.Pages
             ("#", 8)
         };
 
+
         public CardTable()
         {
             InitializeComponent();
+            _numberGenerator = new Random();
+            _gameMenu = new GameMenu();
 
             loadSettingsMenu();
             dealTableCards();
-            dealPlayerCards();
-            dealOtherPlayersCards();
+            dealPlayersCards();
         }
 
         void loadSettingsMenu()
         {
-            GameMenu gameMenu = new GameMenu();
-
-            _gameMenu.Children.Add(gameMenu);
+            _gameMenu.Margin = new Thickness(550, 0, 0, 0);
+            _gameMenu.Visibility = Visibility.Collapsed;
+            _background.Children.Add(_gameMenu);
         }
 
         void dealTableCards()
         {
-            // Assign card values
-            Random numberGenerator = new Random();
-
-            int leftRandomIndex = numberGenerator.Next(1, 9);
-            int rightRandomIndex = numberGenerator.Next(1, 9);
+            int leftRandomIndex = _numberGenerator.Next(1, 9);
+            int rightRandomIndex = _numberGenerator.Next(1, 9);
 
             do
             {
-                leftRandomIndex = numberGenerator.Next(1, 9);
+                leftRandomIndex = _numberGenerator.Next(1, 9);
                 _middleCardLabel.Content = leftRandomIndex.ToString();
 
-                rightRandomIndex = numberGenerator.Next(1, 9);
+                rightRandomIndex = _numberGenerator.Next(1, 9);
                 _rightCardLabel.Content = rightRandomIndex.ToString();
 
             } while(leftRandomIndex == 2 || rightRandomIndex == 2 || leftRandomIndex == rightRandomIndex);
 
-            //Assign colors
-            Random colorGenerator = new Random();
-
-            string _middleColor = _cardColors[colorGenerator.Next(1, 4)];
-            string _rightColor = _cardColors[colorGenerator.Next(1, 4)];
+            string _middleColor = _cardColors[_numberGenerator.Next(0, 3)];
+            string _rightColor = _cardColors[_numberGenerator.Next(0, 3)];
 
             _middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_middleColor));
             _rightCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_rightColor));
         }
 
-        public void dealCardLeft()
-        {
-
-        }
-
-        public void dealCardRight()
-        {
-
-        }
-
-        public void dealCardTop()
-        {
-
-        }
-
-        void dealOtherPlayersCards()
+        void dealPlayersCards()
         {
             for (int i = 0; i < 5; i++)
             {
+                dealPlayerCard();
                 dealCardLeft();
                 dealCardRight();
                 dealCardTop();
             }
         }
 
-        void dealPlayerCards()
+        void dealCardLeft()
         {
-            Card[] deck = new Card[5];
-            Random numberGenerator = new Random();
-            
-            for (int i = 0; i < deck.Length; i++)
+            FlippedCard card = new FlippedCard();
+
+            card.RenderTransform = new RotateTransform(90);
+            card.Margin = new Thickness(100, 0, 0, 0);
+
+
+            card.Visibility = Visibility.Visible;
+            _leftDeck.Children.Add(card);
+        }
+
+        void dealCardRight()
+        {
+
+        }
+
+        void dealCardTop()
+        {
+
+        }
+
+        void dealPlayerCard()
+        {
+            Card card = new Card();
+            int _accumulatedWeight = 0;
+            int _cardNumber = _numberGenerator.Next(0, 108); //108 is the total of cards in a standard DUO deck
+
+            foreach (var (number, weight) in _cardNumbers)
             {
-                deck[i] = new Card();
-                int _accumulatedWeight = 0;
-                int _cardNumber = numberGenerator.Next(0, 108); //108 is the total of cards in a standard DUO deck
+                _accumulatedWeight += weight;
 
-                foreach (var (number, weight) in _cardNumbers)
+                if (_accumulatedWeight <= _cardNumber)
                 {
-                    _accumulatedWeight += weight;
-
-                    if (_accumulatedWeight <= _cardNumber)
-                    {
-                        deck[i].Number = number;
-                    }
+                    card.Number = number;
                 }
             }
 
-            Random colorGenerator = new Random();
-
-            for (int i = 0; i < deck.Length; i++)
+            if (card.Number.CompareTo("2") != 0)
             {
-                if (deck[i].Number.CompareTo("2") != 0)
-                {
-                    deck[i].Color = _cardColors[colorGenerator.Next(0, 4)];
-                }
-
-                deck[i].Visibility = Visibility.Visible;
-                _playerDeck.Children.Add(deck[i]);
+                card.Color = _cardColors[_numberGenerator.Next(0, 3)];
             }
+
+            card.Visibility = Visibility.Visible;
+            _playerDeck.Children.Add(card);
         }
 
         private void _gameMenuButton_Click(object sender, RoutedEventArgs e)
         {
             _gameMenu.Visibility = Visibility.Visible;
-
-            _showGameMenuButton.Visibility = Visibility.Collapsed;
         }
     }
 }

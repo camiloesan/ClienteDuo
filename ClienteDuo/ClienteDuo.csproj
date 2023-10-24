@@ -229,9 +229,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\Amogus icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Pages\ExpandMenuIcon.png" />
   </ItemGroup>
   <ItemGroup>

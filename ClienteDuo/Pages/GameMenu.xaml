@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ClienteDuo.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="585" d:DesignWidth="450">
-    <Grid Background="White" Height="585">
+    <Grid x:Name="_gameMenu" Background="White" Height="585">
         <Button x:Name="_hideMenuButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="61" Margin="10,10,0,0" Click="_hideMenuButton_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/Pages/ExpandMenuIcon.png"/>
