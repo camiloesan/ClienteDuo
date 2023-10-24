@@ -205,7 +205,7 @@
     <value>Configuración del Juego</value>
   </data>
   <data name="LblInGameUsername" xml:space="preserve">
-    <value>Nombre de Usuario En-Juego</value>
+    <value>Nombre de Usuario Temporal</value>
   </data>
   <data name="LblPartyCode" xml:space="preserve">
     <value>Código de Partida</value>

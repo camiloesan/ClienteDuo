@@ -12,6 +12,7 @@ namespace ClienteDuo.Pages
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static string ACTIVE_EMAIL;
+        public static string ACTIVE_USERNAME;
 
         public Login()
         {
@@ -33,15 +34,15 @@ namespace ClienteDuo.Pages
 
         private void AttemptLogin()
         {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            string email = TBoxEmail.Text;
+            string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
-
+            DataService.UsersManagerClient client = null;
 
             bool isLoginValid = false;
             try
             {
-                isLoginValid = client.IsLoginValid(email, Sha256_hash(password));
+                client = new DataService.UsersManagerClient();
+                isLoginValid = client.IsLoginValid(username, Sha256_hash(password));
             } 
             catch (Exception ex)
             {
@@ -49,16 +50,18 @@ namespace ClienteDuo.Pages
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
             }
             
-
-            if (isLoginValid)
+            if (client != null)
             {
-                ACTIVE_EMAIL = email;
-                MainMenu mainMenu = new MainMenu();
-                App.Current.MainWindow.Content = mainMenu;
-            }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
+                if (isLoginValid)
+                {
+                    ACTIVE_USERNAME = username;
+                    MainMenu mainMenu = new MainMenu();
+                    App.Current.MainWindow.Content = mainMenu;
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
+                }
             }
         }
 

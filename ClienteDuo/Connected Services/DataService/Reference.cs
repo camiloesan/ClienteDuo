@@ -9,17 +9,96 @@
 //------------------------------------------------------------------------------
 
 namespace ClienteDuo.DataService {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/CommunicationService")]
+    [System.SerializableAttribute()]
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IUsersManager")]
     public interface IUsersManager {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
-        bool AddUserToDatabase(string username, string email, string password);
+        bool AddUserToDatabase(ClienteDuo.DataService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
-        System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(string username, string email, string password);
+        System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(ClienteDuo.DataService.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsLoginValid", ReplyAction="http://tempuri.org/IUsersManager/IsLoginValidResponse")]
         bool IsLoginValid(string email, string password);
@@ -73,12 +152,12 @@ namespace ClienteDuo.DataService {
                 base(binding, remoteAddress) {
         }
         
-        public bool AddUserToDatabase(string username, string email, string password) {
-            return base.Channel.AddUserToDatabase(username, email, password);
+        public bool AddUserToDatabase(ClienteDuo.DataService.User user) {
+            return base.Channel.AddUserToDatabase(user);
         }
         
-        public System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(string username, string email, string password) {
-            return base.Channel.AddUserToDatabaseAsync(username, email, password);
+        public System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(ClienteDuo.DataService.User user) {
+            return base.Channel.AddUserToDatabaseAsync(user);
         }
         
         public bool IsLoginValid(string email, string password) {
@@ -119,16 +198,16 @@ namespace ClienteDuo.DataService {
     public interface IPartyManager {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NewParty")]
-        void NewParty(int partyCode, string email);
+        void NewParty(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NewParty")]
-        System.Threading.Tasks.Task NewPartyAsync(int partyCode, string email);
+        System.Threading.Tasks.Task NewPartyAsync(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/JoinParty")]
-        void JoinParty(int partyCode, string email);
+        void JoinParty(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/JoinParty")]
-        System.Threading.Tasks.Task JoinPartyAsync(int partyCode, string email);
+        System.Threading.Tasks.Task JoinPartyAsync(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/SendMessage")]
         void SendMessage(int partyCode, string message);
@@ -137,10 +216,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task SendMessageAsync(int partyCode, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
-        void LeaveParty(int partyCode, string email);
+        void LeaveParty(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
-        System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string email);
+        System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -187,20 +266,20 @@ namespace ClienteDuo.DataService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void NewParty(int partyCode, string email) {
-            base.Channel.NewParty(partyCode, email);
+        public void NewParty(int partyCode, string username) {
+            base.Channel.NewParty(partyCode, username);
         }
         
-        public System.Threading.Tasks.Task NewPartyAsync(int partyCode, string email) {
-            return base.Channel.NewPartyAsync(partyCode, email);
+        public System.Threading.Tasks.Task NewPartyAsync(int partyCode, string username) {
+            return base.Channel.NewPartyAsync(partyCode, username);
         }
         
-        public void JoinParty(int partyCode, string email) {
-            base.Channel.JoinParty(partyCode, email);
+        public void JoinParty(int partyCode, string username) {
+            base.Channel.JoinParty(partyCode, username);
         }
         
-        public System.Threading.Tasks.Task JoinPartyAsync(int partyCode, string email) {
-            return base.Channel.JoinPartyAsync(partyCode, email);
+        public System.Threading.Tasks.Task JoinPartyAsync(int partyCode, string username) {
+            return base.Channel.JoinPartyAsync(partyCode, username);
         }
         
         public void SendMessage(int partyCode, string message) {
@@ -211,12 +290,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.SendMessageAsync(partyCode, message);
         }
         
-        public void LeaveParty(int partyCode, string email) {
-            base.Channel.LeaveParty(partyCode, email);
+        public void LeaveParty(int partyCode, string username) {
+            base.Channel.LeaveParty(partyCode, username);
         }
         
-        public System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string email) {
-            return base.Channel.LeavePartyAsync(partyCode, email);
+        public System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string username) {
+            return base.Channel.LeavePartyAsync(partyCode, username);
         }
     }
     

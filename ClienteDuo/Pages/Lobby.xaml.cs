@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClienteDuo.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Media;
@@ -32,8 +33,8 @@ namespace ClienteDuo.Pages
             Random rand = new Random();
             partyCode = rand.Next(0, 10000);
 
-            client.NewParty(partyCode, Login.ACTIVE_EMAIL);
-            LblPartyCode.Content = "Code: " + partyCode;
+            client.NewParty(partyCode, Login.ACTIVE_USERNAME);
+            LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
         }
 
         public void MessageReceived(string messageSent)
@@ -55,7 +56,7 @@ namespace ClienteDuo.Pages
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-                string message = Login.ACTIVE_EMAIL + ": " + TBoxMessage.Text;
+                string message = Login.ACTIVE_USERNAME + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
                 client.SendMessage(partyCode, message); //partycode no good
             }
@@ -72,13 +73,13 @@ namespace ClienteDuo.Pages
 
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.LeaveParty(partyCode, Login.ACTIVE_EMAIL);
+            client.LeaveParty(partyCode, Login.ACTIVE_USERNAME);
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
             players = playersInLobby;
-            //PlayPlayerJoinedAudio();
+            PlayPlayerJoinedAudio();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -104,11 +105,8 @@ namespace ClienteDuo.Pages
 
         private void PlayPlayerJoinedAudio()
         {
-
-            MediaPlayer player = new MediaPlayer();
-
-            //player.Open(new System.Uri("fullpathx"));
-            player.Play();
+            MusicManager musicManager = new MusicManager("SFX\\playerJoinedSound.wav");
+            musicManager.PlayMusic();
         }
 
         public void PartyCreated(Dictionary<string, object> playersInLobby)

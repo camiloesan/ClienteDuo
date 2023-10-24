@@ -1,4 +1,5 @@
-﻿using ClienteDuo.Pages;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -164,12 +165,20 @@ namespace ClienteDuo
             string username = TBoxUsername.Text;
             string email = TBoxEmail.Text;
             string password = TBoxPassword.Password;
+
+            DataService.User databaseUser = new DataService.User
+            {
+                UserName = username,
+                Email = email,
+                Password = Sha256_hash(password)
+            };
+
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
 
             bool result = false;
             try
             {
-                result = client.AddUserToDatabase(username, email, Sha256_hash(password));
+                result = client.AddUserToDatabase(databaseUser);
             } 
             catch (Exception ex)
             {

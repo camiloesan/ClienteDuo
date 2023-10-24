@@ -322,7 +322,7 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In-Game Username.
+        ///   Looks up a localized string similar to Temporary Username.
         /// </summary>
         public static string LblInGameUsername {
             get {
@@ -331,7 +331,7 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PartyCode.
+        ///   Looks up a localized string similar to Party Code.
         /// </summary>
         public static string LblPartyCode {
             get {

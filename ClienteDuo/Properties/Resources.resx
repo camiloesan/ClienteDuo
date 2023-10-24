@@ -205,10 +205,10 @@
     <value>Game Settings</value>
   </data>
   <data name="LblInGameUsername" xml:space="preserve">
-    <value>In-Game Username</value>
+    <value>Temporary Username</value>
   </data>
   <data name="LblPartyCode" xml:space="preserve">
-    <value>PartyCode</value>
+    <value>Party Code</value>
   </data>
   <data name="LblPassword" xml:space="preserve">
     <value>Password</value>
