@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClienteDuo.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -23,6 +24,16 @@ namespace ClienteDuo.Pages
         public JoinParty()
         {
             InitializeComponent();
+            IsUserGuest();
+        }
+
+        private void IsUserGuest()
+        {
+            if (SessionDetails.isGuest)
+            {
+                LblUsername.Visibility = Visibility.Visible;
+                TBoxUsername.Visibility = Visibility.Visible;
+            }
         }
 
         private void BtnJoin(object sender, RoutedEventArgs e)
@@ -57,6 +68,7 @@ namespace ClienteDuo.Pages
             }
 
         }
+
 
         private bool IsPartyCodeCorrect(int partyCode)
         {

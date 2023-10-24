@@ -26,10 +26,5 @@ namespace ClienteDuo.Pages
             JoinParty joinParty = new JoinParty();
             App.Current.MainWindow.Content = joinParty;
         }
-
-        private void fillActiveFriends()
-        {
-            
-        }
     }
 }
