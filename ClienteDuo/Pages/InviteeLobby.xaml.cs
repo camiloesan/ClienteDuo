@@ -102,8 +102,16 @@ namespace ClienteDuo.Pages
 
         private void BtnExitLobby(object sender, RoutedEventArgs e)
         {
-            MainMenu mainMenu = new MainMenu();
-            App.Current.MainWindow.Content = mainMenu;
+            if (SessionDetails.isGuest)
+            {
+                Launcher launcher = new Launcher();
+                App.Current.MainWindow.Content = launcher;
+            }
+            else
+            {
+                MainMenu mainMenu = new MainMenu();
+                App.Current.MainWindow.Content = mainMenu;
+            }
 
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
