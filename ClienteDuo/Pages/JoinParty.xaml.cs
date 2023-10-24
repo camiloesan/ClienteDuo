@@ -38,8 +38,13 @@ namespace ClienteDuo.Pages
 
         private void BtnJoin(object sender, RoutedEventArgs e)
         {
+            if (SessionDetails.isGuest)
+            {
+                SessionDetails.username = TBoxUsername.Text.Trim(); //validar longitud de nombre
+            }
+
             bool isInteger = false;
-            try
+            try // all this block in another function
             {
                 PARTY_CODE = Int32.Parse(TBoxPartyCode.Text.Trim());
                 isInteger = true;
@@ -68,6 +73,7 @@ namespace ClienteDuo.Pages
             }
 
         }
+
 
         private bool IsPartyCodeCorrect(int partyCode)
         {
