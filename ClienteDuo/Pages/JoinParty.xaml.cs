@@ -24,10 +24,10 @@ namespace ClienteDuo.Pages
         public JoinParty()
         {
             InitializeComponent();
-            EnableOrDisableGuestFields();
+            IsUserGuest();
         }
 
-        private void EnableOrDisableGuestFields()
+        private void IsUserGuest()
         {
             if (SessionDetails.isGuest)
             {
@@ -68,6 +68,7 @@ namespace ClienteDuo.Pages
             }
 
         }
+
 
         private bool IsPartyCodeCorrect(int partyCode)
         {
