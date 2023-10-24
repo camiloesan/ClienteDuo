@@ -201,11 +201,20 @@
   <data name="LblEmail" xml:space="preserve">
     <value>Correo Electrónico</value>
   </data>
+  <data name="LblFriends" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
   <data name="LblGameSettings" xml:space="preserve">
     <value>Configuración del Juego</value>
   </data>
   <data name="LblInGameUsername" xml:space="preserve">
     <value>Nombre de Usuario Temporal</value>
+  </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="LblMyProfile" xml:space="preserve">
+    <value>Mi Perfil</value>
   </data>
   <data name="LblPartyCode" xml:space="preserve">
     <value>Código de Partida</value>

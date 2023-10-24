@@ -313,6 +313,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friends.
+        /// </summary>
+        public static string LblFriends {
+            get {
+                return ResourceManager.GetString("LblFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game Settings.
         /// </summary>
         public static string LblGameSettings {
@@ -327,6 +336,24 @@ namespace ClienteDuo.Properties {
         public static string LblInGameUsername {
             get {
                 return ResourceManager.GetString("LblInGameUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leaderboard.
+        /// </summary>
+        public static string LblLeaderboard {
+            get {
+                return ResourceManager.GetString("LblLeaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Profile.
+        /// </summary>
+        public static string LblMyProfile {
+            get {
+                return ResourceManager.GetString("LblMyProfile", resourceCulture);
             }
         }
         
