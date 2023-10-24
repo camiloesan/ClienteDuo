@@ -1,12 +1,19 @@
-﻿using ClienteDuo.Pages;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages;
 using System;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace ClienteDuo
 {
     public partial class NewAccount : Page
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public NewAccount()
         {
             InitializeComponent();
@@ -28,14 +35,69 @@ namespace ClienteDuo
                 }
                 else
                 {
-                    MainWindow.ShowMessageBox("Ocurrió un error en la basa de datos, no se pudo registrar el usuario");
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException);
                 }
             }
         }
 
+        private bool IsUsernameAvailable(String username)
+        {
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+
+            bool isTaken = false;
+            try
+            {
+                isTaken = client.IsUsernameTaken(username);
+                
+            } 
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+            }
+            
+            if (isTaken)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken);
+            }
+
+            return !isTaken;
+        }
+
+        private bool IsEmailAvailable(string email)
+        {
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+            
+            bool isTaken = false;
+            try
+            {
+                isTaken = client.IsEmailTaken(email);
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+            }
+
+            if (isTaken)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailTaken);
+            }
+
+            return !isTaken;
+        }
+
         private bool AreFieldsValid()
         {
-            if (!AreFieldsEmpty() && AreFieldsLengthValid() && IsPasswordMatch())
+            string username = TBoxUsername.Text.Trim();
+            string email = TBoxEmail.Text.Trim();
+            string password = TBoxPassword.Password.Trim();
+            if (!AreFieldsEmpty() 
+                && AreFieldsLengthValid() 
+                && IsPasswordMatch() 
+                && IsPasswordSecure(password)
+                && IsUsernameAvailable(username)
+                && IsEmailAvailable(email))
             {
                 return true;
             }
@@ -52,24 +114,32 @@ namespace ClienteDuo
         {
             string usernameField = TBoxUsername.Text.Trim();
             string emailField = TBoxEmail.Text.Trim();
-            string passwordField = TBoxPassword.Password.Trim();
 
             if (usernameField.Length > 30)
             {
-                MainWindow.ShowMessageBox("el maximo de caracteres para el username es de 30 ***");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameMaxCharacters);
                 return false;
             } 
             else if (emailField.Length > 30)
             {
-                MainWindow.ShowMessageBox("el maximo de caracteres para el correo electronico es de 30***");
-                return false;
-            }
-            else if (passwordField.Length < 8)
-            {
-                MainWindow.ShowMessageBox("La contraseña debe tener un minimo de 8 caracteres***");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailMaxCharacters);
                 return false;
             }
             return true;
+        }
+
+        private bool IsPasswordSecure(string password)
+        {
+            Regex regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,}$");
+            if (regex.IsMatch(password))
+            {
+                return true;
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword);
+                return false;
+            }
         }
 
         private bool AreFieldsEmpty()
@@ -84,7 +154,7 @@ namespace ClienteDuo
                 || string.IsNullOrEmpty(passwordField)
                 || string.IsNullOrEmpty(confirmPasswordField))
             {
-                MainWindow.ShowMessageBox("Todos los campos deben estar llenos *pendiente internacionalizar*");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields);
                 return true;
             }
             return false;
@@ -95,18 +165,43 @@ namespace ClienteDuo
             string username = TBoxUsername.Text;
             string email = TBoxEmail.Text;
             string password = TBoxPassword.Password;
+
+            DataService.User databaseUser = new DataService.User
+            {
+                UserName = username,
+                Email = email,
+                Password = Sha256_hash(password)
+            };
+
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
 
             bool result = false;
             try
             {
-                result = client.AddUserToDatabase(username, email, password);
-            } catch (Exception ex)
+                result = client.AddUserToDatabase(databaseUser);
+            } 
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                log.Error(ex);
             }
 
             return result;
+        }
+
+        public static String Sha256_hash(String value)
+        {
+            StringBuilder Sb = new StringBuilder();
+
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
     }
 }

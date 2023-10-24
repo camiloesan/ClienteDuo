@@ -20,6 +20,8 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class JoinAsGuest : Page
     {
+        public static int PARTY_CODE = 0;
+
         public JoinAsGuest()
         {
             InitializeComponent();
@@ -33,7 +35,56 @@ namespace ClienteDuo.Pages
 
         private void BtnJoin(object sender, RoutedEventArgs e)
         {
+            string partyCodeString = TBoxPartyCode.Text.Trim();
 
+            if (IsPartyCodeStringValid(partyCodeString))
+            {
+                InviteeLobby inviteeLobby = new InviteeLobby();
+                App.Current.MainWindow.Content = inviteeLobby;
+            }
+        }
+
+        private bool IsPartyCodeStringValid(string partyCode)
+        {
+            bool isInteger;
+            try
+            {
+                PARTY_CODE = Int32.Parse(partyCode);
+                isInteger = true;
+            }
+            catch (Exception ex)
+            {
+                isInteger = false;
+            }
+
+            if (!isInteger)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
+                return false;
+            }
+            else if (!IsPartyCodeCorrect(PARTY_CODE))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
+                return false;
+            }
+            else if (!IsSpaceAvailable(PARTY_CODE))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsPartyCodeCorrect(int partyCode)
+        {
+            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
+            return client.IsPartyExistent(partyCode);
+        }
+
+        private bool IsSpaceAvailable(int partyCode) //thread insecure?
+        {
+            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
+            return client.IsSpaceAvailable(partyCode);
         }
     }
 }

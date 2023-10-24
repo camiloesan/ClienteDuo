@@ -17,7 +17,7 @@
             <Label x:Name="LblEmail" Content="{x:Static p:Resources.LblEmail}" Foreground="White" FontSize="14"/>
             <TextBox x:Name="TBoxEmail" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14"/>
             <Label x:Name="LblPassword" Content="{x:Static p:Resources.LblPassword}" Foreground="White" FontSize="14"/>
-            <PasswordBox x:Name="TBoxPassword" Width="174" Margin="0,5,0,5" Height="20"/>
+            <PasswordBox x:Name="TBoxPassword" Width="174" Margin="0,5,0,5" Height="20" FontSize="14"/>
             <Label x:Name="LblConfirmPassword" Content="{x:Static p:Resources.LblConfirmPassword}" Foreground="White" Margin="0,5,0,5" FontSize="14"/>
             <PasswordBox x:Name="TBoxConfirmPassword" Width="174" Height="20" FontSize="14"/>
         </StackPanel>

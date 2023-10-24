@@ -1,25 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for Launcher.xaml
-    /// </summary>
     public partial class Launcher : Page
     {
         public Launcher()
@@ -55,8 +38,8 @@ namespace ClienteDuo.Pages
 
         private void BtnJoinAsGuest(object sender, RoutedEventArgs e)
         {
-            JoinAsGuest joinAsGuest = new JoinAsGuest();
-            App.Current.MainWindow.Content = joinAsGuest;
+            JoinParty joinParty = new JoinParty();
+            App.Current.MainWindow.Content = joinParty;
         }
     }
 }

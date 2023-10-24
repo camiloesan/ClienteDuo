@@ -150,8 +150,47 @@
   <data name="BtnStartGame" xml:space="preserve">
     <value>Start Game</value>
   </data>
+  <data name="DlgConnectionError" xml:space="preserve">
+    <value>There was an error connecting with the service, try again later</value>
+  </data>
+  <data name="DlgEmailMaxCharacters" xml:space="preserve">
+    <value>Max characters for email is 30</value>
+  </data>
+  <data name="DlgEmailTaken" xml:space="preserve">
+    <value>An account with that email is already registered</value>
+  </data>
+  <data name="DlgEmptyFields" xml:space="preserve">
+    <value>All fields must be completed</value>
+  </data>
+  <data name="DlgFailedLogin" xml:space="preserve">
+    <value>Incorrect email or password</value>
+  </data>
+  <data name="DlgFullParty" xml:space="preserve">
+    <value>The party is full already, try again later</value>
+  </data>
+  <data name="DlgInsecurePassword" xml:space="preserve">
+    <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter</value>
+  </data>
+  <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
+    <value>Party code needs to be a number with a max of 4 digits</value>
+  </data>
+  <data name="DlgMessageMaxCharacters" xml:space="preserve">
+    <value>A message can only contain 250 characters</value>
+  </data>
   <data name="DlgNewAccountSuccess" xml:space="preserve">
     <value>The user has been registered succesfully</value>
+  </data>
+  <data name="DlgPartyNotFound" xml:space="preserve">
+    <value>The party code is incorrect</value>
+  </data>
+  <data name="DlgServiceException" xml:space="preserve">
+    <value>There was an error connecting with the service, try again later</value>
+  </data>
+  <data name="DlgUsernameMaxCharacters" xml:space="preserve">
+    <value>Max characters for username is 30</value>
+  </data>
+  <data name="DlgUsernameTaken" xml:space="preserve">
+    <value>Username is already taken</value>
   </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>
@@ -166,10 +205,10 @@
     <value>Game Settings</value>
   </data>
   <data name="LblInGameUsername" xml:space="preserve">
-    <value>In-Game Username</value>
+    <value>Temporary Username</value>
   </data>
   <data name="LblPartyCode" xml:space="preserve">
-    <value>PartyCode</value>
+    <value>Party Code</value>
   </data>
   <data name="LblPassword" xml:space="preserve">
     <value>Password</value>
@@ -179,6 +218,9 @@
   </data>
   <data name="LblUsername" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="TitleAlert" xml:space="preserve">
+    <value>Alert</value>
   </data>
   <data name="TItleLauncher" xml:space="preserve">
     <value>Launcher</value>

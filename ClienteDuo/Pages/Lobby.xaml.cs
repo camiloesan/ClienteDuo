@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClienteDuo.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Media;
@@ -13,14 +14,27 @@ namespace ClienteDuo.Pages
 {
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
+        const int MESSAGE_MAX_LENGTH = 250;
+
         private Dictionary<string, object> players = new Dictionary<string, object>();
+        int partyCode = 0;
 
         public Lobby()
         {
             InitializeComponent();
+            CreateNewParty();
+        }
+
+        private void CreateNewParty()
+        {
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.JoinParty(Login.ACTIVE_EMAIL);
+
+            Random rand = new Random();
+            partyCode = rand.Next(0, 10000);
+
+            client.NewParty(partyCode, SessionDetails.username);
+            LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
         }
 
         public void MessageReceived(string messageSent)
@@ -37,14 +51,18 @@ namespace ClienteDuo.Pages
         
         private void SendMessage(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            if (e.Key == Key.Return && TBoxMessage.Text.Trim().Length > 0)
             {
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-                string message = Login.ACTIVE_EMAIL + ": " + TBoxMessage.Text;
+                string message = SessionDetails.username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
-                client.SendMessage(message);
+                client.SendMessage(partyCode, message); //partycode no good
+            }
+            else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters);
             }
         }
 
@@ -55,13 +73,13 @@ namespace ClienteDuo.Pages
 
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.LeaveParty(Login.ACTIVE_EMAIL);
+            client.LeaveParty(partyCode, SessionDetails.username);
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
             players = playersInLobby;
-            //PlayPlayerJoinedAudio();
+            PlayPlayerJoinedAudio();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -87,11 +105,13 @@ namespace ClienteDuo.Pages
 
         private void PlayPlayerJoinedAudio()
         {
+            MusicManager musicManager = new MusicManager("SFX\\playerJoinedSound.wav");
+            musicManager.PlayMusic();
+        }
 
-            MediaPlayer player = new MediaPlayer();
-
-            //player.Open(new System.Uri("fullpathx"));
-            player.Play();
+        public void PartyCreated(Dictionary<string, object> playersInLobby)
+        {
+            UpdatePlayerList(playersInLobby);
         }
     }
 }
