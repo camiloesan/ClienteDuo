@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClienteDuo.Utilities;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,16 +33,18 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.JoinParty(JoinParty.PARTY_CODE, Login.ACTIVE_EMAIL);
+            client.JoinParty(JoinParty.PARTY_CODE, Login.ACTIVE_USERNAME);
         }
 
         public void MessageReceived(string messageSent)
         {
-            Label labelMessageReceived = new Label();
-            labelMessageReceived.HorizontalAlignment = HorizontalAlignment.Left;
-            labelMessageReceived.Foreground = new SolidColorBrush(Colors.White);
-            labelMessageReceived.FontSize = 14;
-            labelMessageReceived.Content = messageSent;
+            Label labelMessageReceived = new Label
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 14,
+                Content = messageSent
+            };
 
             chatPanel.Children.Add(labelMessageReceived);
             chatScrollViewer.ScrollToEnd();
@@ -54,7 +57,7 @@ namespace ClienteDuo.Pages
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-                string message = Login.ACTIVE_EMAIL + ": " + TBoxMessage.Text;
+                string message = Login.ACTIVE_USERNAME + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
                 client.SendMessage(JoinParty.PARTY_CODE, message); //partycode no good
             } 
@@ -71,6 +74,7 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
+            PlayPlayerJoinedAudio();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -84,11 +88,13 @@ namespace ClienteDuo.Pages
             playersPanel.Children.Clear();
             foreach (KeyValuePair<string, object> keyValuePair in playersInLobby)
             {
-                Label label = new Label();
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-                label.Foreground = new SolidColorBrush(Colors.White);
-                label.FontSize = 14;
-                label.Content = keyValuePair.Key;
+                Label label = new Label
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Foreground = new SolidColorBrush(Colors.White),
+                    FontSize = 14,
+                    Content = keyValuePair.Key
+                };
 
                 playersPanel.Children.Add(label);
             }
@@ -102,7 +108,13 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.LeaveParty(JoinParty.PARTY_CODE, Login.ACTIVE_EMAIL);
+            client.LeaveParty(JoinParty.PARTY_CODE, Login.ACTIVE_USERNAME);
+        }
+
+        private void PlayPlayerJoinedAudio()
+        {
+            MusicManager musicManager = new MusicManager("SFX\\playerJoinedSound.wav");
+            musicManager.PlayMusic();
         }
     }
 }
