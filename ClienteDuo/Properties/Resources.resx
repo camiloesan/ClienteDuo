@@ -231,6 +231,9 @@
   <data name="TitleAlert" xml:space="preserve">
     <value>Alert</value>
   </data>
+  <data name="TitleJoinParty" xml:space="preserve">
+    <value>Join Party</value>
+  </data>
   <data name="TItleLauncher" xml:space="preserve">
     <value>Launcher</value>
   </data>

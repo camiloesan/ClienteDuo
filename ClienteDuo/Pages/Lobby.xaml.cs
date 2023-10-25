@@ -100,6 +100,7 @@ namespace ClienteDuo.Pages
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Foreground = new SolidColorBrush(Colors.White),
                     FontSize = 14,
+                    VerticalAlignment = VerticalAlignment.Center,
                     Content = keyValuePair.Key
                 };
 

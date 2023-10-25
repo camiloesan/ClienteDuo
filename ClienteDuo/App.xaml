@@ -7,5 +7,7 @@
         <SolidColorBrush x:Key="BtnBackground" Color="#FF6B472B"/>
         <SolidColorBrush x:Key="BtnBorder" Color="#FF452308"/>
         <SolidColorBrush x:Key="Background" Color="#FF212D47"/>
+        <SolidColorBrush x:Key="HighlightFill" Color="#576B552B"/>
+        <SolidColorBrush x:Key="HighlightStroke" Color="#FF453008"/>
     </Application.Resources>
 </Application>

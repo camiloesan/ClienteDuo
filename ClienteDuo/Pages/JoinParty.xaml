@@ -12,11 +12,12 @@
     <Grid Background="{DynamicResource Background}">
         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0" Orientation="Vertical" VerticalAlignment="Center">
             <Label x:Name="LblUsername" Content="{x:Static p:Resources.LblInGameUsername}" Foreground="White" FontSize="14" Width="200" Visibility="Hidden"/>
-            <TextBox x:Name="TBoxUsername" TextWrapping="Wrap" Width="200" Margin="0,5,0,5" FontSize="14" HorizontalContentAlignment="Center" Visibility="Hidden"/>
+            <TextBox x:Name="TBoxUsername" TextWrapping="Wrap" Width="200" Margin="0,5,0,5" FontSize="14" HorizontalContentAlignment="Left" Visibility="Hidden"/>
             <Label Content="{x:Static p:Resources.LblPartyCode}" Foreground="White" FontSize="14" Width="200"/>
             <TextBox x:Name="TBoxPartyCode" TextWrapping="Wrap" Width="200" Margin="0,5,0,5" FontSize="14" HorizontalContentAlignment="Center"/>
         </StackPanel>
         <Button Content="{x:Static p:Resources.BtnJoin}" HorizontalAlignment="Left" Margin="458,387,0,0" VerticalAlignment="Top" Width="60" Click="BtnJoin" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
         <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="538,387,0,0" VerticalAlignment="Top" Width="60" Click="BtnCancel" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
+        <Label Content="{x:Static p:Resources.TitleJoinParty}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
     </Grid>
 </Page>

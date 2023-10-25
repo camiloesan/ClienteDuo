@@ -403,6 +403,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Join Party.
+        /// </summary>
+        public static string TitleJoinParty {
+            get {
+                return ResourceManager.GetString("TitleJoinParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Launcher.
         /// </summary>
         public static string TItleLauncher {
