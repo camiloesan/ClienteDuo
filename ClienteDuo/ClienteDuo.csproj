@@ -122,10 +122,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\JoinAsGuest.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\JoinParty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,9 +171,6 @@
     </Compile>
     <Compile Include="Pages\InviteeLobby.xaml.cs">
       <DependentUpon>InviteeLobby.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\JoinAsGuest.xaml.cs">
-      <DependentUpon>JoinAsGuest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\JoinParty.xaml.cs">
       <DependentUpon>JoinParty.xaml</DependentUpon>
@@ -278,9 +271,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\Amogus icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pages\ExpandMenuIcon.png" />

@@ -35,6 +35,8 @@ namespace ClienteDuo.Pages
 
             client.NewParty(partyCode, SessionDetails.username);
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
+
+            PlayPlayerJoinedAudio();
         }
 
         public void MessageReceived(string messageSent)
@@ -93,11 +95,13 @@ namespace ClienteDuo.Pages
             playersPanel.Children.Clear();
             foreach (KeyValuePair<string, object> keyValuePair in playersInLobby)
             {
-                Label label = new Label();
-                label.HorizontalAlignment = HorizontalAlignment.Center;
-                label.Foreground = new SolidColorBrush(Colors.White);
-                label.FontSize = 14;
-                label.Content = keyValuePair.Key;
+                Label label = new Label
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Foreground = new SolidColorBrush(Colors.White),
+                    FontSize = 14,
+                    Content = keyValuePair.Key
+                };
 
                 playersPanel.Children.Add(label);
             }
