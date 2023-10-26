@@ -177,6 +177,9 @@
   <data name="DlgMessageMaxCharacters" xml:space="preserve">
     <value>A message can only contain 250 characters</value>
   </data>
+  <data name="DlgMinPlayers" xml:space="preserve">
+    <value>You need a minimum of 2 players to start the game</value>
+  </data>
   <data name="DlgNewAccountSuccess" xml:space="preserve">
     <value>The user has been registered succesfully</value>
   </data>
@@ -201,11 +204,20 @@
   <data name="LblEmail" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="LblFriends" xml:space="preserve">
+    <value>Friends</value>
+  </data>
   <data name="LblGameSettings" xml:space="preserve">
     <value>Game Settings</value>
   </data>
   <data name="LblInGameUsername" xml:space="preserve">
     <value>Temporary Username</value>
+  </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="LblMyProfile" xml:space="preserve">
+    <value>My Profile</value>
   </data>
   <data name="LblPartyCode" xml:space="preserve">
     <value>Party Code</value>
@@ -221,6 +233,9 @@
   </data>
   <data name="TitleAlert" xml:space="preserve">
     <value>Alert</value>
+  </data>
+  <data name="TitleJoinParty" xml:space="preserve">
+    <value>Join Party</value>
   </data>
   <data name="TItleLauncher" xml:space="preserve">
     <value>Launcher</value>

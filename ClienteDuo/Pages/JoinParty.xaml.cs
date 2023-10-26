@@ -19,6 +19,7 @@ namespace ClienteDuo.Pages
 {
     public partial class JoinParty : Page
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public static int PARTY_CODE = 0;
 
         public JoinParty()
@@ -51,6 +52,7 @@ namespace ClienteDuo.Pages
             } 
             catch (Exception ex)
             {
+                log.Error(ex);
                 isInteger = false;
             }
 
