@@ -30,11 +30,6 @@ namespace ClienteDuo.Pages
             this.Content = launcher;
         }
 
-        public void OnClosing(object sender, CancelEventArgs e)
-        {
-
-        }
-
         public static void ShowMessageBox(string message)
         {
             string messageBoxText = message;

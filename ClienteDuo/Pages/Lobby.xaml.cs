@@ -118,5 +118,19 @@ namespace ClienteDuo.Pages
         {
             UpdatePlayerList(playersInLobby);
         }
+
+        private void StartGame(object sender, RoutedEventArgs e)
+        {
+
+            if (players.Count > 1)
+            {
+                CardTable cardTable = new CardTable();
+                cardTable.Show();
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgMinPlayers);
+            }
+        }
     }
 }
