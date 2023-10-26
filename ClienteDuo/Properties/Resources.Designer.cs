@@ -241,15 +241,6 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need a minimum of 2 players to start the game.
-        /// </summary>
-        public static string DlgMinPlayers {
-            get {
-                return ResourceManager.GetString("DlgMinPlayers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The user has been registered succesfully.
         /// </summary>
         public static string DlgNewAccountSuccess {
@@ -322,15 +313,6 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Friends.
-        /// </summary>
-        public static string LblFriends {
-            get {
-                return ResourceManager.GetString("LblFriends", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Game Settings.
         /// </summary>
         public static string LblGameSettings {
@@ -345,24 +327,6 @@ namespace ClienteDuo.Properties {
         public static string LblInGameUsername {
             get {
                 return ResourceManager.GetString("LblInGameUsername", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leaderboard.
-        /// </summary>
-        public static string LblLeaderboard {
-            get {
-                return ResourceManager.GetString("LblLeaderboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to My Profile.
-        /// </summary>
-        public static string LblMyProfile {
-            get {
-                return ResourceManager.GetString("LblMyProfile", resourceCulture);
             }
         }
         
@@ -408,15 +372,6 @@ namespace ClienteDuo.Properties {
         public static string TitleAlert {
             get {
                 return ResourceManager.GetString("TitleAlert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Join Party.
-        /// </summary>
-        public static string TitleJoinParty {
-            get {
-                return ResourceManager.GetString("TitleJoinParty", resourceCulture);
             }
         }
         

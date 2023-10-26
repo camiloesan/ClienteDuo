@@ -35,8 +35,6 @@ namespace ClienteDuo.Pages
 
             client.NewParty(partyCode, SessionDetails.username);
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
-
-            PlayPlayerJoinedAudio();
         }
 
         public void MessageReceived(string messageSent)
@@ -95,14 +93,11 @@ namespace ClienteDuo.Pages
             playersPanel.Children.Clear();
             foreach (KeyValuePair<string, object> keyValuePair in playersInLobby)
             {
-                Label label = new Label
-                {
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Foreground = new SolidColorBrush(Colors.White),
-                    FontSize = 14,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Content = keyValuePair.Key
-                };
+                Label label = new Label();
+                label.HorizontalAlignment = HorizontalAlignment.Center;
+                label.Foreground = new SolidColorBrush(Colors.White);
+                label.FontSize = 14;
+                label.Content = keyValuePair.Key;
 
                 playersPanel.Children.Add(label);
             }
@@ -117,20 +112,6 @@ namespace ClienteDuo.Pages
         public void PartyCreated(Dictionary<string, object> playersInLobby)
         {
             UpdatePlayerList(playersInLobby);
-        }
-
-        private void StartGame(object sender, RoutedEventArgs e)
-        {
-
-            if (players.Count > 1)
-            {
-                CardTable cardTable = new CardTable();
-                cardTable.Show();
-            }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgMinPlayers);
-            }
         }
     }
 }
