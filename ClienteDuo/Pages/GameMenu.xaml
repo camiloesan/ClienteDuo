@@ -9,12 +9,12 @@
     <Grid x:Name="_gameMenu" Background="White" Height="585">
         <Button x:Name="_hideMenuButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="61" Margin="10,10,0,0" Click="_hideMenuButton_Click">
             <Button.Background>
-                <ImageBrush ImageSource="/Pages/ExpandMenuIcon.png"/>
+                <ImageBrush ImageSource="/Images/ExpandMenuIcon.png"/>
             </Button.Background>
         </Button>
         <Button x:Name="_exitButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="63" Width="61" Margin="379,10,0,0" Click="_exitButton_Click">
             <Button.Background>
-                <ImageBrush ImageSource="/Pages/ExitButtonIcon.png"/>
+                <ImageBrush ImageSource="/Images/ExitButtonIcon.png"/>
             </Button.Background>
         </Button>
         <Label Content="Party settings" HorizontalAlignment="Left" Margin="111,10,0,0" VerticalAlignment="Top" Width="234" Height="80" FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center"/>

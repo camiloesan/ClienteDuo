@@ -7,40 +7,8 @@
         mc:Ignorable="d"
         Title="CardTable" Height="600" Width="1000">
     <Grid x:Name="_background" Background="#FF2CAB00">
-        <StackPanel x:Name="_topDeck" Orientation="Horizontal" Background="White" Height="120" HorizontalAlignment="Center" VerticalAlignment="Top" Width="702" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <StackPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </StackPanel.RenderTransform>
-        </StackPanel>
 
         <StackPanel x:Name="_playerDeck" Margin="0,464,0,0" Height="120" Width="702" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled" CanHorizontallyScroll="True" Background="White">
-            <StackPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </StackPanel.RenderTransform>
-        </StackPanel>
-
-        <StackPanel x:Name="_leftDeck" Orientation="Vertical" Background="White" Width="120" Height="400" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0,0,880,0" HorizontalAlignment="Left">
-            <StackPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </StackPanel.RenderTransform>
-        </StackPanel>
-
-        <StackPanel x:Name="_rightDeck" Orientation="Vertical" Margin="880,0,0,0" Background="White" Width="120" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <StackPanel.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -74,7 +42,7 @@
 
         <Button x:Name="_showGameMenuButton" HorizontalAlignment="Left" Margin="920,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.418,0.557" Width="70" Height="70" Click="_gameMenuButton_Click">
             <Button.Background>
-                <ImageBrush ImageSource="/Pages/ExpandMenuIcon.png"/>
+                <ImageBrush ImageSource="/Images/ExpandMenuIcon.png"/>
             </Button.Background>
         </Button>
     </Grid>

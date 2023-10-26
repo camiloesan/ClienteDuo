@@ -4,6 +4,6 @@
              Height="120" Width="80" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Black">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Rectangle Height="90" Width="65" Fill="Red" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-        <Label Content="DUO" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Height="32"/>
+        <Label Content="DUO" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" Height="34"/>
     </Grid>
 </UserControl>

@@ -21,107 +21,73 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class CardTable : Window
     {
+        Card[] _tableCards = new Card[3];
         GameMenu _gameMenu;
-        Random _numberGenerator;
-        static readonly List<string> _cardColors = new List<string>()
-        {
-            "#0000FF", //Blue
-            "#FFFF00", //Yellow
-            "#008000", //Green
-            "#FF0000"  //Red
-        };
-        static readonly List<(string, int)> _cardNumbers = new List<(string, int)>()
-        {
-            ("1", 12),
-            ("2", 12),
-            ("3", 12),
-            ("4", 12),
-            ("5", 12),
-            ("6", 8),
-            ("7", 8),
-            ("8", 8),
-            ("9", 8),
-            ("10", 8),
-            ("#", 8)
-        };
-
 
         public CardTable()
         {
             InitializeComponent();
-            _numberGenerator = new Random();
-            _gameMenu = new GameMenu();
 
-            loadSettingsMenu();
-            dealTableCards();
-            dealPlayersCards();
+            //The middle and right cards are instantiated first because of the rules
+            _tableCards[0] = new Card();
+            _tableCards[1] = new Card();
+            _tableCards[2] = new Card();
+
+            LoadSettingsMenu();
+            UpdateTableCards();
+
+            for (int i = 0; i < 5; i++)
+            {
+                DealPlayerCard();
+            }
         }
 
-        void loadSettingsMenu()
+        void LoadSettingsMenu()
         {
+            _gameMenu = new GameMenu();
+
             _gameMenu.Margin = new Thickness(550, 0, 0, 0);
             _gameMenu.Visibility = Visibility.Collapsed;
             _background.Children.Add(_gameMenu);
         }
 
-        void dealTableCards()
+        void DealTableCards()
         {
-            int leftRandomIndex = _numberGenerator.Next(1, 9);
-            int rightRandomIndex = _numberGenerator.Next(1, 9);
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
 
-            do
-            {
-                leftRandomIndex = _numberGenerator.Next(1, 9);
-                _middleCardLabel.Content = leftRandomIndex.ToString();
+            client.DealTableCards();
+            DataService.Card[] cards = client.GetTableCards();
 
-                rightRandomIndex = _numberGenerator.Next(1, 9);
-                _rightCardLabel.Content = rightRandomIndex.ToString();
-
-            } while(leftRandomIndex == 2 || rightRandomIndex == 2 || leftRandomIndex == rightRandomIndex);
-
-            string _middleColor = _cardColors[_numberGenerator.Next(0, 3)];
-            string _rightColor = _cardColors[_numberGenerator.Next(0, 3)];
-
-            _middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_middleColor));
-            _rightCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_rightColor));
+            
         }
 
-        void dealPlayersCards()
+
+
+        void UpdateTableCards()
         {
-            for (int i = 0; i < 5; i++)
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+
+            client.DealTableCards();
+            DataService.Card[] cards = client.GetTableCards();
+
+            for (int i = 0; i < cards.Length; i++)
             {
-                dealPlayerCard();
-                dealCardLeft();
-                dealCardRight();
-                dealCardTop();
+                //If the table card is not black, it means there
+                if (cards[i] != null)
+                {
+                    //_tableCards[]
+                    
+                    _middleCardLabel.Content = cards[i].Number;
+                    _middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
+                }
             }
+
+            client.Close();
         }
 
-        void dealCardLeft()
+        void DealPlayerCard()
         {
-            FlippedCard card = new FlippedCard();
-
-            card.RenderTransform = new RotateTransform(90);
-            card.Margin = new Thickness(100, 0, 0, 0);
-
-
-            card.Visibility = Visibility.Visible;
-            _leftDeck.Children.Add(card);
-        }
-
-        void dealCardRight()
-        {
-
-        }
-
-        void dealCardTop()
-        {
-
-        }
-
-        void dealPlayerCard()
-        {
-            Card card = new Card();
+            /*Card card = new Card();
             int _accumulatedWeight = 0;
             int _cardNumber = _numberGenerator.Next(0, 108); //108 is the total of cards in a standard DUO deck
 
@@ -141,7 +107,7 @@ namespace ClienteDuo.Pages
             }
 
             card.Visibility = Visibility.Visible;
-            _playerDeck.Children.Add(card);
+            _playerDeck.Children.Add(card);*/
         }
 
         private void _gameMenuButton_Click(object sender, RoutedEventArgs e)
