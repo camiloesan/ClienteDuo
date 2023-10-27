@@ -1,9 +1,6 @@
 ﻿using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Media;
-using System.Resources;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,11 +38,13 @@ namespace ClienteDuo.Pages
 
         public void MessageReceived(string messageSent)
         {
-            Label labelMessageReceived = new Label();
-            labelMessageReceived.HorizontalAlignment = HorizontalAlignment.Left;
-            labelMessageReceived.Foreground = new SolidColorBrush(Colors.White);
-            labelMessageReceived.FontSize = 14;
-            labelMessageReceived.Content = messageSent;
+            Label labelMessageReceived = new Label
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 14,
+                Content = messageSent
+            };
 
             chatPanel.Children.Add(labelMessageReceived);
             chatScrollViewer.ScrollToEnd();

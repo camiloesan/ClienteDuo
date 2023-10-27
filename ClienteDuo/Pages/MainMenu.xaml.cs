@@ -5,14 +5,38 @@ namespace ClienteDuo.Pages
 {
     public partial class MainMenu : Page
     {
-        //SidebarUserProfile sidebarUserProfile = new SidebarUserProfile();
+        SidebarUserProfile sidebarUserProfile;
+        SidebarFriends sidebarFriends;
+        SidebarLeaderboard sidebarLeaderboard;
 
         public MainMenu()
         {
             InitializeComponent();
-            //sidebarUserProfile.Margin = new Thickness(0, 0, 700, 0); // poner en función
-            //sidebarUserProfile.Visibility = Visibility.Collapsed;
-            //MainGrid.Children.Add(sidebarUserProfile);
+            InitializeSidebars();
+        }
+
+        void InitializeSidebars()
+        {
+            sidebarUserProfile = new SidebarUserProfile
+            {
+                Margin = new Thickness(0, 0, 700, 0),
+                Visibility = Visibility.Collapsed
+            };
+            MainGrid.Children.Add(sidebarUserProfile);
+
+            sidebarFriends = new SidebarFriends
+            {
+                Margin = new Thickness(700, 0, 0, 0),
+                Visibility = Visibility.Collapsed
+            };
+            MainGrid.Children.Add(sidebarFriends);
+
+            sidebarLeaderboard = new SidebarLeaderboard
+            {
+                Margin = new Thickness(700, 0, 0, 0),
+                Visibility = Visibility.Collapsed
+            };
+            MainGrid.Children.Add(sidebarLeaderboard);
         }
 
         private void BtnQuitGame(object sender, RoutedEventArgs e)
@@ -34,7 +58,17 @@ namespace ClienteDuo.Pages
 
         private void BtnMyProfileSidebar(object sender, RoutedEventArgs e)
         {
-            //sidebarUserProfile.Visibility = Visibility.Visible;
+            sidebarUserProfile.Visibility = Visibility.Visible;
+        }
+
+        private void BtnFriendsSidebar(object sender, RoutedEventArgs e)
+        {
+            sidebarFriends.Visibility = Visibility.Visible;
+        }
+
+        private void BtnLeaderboard(object sender, RoutedEventArgs e)
+        {
+            sidebarLeaderboard.Visibility = Visibility.Visible;
         }
     }
 }

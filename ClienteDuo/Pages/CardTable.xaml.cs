@@ -53,10 +53,10 @@ namespace ClienteDuo.Pages
 
         void DealTableCards()
         {
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+            //DataService.MatchManagerClient client = new DataService.MatchManagerClient();
 
-            client.DealTableCards();
-            DataService.Card[] cards = client.GetTableCards();
+            //client.DealTableCards();
+            //DataService.Card[] cards = client.GetTableCards();
 
             
         }
@@ -65,24 +65,24 @@ namespace ClienteDuo.Pages
 
         void UpdateTableCards()
         {
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+            //DataService.MatchManagerClient client = new DataService.MatchManagerClient();
 
-            client.DealTableCards();
-            DataService.Card[] cards = client.GetTableCards();
+            //client.DealTableCards();
+            //DataService.Card[] cards = client.GetTableCards();
 
-            for (int i = 0; i < cards.Length; i++)
-            {
+            //for (int i = 0; i < cards.Length; i++)
+            //{
                 //If the table card is not black, it means there
-                if (cards[i] != null)
-                {
+                //if (cards[i] != null)
+                //{
                     //_tableCards[]
                     
-                    _middleCardLabel.Content = cards[i].Number;
-                    _middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
-                }
-            }
+                    //_middleCardLabel.Content = cards[i].Number;
+                    //_middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
+                //}
+            //}
 
-            client.Close();
+            //client.Close();
         }
 
         void DealPlayerCard()

@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="ClienteDuo.Pages.SidebarFriends"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClienteDuo.Pages"
+             xmlns:p="clr-namespace:ClienteDuo.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="250">
+    <Grid x:Name="FriendsBar" Background="{DynamicResource BtnBackground}">
+        <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <StackPanel x:Name="friendsPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="350">
+
+        </StackPanel>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel"/>
+        <Button Content="{x:Static p:Resources.BtnAddFriend}" HorizontalAlignment="Center" Margin="0,517,0,0" VerticalAlignment="Top" FontSize="14" Width="120" Click="Button_Click"/>
+    </Grid>
+</UserControl>

@@ -4,18 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClienteDuo.Pages"
-                   xmlns:p="clr-namespace:ClienteDuo.Properties"
-
+             xmlns:p="clr-namespace:ClienteDuo.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="250">
     <Grid x:Name="UserProfileBar" Background="{DynamicResource BtnBackground}">
-        <Label Content="{x:Static p:Resources.LblMyProfile}" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"></Label>
+        <Label Content="{x:Static p:Resources.LblMyProfile}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"></Label>
         <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0" Orientation="Vertical" VerticalAlignment="Center">
             <Label Content="{x:Static p:Resources.LblUsername}" Foreground="White"></Label>
             
             <Label Content="{x:Static p:Resources.LblEmail}" Foreground="White"></Label>
         </StackPanel>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="201,10,0,0" VerticalAlignment="Top" Click="BtnCloseBar"/>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="191,10,0,0" VerticalAlignment="Top" Click="BtnCloseBar"/>
 
     </Grid>
 </UserControl>
