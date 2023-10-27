@@ -65,7 +65,7 @@ namespace ClienteDuo.Pages
         {
             DataService.MatchManagerClient client = new DataService.MatchManagerClient();
 
-            client.DealTableCards();
+            client.DealTableCards(); //This is only called here for test purposes
             DataService.Card[] cards = client.GetTableCards();
 
             for (int i = 0; i < cards.Length; i++)
@@ -102,6 +102,21 @@ namespace ClienteDuo.Pages
         void Deck_Click(object sender, RoutedEventArgs e)
         {
             DealPlayerCard();
+        }
+
+        void PlayCardLeft(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        void PlayCardMiddle(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        void PlayCardRight(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

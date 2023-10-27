@@ -19,12 +19,14 @@ namespace ClienteDuo.Pages
     {
         string _number; 
         string _color;
+        bool _isSelected;
 
         public Card()
         {
             InitializeComponent();
             _number = "2";
             _color = "000000";
+            _isSelected = true;
         }
 
         public string Color
@@ -46,6 +48,9 @@ namespace ClienteDuo.Pages
             get => _number;
         }
 
-        
+        public void SelectCard(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
