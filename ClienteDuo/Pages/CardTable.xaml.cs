@@ -18,7 +18,7 @@ namespace ClienteDuo.Pages
     /// <summary>
     /// Interaction logic for CardTable.xaml
     /// </summary>
-    public partial class CardTable : Window
+    public partial class CardTable : Page
     {
         static List<string> _cardColors = new List<string>()
         {

@@ -118,5 +118,11 @@ namespace ClienteDuo.Pages
         {
             UpdatePlayerList(playersInLobby);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CardTable cardTable = new CardTable();
+            App.Current.MainWindow.Content = cardTable;
+        }
     }
 }
