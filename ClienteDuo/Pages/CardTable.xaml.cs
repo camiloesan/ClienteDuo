@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
 {
@@ -21,17 +22,26 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class CardTable : Window
     {
-        Card[] _tableCards = new Card[3];
+        DataService.Card[] _tableCards = new DataService.Card[3];
+        Label[] _cardLabels = new Label[3];
+        Rectangle[] _cardColors = new Rectangle[3];
         GameMenu _gameMenu;
 
         public CardTable()
         {
             InitializeComponent();
 
-            //The middle and right cards are instantiated first because of the rules
-            _tableCards[0] = new Card();
-            _tableCards[1] = new Card();
-            _tableCards[2] = new Card();
+            _cardLabels[0] = _leftCardLabel;
+            _cardLabels[1] = _middleCardLabel;
+            _cardLabels[2] = _rightCardLabel;
+
+            _cardColors[0] = _leftCardColor;
+            _cardColors[1] = _middleCardColor;
+            _cardColors[2] = _rightCardColor;
+
+            _tableCards[0] = null;
+            _tableCards[1] = new DataService.Card();
+            _tableCards[2] = new DataService.Card();
 
             LoadSettingsMenu();
             UpdateTableCards();
@@ -51,18 +61,6 @@ namespace ClienteDuo.Pages
             _background.Children.Add(_gameMenu);
         }
 
-        void DealTableCards()
-        {
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
-
-            client.DealTableCards();
-            DataService.Card[] cards = client.GetTableCards();
-
-            
-        }
-
-
-
         void UpdateTableCards()
         {
             DataService.MatchManagerClient client = new DataService.MatchManagerClient();
@@ -72,13 +70,10 @@ namespace ClienteDuo.Pages
 
             for (int i = 0; i < cards.Length; i++)
             {
-                //If the table card is not black, it means there
                 if (cards[i] != null)
                 {
-                    //_tableCards[]
-                    
-                    _middleCardLabel.Content = cards[i].Number;
-                    _middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
+                    _cardLabels[i].Content = cards[i].Number;
+                    _cardColors[i].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
                 }
             }
 
@@ -87,32 +82,26 @@ namespace ClienteDuo.Pages
 
         void DealPlayerCard()
         {
-            /*Card card = new Card();
-            int _accumulatedWeight = 0;
-            int _cardNumber = _numberGenerator.Next(0, 108); //108 is the total of cards in a standard DUO deck
+            Card card = new Card();
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+            DataService.Card dealtCard = client.DrawCard();
 
-            foreach (var (number, weight) in _cardNumbers)
-            {
-                _accumulatedWeight += weight;
-
-                if (_accumulatedWeight <= _cardNumber)
-                {
-                    card.Number = number;
-                }
-            }
-
-            if (card.Number.CompareTo("2") != 0)
-            {
-                card.Color = _cardColors[_numberGenerator.Next(0, 3)];
-            }
-
+            card.Number = dealtCard.Number;
+            card.Color = dealtCard.Color;
             card.Visibility = Visibility.Visible;
-            _playerDeck.Children.Add(card);*/
+
+            _playerDeck.Children.Add(card);
+            client.Close();
         }
 
-        private void _gameMenuButton_Click(object sender, RoutedEventArgs e)
+        void _gameMenuButton_Click(object sender, RoutedEventArgs e)
         {
             _gameMenu.Visibility = Visibility.Visible;
+        }
+
+        void Deck_Click(object sender, RoutedEventArgs e)
+        {
+            DealPlayerCard();
         }
     }
 }

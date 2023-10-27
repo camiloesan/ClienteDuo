@@ -22,23 +22,25 @@
         <Rectangle x:Name="_leftCardBackground" HorizontalAlignment="Left" Height="135" Margin="219,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="90" Fill="White" Visibility="Collapsed"/>
         <Rectangle x:Name="_leftCardColor" HorizontalAlignment="Left" Height="90" Margin="232,0,0,0" VerticalAlignment="Center" Width="65" Fill="Red" Visibility="Collapsed"/>
         <Ellipse x:Name="_leftCardEllipse" Height="65" Width="65" Fill="White" Margin="232,260,703,259" Visibility="Collapsed" Stretch="None"/>
-        
-        <Label x:Name="_leftCardLabel" HorizontalAlignment="Left" VerticalAlignment="Center" Content="1" FontSize="60" Margin="243,0,0,0" Visibility="Collapsed"/>
+        <Label x:Name="_leftCardLabel" HorizontalAlignment="Left" VerticalAlignment="Center" Content="2" FontSize="60" Margin="243,0,0,0" Visibility="Collapsed"/>
 
         <Rectangle HorizontalAlignment="Left" Height="135" Margin="385,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="90" Fill="White"/>
-        
+
         <Rectangle x:Name="_middleCardColor" HorizontalAlignment="Left" Height="90" Margin="397,0,0,0" VerticalAlignment="Center" Width="66" Fill="Red"/>
         <Ellipse Fill="White" Margin="400,263,540,261" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-        <Label x:Name="_middleCardLabel" HorizontalAlignment="Left" VerticalAlignment="Center" Content="1" FontSize="60" Margin="409,0,0,0" HorizontalContentAlignment="Center"/>
+        <Label x:Name="_middleCardLabel" HorizontalAlignment="Left" VerticalAlignment="Center" Content="2" FontSize="60" Margin="409,0,0,0" HorizontalContentAlignment="Center"/>
 
         <Rectangle HorizontalAlignment="Left" Height="135" Margin="542,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="90" Fill="White"/>
         <Rectangle x:Name="_rightCardColor" HorizontalAlignment="Left" Height="90" Margin="554,0,0,0" VerticalAlignment="Center" Width="66" Fill="Red"/>
         <Ellipse Fill="White" Margin="557,262,383,262" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-        <Label x:Name="_rightCardLabel" HorizontalAlignment="Left" VerticalAlignment="Center" Content="1" FontSize="60" Margin="566,0,0,0"/>
+        <Label x:Name="_rightCardLabel" HorizontalAlignment="Left" VerticalAlignment="Center" Content="2" FontSize="60" Margin="566,0,0,0"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="135" Margin="728,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="90" Fill="White"/>
-        <Rectangle HorizontalAlignment="Left" Height="90" Margin="740,0,0,0" VerticalAlignment="Center" Width="66" Fill="Red"/>
-        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="DUO" FontSize="25" Margin="741,0,0,0" Background="White" Height="38"/>
+        <Button Name="customClickableArea" Click="Deck_Click" Margin="693,0,0,0" Background="White" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="135" Width="90">
+            <Grid>
+                <Rectangle HorizontalAlignment="Center" Height="90" VerticalAlignment="Center" Width="66" Fill="Red"/>
+                <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="DUO" FontSize="25" Background="White" Height="38"/>
+            </Grid>
+        </Button>
 
         <Button x:Name="_showGameMenuButton" HorizontalAlignment="Left" Margin="920,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.418,0.557" Width="70" Height="70" Click="_gameMenuButton_Click">
             <Button.Background>
