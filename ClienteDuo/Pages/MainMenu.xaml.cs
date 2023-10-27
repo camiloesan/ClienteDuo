@@ -5,14 +5,14 @@ namespace ClienteDuo.Pages
 {
     public partial class MainMenu : Page
     {
-        SidebarUserProfile sidebarUserProfile = new SidebarUserProfile();
+        //SidebarUserProfile sidebarUserProfile = new SidebarUserProfile();
 
         public MainMenu()
         {
             InitializeComponent();
-            sidebarUserProfile.Margin = new Thickness(0, 0, 700, 0); // poner en función
-            sidebarUserProfile.Visibility = Visibility.Collapsed;
-            MainGrid.Children.Add(sidebarUserProfile);
+            //sidebarUserProfile.Margin = new Thickness(0, 0, 700, 0); // poner en función
+            //sidebarUserProfile.Visibility = Visibility.Collapsed;
+            //MainGrid.Children.Add(sidebarUserProfile);
         }
 
         private void BtnQuitGame(object sender, RoutedEventArgs e)
@@ -34,7 +34,7 @@ namespace ClienteDuo.Pages
 
         private void BtnMyProfileSidebar(object sender, RoutedEventArgs e)
         {
-            sidebarUserProfile.Visibility = Visibility.Visible;
+            //sidebarUserProfile.Visibility = Visibility.Visible;
         }
     }
 }
