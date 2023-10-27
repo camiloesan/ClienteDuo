@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,140 +21,98 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class CardTable : Page
     {
-        static List<string> _cardColors = new List<string>()
-        {
-            "#0000FF", //Blue
-            "#FFFF00", //Yellow
-            "#008000", //Green
-            "#FF0000"  //Red
-        };
-
-        static List<(string, int)> _cardNumbers = new List<(string, int)>()
-        {
-            ("1", 12),
-            ("2", 12),
-            ("3", 12),
-            ("4", 12),
-            ("5", 12),
-            ("6", 8),
-            ("7", 8),
-            ("8", 8),
-            ("9", 8),
-            ("10", 8),
-            ("#", 8)
-        };
+        Card[] _tableCards = new Card[3];
+        GameMenu _gameMenu;
 
         public CardTable()
         {
             InitializeComponent();
 
-            loadSettingsMenu();
-            dealTableCards();
-            dealPlayerCards();
-            dealOtherPlayersCards();
-        }
+            //The middle and right cards are instantiated first because of the rules
+            _tableCards[0] = new Card();
+            _tableCards[1] = new Card();
+            _tableCards[2] = new Card();
 
-        void loadSettingsMenu()
-        {
-            GameMenu gameMenu = new GameMenu();
+            LoadSettingsMenu();
+            UpdateTableCards();
 
-            _gameMenu.Children.Add(gameMenu);
-        }
-
-        void dealTableCards()
-        {
-            // Assign card values
-            Random numberGenerator = new Random();
-
-            int leftRandomIndex = numberGenerator.Next(1, 9);
-            int rightRandomIndex = numberGenerator.Next(1, 9);
-
-            do
-            {
-                leftRandomIndex = numberGenerator.Next(1, 9);
-                _middleCardLabel.Content = leftRandomIndex.ToString();
-
-                rightRandomIndex = numberGenerator.Next(1, 9);
-                _rightCardLabel.Content = rightRandomIndex.ToString();
-
-            } while(leftRandomIndex == 2 || rightRandomIndex == 2 || leftRandomIndex == rightRandomIndex);
-
-            //Assign colors
-            Random colorGenerator = new Random();
-
-            string _middleColor = _cardColors[colorGenerator.Next(1, 4)];
-            string _rightColor = _cardColors[colorGenerator.Next(1, 4)];
-
-            _middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_middleColor));
-            _rightCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_rightColor));
-        }
-
-        public void dealCardLeft()
-        {
-
-        }
-
-        public void dealCardRight()
-        {
-
-        }
-
-        public void dealCardTop()
-        {
-
-        }
-
-        void dealOtherPlayersCards()
-        {
             for (int i = 0; i < 5; i++)
             {
-                dealCardLeft();
-                dealCardRight();
-                dealCardTop();
+                DealPlayerCard();
             }
         }
 
-        void dealPlayerCards()
+        void LoadSettingsMenu()
         {
-            Card[] deck = new Card[5];
-            Random numberGenerator = new Random();
+            _gameMenu = new GameMenu();
+
+            _gameMenu.Margin = new Thickness(550, 0, 0, 0);
+            _gameMenu.Visibility = Visibility.Collapsed;
+            _background.Children.Add(_gameMenu);
+        }
+
+        void DealTableCards()
+        {
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+
+            client.DealTableCards();
+            DataService.Card[] cards = client.GetTableCards();
+
             
-            for (int i = 0; i < deck.Length; i++)
+        }
+
+
+
+        void UpdateTableCards()
+        {
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+
+            client.DealTableCards();
+            DataService.Card[] cards = client.GetTableCards();
+
+            for (int i = 0; i < cards.Length; i++)
             {
-                deck[i] = new Card();
-                int _accumulatedWeight = 0;
-                int _cardNumber = numberGenerator.Next(0, 108); //108 is the total of cards in a standard DUO deck
-
-                foreach (var (number, weight) in _cardNumbers)
+                //If the table card is not black, it means there
+                if (cards[i] != null)
                 {
-                    _accumulatedWeight += weight;
-
-                    if (_accumulatedWeight <= _cardNumber)
-                    {
-                        deck[i].Number = number;
-                    }
+                    //_tableCards[]
+                    
+                    _middleCardLabel.Content = cards[i].Number;
+                    _middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
                 }
             }
 
-            Random colorGenerator = new Random();
+            client.Close();
+        }
 
-            for (int i = 0; i < deck.Length; i++)
+        void DealPlayerCard()
+        {
+            /*Card card = new Card();
+            int _accumulatedWeight = 0;
+            int _cardNumber = _numberGenerator.Next(0, 108); //108 is the total of cards in a standard DUO deck
+
+            foreach (var (number, weight) in _cardNumbers)
             {
-                if (deck[i].Number.CompareTo("2") != 0)
-                {
-                    deck[i].Color = _cardColors[colorGenerator.Next(0, 4)];
-                }
+                _accumulatedWeight += weight;
 
-                deck[i].Visibility = Visibility.Visible;
-                _playerDeck.Children.Add(deck[i]);
+                if (_accumulatedWeight <= _cardNumber)
+                {
+                    card.Number = number;
+                }
             }
+
+            if (card.Number.CompareTo("2") != 0)
+            {
+                card.Color = _cardColors[_numberGenerator.Next(0, 3)];
+            }
+
+            card.Visibility = Visibility.Visible;
+            _playerDeck.Children.Add(card);*/
         }
 
         private void _gameMenuButton_Click(object sender, RoutedEventArgs e)
         {
             _gameMenu.Visibility = Visibility.Visible;
-
-            _showGameMenuButton.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -241,6 +241,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need a minimum of 2 players to start the game.
+        /// </summary>
+        public static string DlgMinPlayers {
+            get {
+                return ResourceManager.GetString("DlgMinPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user has been registered succesfully.
         /// </summary>
         public static string DlgNewAccountSuccess {

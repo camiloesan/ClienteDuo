@@ -1,7 +1,7 @@
 ﻿<Application x:Class="ClienteDuo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="/Pages/MainWindow.xaml">
+             StartupUri="/Pages/CardTable.xaml">
     <Application.Resources>
          
         <SolidColorBrush x:Key="BtnBackground" Color="#FF6B472B"/>

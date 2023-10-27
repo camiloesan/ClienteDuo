@@ -177,6 +177,9 @@
   <data name="DlgMessageMaxCharacters" xml:space="preserve">
     <value>Un mensaje solo puede contener 250 caracteres</value>
   </data>
+  <data name="DlgMinPlayers" xml:space="preserve">
+    <value>Se necesitan al menos dos jugadores para iniciar el juego</value>
+  </data>
   <data name="DlgNewAccountSuccess" xml:space="preserve">
     <value>Se ha registrado el usuario correctamente</value>
   </data>
