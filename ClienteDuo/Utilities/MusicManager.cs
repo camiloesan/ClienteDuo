@@ -30,6 +30,24 @@ namespace ClienteDuo.Utilities
             }
         }
 
+        public static void PlayPlayerJoinedSound()
+        {
+            AudioFileReader audioFileReader = new AudioFileReader("SFX\\playerJoinedSound.wav");
+            WaveOutEvent waveOut = new WaveOutEvent();
+            waveOut.Init(audioFileReader);
+            waveOut.Volume = 0.5f;
+            waveOut.Play();
+        }
+
+        public static void PlayPlayerLeftSound()
+        {
+            AudioFileReader audioFileReader = new AudioFileReader("SFX\\playerLeftSound.wav");
+            WaveOutEvent waveOut = new WaveOutEvent();
+            waveOut.Init(audioFileReader);
+            waveOut.Volume = 0.5f;
+            waveOut.Play();
+        }
+
         public void PlayMusic()
         {
             if (isMusicEnabled)

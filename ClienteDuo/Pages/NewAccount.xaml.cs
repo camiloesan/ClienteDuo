@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.Pages;
+using ClienteDuo.Utilities;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -168,7 +169,7 @@ namespace ClienteDuo
             {
                 UserName = username,
                 Email = email,
-                Password = Sha256_hash(password)
+                Password = Sha256Encryptor.SHA256_hash(password),
             };
 
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
@@ -184,22 +185,6 @@ namespace ClienteDuo
             }
 
             return result;
-        }
-
-        public static String Sha256_hash(String value)
-        {
-            StringBuilder Sb = new StringBuilder();
-
-            using (SHA256 hash = SHA256Managed.Create())
-            {
-                Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
-
-                foreach (Byte b in result)
-                    Sb.Append(b.ToString("x2"));
-            }
-
-            return Sb.ToString();
         }
     }
 }

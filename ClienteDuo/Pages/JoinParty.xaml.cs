@@ -60,7 +60,6 @@ namespace ClienteDuo.Pages
                 InviteeLobby inviteeLobby = new InviteeLobby();
                 App.Current.MainWindow.Content = inviteeLobby;
             }
-
         }
 
         private bool IsPartyCodeCorrect(int partyCode)

@@ -50,7 +50,7 @@ namespace ClienteDuo.Pages
 
                 string message = SessionDetails.Username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
-                client.SendMessage(SessionDetails.PartyCode, message); //partycode no good
+                client.SendMessage(SessionDetails.PartyCode, message);
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
@@ -65,13 +65,13 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            PlayPlayerJoinedAudio();
+            MusicManager.PlayPlayerJoinedSound();
             UpdatePlayerList(playersInLobby);
         }
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
-            PlayPlayerLeftAudio();
+            MusicManager.PlayPlayerLeftSound();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -111,18 +111,5 @@ namespace ClienteDuo.Pages
 
             client.LeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
         }
-
-        private void PlayPlayerJoinedAudio()
-        {
-            MusicManager musicManager = new MusicManager("SFX\\playerJoinedSound.wav");
-            musicManager.PlayMusic();
-        }
-
-        private void PlayPlayerLeftAudio()
-        {
-            MusicManager musicManager = new MusicManager("SFX\\playerLeftSound.wav");
-            musicManager.PlayMusic();
-        }
-
     }
 }

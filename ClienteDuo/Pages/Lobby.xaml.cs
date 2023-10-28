@@ -33,7 +33,7 @@ namespace ClienteDuo.Pages
             client.NewParty(partyCode, SessionDetails.Username);
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
 
-            PlayPlayerJoinedAudio();
+            MusicManager.PlayPlayerJoinedSound();
         }
 
         public void MessageReceived(string messageSent)
@@ -69,7 +69,7 @@ namespace ClienteDuo.Pages
 
         private void BtnExitLobby(object sender, RoutedEventArgs e)
         {
-            PlayPlayerLeftAudio();
+            MusicManager.PlayPlayerLeftSound();
             MainMenu mainMenu = new MainMenu();
             App.Current.MainWindow.Content = mainMenu;
 
@@ -81,13 +81,13 @@ namespace ClienteDuo.Pages
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
             players = playersInLobby;
-            PlayPlayerJoinedAudio();
+            MusicManager.PlayPlayerJoinedSound();
             UpdatePlayerList(playersInLobby);
         }
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
-            PlayPlayerLeftAudio();
+            MusicManager.PlayPlayerLeftSound();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -107,18 +107,6 @@ namespace ClienteDuo.Pages
 
                 playersPanel.Children.Add(label);
             }
-        }
-
-        private void PlayPlayerJoinedAudio()
-        {
-            MusicManager musicManager = new MusicManager("SFX\\playerJoinedSound.wav");
-            musicManager.PlayMusic();
-        }
-
-        private void PlayPlayerLeftAudio()
-        {
-            MusicManager musicManager = new MusicManager("SFX\\playerLeftSound.wav");
-            musicManager.PlayMusic();
         }
 
         public void PartyCreated(Dictionary<string, object> playersInLobby)
