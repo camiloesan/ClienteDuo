@@ -111,5 +111,11 @@ namespace ClienteDuo.Pages
 
             client.LeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
         }
+
+        public void GameStarted()
+        {
+            CardTable cardTable = new CardTable();
+            App.Current.MainWindow.Content = cardTable;
+        }
     }
 }

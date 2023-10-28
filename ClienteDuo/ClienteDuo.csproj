@@ -276,19 +276,19 @@
     <None Include="Connected Services\DataService\ClienteDuo.DataService.User.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\item.xsd">
+    <None Include="Connected Services\DataService\item44.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\item1.xsd">
+    <None Include="Connected Services\DataService\item45.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\item2.xsd">
+    <None Include="Connected Services\DataService\item46.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\item3.xsd">
+    <None Include="Connected Services\DataService\item47.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\ServiceImplementation.wsdl" />
+    <None Include="Connected Services\DataService\ServiceImplementation12.wsdl" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -332,12 +332,12 @@
     <Resource Include="Images\friends.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\DataService\item12.disco" />
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\ExpandMenuIcon.png" />
     <Resource Include="Images\ExitButtonIcon.png" />
-    <None Include="Connected Services\DataService\item.disco" />
     <Content Include="SFX\playerJoinedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

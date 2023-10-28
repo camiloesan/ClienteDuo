@@ -38,10 +38,10 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CommunicationService" />
-      <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CommunicationService" />
+      <xsd:import schemaLocation="http://192.168.1.64:8082/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUsersManager_AddUserToDatabase_InputMessage">
@@ -116,6 +116,9 @@
   <wsdl:message name="IPartyManager_LeaveParty_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveParty" />
   </wsdl:message>
+  <wsdl:message name="IPartyManager_StartGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartGame" />
+  </wsdl:message>
   <wsdl:message name="IPartyManager_IsPlayerActive_InputMessage">
     <wsdl:part name="parameters" element="tns:IsPlayerActive" />
   </wsdl:message>
@@ -142,6 +145,12 @@
   </wsdl:message>
   <wsdl:message name="IPartyManager_PlayerLeft_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_GameStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStarted" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_GameStarted_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStartedResponse" />
   </wsdl:message>
   <wsdl:message name="IPartyValidator_IsPartyExistent_InputMessage">
     <wsdl:part name="parameters" element="tns:IsPartyExistent" />
@@ -210,6 +219,9 @@
     <wsdl:operation name="LeaveParty">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/LeaveParty" message="tns:IPartyManager_LeaveParty_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/StartGame" message="tns:IPartyManager_StartGame_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="IsPlayerActive">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/IsPlayerActive" message="tns:IPartyManager_IsPlayerActive_InputMessage" />
     </wsdl:operation>
@@ -228,6 +240,10 @@
     <wsdl:operation name="PlayerLeft">
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeft" message="tns:IPartyManager_PlayerLeft_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeftResponse" message="tns:IPartyManager_PlayerLeft_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/GameStarted" message="tns:IPartyManager_GameStarted_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/GameStartedResponse" message="tns:IPartyManager_GameStarted_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyValidator">
@@ -361,6 +377,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="StartGame">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/StartGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="IsPlayerActive">
       <soap12:operation soapAction="http://tempuri.org/IPartyManager/IsPlayerActive" style="document" />
       <wsdl:input>
@@ -403,6 +425,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/GameStarted" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IPartyValidator" type="tns:IPartyValidator">
     <wsp:PolicyReference URI="#NetTcpBinding_IPartyValidator_policy" />
@@ -428,21 +459,21 @@
   </wsdl:binding>
   <wsdl:service name="ServiceImplementation">
     <wsdl:port name="NetTcpBinding_IUsersManager" binding="tns:NetTcpBinding_IUsersManager">
-      <soap12:address location="net.tcp://localhost:8080/Service" />
+      <soap12:address location="net.tcp://192.168.1.64:8080/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8080/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.64:8080/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPartyManager" binding="tns:NetTcpBinding_IPartyManager">
-      <soap12:address location="net.tcp://localhost:8080/Service" />
+      <soap12:address location="net.tcp://192.168.1.64:8080/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8080/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.64:8080/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IPartyValidator" binding="tns:NetTcpBinding_IPartyValidator">
-      <soap12:address location="net.tcp://localhost:8080/Service" />
+      <soap12:address location="net.tcp://192.168.1.64:8080/Service" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8080/Service</wsa10:Address>
+        <wsa10:Address>net.tcp://192.168.1.64:8080/Service</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

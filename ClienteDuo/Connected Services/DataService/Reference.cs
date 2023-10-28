@@ -541,6 +541,12 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
         System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string username);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/StartGame")]
+        void StartGame(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/StartGame")]
+        System.Threading.Tasks.Task StartGameAsync(int partyCode);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/IsPlayerActive")]
         void IsPlayerActive();
         
@@ -562,6 +568,9 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerLeft", ReplyAction="http://tempuri.org/IPartyManager/PlayerLeftResponse")]
         void PlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/GameStarted", ReplyAction="http://tempuri.org/IPartyManager/GameStartedResponse")]
+        void GameStarted();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -622,6 +631,14 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string username) {
             return base.Channel.LeavePartyAsync(partyCode, username);
+        }
+        
+        public void StartGame(int partyCode) {
+            base.Channel.StartGame(partyCode);
+        }
+        
+        public System.Threading.Tasks.Task StartGameAsync(int partyCode) {
+            return base.Channel.StartGameAsync(partyCode);
         }
         
         public void IsPlayerActive() {

@@ -12,8 +12,6 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-
-        private Dictionary<string, object> players = new Dictionary<string, object>();
         int partyCode = 0;
 
         public Lobby()
@@ -80,7 +78,6 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            players = playersInLobby;
             MusicManager.PlayPlayerJoinedSound();
             UpdatePlayerList(playersInLobby);
         }
@@ -115,6 +112,12 @@ namespace ClienteDuo.Pages
         }
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
+        {
+            CardTable cardTable = new CardTable();
+            App.Current.MainWindow.Content = cardTable;
+        }
+
+        public void GameStarted()
         {
             CardTable cardTable = new CardTable();
             App.Current.MainWindow.Content = cardTable;
