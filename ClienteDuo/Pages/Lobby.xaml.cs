@@ -59,7 +59,7 @@ namespace ClienteDuo.Pages
 
                 string message = SessionDetails.username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
-                client.SendMessage(partyCode, message); //partycode no good
+                client.SendMessage(partyCode, message);
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
@@ -69,6 +69,7 @@ namespace ClienteDuo.Pages
 
         private void BtnExitLobby(object sender, RoutedEventArgs e)
         {
+            PlayPlayerLeftAudio();
             MainMenu mainMenu = new MainMenu();
             App.Current.MainWindow.Content = mainMenu;
 
@@ -86,6 +87,7 @@ namespace ClienteDuo.Pages
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
+            PlayPlayerLeftAudio();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -113,12 +115,18 @@ namespace ClienteDuo.Pages
             musicManager.PlayMusic();
         }
 
+        private void PlayPlayerLeftAudio()
+        {
+            MusicManager musicManager = new MusicManager("SFX\\playerLeftSound.wav");
+            musicManager.PlayMusic();
+        }
+
         public void PartyCreated(Dictionary<string, object> playersInLobby)
         {
             UpdatePlayerList(playersInLobby);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnStartGame(object sender, RoutedEventArgs e)
         {
             CardTable cardTable = new CardTable();
             App.Current.MainWindow.Content = cardTable;

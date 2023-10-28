@@ -80,6 +80,7 @@ namespace ClienteDuo.Pages
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
+            PlayPlayerLeftAudio();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -125,5 +126,12 @@ namespace ClienteDuo.Pages
             MusicManager musicManager = new MusicManager("SFX\\playerJoinedSound.wav");
             musicManager.PlayMusic();
         }
+
+        private void PlayPlayerLeftAudio()
+        {
+            MusicManager musicManager = new MusicManager("SFX\\playerLeftSound.wav");
+            musicManager.PlayMusic();
+        }
+
     }
 }

@@ -1,0 +1,100 @@
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace ClienteDuo.Pages.Sidebars
+{
+    /// <summary>
+    /// Interaction logic for SidebarFriendRequests.xaml
+    /// </summary>
+    public partial class SidebarFriendRequests : UserControl
+    {
+        public SidebarFriendRequests()
+        {
+            InitializeComponent();
+            FillFriendRequestsPanel();
+        }
+
+        private void FillFriendRequestsPanel()
+        {
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+            var list = client.GetFriendRequestsList(SessionDetails.userID);
+            
+
+            foreach (var item in list)
+            {
+                StackPanel stackPanel = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
+                panelFriendRequests.Children.Add(stackPanel);
+
+                Label lblSender = new Label
+                {
+                    Content = item.SenderUsername
+                };
+                stackPanel.Children.Add(lblSender);
+
+                Button btnAccept = new Button
+                {
+                    Content = Properties.Resources.BtnAccept,
+                };
+                btnAccept.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    DataService.FriendRequest friendRequest = new DataService.FriendRequest
+                    {
+                        FriendRequestID = item.FriendRequestID,
+                        SenderID = item.SenderID,
+                        ReceiverID = item.ReceiverID
+                    };
+                    
+                    if (client.AcceptFriendRequest(friendRequest))
+                    {
+                        MainWindow.ShowMessageBox("ahora son amigos");
+                    }
+                    else
+                    {
+                        MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                    }  
+                };
+                stackPanel.Children.Add(btnAccept);
+
+                Button btnReject = new Button
+                {
+                    Content = Properties.Resources.BtnReject
+                };
+                stackPanel.Children.Add(btnReject);
+                btnReject.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    if (client.RejectFriendRequest(item.FriendRequestID))
+                    {
+                        MainWindow.ShowMessageBox("haz eliminado la solicitud");
+                    }
+                    else
+                    {
+                        MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                    }
+                };
+            }
+        }
+
+        private void BtnCancel(object sender, RoutedEventArgs e)
+        {
+            Visibility = Visibility.Collapsed;
+        }
+    }
+}

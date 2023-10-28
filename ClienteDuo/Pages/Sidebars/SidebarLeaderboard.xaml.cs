@@ -13,19 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClienteDuo.Pages
+namespace ClienteDuo.Pages.Sidebars
 {
     /// <summary>
-    /// Interaction logic for SidebarAddFriend.xaml
+    /// Interaction logic for SidebarLeaderboard.xaml
     /// </summary>
-    public partial class SidebarAddFriend : UserControl
+    public partial class SidebarLeaderboard : UserControl
     {
-        public SidebarAddFriend()
+        public SidebarLeaderboard()
         {
             InitializeComponent();
         }
 
-        private void BtnClose(object sender, RoutedEventArgs e)
+        private void BtnCancel(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }

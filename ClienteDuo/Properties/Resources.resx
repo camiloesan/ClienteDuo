@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BtnAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
   <data name="BtnAddFriend" xml:space="preserve">
     <value>Add Friend</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="BtnExitLobby" xml:space="preserve">
     <value>Exit Lobby</value>
+  </data>
+  <data name="BtnFriendRequests" xml:space="preserve">
+    <value>Friend Requests</value>
   </data>
   <data name="BtnJoin" xml:space="preserve">
     <value>Join</value>
@@ -149,6 +155,9 @@
   </data>
   <data name="BtnQuitGame" xml:space="preserve">
     <value>Quit Game</value>
+  </data>
+  <data name="BtnReject" xml:space="preserve">
+    <value>Reject</value>
   </data>
   <data name="BtnStartGame" xml:space="preserve">
     <value>Start Game</value>

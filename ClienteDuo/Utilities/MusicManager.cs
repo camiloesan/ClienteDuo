@@ -12,7 +12,7 @@ namespace ClienteDuo.Utilities
         private WaveOutEvent waveOut;
         private AudioFileReader audioFileReader;
         private bool isMusicEnabled = true;
-        private float volume = 0.5f; // Establece un valor predeterminado para el volumen
+        private float volume = 0.5f;
 
         public MusicManager(string musicFilePath)
         {

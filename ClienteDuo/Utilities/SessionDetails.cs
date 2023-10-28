@@ -11,7 +11,7 @@ namespace ClienteDuo.Utilities
 {
     public sealed class SessionDetails
     {
-        public static int id;
+        public static int userID;
         public static string username;
         public static string email;
         public static bool isGuest = true;

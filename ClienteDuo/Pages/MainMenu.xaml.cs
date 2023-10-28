@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using ClienteDuo.Pages.Sidebars;
+using System;
+using System.Drawing;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace ClienteDuo.Pages
 {
@@ -62,7 +66,7 @@ namespace ClienteDuo.Pages
         }
 
         private void BtnFriendsSidebar(object sender, RoutedEventArgs e)
-        {
+        {   
             sidebarFriends.Visibility = Visibility.Visible;
         }
 

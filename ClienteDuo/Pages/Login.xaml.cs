@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ClienteDuo.Utilities;
+using ClienteDuo.DataService;
 
 namespace ClienteDuo.Pages
 {
@@ -39,11 +40,11 @@ namespace ClienteDuo.Pages
             string password = TBoxPassword.Password;
             DataService.UsersManagerClient client = null;
 
-            bool isLoginValid = false;
+            User loggedUser = new User();
             try
             {
                 client = new DataService.UsersManagerClient();
-                isLoginValid = client.IsLoginValid(username, Sha256_hash(password));
+                loggedUser = client.IsLoginValid(username, Sha256_hash(password));
             } 
             catch (Exception ex)
             {
@@ -53,10 +54,12 @@ namespace ClienteDuo.Pages
             
             if (client != null)
             {
-                if (isLoginValid)
+                if (loggedUser != null)
                 {
-                    SessionDetails.username = username;
+                    SessionDetails.username = loggedUser.UserName;
+                    SessionDetails.email = loggedUser.Email;
                     SessionDetails.isGuest = false;
+                    SessionDetails.userID = loggedUser.ID;
                     MainMenu mainMenu = new MainMenu();
                     App.Current.MainWindow.Content = mainMenu;
                 }
