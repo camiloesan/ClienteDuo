@@ -1,20 +1,17 @@
-﻿using System.Security.Cryptography;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System;
-using System.ServiceModel;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ClienteDuo.Utilities;
-using ClienteDuo.DataService;
 
 namespace ClienteDuo.Pages
 {
     public partial class Login : Page
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public static string ACTIVE_EMAIL;
-        public static string ACTIVE_USERNAME;
 
         public Login()
         {
@@ -45,21 +42,22 @@ namespace ClienteDuo.Pages
             {
                 client = new DataService.UsersManagerClient();
                 loggedUser = client.IsLoginValid(username, Sha256_hash(password));
-            } 
+            }
             catch (Exception ex)
             {
                 log.Error(ex);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
             }
-            
+
             if (client != null)
             {
                 if (loggedUser != null)
                 {
-                    SessionDetails.username = loggedUser.UserName;
-                    SessionDetails.email = loggedUser.Email;
-                    SessionDetails.isGuest = false;
-                    SessionDetails.userID = loggedUser.ID;
+                    SessionDetails.Username = loggedUser.UserName;
+                    SessionDetails.Email = loggedUser.Email;
+                    SessionDetails.IsGuest = false;
+                    SessionDetails.UserID = loggedUser.ID;
+
                     MainMenu mainMenu = new MainMenu();
                     App.Current.MainWindow.Content = mainMenu;
                 }

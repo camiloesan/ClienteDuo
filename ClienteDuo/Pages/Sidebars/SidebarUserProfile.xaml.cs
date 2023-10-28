@@ -14,9 +14,9 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void FillLabels()
         {
-            LblPlayerID.Content = SessionDetails.userID;
-            LblUsername.Content = SessionDetails.username;
-            LblEmail.Content = SessionDetails.email;
+            LblPlayerID.Content = SessionDetails.UserID;
+            LblUsername.Content = SessionDetails.Username;
+            LblEmail.Content = SessionDetails.Email;
         }
 
         private void BtnCloseBar(object sender, RoutedEventArgs e)

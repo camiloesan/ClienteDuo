@@ -1,19 +1,6 @@
-﻿using ClienteDuo.DataService;
-using ClienteDuo.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -31,8 +18,8 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendRequestsPanel()
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            var list = client.GetFriendRequestsList(SessionDetails.userID);
-            
+            var list = client.GetFriendRequestsList(SessionDetails.UserID);
+
 
             foreach (var item in list)
             {
@@ -61,7 +48,7 @@ namespace ClienteDuo.Pages.Sidebars
                         SenderID = item.SenderID,
                         ReceiverID = item.ReceiverID
                     };
-                    
+
                     if (client.AcceptFriendRequest(friendRequest))
                     {
                         MainWindow.ShowMessageBox("ahora son amigos");
@@ -69,7 +56,7 @@ namespace ClienteDuo.Pages.Sidebars
                     else
                     {
                         MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
-                    }  
+                    }
                 };
                 stackPanel.Children.Add(btnAccept);
 

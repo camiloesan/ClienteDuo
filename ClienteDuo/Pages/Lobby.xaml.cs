@@ -30,7 +30,7 @@ namespace ClienteDuo.Pages
             Random rand = new Random();
             partyCode = rand.Next(0, 10000);
 
-            client.NewParty(partyCode, SessionDetails.username);
+            client.NewParty(partyCode, SessionDetails.Username);
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
 
             PlayPlayerJoinedAudio();
@@ -49,7 +49,7 @@ namespace ClienteDuo.Pages
             chatPanel.Children.Add(labelMessageReceived);
             chatScrollViewer.ScrollToEnd();
         }
-        
+
         private void SendMessage(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && TBoxMessage.Text.Trim().Length > 0)
@@ -57,7 +57,7 @@ namespace ClienteDuo.Pages
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-                string message = SessionDetails.username + ": " + TBoxMessage.Text;
+                string message = SessionDetails.Username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
                 client.SendMessage(partyCode, message);
             }
@@ -75,7 +75,7 @@ namespace ClienteDuo.Pages
 
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.LeaveParty(partyCode, SessionDetails.username);
+            client.LeaveParty(partyCode, SessionDetails.Username);
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)

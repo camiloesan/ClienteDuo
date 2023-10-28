@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
@@ -58,7 +45,7 @@ namespace ClienteDuo.Pages
             //client.DealTableCards();
             //DataService.Card[] cards = client.GetTableCards();
 
-            
+
         }
 
 
@@ -72,14 +59,14 @@ namespace ClienteDuo.Pages
 
             //for (int i = 0; i < cards.Length; i++)
             //{
-                //If the table card is not black, it means there
-                //if (cards[i] != null)
-                //{
-                    //_tableCards[]
-                    
-                    //_middleCardLabel.Content = cards[i].Number;
-                    //_middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
-                //}
+            //If the table card is not black, it means there
+            //if (cards[i] != null)
+            //{
+            //_tableCards[]
+
+            //_middleCardLabel.Content = cards[i].Number;
+            //_middleCardColor.Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
+            //}
             //}
 
             //client.Close();

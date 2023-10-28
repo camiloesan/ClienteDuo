@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.ServiceModel.Security;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ClienteDuo.Utilities
+﻿namespace ClienteDuo.Utilities
 {
     public sealed class SessionDetails
     {
-        public static int userID;
-        public static string username;
-        public static string email;
-        public static bool isGuest = true;
+        private SessionDetails()
+        {
+        }
+
+        public static int UserID { get; set; }
+        public static string Username { get; set; }
+        public static bool IsGuest { get; set; }
+        public static string Email { get; set; }
+        public static int PartyCode { get; set; }
     }
 }

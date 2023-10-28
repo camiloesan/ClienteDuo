@@ -1,7 +1,4 @@
 ﻿using ClienteDuo.Utilities;
-using System;
-using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -34,7 +31,7 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendsPanel()
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            var friendsList = client.GetFriendsList(SessionDetails.userID);
+            var friendsList = client.GetFriendsList(SessionDetails.UserID);
 
             foreach (var friend in friendsList)
             {
@@ -47,12 +44,12 @@ namespace ClienteDuo.Pages.Sidebars
 
                 Label lblFriend = new Label();
                 lblFriend.Foreground = new SolidColorBrush(Colors.White);
-                if (friend.Friend1ID != SessionDetails.userID)
+                if (friend.Friend1ID != SessionDetails.UserID)
                 {
                     lblFriend.Content = friend.Friend1Username;
                     stackPanel.Children.Add(lblFriend);
                 }
-                else if (friend.Friend2ID != SessionDetails.userID)
+                else if (friend.Friend2ID != SessionDetails.UserID)
                 {
                     lblFriend.Content = friend.Friend2Username;
                     stackPanel.Children.Add(lblFriend);
