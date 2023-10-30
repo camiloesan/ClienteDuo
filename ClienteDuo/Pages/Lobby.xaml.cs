@@ -13,6 +13,7 @@ namespace ClienteDuo.Pages
     {
         const int MESSAGE_MAX_LENGTH = 250;
         int partyCode = 0;
+        Dictionary<string, object> players = new Dictionary<string, object>();
 
         public Lobby()
         {
@@ -78,12 +79,14 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
+            players = playersInLobby;
             MusicManager.PlayPlayerJoinedSound();
             UpdatePlayerList(playersInLobby);
         }
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
+            players = playersInLobby;
             MusicManager.PlayPlayerLeftSound();
             UpdatePlayerList(playersInLobby);
         }
@@ -113,8 +116,9 @@ namespace ClienteDuo.Pages
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
         {
-            CardTable cardTable = new CardTable();
-            App.Current.MainWindow.Content = cardTable;
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            client.StartGame(partyCode);
         }
 
         public void GameStarted()

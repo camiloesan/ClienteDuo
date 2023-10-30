@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ClienteDuo.Pages
 {
@@ -35,13 +36,32 @@ namespace ClienteDuo.Pages
         {
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
-            DataService.UsersManagerClient client = null;
 
-            User loggedUser = new User();
+            User loggedUser = AreCredentialsValid(username, password);
+
+            if (loggedUser != null)
+            {
+                SessionDetails.Username = loggedUser.UserName;
+                SessionDetails.Email = loggedUser.Email;
+                SessionDetails.IsGuest = false;
+                SessionDetails.UserID = loggedUser.ID;
+
+                MainMenu mainMenu = new MainMenu();
+                App.Current.MainWindow.Content = mainMenu;
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
+            }
+        }
+
+        public User AreCredentialsValid(string username, string password)
+        {
+            User userCredentials = null;
             try
             {
-                client = new DataService.UsersManagerClient();
-                loggedUser = client.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
+                DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+                userCredentials = client.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
             }
             catch (Exception ex)
             {
@@ -49,23 +69,7 @@ namespace ClienteDuo.Pages
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
             }
 
-            if (client != null)
-            {
-                if (loggedUser != null)
-                {
-                    SessionDetails.Username = loggedUser.UserName;
-                    SessionDetails.Email = loggedUser.Email;
-                    SessionDetails.IsGuest = false;
-                    SessionDetails.UserID = loggedUser.ID;
-
-                    MainMenu mainMenu = new MainMenu();
-                    App.Current.MainWindow.Content = mainMenu;
-                }
-                else
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
-                }
-            }
+            return userCredentials;
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
