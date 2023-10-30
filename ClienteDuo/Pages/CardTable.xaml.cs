@@ -1,28 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for CardTable.xaml
-    /// </summary>
     public partial class CardTable : Window
     {
         DataService.Card[] _tableCards = new DataService.Card[3];
+        List<Card> _selectedCards = new List<Card>();
         Label[] _cardLabels = new Label[3];
         Rectangle[] _cardColors = new Rectangle[3];
         GameMenu _gameMenu;
@@ -31,6 +18,42 @@ namespace ClienteDuo.Pages
         {
             InitializeComponent();
 
+            InitializeAttributes();
+            LoadSettingsMenu();
+
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+            client.InitializeData();
+            _tableCards = client.GetTableCards();
+            client.Close();
+
+            UpdateTableCards();
+
+            for (int i = 0; i < 5; i++)
+            {
+                DealPlayerCard();
+            }
+        }
+
+        public bool SelectCard(Card selectedCard)
+        {
+            bool result = false;
+
+            if (_selectedCards.Count < 2)
+            {
+                _selectedCards.Add(selectedCard);
+                result = true;
+            }
+
+            return result;
+        }
+
+        public void UnselectCard(Card unselectedCard)
+        {
+            _selectedCards.Remove(unselectedCard);
+        }
+
+        void InitializeAttributes()
+        {
             _cardLabels[0] = _leftCardLabel;
             _cardLabels[1] = _middleCardLabel;
             _cardLabels[2] = _rightCardLabel;
@@ -39,17 +62,9 @@ namespace ClienteDuo.Pages
             _cardColors[1] = _middleCardColor;
             _cardColors[2] = _rightCardColor;
 
-            _tableCards[0] = null;
+            _tableCards[0] = new DataService.Card();
             _tableCards[1] = new DataService.Card();
             _tableCards[2] = new DataService.Card();
-
-            LoadSettingsMenu();
-            UpdateTableCards();
-
-            for (int i = 0; i < 5; i++)
-            {
-                DealPlayerCard();
-            }
         }
 
         void LoadSettingsMenu()
@@ -64,16 +79,20 @@ namespace ClienteDuo.Pages
         void UpdateTableCards()
         {
             DataService.MatchManagerClient client = new DataService.MatchManagerClient();
-
             client.DealTableCards(); //This is only called here for test purposes
-            DataService.Card[] cards = client.GetTableCards();
+            _tableCards = client.GetTableCards();
 
-            for (int i = 0; i < cards.Length; i++)
+            for (int i = 0; i < _tableCards.Length; i++)
             {
-                if (cards[i] != null)
+                if (_tableCards[i].Number != "")
                 {
-                    _cardLabels[i].Content = cards[i].Number;
-                    _cardColors[i].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(cards[i].Color));
+                    _cardLabels[i].Content = _tableCards[i].Number;
+                    _cardColors[i].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_tableCards[i].Color));
+                }
+                else
+                {
+                    _cardLabels[i].Content = "";
+                    _cardColors[i].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF969696"));
                 }
             }
 
@@ -89,6 +108,7 @@ namespace ClienteDuo.Pages
             card.Number = dealtCard.Number;
             card.Color = dealtCard.Color;
             card.Visibility = Visibility.Visible;
+            card.GameTable = this;
 
             _playerDeck.Children.Add(card);
             client.Close();
@@ -104,19 +124,63 @@ namespace ClienteDuo.Pages
             DealPlayerCard();
         }
 
+        bool isValidMove(int position)
+        {
+            bool result = false;
+            int selectionSum = 0;
+
+            for (int i = 0; i < _selectedCards.Count; i++)
+            {
+                if (_selectedCards[i].Number == "#")
+                {
+                    return true;
+                }
+                else
+                {
+                    selectionSum += int.Parse(_selectedCards[i].Number);
+                }
+            }
+
+            if (_tableCards[position].Number == selectionSum.ToString())
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        void PlayCard(int position)
+        {
+            if (isValidMove(position))
+            {
+                DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+                client.PlayCard(position);
+
+                for (int i = 0; i < _selectedCards.Count; i++)
+                {
+                    _playerDeck.Children.Remove(_selectedCards[i]);
+                    
+                }
+
+                _selectedCards.Clear();
+                UpdateTableCards();
+                client.Close();
+            }
+        }
+
         void PlayCardLeft(object sender, RoutedEventArgs e)
         {
-
+            PlayCard(0);
         }
 
         void PlayCardMiddle(object sender, RoutedEventArgs e)
         {
-
+            PlayCard(1);
         }
 
         void PlayCardRight(object sender, RoutedEventArgs e)
         {
-
+            PlayCard(2);
         }
     }
 }

@@ -425,23 +425,11 @@ namespace ClienteDuo.DataService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IMatchManager")]
     public interface IMatchManager {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/IsValidMove", ReplyAction="http://tempuri.org/IMatchManager/IsValidMoveResponse")]
-        bool IsValidMove(ClienteDuo.DataService.Card[] _cards, int position);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/IsValidMove", ReplyAction="http://tempuri.org/IMatchManager/IsValidMoveResponse")]
-        System.Threading.Tasks.Task<bool> IsValidMoveAsync(ClienteDuo.DataService.Card[] _cards, int position);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/DrawCard", ReplyAction="http://tempuri.org/IMatchManager/DrawCardResponse")]
         ClienteDuo.DataService.Card DrawCard();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/DrawCard", ReplyAction="http://tempuri.org/IMatchManager/DrawCardResponse")]
         System.Threading.Tasks.Task<ClienteDuo.DataService.Card> DrawCardAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
-        void DealTableCards();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
-        System.Threading.Tasks.Task DealTableCardsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetTableCards", ReplyAction="http://tempuri.org/IMatchManager/GetTableCardsResponse")]
         ClienteDuo.DataService.Card[] GetTableCards();
@@ -449,11 +437,11 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetTableCards", ReplyAction="http://tempuri.org/IMatchManager/GetTableCardsResponse")]
         System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetTableCardsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCards")]
-        void PlayCards(ClienteDuo.DataService.Card[] _cards);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
+        void DealTableCards();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCards")]
-        System.Threading.Tasks.Task PlayCardsAsync(ClienteDuo.DataService.Card[] _cards);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
+        System.Threading.Tasks.Task DealTableCardsAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
         void EndTurn();
@@ -472,6 +460,18 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/EndGame", ReplyAction="http://tempuri.org/IMatchManager/EndGameResponse")]
         System.Threading.Tasks.Task EndGameAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/InitializeData", ReplyAction="http://tempuri.org/IMatchManager/InitializeDataResponse")]
+        void InitializeData();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/InitializeData", ReplyAction="http://tempuri.org/IMatchManager/InitializeDataResponse")]
+        System.Threading.Tasks.Task InitializeDataAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCard")]
+        void PlayCard(int position);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCard")]
+        System.Threading.Tasks.Task PlayCardAsync(int position);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -501,28 +501,12 @@ namespace ClienteDuo.DataService {
                 base(binding, remoteAddress) {
         }
         
-        public bool IsValidMove(ClienteDuo.DataService.Card[] _cards, int position) {
-            return base.Channel.IsValidMove(_cards, position);
-        }
-        
-        public System.Threading.Tasks.Task<bool> IsValidMoveAsync(ClienteDuo.DataService.Card[] _cards, int position) {
-            return base.Channel.IsValidMoveAsync(_cards, position);
-        }
-        
         public ClienteDuo.DataService.Card DrawCard() {
             return base.Channel.DrawCard();
         }
         
         public System.Threading.Tasks.Task<ClienteDuo.DataService.Card> DrawCardAsync() {
             return base.Channel.DrawCardAsync();
-        }
-        
-        public void DealTableCards() {
-            base.Channel.DealTableCards();
-        }
-        
-        public System.Threading.Tasks.Task DealTableCardsAsync() {
-            return base.Channel.DealTableCardsAsync();
         }
         
         public ClienteDuo.DataService.Card[] GetTableCards() {
@@ -533,12 +517,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.GetTableCardsAsync();
         }
         
-        public void PlayCards(ClienteDuo.DataService.Card[] _cards) {
-            base.Channel.PlayCards(_cards);
+        public void DealTableCards() {
+            base.Channel.DealTableCards();
         }
         
-        public System.Threading.Tasks.Task PlayCardsAsync(ClienteDuo.DataService.Card[] _cards) {
-            return base.Channel.PlayCardsAsync(_cards);
+        public System.Threading.Tasks.Task DealTableCardsAsync() {
+            return base.Channel.DealTableCardsAsync();
         }
         
         public void EndTurn() {
@@ -563,6 +547,22 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task EndGameAsync() {
             return base.Channel.EndGameAsync();
+        }
+        
+        public void InitializeData() {
+            base.Channel.InitializeData();
+        }
+        
+        public System.Threading.Tasks.Task InitializeDataAsync() {
+            return base.Channel.InitializeDataAsync();
+        }
+        
+        public void PlayCard(int position) {
+            base.Channel.PlayCard(position);
+        }
+        
+        public System.Threading.Tasks.Task PlayCardAsync(int position) {
+            return base.Channel.PlayCardAsync(position);
         }
     }
 }

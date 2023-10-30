@@ -181,21 +181,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="IsValidMove">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="_cards" nillable="true" type="q6:ArrayOfCard" />
-        <xs:element minOccurs="0" name="position" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsValidMoveResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IsValidMoveResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="DrawCard">
     <xs:complexType>
       <xs:sequence />
@@ -204,13 +189,8 @@
   <xs:element name="DrawCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q7:Card" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q6:Card" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DealTableCards">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTableCards">
@@ -221,15 +201,13 @@
   <xs:element name="GetTableCardsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetTableCardsResult" nillable="true" type="q8:ArrayOfCard" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetTableCardsResult" nillable="true" type="q7:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayCards">
+  <xs:element name="DealTableCards">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="_cards" nillable="true" type="q9:ArrayOfCard" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="EndTurn">
@@ -250,6 +228,23 @@
   <xs:element name="EndGameResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InitializeData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InitializeDataResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayCard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="position" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

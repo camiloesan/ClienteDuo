@@ -166,7 +166,7 @@
     <value>Incorrect email or password</value>
   </data>
   <data name="DlgFullParty" xml:space="preserve">
-    <value>The party is full already, try again later</value>
+    <value>The party is already full, try again later</value>
   </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
     <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter</value>

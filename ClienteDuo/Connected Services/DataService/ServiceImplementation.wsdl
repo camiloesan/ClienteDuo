@@ -134,20 +134,11 @@
   <wsdl:message name="IPartyValidator_IsSpaceAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsSpaceAvailableResponse" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_IsValidMove_InputMessage">
-    <wsdl:part name="parameters" element="tns:IsValidMove" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_IsValidMove_OutputMessage">
-    <wsdl:part name="parameters" element="tns:IsValidMoveResponse" />
-  </wsdl:message>
   <wsdl:message name="IMatchManager_DrawCard_InputMessage">
     <wsdl:part name="parameters" element="tns:DrawCard" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_DrawCard_OutputMessage">
     <wsdl:part name="parameters" element="tns:DrawCardResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_DealTableCards_InputMessage">
-    <wsdl:part name="parameters" element="tns:DealTableCards" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_GetTableCards_InputMessage">
     <wsdl:part name="parameters" element="tns:GetTableCards" />
@@ -155,8 +146,8 @@
   <wsdl:message name="IMatchManager_GetTableCards_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTableCardsResponse" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_PlayCards_InputMessage">
-    <wsdl:part name="parameters" element="tns:PlayCards" />
+  <wsdl:message name="IMatchManager_DealTableCards_InputMessage">
+    <wsdl:part name="parameters" element="tns:DealTableCards" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_EndTurn_InputMessage">
     <wsdl:part name="parameters" element="tns:EndTurn" />
@@ -169,6 +160,15 @@
   </wsdl:message>
   <wsdl:message name="IMatchManager_EndGame_OutputMessage">
     <wsdl:part name="parameters" element="tns:EndGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_InitializeData_InputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeData" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_InitializeData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InitializeDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_PlayCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:PlayCard" />
   </wsdl:message>
   <wsdl:portType name="IUsersManager">
     <wsdl:operation name="AddUserToDatabase">
@@ -233,23 +233,16 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMatchManager">
-    <wsdl:operation name="IsValidMove">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/IsValidMove" message="tns:IMatchManager_IsValidMove_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/IsValidMoveResponse" message="tns:IMatchManager_IsValidMove_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="DrawCard">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/DrawCard" message="tns:IMatchManager_DrawCard_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/DrawCardResponse" message="tns:IMatchManager_DrawCard_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="DealTableCards">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/DealTableCards" message="tns:IMatchManager_DealTableCards_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetTableCards">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetTableCards" message="tns:IMatchManager_GetTableCards_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetTableCardsResponse" message="tns:IMatchManager_GetTableCards_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PlayCards">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/PlayCards" message="tns:IMatchManager_PlayCards_InputMessage" />
+    <wsdl:operation name="DealTableCards">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/DealTableCards" message="tns:IMatchManager_DealTableCards_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EndTurn">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndTurn" message="tns:IMatchManager_EndTurn_InputMessage" />
@@ -260,6 +253,13 @@
     <wsdl:operation name="EndGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndGame" message="tns:IMatchManager_EndGame_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/EndGameResponse" message="tns:IMatchManager_EndGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InitializeData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/InitializeData" message="tns:IMatchManager_InitializeData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/InitializeDataResponse" message="tns:IMatchManager_InitializeData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/PlayCard" message="tns:IMatchManager_PlayCard_InputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUsersManager" type="tns:IUsersManager">
@@ -400,15 +400,6 @@
   <wsdl:binding name="NetTcpBinding_IMatchManager" type="tns:IMatchManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IMatchManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="IsValidMove">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/IsValidMove" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="DrawCard">
       <soap12:operation soapAction="http://tempuri.org/IMatchManager/DrawCard" style="document" />
       <wsdl:input>
@@ -417,12 +408,6 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DealTableCards">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/DealTableCards" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="GetTableCards">
       <soap12:operation soapAction="http://tempuri.org/IMatchManager/GetTableCards" style="document" />
@@ -433,8 +418,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlayCards">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/PlayCards" style="document" />
+    <wsdl:operation name="DealTableCards">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/DealTableCards" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -459,6 +444,21 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitializeData">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/InitializeData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayCard">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/PlayCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ServiceImplementation">

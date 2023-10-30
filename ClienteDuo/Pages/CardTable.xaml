@@ -8,7 +8,7 @@
         Title="CardTable" Height="600" Width="1000">
     <Grid x:Name="_background" Background="#FF2CAB00">
 
-        <ScrollViewer Margin="0,440,0,0" Height="130" Width="702" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled" Background="#FF003E01" >
+        <ScrollViewer Margin="0,440,0,0" Height="130" Width="702" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="#FF003E01" >
             <StackPanel x:Name="_playerDeck" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
@@ -22,17 +22,21 @@
             </StackPanel>
         </ScrollViewer>
 
-        <Button x:Name="_leftCardButton" Click="PlayCardLeft" Margin="250,0,0,0" Background="#FF969696" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="135" Width="90" BorderBrush="Black">
+        <Button x:Name="_leftCardButton" Click="PlayCardLeft" Margin="250,0,0,0" Background="White" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="135" Width="90" BorderBrush="Black">
             <Grid>
-                <Rectangle x:Name="_leftCardColor" HorizontalAlignment="Center" Height="90" Margin="0,0,0,0" VerticalAlignment="Center" Width="65"/>
-                <Label x:Name="_leftCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontSize="60" Margin="0,0,0,0" Background="{x:Null}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="64*"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle x:Name="_leftCardColor" HorizontalAlignment="Center" Height="90" VerticalAlignment="Center" Width="65" Grid.Column="1" Fill="Red"/>
+                <Label x:Name="_leftCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontSize="60" Background="{x:Null}" Grid.Column="1"/>
             </Grid>
         </Button>
 
         <Button x:Name="_middleCardButton" Click="PlayCardMiddle" Margin="400,0,0,0" Background="White" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="135" Width="90" BorderBrush="Black">
             <Grid>
                 <Rectangle x:Name="_middleCardColor" HorizontalAlignment="Center" Height="90" Margin="0,0,0,0" VerticalAlignment="Center" Width="66" Fill="Red"/>
-                <Label x:Name="_middleCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="2" FontSize="60" Margin="0,0,0,0" HorizontalContentAlignment="Center"/>
+                <Label x:Name="_middleCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontSize="60" Margin="0,0,0,0" HorizontalContentAlignment="Center"/>
             </Grid>
         </Button>
 
@@ -40,7 +44,7 @@
             <Grid>
                 <Rectangle x:Name="_rightCardColor" HorizontalAlignment="Center" Height="90" Margin="0,0,0,0" VerticalAlignment="Center" Width="66" Fill="Red"/>
                 <Ellipse Fill="White" Margin="0,0,0,0" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                <Label x:Name="_rightCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="2" FontSize="60" Margin="0,0,0,0"/>
+                <Label x:Name="_rightCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontSize="60" Margin="0,0,0,0"/>
             </Grid>
         </Button>
 

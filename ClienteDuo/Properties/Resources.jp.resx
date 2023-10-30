@@ -117,192 +117,127 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BtnAddFriend" xml:space="preserve">
-    <value>Ajouter ami</value>
-    <comment>SidebarFriends</comment>
-  </data>
   <data name="BtnCancel" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>WinLogin</comment>
-  </data>
-  <data name="BtnCancelJoinLogged" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>WinJoinPartyLogged</comment>
-  </data>
-  <data name="BtnChangePassword" xml:space="preserve">
-    <value>Changer mot de passe</value>
-    <comment>SidebarMyProfile</comment>
+    <value>キャンセル</value>
   </data>
   <data name="BtnContinue" xml:space="preserve">
-    <value>Continuer</value>
-    <comment>WinLogin</comment>
+    <value>続く</value>
   </data>
-  <data name="BtnExit" xml:space="preserve">
-    <value>Sortir</value>
-    <comment>WinLobby</comment>
+  <data name="BtnExitLobby" xml:space="preserve">
+    <value>ゲームを終了</value>
   </data>
   <data name="BtnJoin" xml:space="preserve">
-    <value>Rejoindre</value>
-    <comment>WinJoinAsGuest</comment>
+    <value>加入する</value>
   </data>
   <data name="BtnJoinAsGuest" xml:space="preserve">
-    <value>Rejoindre comme invité</value>
-    <comment>WinLauncher</comment>
-  </data>
-  <data name="BtnJoinLogged" xml:space="preserve">
-    <value>Rejoindre</value>
-    <comment>WinJoinPartyLogged</comment>
+    <value>ゲストとして参加する</value>
   </data>
   <data name="BtnJoinParty" xml:space="preserve">
-    <value>Rejoindre groupe</value>
-    <comment>WinMainMenu</comment>
+    <value>パーティに参加入する</value>
   </data>
   <data name="BtnLogin" xml:space="preserve">
-    <value>Rejoindre</value>
-    <comment>WinLauncher</comment>
+    <value>ログイン</value>
   </data>
   <data name="BtnNewAccount" xml:space="preserve">
-    <value>Nouvelle compte</value>
-    <comment>WinLauncher</comment>
+    <value>登録</value>
   </data>
   <data name="BtnNewParty" xml:space="preserve">
-    <value>Nouvel groupe</value>
-    <comment>WinMainMenu</comment>
-  </data>
-  <data name="BtnNotReady" xml:space="preserve">
-    <value>Pas prêt</value>
-    <comment>WinLobby</comment>
+    <value>新パーティ</value>
   </data>
   <data name="BtnQuitGame" xml:space="preserve">
-    <value>Sortir</value>
-    <comment>WinMainMenu</comment>
-  </data>
-  <data name="BtnReady" xml:space="preserve">
-    <value>Prêt</value>
-    <comment>WinLobby</comment>
-  </data>
-  <data name="BtnSendFriendRequest" xml:space="preserve">
-    <value>Envoyer demande d'ami</value>
-    <comment>SidebarAddFriend</comment>
+    <value>リタイア</value>
   </data>
   <data name="BtnStartGame" xml:space="preserve">
-    <value>Commencer partie</value>
-    <comment>WinHostLobby</comment>
+    <value>試合を始め</value>
   </data>
-  <data name="BtnUnfriend" xml:space="preserve">
-    <value>Supprimer l'ami</value>
-    <comment>SidebarFriendsInfo</comment>
+  <data name="DlgConnectionError" xml:space="preserve">
+    <value>サービスへの接続中にエラーが発生しました。後でもう一度お試しください</value>
+  </data>
+  <data name="DlgEmailMaxCharacters" xml:space="preserve">
+    <value>メールの最大文字数は 30 文字です</value>
+  </data>
+  <data name="DlgEmailTaken" xml:space="preserve">
+    <value>このメールアドレスのアカウントはすでに登録されています</value>
+  </data>
+  <data name="DlgEmptyFields" xml:space="preserve">
+    <value>全てのフィールドに入力する必要があります</value>
+  </data>
+  <data name="DlgFailedLogin" xml:space="preserve">
+    <value>メールアドレスまたはパスワードが間違っています</value>
+  </data>
+  <data name="DlgFullParty" xml:space="preserve">
+    <value>パーティーはすでに満員です。後でもう一度お試しください</value>
+  </data>
+  <data name="DlgInsecurePassword" xml:space="preserve">
+    <value>パスワードには少なくとも次の文字が含まれている必要があります: 8 文字、特殊記号 1 つ、大文字と小文字 1 つ</value>
+  </data>
+  <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
+    <value>パーティコードは最大 4 桁の数字である必要があります</value>
+  </data>
+  <data name="DlgMessageMaxCharacters" xml:space="preserve">
+    <value>メッセージには 250 文字までしか含めることができません</value>
+  </data>
+  <data name="DlgNewAccountSuccess" xml:space="preserve">
+    <value>ユーザーは正常に登録されました</value>
+  </data>
+  <data name="DlgPartyNotFound" xml:space="preserve">
+    <value>パーティコードが間違っています</value>
+  </data>
+  <data name="DlgServiceException" xml:space="preserve">
+    <value>サービスへの接続中にエラーが発生しました。後でもう一度お試しください</value>
+  </data>
+  <data name="DlgUsernameMaxCharacters" xml:space="preserve">
+    <value>ユーザー名の最大文字数は 30 文字です</value>
+  </data>
+  <data name="DlgUsernameTaken" xml:space="preserve">
+    <value>ユーザー名は既に使われています</value>
   </data>
   <data name="LblAddNewFriend" xml:space="preserve">
-    <value>Ajouter nouvel ami</value>
-    <comment>SidebarAddFriend</comment>
+    <value>フレンド申請する</value>
   </data>
-  <data name="LblChatSection" xml:space="preserve">
-    <value>Chat</value>
-    <comment>WinLobby</comment>
+  <data name="LblChat" xml:space="preserve">
+    <value>チャット</value>
   </data>
   <data name="LblConfirmPassword" xml:space="preserve">
-    <value>Confirmer mot de passe</value>
-    <comment>WinCreateAcc</comment>
+    <value>パスワードを確認する</value>
   </data>
   <data name="LblEmail" xml:space="preserve">
-    <value>Courriel</value>
-    <comment>WinCreateAcc</comment>
-  </data>
-  <data name="LblEmailLogin" xml:space="preserve">
-    <value>Courriel</value>
-    <comment>WinLogin</comment>
+    <value>メール</value>
   </data>
   <data name="LblFriends" xml:space="preserve">
-    <value>Amis</value>
-    <comment>WinMainMenu</comment>
+    <value>友達</value>
   </data>
   <data name="LblFriendStatus" xml:space="preserve">
-    <value>État</value>
-    <comment>SidebarFriendsInfo</comment>
+    <value>ステータス</value>
   </data>
-  <data name="LblFriendsTitleSidebar" xml:space="preserve">
-    <value>Amis</value>
-    <comment>SidebarFriends</comment>
+  <data name="LblGameSettings" xml:space="preserve">
+    <value>ゲーム設定</value>
   </data>
-  <data name="LblFriendsTrophies" xml:space="preserve">
-    <value>Prix</value>
-    <comment>SidebarFriendsInfo</comment>
-  </data>
-  <data name="LblGameSettingsSection" xml:space="preserve">
-    <value>Configuration de jeu</value>
-    <comment>WinHostLobby</comment>
-  </data>
-  <data name="LblJoinPartyTitle" xml:space="preserve">
-    <value>Rejoindre groupe</value>
-    <comment>WinJoinPartyLogged</comment>
-  </data>
-  <data name="LblLeaderboard" xml:space="preserve">
-    <value>Leaderboard</value>
-    <comment>WinMainMenu</comment>
-  </data>
-  <data name="LblLeaderboardTitle" xml:space="preserve">
-    <value>Leaderboard</value>
-    <comment>SidebarLeaderboard</comment>
-  </data>
-  <data name="LblMyProfile" xml:space="preserve">
-    <value>My Profile</value>
-    <comment>WinMainMenu</comment>
-  </data>
-  <data name="LblMyProfileSidebar" xml:space="preserve">
-    <value>My Profile</value>
-    <comment>SidebarMyProfile</comment>
-  </data>
-  <data name="LblNotReady" xml:space="preserve">
-    <value>Pas prêt</value>
-    <comment>WinLobby</comment>
-  </data>
-  <data name="LblOwnerLobby" xml:space="preserve">
-    <value>Your Lobby</value>
-    <comment>WinHostLobby</comment>
+  <data name="LblGameUsername" xml:space="preserve">
+    <value>プレイヤー名</value>
   </data>
   <data name="LblPartyCode" xml:space="preserve">
-    <value>Party Code</value>
-    <comment>WinJoinAsGuest</comment>
-  </data>
-  <data name="LblPartyCodeLogged" xml:space="preserve">
-    <value>Party Code</value>
-    <comment>WinJoinPartyLogged</comment>
+    <value>パーティコード</value>
   </data>
   <data name="LblPassword" xml:space="preserve">
-    <value>Mot de passe</value>
-    <comment>WinLogin</comment>
+    <value>パスワード</value>
   </data>
-  <data name="LblPlayersSection" xml:space="preserve">
-    <value>Joueurs</value>
-    <comment>WinLobby</comment>
-  </data>
-  <data name="LblReady" xml:space="preserve">
-    <value>Prêt</value>
-    <comment>WinLobby</comment>
-  </data>
-  <data name="LblTemporalName" xml:space="preserve">
-    <value>Nom de jeu</value>
-    <comment>WinJoinAsGuest</comment>
-  </data>
-  <data name="LblTrophies" xml:space="preserve">
-    <value>Prix</value>
-    <comment>SidebarMyProfile</comment>
-  </data>
-  <data name="LblUserID" xml:space="preserve">
-    <value>ID d'utilisateur</value>
-    <comment>SidebarFriendsInfo</comment>
-  </data>
-  <data name="LblUserIDNewFriend" xml:space="preserve">
-    <value>ID d'utilisateur</value>
-    <comment>SidebarAddFriend</comment>
+  <data name="LblPlayers" xml:space="preserve">
+    <value>プレイヤー</value>
   </data>
   <data name="LblUsername" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
-    <comment>WinCreateAcc</comment>
+    <value>ニックネーム</value>
   </data>
-  <data name="LblUsernameSideBar" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
-    <comment>SidebarMyProfile</comment>
+  <data name="TitleAlert" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="TitleLauncher" xml:space="preserve">
+    <value>ランチャー</value>
+  </data>
+  <data name="TitleLogin" xml:space="preserve">
+    <value>ログイン</value>
+  </data>
+  <data name="TitleNewAccount" xml:space="preserve">
+    <value>新アカウント</value>
   </data>
 </root>

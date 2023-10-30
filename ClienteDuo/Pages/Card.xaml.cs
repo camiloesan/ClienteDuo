@@ -17,16 +17,16 @@ namespace ClienteDuo.Pages
 {
     public partial class Card: UserControl
     {
+        bool _isSelected;
         string _number; 
         string _color;
-        bool _isSelected;
 
         public Card()
         {
             InitializeComponent();
             _number = "2";
             _color = "000000";
-            _isSelected = true;
+            _isSelected = false;
         }
 
         public string Color
@@ -48,9 +48,24 @@ namespace ClienteDuo.Pages
             get => _number;
         }
 
+        public CardTable GameTable { set; get; }
+
         public void SelectCard(object sender, RoutedEventArgs e)
         {
-
+            if (_isSelected)
+            {
+                _cardButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFFFFF"));
+                _isSelected = false;
+                GameTable.UnselectCard(this);
+            }
+            else
+            {
+                if (GameTable.SelectCard(this))
+                {
+                    _cardButton.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FFD700"));
+                    _isSelected = true;
+                }
+            }
         }
     }
 }

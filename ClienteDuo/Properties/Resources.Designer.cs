@@ -205,7 +205,7 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The party is full already, try again later.
+        ///   Looks up a localized string similar to The party is already full, try again later.
         /// </summary>
         public static string DlgFullParty {
             get {
