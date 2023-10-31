@@ -16,14 +16,14 @@ namespace ClienteDuo.Pages
             App.Current.MainWindow.Content = newAccount;
         }
 
-        private void ButtonLocalizationEnUS(object sender, RoutedEventArgs e)
+        private void BtnLocalizationEnUS(object sender, RoutedEventArgs e)
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
             Launcher launcher = new Launcher();
             App.Current.MainWindow.Content = launcher;
         }
 
-        private void ButtonLocalizationEsMX(object sender, RoutedEventArgs e)
+        private void BtnLocalizationEsMX(object sender, RoutedEventArgs e)
         {
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
             Launcher launcher = new Launcher();
@@ -40,6 +40,20 @@ namespace ClienteDuo.Pages
         {
             JoinParty joinParty = new JoinParty();
             App.Current.MainWindow.Content = joinParty;
+        }
+
+        private void BtnLocalizationJaJP(object sender, RoutedEventArgs e)
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ja");
+            Launcher launcher = new Launcher();
+            App.Current.MainWindow.Content = launcher;
+        }
+
+        private void BtnLocalizationFrFR(object sender, RoutedEventArgs e)
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr");
+            Launcher launcher = new Launcher();
+            App.Current.MainWindow.Content = launcher;
         }
     }
 }

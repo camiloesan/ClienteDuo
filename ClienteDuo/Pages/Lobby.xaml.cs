@@ -96,18 +96,49 @@ namespace ClienteDuo.Pages
             playersPanel.Children.Clear();
             foreach (KeyValuePair<string, object> keyValuePair in playersInLobby)
             {
-                Label label = new Label
-                {
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Foreground = new SolidColorBrush(Colors.White),
-                    FontSize = 14,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Content = keyValuePair.Key
-                };
-
-                playersPanel.Children.Add(label);
+                CreatePlayerPanel(keyValuePair.Key);
             }
         }
+
+        private void CreatePlayerPanel(string username)
+        {
+            StackPanel stackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Background = new SolidColorBrush(Colors.DimGray),
+                Margin = new Thickness(15, 20, 15, 20),
+                Width = 200,
+                Height = 40,
+            };
+            playersPanel.Children.Add(stackPanel);
+
+            Label usernameName = new Label
+            {
+                Foreground = new SolidColorBrush(Colors.Black),
+                Content = username,
+                Margin = new Thickness(10, 0, 5, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            stackPanel.Children.Add(usernameName);
+
+            Button BtnKick = new Button
+            {
+                Content = "*kick*",
+                Margin = new Thickness(5, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            stackPanel.Children.Add(BtnKick);
+
+            Button BtnViewProfile = new Button
+            {
+                Content = "*Profile*",
+                Margin = new Thickness(5, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            stackPanel.Children.Add(BtnViewProfile);
+        }
+
 
         public void PartyCreated(Dictionary<string, object> playersInLobby)
         {

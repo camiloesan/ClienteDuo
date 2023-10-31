@@ -213,11 +213,20 @@
   <data name="LblEmail" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="LblFriends" xml:space="preserve">
+    <value>Friends</value>
+  </data>
   <data name="LblGameSettings" xml:space="preserve">
     <value>Game Settings</value>
   </data>
   <data name="LblInGameUsername" xml:space="preserve">
     <value>Temporary Username</value>
+  </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="LblMyProfile" xml:space="preserve">
+    <value>My Profile</value>
   </data>
   <data name="LblPartyCode" xml:space="preserve">
     <value>Party Code</value>

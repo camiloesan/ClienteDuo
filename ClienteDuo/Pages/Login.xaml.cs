@@ -39,7 +39,7 @@ namespace ClienteDuo.Pages
 
             User loggedUser = AreCredentialsValid(username, password);
 
-            if (loggedUser != null)
+            if (loggedUser.ID != 0)
             {
                 SessionDetails.Username = loggedUser.UserName;
                 SessionDetails.Email = loggedUser.Email;

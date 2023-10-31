@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
 {
-    public partial class CardTable : Window
+    public partial class CardTable : Page
     {
         DataService.Card[] _tableCards = new DataService.Card[3];
         GameMenu _gameMenu;

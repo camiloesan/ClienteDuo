@@ -35,27 +35,44 @@ namespace ClienteDuo.Pages.Sidebars
 
             foreach (var friend in friendsList)
             {
-                StackPanel stackPanel = new StackPanel
-                {
-                    Orientation = Orientation.Horizontal,
-                    HorizontalAlignment = HorizontalAlignment.Center
-                };
-                panelFriends.Children.Add(stackPanel);
-
-                Label lblFriend = new Label();
-                lblFriend.Foreground = new SolidColorBrush(Colors.White);
                 if (friend.Friend1ID != SessionDetails.UserID)
                 {
-                    lblFriend.Content = friend.Friend1Username;
-                    stackPanel.Children.Add(lblFriend);
+                    CreateFriendPanel(friend.Friend1Username);
                 }
                 else if (friend.Friend2ID != SessionDetails.UserID)
                 {
-                    lblFriend.Content = friend.Friend2Username;
-                    stackPanel.Children.Add(lblFriend);
+                    CreateFriendPanel(friend.Friend2Username);
                 }
             }
         }
+
+        private void CreateFriendPanel(string username)
+        {
+            StackPanel stackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Background = new SolidColorBrush(Colors.DimGray),
+                Width = 200,
+                Height = 40,
+            };
+            panelFriends.Children.Add(stackPanel);
+
+            Label activeStatus = new Label();
+            activeStatus.Foreground = new SolidColorBrush(Colors.Black);
+            activeStatus.Content = "●";
+            activeStatus.Margin = new Thickness(10, 0, 5, 0);
+            activeStatus.VerticalAlignment = VerticalAlignment.Center;
+            stackPanel.Children.Add(activeStatus);
+
+            Label usernameName = new Label();
+            usernameName.Foreground = new SolidColorBrush(Colors.Black);
+            usernameName.Content = username;
+            usernameName.Margin = new Thickness(5, 0, 10, 0);
+            usernameName.VerticalAlignment = VerticalAlignment.Center;
+            stackPanel.Children.Add(usernameName);
+        }
+
 
         private void BtnCancel(object sender, RoutedEventArgs e)
         {

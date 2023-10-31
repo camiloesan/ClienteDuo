@@ -9,21 +9,21 @@
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="Launcher">
 
-    <Grid Background="#FF263E54">
+    <Grid Background="{DynamicResource Background}">
         <Border HorizontalAlignment="Center" Height="69" Margin="0,0,0,0" VerticalAlignment="Center" Width="260">
             <Grid Margin="-92,-14,-92,-14">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="34*"/>
                     <RowDefinition Height="35*"/>
                 </Grid.RowDefinitions>
-                <Button Content="{x:Static p:Resources.BtnNewAccount}" Margin="33,0,227,0" VerticalAlignment="Center" Cursor="Hand" Height="33" Click="BtnNewAccount" FontSize="14"/>
-                <Button Content="{x:Static p:Resources.BtnLogin}" Margin="227,0,33,0" VerticalAlignment="Center" Height="33" Click="BtnLogin" FontSize="14" Cursor="Hand"/>
-                <Button Content="{x:Static p:Resources.BtnJoinAsGuest}" Margin="0,7,0,0" VerticalAlignment="Top" Height="33" HorizontalAlignment="Center" Width="378" Click="BtnJoinAsGuest" FontSize="14" Grid.Row="1" />
+                <Button Content="{x:Static p:Resources.BtnNewAccount}" Margin="33,0,227,0" VerticalAlignment="Center" Cursor="Hand" Height="33" Click="BtnNewAccount" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
+                <Button Content="{x:Static p:Resources.BtnLogin}" Margin="227,0,33,0" VerticalAlignment="Center" Height="33" Click="BtnLogin" FontSize="14" Cursor="Hand" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
+                <Button Content="{x:Static p:Resources.BtnJoinAsGuest}" Margin="0,7,0,0" VerticalAlignment="Top" Height="33" HorizontalAlignment="Center" Width="378" Click="BtnJoinAsGuest" FontSize="14" Grid.Row="1" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" />
             </Grid>
         </Border>
-        <Button Content="en_US" HorizontalAlignment="Left" Margin="30,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEnUS" Width="60"/>
-        <Button Content="es_MX" HorizontalAlignment="Left" Margin="112,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEsMX" Width="60"/>
-        <Button Content="ja_JP" HorizontalAlignment="Left" Margin="195,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEsMX" Width="60"/>
-        <Button Content="fr_FR" HorizontalAlignment="Left" Margin="278,527,0,0" VerticalAlignment="Top" Click="ButtonLocalizationEsMX" Width="60"/>
+        <Button Content="en_US" HorizontalAlignment="Left" Margin="30,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationEnUS" Width="60"/>
+        <Button Content="es_MX" HorizontalAlignment="Left" Margin="112,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationEsMX" Width="60"/>
+        <Button Content="ja_JP" HorizontalAlignment="Left" Margin="195,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationJaJP" Width="60"/>
+        <Button Content="fr_FR" HorizontalAlignment="Left" Margin="278,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationFrFR" Width="60"/>
     </Grid>
 </Page>
