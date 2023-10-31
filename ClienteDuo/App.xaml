@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="/Pages/MainWindow.xaml">
     <Application.Resources>
-         
         <SolidColorBrush x:Key="BtnBackground" Color="#FF6B472B"/>
         <SolidColorBrush x:Key="BtnBorder" Color="#FF452308"/>
         <SolidColorBrush x:Key="Background" Color="#FF212D47"/>
