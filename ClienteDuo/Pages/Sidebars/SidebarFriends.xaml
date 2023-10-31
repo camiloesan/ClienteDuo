@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="ClienteDuo.Pages.Sidebars.SidebarFriends"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClienteDuo.Pages"
+             xmlns:p="clr-namespace:ClienteDuo.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="250">
+    <Grid x:Name="FriendsBar" Background="#FF6B472B">
+        <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <StackPanel x:Name="panelFriends" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="350"/>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
+        <Button Content="{x:Static p:Resources.BtnAddFriend}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,60" FontSize="14" Width="120" Click="BtnAddFriend" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
+        <Button Content="{x:Static p:Resources.BtnFriendRequests}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,60" FontSize="14" Click="BtnFriendRequests" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
+    </Grid>
+</UserControl>

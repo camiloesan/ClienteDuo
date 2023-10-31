@@ -1,19 +1,18 @@
-﻿using System.Security.Cryptography;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System;
-using System.ServiceModel;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ClienteDuo.Utilities;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ClienteDuo.Pages
 {
     public partial class Login : Page
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public static string ACTIVE_EMAIL;
-        public static string ACTIVE_USERNAME;
 
         public Login()
         {
@@ -37,56 +36,46 @@ namespace ClienteDuo.Pages
         {
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
-            DataService.UsersManagerClient client = null;
 
-            bool isLoginValid = false;
+            User loggedUser = AreCredentialsValid(username, password);
+
+            if (loggedUser != null)
+            {
+                SessionDetails.Username = loggedUser.UserName;
+                SessionDetails.Email = loggedUser.Email;
+                SessionDetails.IsGuest = false;
+                SessionDetails.UserID = loggedUser.ID;
+
+                MainMenu mainMenu = new MainMenu();
+                App.Current.MainWindow.Content = mainMenu;
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
+            }
+        }
+
+        public User AreCredentialsValid(string username, string password)
+        {
+            User userCredentials = null;
             try
             {
-                client = new DataService.UsersManagerClient();
-                isLoginValid = client.IsLoginValid(username, Sha256_hash(password));
-            } 
+                DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+                userCredentials = client.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
+            }
             catch (Exception ex)
             {
                 log.Error(ex);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
             }
-            
-            if (client != null)
-            {
-                if (isLoginValid)
-                {
-                    SessionDetails.username = username;
-                    SessionDetails.isGuest = false;
-                    MainMenu mainMenu = new MainMenu();
-                    App.Current.MainWindow.Content = mainMenu;
-                }
-                else
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
-                }
-            }
+
+            return userCredentials;
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
         {
             Launcher launcher = new Launcher();
             App.Current.MainWindow.Content = launcher;
-        }
-
-        public static String Sha256_hash(String value)
-        {
-            StringBuilder Sb = new StringBuilder();
-
-            using (SHA256 hash = SHA256Managed.Create())
-            {
-                Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
-
-                foreach (Byte b in result)
-                    Sb.Append(b.ToString("x2"));
-            }
-
-            return Sb.ToString();
         }
     }
 }

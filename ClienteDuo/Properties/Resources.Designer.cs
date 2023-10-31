@@ -61,6 +61,24 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        public static string BtnAccept {
+            get {
+                return ResourceManager.GetString("BtnAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Friend.
+        /// </summary>
+        public static string BtnAddFriend {
+            get {
+                return ResourceManager.GetString("BtnAddFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string BtnCancel {
@@ -84,6 +102,15 @@ namespace ClienteDuo.Properties {
         public static string BtnExitLobby {
             get {
                 return ResourceManager.GetString("BtnExitLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friend Requests.
+        /// </summary>
+        public static string BtnFriendRequests {
+            get {
+                return ResourceManager.GetString("BtnFriendRequests", resourceCulture);
             }
         }
         
@@ -147,6 +174,15 @@ namespace ClienteDuo.Properties {
         public static string BtnQuitGame {
             get {
                 return ResourceManager.GetString("BtnQuitGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reject.
+        /// </summary>
+        public static string BtnReject {
+            get {
+                return ResourceManager.GetString("BtnReject", resourceCulture);
             }
         }
         

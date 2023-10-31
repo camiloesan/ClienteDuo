@@ -1,20 +1,11 @@
 ﻿using ClienteDuo.Utilities;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
@@ -33,7 +24,7 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.JoinParty(JoinParty.PARTY_CODE, SessionDetails.username);
+            client.JoinParty(SessionDetails.PartyCode, SessionDetails.Username);
         }
 
         public void MessageReceived(string messageSent)
@@ -57,10 +48,10 @@ namespace ClienteDuo.Pages
                 InstanceContext instanceContext = new InstanceContext(this);
                 DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-                string message = SessionDetails.username + ": " + TBoxMessage.Text;
+                string message = SessionDetails.Username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
-                client.SendMessage(JoinParty.PARTY_CODE, message); //partycode no good
-            } 
+                client.SendMessage(SessionDetails.PartyCode, message);
+            }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters);
@@ -74,12 +65,13 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            PlayPlayerJoinedAudio();
+            MusicManager.PlayPlayerJoinedSound();
             UpdatePlayerList(playersInLobby);
         }
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
+            MusicManager.PlayPlayerLeftSound();
             UpdatePlayerList(playersInLobby);
         }
 
@@ -102,7 +94,7 @@ namespace ClienteDuo.Pages
 
         private void BtnExitLobby(object sender, RoutedEventArgs e)
         {
-            if (SessionDetails.isGuest)
+            if (SessionDetails.IsGuest)
             {
                 Launcher launcher = new Launcher();
                 App.Current.MainWindow.Content = launcher;
@@ -116,13 +108,13 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.LeaveParty(JoinParty.PARTY_CODE, SessionDetails.username);
+            client.LeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
         }
 
-        private void PlayPlayerJoinedAudio()
+        public void GameStarted()
         {
-            MusicManager musicManager = new MusicManager("SFX\\playerJoinedSound.wav");
-            musicManager.PlayMusic();
+            CardTable cardTable = new CardTable();
+            App.Current.MainWindow.Content = cardTable;
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using ClienteDuo.DataService;
-using ClienteDuo.Pages;
+﻿using ClienteDuo.Pages;
+using ClienteDuo.Utilities;
 using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 
 namespace ClienteDuo
 {
@@ -48,14 +47,14 @@ namespace ClienteDuo
             try
             {
                 isTaken = client.IsUsernameTaken(username);
-                
-            } 
+
+            }
             catch (Exception ex)
             {
                 log.Error(ex);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
             }
-            
+
             if (isTaken)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken);
@@ -67,7 +66,7 @@ namespace ClienteDuo
         private bool IsEmailAvailable(string email)
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            
+
             bool isTaken = false;
             try
             {
@@ -92,9 +91,9 @@ namespace ClienteDuo
             string username = TBoxUsername.Text.Trim();
             string email = TBoxEmail.Text.Trim();
             string password = TBoxPassword.Password.Trim();
-            if (!AreFieldsEmpty() 
-                && AreFieldsLengthValid() 
-                && IsPasswordMatch() 
+            if (!AreFieldsEmpty()
+                && AreFieldsLengthValid()
+                && IsPasswordMatch()
                 && IsPasswordSecure(password)
                 && IsUsernameAvailable(username)
                 && IsEmailAvailable(email))
@@ -119,7 +118,7 @@ namespace ClienteDuo
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameMaxCharacters);
                 return false;
-            } 
+            }
             else if (emailField.Length > 30)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailMaxCharacters);
@@ -150,7 +149,7 @@ namespace ClienteDuo
             string confirmPasswordField = TBoxConfirmPassword.Password;
 
             if (string.IsNullOrEmpty(usernameField)
-                || string.IsNullOrEmpty(emailField) 
+                || string.IsNullOrEmpty(emailField)
                 || string.IsNullOrEmpty(passwordField)
                 || string.IsNullOrEmpty(confirmPasswordField))
             {
@@ -170,7 +169,7 @@ namespace ClienteDuo
             {
                 UserName = username,
                 Email = email,
-                Password = Sha256_hash(password)
+                Password = Sha256Encryptor.SHA256_hash(password),
             };
 
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
@@ -179,29 +178,13 @@ namespace ClienteDuo
             try
             {
                 result = client.AddUserToDatabase(databaseUser);
-            } 
+            }
             catch (Exception ex)
             {
                 log.Error(ex);
             }
 
             return result;
-        }
-
-        public static String Sha256_hash(String value)
-        {
-            StringBuilder Sb = new StringBuilder();
-
-            using (SHA256 hash = SHA256Managed.Create())
-            {
-                Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
-
-                foreach (Byte b in result)
-                    Sb.Append(b.ToString("x2"));
-            }
-
-            return Sb.ToString();
         }
     }
 }

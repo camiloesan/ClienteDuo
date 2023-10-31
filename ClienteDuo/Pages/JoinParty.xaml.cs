@@ -1,25 +1,13 @@
 ﻿using ClienteDuo.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
     public partial class JoinParty : Page
     {
-        public static int PARTY_CODE = 0;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public JoinParty()
         {
@@ -29,7 +17,7 @@ namespace ClienteDuo.Pages
 
         private void EnableOrDisableGuestFields()
         {
-            if (SessionDetails.isGuest)
+            if (SessionDetails.IsGuest)
             {
                 LblUsername.Visibility = Visibility.Visible;
                 TBoxUsername.Visibility = Visibility.Visible;
@@ -38,31 +26,32 @@ namespace ClienteDuo.Pages
 
         private void BtnJoin(object sender, RoutedEventArgs e)
         {
-            if (SessionDetails.isGuest)
+            if (SessionDetails.IsGuest)
             {
-                SessionDetails.username = TBoxUsername.Text.Trim(); //validar longitud de nombre
+                SessionDetails.Username = TBoxUsername.Text.Trim(); //validar longitud de nombre
             }
 
             bool isInteger = false;
             try // all this block in another function
             {
-                PARTY_CODE = Int32.Parse(TBoxPartyCode.Text.Trim());
+                SessionDetails.PartyCode = Int32.Parse(TBoxPartyCode.Text.Trim());
                 isInteger = true;
-            } 
+            }
             catch (Exception ex)
             {
+                log.Error(ex);
                 isInteger = false;
             }
 
             if (!isInteger)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
-            } 
-            else if (!IsPartyCodeCorrect(PARTY_CODE))
+            }
+            else if (!IsPartyCodeCorrect(SessionDetails.PartyCode))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
             }
-            else if (!IsSpaceAvailable(PARTY_CODE))
+            else if (!IsSpaceAvailable(SessionDetails.PartyCode))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
             }
@@ -71,9 +60,7 @@ namespace ClienteDuo.Pages
                 InviteeLobby inviteeLobby = new InviteeLobby();
                 App.Current.MainWindow.Content = inviteeLobby;
             }
-
         }
-
 
         private bool IsPartyCodeCorrect(int partyCode)
         {
@@ -81,7 +68,7 @@ namespace ClienteDuo.Pages
             return client.IsPartyExistent(partyCode);
         }
 
-        private bool IsSpaceAvailable(int partyCode) //thread insecure?
+        private bool IsSpaceAvailable(int partyCode)
         {
             DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
             return client.IsSpaceAvailable(partyCode);
@@ -90,7 +77,7 @@ namespace ClienteDuo.Pages
         private void BtnCancel(object sender, RoutedEventArgs e)
         {
 
-            if (SessionDetails.isGuest)
+            if (SessionDetails.IsGuest)
             {
                 Launcher launcher = new Launcher();
                 App.Current.MainWindow.Content = launcher;

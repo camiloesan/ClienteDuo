@@ -38,8 +38,8 @@
     <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Win32.Registry, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Win32.Registry.4.7.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
     <Reference Include="NAudio, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.2.2.1\lib\net472\NAudio.dll</HintPath>
@@ -67,11 +67,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
@@ -100,18 +100,28 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.fr.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.fr.resx</DependentUpon>
+    <Compile Include="Pages\Sidebars\SidebarAddFriend.xaml.cs">
+      <DependentUpon>SidebarAddFriend.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.jp.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.jp.resx</DependentUpon>
+    <Compile Include="Pages\Sidebars\SidebarFriendRequests.xaml.cs">
+      <DependentUpon>SidebarFriendRequests.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Pages\Sidebars\SidebarFriends.xaml.cs">
+      <DependentUpon>SidebarFriends.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Pages\Sidebars\SidebarLeaderboard.xaml.cs">
+      <DependentUpon>SidebarLeaderboard.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Pages\Sidebars\SidebarUserProfile.xaml.cs">
+      <DependentUpon>SidebarUserProfile.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Utilities\MusicManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
+    <Compile Include="Utilities\Sha256Encryptor.cs" />
     <Page Include="Pages\CardTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,10 +139,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\InviteeLobby.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\JoinAsGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +170,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Sidebars\SidebarAddFriend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\SidebarFriendRequests.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Pages\Sidebars\SidebarFriends.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Pages\Sidebars\SidebarLeaderboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Pages\Sidebars\SidebarUserProfile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connected Services\DataService\Reference.cs">
@@ -185,9 +215,6 @@
     </Compile>
     <Compile Include="Pages\InviteeLobby.xaml.cs">
       <DependentUpon>InviteeLobby.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\JoinAsGuest.xaml.cs">
-      <DependentUpon>JoinAsGuest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\JoinParty.xaml.cs">
       <DependentUpon>JoinParty.xaml</DependentUpon>
@@ -228,14 +255,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Resources.fr.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.jp.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.jp.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\en_US.resx" />
+    <EmbeddedResource Include="Properties\es_MX.resx" />
+    <EmbeddedResource Include="Properties\fr_FR.resx" />
+    <EmbeddedResource Include="Properties\ja_JP.resx" />
     <EmbeddedResource Include="Properties\Resources.es.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.es.Designer.cs</LastGenOutput>
@@ -244,22 +267,28 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.Card.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\item.xsd">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.Friendship.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.User.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DataService\item44.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\item1.xsd">
+    <None Include="Connected Services\DataService\item45.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\item2.xsd">
+    <None Include="Connected Services\DataService\item46.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\item3.xsd">
+    <None Include="Connected Services\DataService\item47.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\DataService\ServiceImplementation.wsdl" />
+    <None Include="Connected Services\DataService\ServiceImplementation12.wsdl" />
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -303,9 +332,12 @@
     <Resource Include="Images\friends.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\DataService\item12.disco" />
+    <Content Include="SFX\playerLeftSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\ExpandMenuIcon.png" />
     <Resource Include="Images\ExitButtonIcon.png" />
-    <None Include="Connected Services\DataService\item.disco" />
     <Content Include="SFX\playerJoinedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

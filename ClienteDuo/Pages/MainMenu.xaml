@@ -9,37 +9,38 @@
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="MainMenu">
 
-    <Grid Background="#FF263E54">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="90*"/>
-            <RowDefinition Height="428*"/>
-            <RowDefinition Height="90*"/>
-        </Grid.RowDefinitions>
-        <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Width="336" Height="98" Margin="0,162,0,0" Grid.Row="1">
+    <Grid x:Name="MainGrid">
+
+        <Grid Background="{DynamicResource Background}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="33*"/>
-                <RowDefinition Height="32*"/>
+                <RowDefinition Height="90*"/>
+                <RowDefinition Height="428*"/>
+                <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
-            <Button Content="{x:Static p:Resources.BtnNewParty}" Margin="5,5,5,5" Click="BtnNewParty" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Height="33"/>
-            <Button Content="{x:Static p:Resources.BtnJoinParty}" Margin="5,5,5,5" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="BtnJoinParty" Width="155" FontSize="14" Height="33"/>
-            <Button Content="{x:Static p:Resources.BtnQuitGame}" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnQuitGame" Width="336" Grid.Row="1" FontSize="14" Height="33"/>
+            <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Width="336" Height="98" Margin="0,162,0,0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33*"/>
+                    <RowDefinition Height="32*"/>
+                </Grid.RowDefinitions>
+                <Button Content="{x:Static p:Resources.BtnNewParty}" Margin="5,5,5,5" Click="BtnNewParty" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
+                <Button Content="{x:Static p:Resources.BtnJoinParty}" Margin="5,5,5,5" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="BtnJoinParty" Width="155" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
+                <Button Content="{x:Static p:Resources.BtnQuitGame}" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnQuitGame" Width="336" Grid.Row="1" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
+            </Grid>
+            <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,0,0,0" Height="52" Width="52" Grid.Row="0" Click="BtnMyProfileSidebar">
+                <Image Source="/Images/profile-user.png" OpacityMask="Black"/>
+            </Button>
+
+            <Button x:Name="ToggleFriends" Width="52" Height="52" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,16,0" Click="BtnFriendsSidebar">
+                <Image Source="/Images/friends.png"/>
+            </Button>
+
+            <Button Margin="0,0,16,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="52" Height="52" Grid.Row="2" Background="#FFDDDDDD" Click="BtnLeaderboard">
+                <Image Source="/Images/trophy.png"/>
+            </Button>
+
+            <Label Content="{x:Static p:Resources.LblMyProfile}" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Width="118" FontSize="14" Foreground="White" Grid.Row="0"/>
+            <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Right" Margin="0,28,100,0" VerticalAlignment="Top" Width="118" FontSize="14" Foreground="White" HorizontalContentAlignment="Right" Grid.Row="0"/>
+            <Label Content="{x:Static p:Resources.LblLeaderboard}" Margin="782,27,100,28" FontSize="14" Foreground="White" HorizontalContentAlignment="Right" Grid.Row="2"/>
         </Grid>
-        <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,0,0,0" Height="52" Width="52" Grid.Row="0">
-            <Image Source="/Images/profile-user.png"></Image>
-        </Button>
-
-        <Button x:Name="ToggleFriends" Width="52" Height="52" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,16,0">
-            <Image Source="/Images/friends.png"></Image>
-        </Button>
-        
-        
-
-        <Button Margin="0,0,16,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="52" Height="52" Grid.Row="2" Background="#FFDDDDDD">
-            <Image Source="/Images/trophy.png"></Image>
-        </Button>
-
-        <Label Content="Label" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Center" Width="118" FontSize="14" Foreground="White" Grid.Row="0"/>
-        <Label Content="Label" HorizontalAlignment="Right" Margin="0,28,100,0" VerticalAlignment="Top" Width="118" FontSize="14" Foreground="White" HorizontalContentAlignment="Right" Grid.Row="0"/>
-        <Label Content="Label" Margin="782,27,100,28" FontSize="14" Foreground="White" HorizontalContentAlignment="Right" Grid.Row="2"/>
     </Grid>
 </Page>
