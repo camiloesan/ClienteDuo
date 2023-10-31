@@ -137,6 +137,10 @@ namespace ClienteDuo.Pages
                 {
                     _matchingColors++;
                 }
+                else
+                {
+                    _matchingColors = -1;
+                }
 
                 if (_selectedCards[i].Number.Equals("#"))
                 {
