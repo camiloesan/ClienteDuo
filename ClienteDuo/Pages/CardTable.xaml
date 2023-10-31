@@ -29,6 +29,7 @@
                     <ColumnDefinition Width="64*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle x:Name="_leftCardColor" HorizontalAlignment="Center" Height="90" VerticalAlignment="Center" Width="65" Grid.Column="1" Fill="Red"/>
+                <Ellipse Grid.Column="1" HorizontalAlignment="Center" Height="65" VerticalAlignment="Center" Width="65" Fill="White"/>
                 <Label x:Name="_leftCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontSize="60" Background="{x:Null}" Grid.Column="1"/>
             </Grid>
         </Button>
@@ -36,6 +37,7 @@
         <Button x:Name="_middleCardButton" Click="PlayCardMiddle" Margin="400,0,0,0" Background="White" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="135" Width="90" BorderBrush="Black">
             <Grid>
                 <Rectangle x:Name="_middleCardColor" HorizontalAlignment="Center" Height="90" Margin="0,0,0,0" VerticalAlignment="Center" Width="66" Fill="Red"/>
+                <Ellipse Grid.Column="1" HorizontalAlignment="Center" Height="65" VerticalAlignment="Center" Width="65" Fill="White"/>
                 <Label x:Name="_middleCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontSize="60" Margin="0,0,0,0" HorizontalContentAlignment="Center"/>
             </Grid>
         </Button>
@@ -43,7 +45,7 @@
         <Button x:Name="_rightCardButton" Click="PlayCardRight" Margin="550,0,0,0" Background="White" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center" Height="135" Width="90" BorderBrush="Black">
             <Grid>
                 <Rectangle x:Name="_rightCardColor" HorizontalAlignment="Center" Height="90" Margin="0,0,0,0" VerticalAlignment="Center" Width="66" Fill="Red"/>
-                <Ellipse Fill="White" Margin="0,0,0,0" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                <Ellipse Grid.Column="1" HorizontalAlignment="Center" Height="65" VerticalAlignment="Center" Width="65" Fill="White"/>
                 <Label x:Name="_rightCardLabel" HorizontalAlignment="Center" VerticalAlignment="Center" Content="" FontSize="60" Margin="0,0,0,0"/>
             </Grid>
         </Button>

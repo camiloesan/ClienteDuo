@@ -9,10 +9,11 @@ namespace ClienteDuo.Pages
     public partial class CardTable : Window
     {
         DataService.Card[] _tableCards = new DataService.Card[3];
+        GameMenu _gameMenu;
         List<Card> _selectedCards = new List<Card>();
         Label[] _cardLabels = new Label[3];
         Rectangle[] _cardColors = new Rectangle[3];
-        GameMenu _gameMenu;
+        int _matchingColors;
 
         public CardTable()
         {
@@ -96,6 +97,7 @@ namespace ClienteDuo.Pages
                 }
             }
 
+            _matchingColors = 0;
             client.Close();
         }
 
@@ -131,9 +133,14 @@ namespace ClienteDuo.Pages
 
             for (int i = 0; i < _selectedCards.Count; i++)
             {
-                if (_selectedCards[i].Number == "#")
+                if (_selectedCards[i].Color.Equals("#000000") || _selectedCards[i].Color.Equals(_tableCards[position].Color))
                 {
-                    return true;
+                    _matchingColors++;
+                }
+
+                if (_selectedCards[i].Number.Equals("#"))
+                {
+                    result = true;
                 }
                 else
                 {
@@ -151,36 +158,58 @@ namespace ClienteDuo.Pages
 
         void PlayCard(int position)
         {
-            if (isValidMove(position))
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+            client.PlayCard(position);
+
+            for (int i = 0; i < _selectedCards.Count; i++)
             {
-                DataService.MatchManagerClient client = new DataService.MatchManagerClient();
-                client.PlayCard(position);
-
-                for (int i = 0; i < _selectedCards.Count; i++)
-                {
-                    _playerDeck.Children.Remove(_selectedCards[i]);
+                    _tableCards[position].Number = "";
+                _cardLabels[position].Content = _selectedCards[i].Number;
+                _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
                     
-                }
+                    
 
-                _selectedCards.Clear();
-                UpdateTableCards();
-                client.Close();
+                _playerDeck.Children.Remove(_selectedCards[i]);
             }
+
+            _selectedCards.Clear();
+            
+            //UpdateTableCards(); //This must be run after ending the player's turn
+            client.Close();
         }
 
         void PlayCardLeft(object sender, RoutedEventArgs e)
         {
-            PlayCard(0);
+            if (isValidMove(0)) 
+            {
+                PlayCard(0);
+            }
         }
 
         void PlayCardMiddle(object sender, RoutedEventArgs e)
         {
-            PlayCard(1);
+            if (isValidMove(1))
+            {
+                PlayCard(1);
+            }
         }
 
         void PlayCardRight(object sender, RoutedEventArgs e)
         {
-            PlayCard(2);
+            if (_tableCards[2].Number.Equals(""))
+            {
+                if (_matchingColors >= 1)
+                {
+                    PlayCard(2);
+                }
+            }
+            else
+            {
+                if (isValidMove(2))
+                {
+                    PlayCard(2);
+                }
+            }
         }
     }
 }
