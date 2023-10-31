@@ -1,4 +1,4 @@
-﻿<Page x:Class="ClienteDuo.Pages.CardTable"
+﻿<Window x:Class="ClienteDuo.Pages.CardTable"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -63,4 +63,4 @@
             </Button.Background>
         </Button>
     </Grid>
-</Page>
+</Window>
