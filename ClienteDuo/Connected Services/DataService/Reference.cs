@@ -776,53 +776,23 @@ namespace ClienteDuo.DataService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IMatchManager")]
     public interface IMatchManager {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/DrawCard", ReplyAction="http://tempuri.org/IMatchManager/DrawCardResponse")]
-        ClienteDuo.DataService.Card DrawCard();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/DrawCard", ReplyAction="http://tempuri.org/IMatchManager/DrawCardResponse")]
-        System.Threading.Tasks.Task<ClienteDuo.DataService.Card> DrawCardAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetTableCards", ReplyAction="http://tempuri.org/IMatchManager/GetTableCardsResponse")]
-        ClienteDuo.DataService.Card[] GetTableCards();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetTableCards", ReplyAction="http://tempuri.org/IMatchManager/GetTableCardsResponse")]
-        System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetTableCardsAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
-        void DealTableCards();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
-        System.Threading.Tasks.Task DealTableCardsAsync();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
+        void EndTurn(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
-        void EndTurn();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
-        System.Threading.Tasks.Task EndTurnAsync();
+        System.Threading.Tasks.Task EndTurnAsync(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
-        void EndRound();
+        void EndRound(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
-        System.Threading.Tasks.Task EndRoundAsync();
+        System.Threading.Tasks.Task EndRoundAsync(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/EndGame", ReplyAction="http://tempuri.org/IMatchManager/EndGameResponse")]
-        void EndGame();
+        void EndGame(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/EndGame", ReplyAction="http://tempuri.org/IMatchManager/EndGameResponse")]
-        System.Threading.Tasks.Task EndGameAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/InitializeData", ReplyAction="http://tempuri.org/IMatchManager/InitializeDataResponse")]
-        void InitializeData();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/InitializeData", ReplyAction="http://tempuri.org/IMatchManager/InitializeDataResponse")]
-        System.Threading.Tasks.Task InitializeDataAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCard")]
-        void PlayCard(int position);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCard")]
-        System.Threading.Tasks.Task PlayCardAsync(int position);
+        System.Threading.Tasks.Task EndGameAsync(int gameId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -852,6 +822,87 @@ namespace ClienteDuo.DataService {
                 base(binding, remoteAddress) {
         }
         
+        public void EndTurn(int gameId) {
+            base.Channel.EndTurn(gameId);
+        }
+        
+        public System.Threading.Tasks.Task EndTurnAsync(int gameId) {
+            return base.Channel.EndTurnAsync(gameId);
+        }
+        
+        public void EndRound(int gameId) {
+            base.Channel.EndRound(gameId);
+        }
+        
+        public System.Threading.Tasks.Task EndRoundAsync(int gameId) {
+            return base.Channel.EndRoundAsync(gameId);
+        }
+        
+        public void EndGame(int gameId) {
+            base.Channel.EndGame(gameId);
+        }
+        
+        public System.Threading.Tasks.Task EndGameAsync(int gameId) {
+            return base.Channel.EndGameAsync(gameId);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.ICardManager")]
+    public interface ICardManager {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/DrawCard", ReplyAction="http://tempuri.org/ICardManager/DrawCardResponse")]
+        ClienteDuo.DataService.Card DrawCard();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/DrawCard", ReplyAction="http://tempuri.org/ICardManager/DrawCardResponse")]
+        System.Threading.Tasks.Task<ClienteDuo.DataService.Card> DrawCardAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/GetCards", ReplyAction="http://tempuri.org/ICardManager/GetCardsResponse")]
+        ClienteDuo.DataService.Card[] GetCards(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/GetCards", ReplyAction="http://tempuri.org/ICardManager/GetCardsResponse")]
+        System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetCardsAsync(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/DealCards")]
+        void DealCards(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/DealCards")]
+        System.Threading.Tasks.Task DealCardsAsync(int gameId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/PlayCard")]
+        void PlayCard(int gameId, int position);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/PlayCard")]
+        System.Threading.Tasks.Task PlayCardAsync(int gameId, int position);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface ICardManagerChannel : ClienteDuo.DataService.ICardManager, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class CardManagerClient : System.ServiceModel.ClientBase<ClienteDuo.DataService.ICardManager>, ClienteDuo.DataService.ICardManager {
+        
+        public CardManagerClient() {
+        }
+        
+        public CardManagerClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public CardManagerClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CardManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public CardManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
         public ClienteDuo.DataService.Card DrawCard() {
             return base.Channel.DrawCard();
         }
@@ -860,60 +911,28 @@ namespace ClienteDuo.DataService {
             return base.Channel.DrawCardAsync();
         }
         
-        public ClienteDuo.DataService.Card[] GetTableCards() {
-            return base.Channel.GetTableCards();
+        public ClienteDuo.DataService.Card[] GetCards(int gameId) {
+            return base.Channel.GetCards(gameId);
         }
         
-        public System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetTableCardsAsync() {
-            return base.Channel.GetTableCardsAsync();
+        public System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetCardsAsync(int gameId) {
+            return base.Channel.GetCardsAsync(gameId);
         }
         
-        public void DealTableCards() {
-            base.Channel.DealTableCards();
+        public void DealCards(int gameId) {
+            base.Channel.DealCards(gameId);
         }
         
-        public System.Threading.Tasks.Task DealTableCardsAsync() {
-            return base.Channel.DealTableCardsAsync();
+        public System.Threading.Tasks.Task DealCardsAsync(int gameId) {
+            return base.Channel.DealCardsAsync(gameId);
         }
         
-        public void EndTurn() {
-            base.Channel.EndTurn();
+        public void PlayCard(int gameId, int position) {
+            base.Channel.PlayCard(gameId, position);
         }
         
-        public System.Threading.Tasks.Task EndTurnAsync() {
-            return base.Channel.EndTurnAsync();
-        }
-        
-        public void EndRound() {
-            base.Channel.EndRound();
-        }
-        
-        public System.Threading.Tasks.Task EndRoundAsync() {
-            return base.Channel.EndRoundAsync();
-        }
-        
-        public void EndGame() {
-            base.Channel.EndGame();
-        }
-        
-        public System.Threading.Tasks.Task EndGameAsync() {
-            return base.Channel.EndGameAsync();
-        }
-        
-        public void InitializeData() {
-            base.Channel.InitializeData();
-        }
-        
-        public System.Threading.Tasks.Task InitializeDataAsync() {
-            return base.Channel.InitializeDataAsync();
-        }
-        
-        public void PlayCard(int position) {
-            base.Channel.PlayCard(position);
-        }
-        
-        public System.Threading.Tasks.Task PlayCardAsync(int position) {
-            return base.Channel.PlayCardAsync(position);
+        public System.Threading.Tasks.Task PlayCardAsync(int gameId, int position) {
+            return base.Channel.PlayCardAsync(gameId, position);
         }
     }
 }

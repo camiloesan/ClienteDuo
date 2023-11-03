@@ -274,6 +274,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EndTurn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndRound">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndGame">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndGameResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DrawCard">
     <xs:complexType>
       <xs:sequence />
@@ -286,56 +312,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetTableCards">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetTableCardsResponse">
+  <xs:element name="GetCards">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetTableCardsResult" nillable="true" type="q11:ArrayOfCard" />
+        <xs:element minOccurs="0" name="gameId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DealTableCards">
+  <xs:element name="GetCardsResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetCardsResult" nillable="true" type="q11:ArrayOfCard" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="EndTurn">
+  <xs:element name="DealCards">
     <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="EndRound">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="EndGame">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="EndGameResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InitializeData">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InitializeDataResponse">
-    <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="gameId" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PlayCard">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" name="gameId" type="xs:int" />
         <xs:element minOccurs="0" name="position" type="xs:int" />
       </xs:sequence>
     </xs:complexType>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ClienteDuo.Utilities;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -7,7 +8,7 @@ using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
 {
-    public partial class CardTable : Window
+    public partial class CardTable : Page
     {
         DataService.Card[] _tableCards = new DataService.Card[3];
         GameMenu _gameMenu;
@@ -22,10 +23,10 @@ namespace ClienteDuo.Pages
 
             InitializeAttributes();
             LoadSettingsMenu();
+            LoadPlayers();
 
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
-            client.InitializeData();
-            _tableCards = client.GetTableCards();
+            DataService.CardManagerClient client = new DataService.CardManagerClient();
+            _tableCards = client.GetCards(SessionDetails.PartyCode);
             client.Close();
 
             UpdateTableCards();
@@ -78,11 +79,16 @@ namespace ClienteDuo.Pages
             _background.Children.Add(_gameMenu);
         }
 
-        void UpdateTableCards()
+        void LoadPlayers()
         {
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
-            client.DealTableCards(); //This is only called here for test purposes
-            _tableCards = client.GetTableCards();
+
+        }
+
+        public void UpdateTableCards()
+        {
+            DataService.CardManagerClient client = new DataService.CardManagerClient();
+            client.DealCards(SessionDetails.PartyCode); //This is only called here for test purposes
+            _tableCards = client.GetCards(SessionDetails.PartyCode);
 
             for (int i = 0; i < _tableCards.Length; i++)
             {
@@ -105,7 +111,7 @@ namespace ClienteDuo.Pages
         void DealPlayerCard()
         {
             Card card = new Card();
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
+            DataService.CardManagerClient client = new DataService.CardManagerClient();
             DataService.Card dealtCard = client.DrawCard();
 
             card.Number = dealtCard.Number;
@@ -163,8 +169,8 @@ namespace ClienteDuo.Pages
 
         void PlayCard(int position)
         {
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient();
-            client.PlayCard(position);
+            DataService.CardManagerClient client = new DataService.CardManagerClient();
+            client.PlayCard(SessionDetails.PartyCode, position);
 
             for (int i = 0; i < _selectedCards.Count; i++)
             {
@@ -172,14 +178,10 @@ namespace ClienteDuo.Pages
                 _cardLabels[position].Content = _selectedCards[i].Number;
                 _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
                     
-                    
-
                 _playerDeck.Children.Remove(_selectedCards[i]);
             }
 
             _selectedCards.Clear();
-            
-            //UpdateTableCards(); //This must be run after ending the player's turn
             client.Close();
         }
 

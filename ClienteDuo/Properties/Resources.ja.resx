@@ -204,12 +204,6 @@
   <data name="LblEmail" xml:space="preserve">
     <value>メール</value>
   </data>
-  <data name="LblFriends" xml:space="preserve">
-    <value>友達</value>
-  </data>
-  <data name="LblFriendStatus" xml:space="preserve">
-    <value>ステータス</value>
-  </data>
   <data name="LblGameSettings" xml:space="preserve">
     <value>ゲーム設定</value>
   </data>

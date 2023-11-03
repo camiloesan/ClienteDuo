@@ -1,4 +1,5 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -114,6 +115,7 @@ namespace ClienteDuo.Pages
         public void GameStarted()
         {
             CardTable cardTable = new CardTable();
+            
             App.Current.MainWindow.Content = cardTable;
         }
     }

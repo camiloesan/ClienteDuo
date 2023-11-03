@@ -107,6 +107,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Pages\PlayerIcon.xaml.cs">
+      <DependentUpon>PlayerIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Sidebars\SidebarAddFriend.xaml.cs">
       <DependentUpon>SidebarAddFriend.xaml</DependentUpon>
     </Compile>
@@ -127,7 +130,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\Resources.fr.Designer.cs" />
-    <Compile Include="Properties\Resources.jp.Designer.cs" />
+    <Compile Include="Properties\Resources.ja1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ja.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\MusicManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
     <Compile Include="Utilities\Sha256Encryptor.cs" />
@@ -136,10 +143,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Card.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\FlippedCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -179,6 +182,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PlayerIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Sidebars\SidebarAddFriend.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,9 +222,6 @@
     </Compile>
     <Compile Include="Pages\CardTable.xaml.cs">
       <DependentUpon>CardTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\FlippedCard.xaml.cs">
-      <DependentUpon>FlippedCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GameMenu.xaml.cs">
       <DependentUpon>GameMenu.xaml</DependentUpon>
@@ -272,8 +276,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
-    <EmbeddedResource Include="Properties\Resources.jp.resx">
+    <EmbeddedResource Include="Properties\Resources.ja.resx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ja1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -350,6 +356,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\DataService\item.disco" />
+    <Resource Include="Pages\profile-user.png" />
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

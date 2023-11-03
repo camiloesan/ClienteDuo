@@ -139,7 +139,6 @@ namespace ClienteDuo.Pages
             stackPanel.Children.Add(BtnViewProfile);
         }
 
-
         public void PartyCreated(Dictionary<string, object> playersInLobby)
         {
             UpdatePlayerList(playersInLobby);
