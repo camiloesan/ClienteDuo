@@ -7,7 +7,7 @@ using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
 {
-    public partial class CardTable : Page
+    public partial class CardTable : Window
     {
         DataService.Card[] _tableCards = new DataService.Card[3];
         GameMenu _gameMenu;
