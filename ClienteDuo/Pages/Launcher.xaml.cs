@@ -44,7 +44,7 @@ namespace ClienteDuo.Pages
 
         private void BtnLocalizationJaJP(object sender, RoutedEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ja");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("jp");
             Launcher launcher = new Launcher();
             App.Current.MainWindow.Content = launcher;
         }

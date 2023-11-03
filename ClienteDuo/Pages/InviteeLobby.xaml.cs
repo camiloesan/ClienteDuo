@@ -27,6 +27,50 @@ namespace ClienteDuo.Pages
             client.JoinParty(SessionDetails.PartyCode, SessionDetails.Username);
         }
 
+        private void CreatePlayerPanel(string username)
+        {
+            var backgroundColor = new SolidColorBrush();
+            if (username == SessionDetails.Username)
+            {
+                backgroundColor = new SolidColorBrush(Colors.Gold);
+            }
+            else
+            {
+                backgroundColor = new SolidColorBrush(Colors.DimGray);
+            }
+
+            StackPanel stackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Background = backgroundColor,
+                Margin = new Thickness(15, 20, 15, 20),
+                Width = 200,
+                Height = 40,
+            };
+            playersPanel.Children.Add(stackPanel);
+
+            Label usernameName = new Label
+            {
+                Foreground = new SolidColorBrush(Colors.Black),
+                Content = username,
+                Margin = new Thickness(10, 0, 5, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            stackPanel.Children.Add(usernameName);
+
+            if (username != SessionDetails.Username)
+            {
+                Button BtnViewProfile = new Button
+                {
+                    Content = "*Profile*",
+                    Margin = new Thickness(5, 0, 0, 0),
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                stackPanel.Children.Add(BtnViewProfile);
+            }
+        }
+
         public void MessageReceived(string messageSent)
         {
             Label labelMessageReceived = new Label
@@ -80,15 +124,7 @@ namespace ClienteDuo.Pages
             playersPanel.Children.Clear();
             foreach (KeyValuePair<string, object> keyValuePair in playersInLobby)
             {
-                Label label = new Label
-                {
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    Foreground = new SolidColorBrush(Colors.White),
-                    FontSize = 14,
-                    Content = keyValuePair.Key
-                };
-
-                playersPanel.Children.Add(label);
+                CreatePlayerPanel(keyValuePair.Key);
             }
         }
 
@@ -115,6 +151,20 @@ namespace ClienteDuo.Pages
         {
             CardTable cardTable = new CardTable();
             App.Current.MainWindow.Content = cardTable;
+        }
+
+        public void PlayerKicked()
+        {
+            if (SessionDetails.IsGuest)
+            {
+                Launcher launcher = new Launcher();
+                App.Current.MainWindow.Content = launcher;
+            }
+            else
+            {
+                MainMenu mainMenu = new MainMenu();
+                App.Current.MainWindow.Content = mainMenu;
+            }
         }
     }
 }
