@@ -46,6 +46,28 @@ namespace ClienteDuo
             }
         }
 
+        private bool AreFieldsValid()
+        {
+            string username = TBoxUsername.Text.Trim();
+            string email = TBoxEmail.Text.Trim();
+            string password = TBoxPassword.Password.Trim();
+            string confirmedPassword = TBoxConfirmPassword.Password.Trim();
+
+            if (!AreFieldsEmpty()
+                && AreFieldsLengthValid(username, email)
+                && IsPasswordMatch(password, confirmedPassword)
+                && IsPasswordSecure(password)
+                && IsUsernameAvailable(username)
+                && IsEmailAvailable(email)
+                && !UsernameContainsGuestKeyword(username)
+                && IsEmailValid(email))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public bool IsUsernameAvailable(String username)
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
@@ -104,28 +126,6 @@ namespace ClienteDuo
             {
                 return false;
             }
-        }
-
-        private bool AreFieldsValid()
-        {
-            string username = TBoxUsername.Text.Trim();
-            string email = TBoxEmail.Text.Trim();
-            string password = TBoxPassword.Password.Trim();
-            string confirmedPassword = TBoxConfirmPassword.Password.Trim();
-
-            if (!AreFieldsEmpty()
-                && AreFieldsLengthValid(username, email)
-                && IsPasswordMatch(password, confirmedPassword)
-                && IsPasswordSecure(password)
-                && IsUsernameAvailable(username)
-                && IsEmailAvailable(email)
-                && !UsernameContainsGuestKeyword(username)
-                && IsEmailValid(email))
-            {
-                return true;
-            }
-
-            return false;
         }
 
         public bool IsPasswordMatch(string password, string confirmedPassword)

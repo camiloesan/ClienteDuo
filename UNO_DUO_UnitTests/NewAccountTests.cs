@@ -12,6 +12,8 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace ClienteDuo.Tests
 {
+
+
     [TestClass()]
     public class NewAccountTests
     {
@@ -131,6 +133,38 @@ namespace ClienteDuo.Tests
             string username = "jesusSolis";
             NewAccount newAccount = new NewAccount();
             Assert.IsFalse(newAccount.UsernameContainsGuestKeyword(username));
+        }
+
+        [TestMethod()]
+        public void EmailContainsUnsupportedCharactersTest()
+        {
+            string email = "....@aol.es.com.mx";
+            NewAccount newAccount = new NewAccount();
+            Assert.IsFalse(newAccount.IsEmailValid(email));
+        }
+
+        [TestMethod()]
+        public void EmailInvalidFormatTest()
+        {
+            string email = "robertoGonzales";
+            NewAccount newAccount = new NewAccount();
+            Assert.IsFalse(newAccount.IsEmailValid(email));
+        }
+
+        [TestMethod()]
+        public void EmailDoenNotContainDomainTest()
+        {
+            string email = "robertoGonzales@";
+            NewAccount newAccount = new NewAccount();
+            Assert.IsFalse(newAccount.IsEmailValid(email));
+        }
+
+        [TestMethod()]
+        public void EmailCorrectlyFormattedTest()
+        {
+            string email = "camiloesan@gmail.com";
+            NewAccount newAccount = new NewAccount();
+            Assert.IsTrue(newAccount.IsEmailValid(email));
         }
     }
 }
