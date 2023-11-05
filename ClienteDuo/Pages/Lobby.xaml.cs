@@ -33,6 +33,7 @@ namespace ClienteDuo.Pages
             client.NewParty(partyCode, SessionDetails.Username);
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
 
+
             MusicManager.PlayPlayerJoinedSound();
         }
 
@@ -76,8 +77,6 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
             client.LeaveParty(partyCode, SessionDetails.Username);
-
-            //close party and kick everyone
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
