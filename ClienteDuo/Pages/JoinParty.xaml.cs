@@ -37,7 +37,7 @@ namespace ClienteDuo.Pages
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
             }
-            else if (!IsPartyCodeCorrect(Int32.Parse(partyCode)))
+            else if (!IsPartyCodeExistent(Int32.Parse(partyCode)))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
             }
@@ -75,7 +75,7 @@ namespace ClienteDuo.Pages
             return isInteger;
         }
 
-        public bool IsPartyCodeCorrect(int partyCode)
+        public bool IsPartyCodeExistent(int partyCode)
         {
             DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
             return client.IsPartyExistent(partyCode);

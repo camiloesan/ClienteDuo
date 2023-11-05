@@ -1,6 +1,7 @@
 ﻿using ClienteDuo.Pages;
 using ClienteDuo.Utilities;
 using System;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -92,6 +93,19 @@ namespace ClienteDuo
             return !isTaken;
         }
 
+        public bool IsEmailValid(string email)
+        {
+            try
+            {
+                MailAddress mailAddress = new MailAddress(email);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
         private bool AreFieldsValid()
         {
             string username = TBoxUsername.Text.Trim();
@@ -105,7 +119,8 @@ namespace ClienteDuo
                 && IsPasswordSecure(password)
                 && IsUsernameAvailable(username)
                 && IsEmailAvailable(email)
-                && !UsernameContainsGuestKeyword(username))
+                && !UsernameContainsGuestKeyword(username)
+                && IsEmailValid(email))
             {
                 return true;
             }
