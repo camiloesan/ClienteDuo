@@ -616,6 +616,12 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
         System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string username);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/CloseParty")]
+        void CloseParty(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/CloseParty")]
+        System.Threading.Tasks.Task ClosePartyAsync(int partyCode);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/StartGame")]
         void StartGame(int partyCode);
         
@@ -638,23 +644,23 @@ namespace ClienteDuo.DataService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPartyManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PartyCreated", ReplyAction="http://tempuri.org/IPartyManager/PartyCreatedResponse")]
-        void PartyCreated(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPartyCreated", ReplyAction="http://tempuri.org/IPartyManager/NotifyPartyCreatedResponse")]
+        void NotifyPartyCreated(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerJoined", ReplyAction="http://tempuri.org/IPartyManager/PlayerJoinedResponse")]
-        void PlayerJoined(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPlayerJoined", ReplyAction="http://tempuri.org/IPartyManager/NotifyPlayerJoinedResponse")]
+        void NotifyPlayerJoined(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/MessageReceived", ReplyAction="http://tempuri.org/IPartyManager/MessageReceivedResponse")]
-        void MessageReceived(string messageSent);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyMessageReceived", ReplyAction="http://tempuri.org/IPartyManager/NotifyMessageReceivedResponse")]
+        void NotifyMessageReceived(string messageSent);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerLeft", ReplyAction="http://tempuri.org/IPartyManager/PlayerLeftResponse")]
-        void PlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPlayerLeft", ReplyAction="http://tempuri.org/IPartyManager/NotifyPlayerLeftResponse")]
+        void NotifyPlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerKicked", ReplyAction="http://tempuri.org/IPartyManager/PlayerKickedResponse")]
-        void PlayerKicked();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPlayerKicked", ReplyAction="http://tempuri.org/IPartyManager/NotifyPlayerKickedResponse")]
+        void NotifyPlayerKicked();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/GameStarted", ReplyAction="http://tempuri.org/IPartyManager/GameStartedResponse")]
-        void GameStarted();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyGameStarted", ReplyAction="http://tempuri.org/IPartyManager/NotifyGameStartedResponse")]
+        void NotifyGameStarted();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -715,6 +721,14 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string username) {
             return base.Channel.LeavePartyAsync(partyCode, username);
+        }
+        
+        public void CloseParty(int partyCode) {
+            base.Channel.CloseParty(partyCode);
+        }
+        
+        public System.Threading.Tasks.Task ClosePartyAsync(int partyCode) {
+            return base.Channel.ClosePartyAsync(partyCode);
         }
         
         public void StartGame(int partyCode) {

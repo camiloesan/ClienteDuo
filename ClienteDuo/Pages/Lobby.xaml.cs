@@ -12,32 +12,48 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        int partyCode = 0;
         Dictionary<string, object> players = new Dictionary<string, object>();
+        private bool _isWPFRunning = true;
+
+        public Lobby(string username)
+        {
+            InitializeComponent();
+            CreateNewParty(username);
+            LoadNewPartyCreatedComponents();
+        }
 
         public Lobby()
         {
-            InitializeComponent();
-            CreateNewParty();
+            try
+            {
+                _ = App.Current.Windows;
+            }
+            catch
+            {
+                _isWPFRunning = false;
+            }
         }
 
-        private void CreateNewParty()
+        public int CreateNewParty(string username)
         {
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
             Random rand = new Random();
-            partyCode = rand.Next(0, 10000); //re do until it is not the same
-            SessionDetails.PartyCode = partyCode;
 
-            client.NewParty(partyCode, SessionDetails.Username);
-            LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
+            SessionDetails.PartyCode = rand.Next(0, 10000);
+            SessionDetails.Username = username;
+            client.NewParty(SessionDetails.PartyCode, SessionDetails.Username);
 
+            return SessionDetails.PartyCode;
+        }
 
+        private void LoadNewPartyCreatedComponents()
+        {
+            LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + SessionDetails.PartyCode;
             MusicManager.PlayPlayerJoinedSound();
         }
 
-        public void MessageReceived(string messageSent)
+        public void NotifyMessageReceived(string messageSent)
         {
             Label labelMessageReceived = new Label
             {
@@ -60,7 +76,7 @@ namespace ClienteDuo.Pages
 
                 string message = SessionDetails.Username + ": " + TBoxMessage.Text;
                 TBoxMessage.Text = "";
-                client.SendMessage(partyCode, message);
+                client.SendMessage(SessionDetails.PartyCode, message);
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
@@ -71,26 +87,35 @@ namespace ClienteDuo.Pages
         private void BtnExitLobby(object sender, RoutedEventArgs e)
         {
             MusicManager.PlayPlayerLeftSound();
+            CloseParty(SessionDetails.PartyCode);
             MainMenu mainMenu = new MainMenu();
             App.Current.MainWindow.Content = mainMenu;
-
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.LeaveParty(partyCode, SessionDetails.Username);
         }
 
-        public void PlayerJoined(Dictionary<string, object> playersInLobby)
+        public void CloseParty(int partyCode)
         {
-            players = playersInLobby;
-            MusicManager.PlayPlayerJoinedSound();
-            UpdatePlayerList(playersInLobby);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(new InstanceContext(this));
+            client.CloseParty(partyCode);
         }
 
-        public void PlayerLeft(Dictionary<string, object> playersInLobby)
+        public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            players = playersInLobby;
-            MusicManager.PlayPlayerLeftSound();
-            UpdatePlayerList(playersInLobby);
+            if (_isWPFRunning)
+            {
+                players = playersInLobby;
+                MusicManager.PlayPlayerJoinedSound();
+                UpdatePlayerList(playersInLobby);
+            }
+        }
+
+        public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
+        {
+            if (_isWPFRunning)
+            {
+                players = playersInLobby;
+                MusicManager.PlayPlayerLeftSound();
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
@@ -104,7 +129,7 @@ namespace ClienteDuo.Pages
 
         private void CreatePlayerPanel(string username)
         {
-            var backgroundColor = new SolidColorBrush(); 
+            SolidColorBrush backgroundColor;
             if (username == SessionDetails.Username)
             {
                 backgroundColor = new SolidColorBrush(Colors.Gold);
@@ -159,27 +184,34 @@ namespace ClienteDuo.Pages
             }
         }
 
-        public void PartyCreated(Dictionary<string, object> playersInLobby)
+        public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
         {
-            UpdatePlayerList(playersInLobby);
+            if (_isWPFRunning)
+            {
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
         {
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.StartGame(partyCode);
+            client.StartGame(SessionDetails.PartyCode);
         }
 
-        public void GameStarted()
+        public void NotifyGameStarted()
         {
             CardTable cardTable = new CardTable();
             App.Current.MainWindow.Content = cardTable;
         }
 
-        public void PlayerKicked()
+        public void NotifyPlayerKicked()
         {
-            
+            if (_isWPFRunning)
+            {
+                MainMenu mainMenu = new MainMenu();
+                App.Current.MainWindow.Content = mainMenu;
+            }
         }
     }
 }

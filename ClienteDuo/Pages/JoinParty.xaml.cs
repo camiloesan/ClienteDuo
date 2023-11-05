@@ -25,10 +25,15 @@ namespace ClienteDuo.Pages
             string partyCode = TBoxPartyCode.Text.Trim();
             if (ArePartyConditionsValid(partyCode))
             {
-                SessionDetails.PartyCode = Int32.Parse(partyCode);
-                InviteeLobby inviteeLobby = new InviteeLobby();
-                App.Current.MainWindow.Content = inviteeLobby;
+                JoinLobby(Int32.Parse(partyCode));
             }
+        }
+
+        public void JoinLobby(int partyCode)
+        {
+            SessionDetails.PartyCode = partyCode;
+            InviteeLobby inviteeLobby = new InviteeLobby(SessionDetails.Username);
+            App.Current.MainWindow.Content = inviteeLobby;
         }
 
         private bool ArePartyConditionsValid(string partyCode)
@@ -62,17 +67,7 @@ namespace ClienteDuo.Pages
 
         public bool IsInputInteger(string code)
         {
-            bool isInteger = true;
-            try
-            {
-                Int32.Parse(code);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return isInteger;
+            return Int32.TryParse(code, out _);
         }
 
         public bool IsPartyCodeExistent(int partyCode)

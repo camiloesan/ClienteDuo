@@ -190,6 +190,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CloseParty">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="StartGame">
     <xs:complexType>
       <xs:sequence>
@@ -210,70 +217,70 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PartyCreated">
+  <xs:element name="NotifyPartyCreated">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q7:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PartyCreatedResponse">
+  <xs:element name="NotifyPartyCreatedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerJoined">
+  <xs:element name="NotifyPlayerJoined">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q8:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerJoinedResponse">
+  <xs:element name="NotifyPlayerJoinedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="MessageReceived">
+  <xs:element name="NotifyMessageReceived">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="messageSent" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MessageReceivedResponse">
+  <xs:element name="NotifyMessageReceivedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerLeft">
+  <xs:element name="NotifyPlayerLeft">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q9:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerLeftResponse">
+  <xs:element name="NotifyPlayerLeftResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerKicked">
+  <xs:element name="NotifyPlayerKicked">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerKickedResponse">
+  <xs:element name="NotifyPlayerKickedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GameStarted">
+  <xs:element name="NotifyGameStarted">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GameStartedResponse">
+  <xs:element name="NotifyGameStartedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>

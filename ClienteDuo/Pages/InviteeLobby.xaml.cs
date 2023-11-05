@@ -1,6 +1,7 @@
 ﻿using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,19 +13,34 @@ namespace ClienteDuo.Pages
     public partial class InviteeLobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
+        private bool _isWPFRunning = true;
+
+        public InviteeLobby(string username)
+        {
+            InitializeComponent();
+            JoinGame(SessionDetails.PartyCode, username);
+        }
 
         public InviteeLobby()
         {
-            InitializeComponent();
-            JoinGame();
+            try
+            {
+                _ = App.Current.Windows;
+            }
+            catch
+            {
+                _isWPFRunning = false;
+            }
         }
 
-        private void JoinGame()
+        public void JoinGame(int partyCode, string username)
         {
+            SessionDetails.PartyCode = partyCode;
+            SessionDetails.Username = username;
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.JoinParty(SessionDetails.PartyCode, SessionDetails.Username);
+            client.JoinParty(partyCode, username);
         }
 
         private void CreatePlayerPanel(string username)
@@ -71,7 +87,7 @@ namespace ClienteDuo.Pages
             }
         }
 
-        public void MessageReceived(string messageSent)
+        public void NotifyMessageReceived(string messageSent)
         {
             Label labelMessageReceived = new Label
             {
@@ -102,21 +118,28 @@ namespace ClienteDuo.Pages
             }
         }
 
-        public void PartyCreated(Dictionary<string, object> playersInLobby)
+        public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
         {
             throw new NotImplementedException();
         }
 
-        public void PlayerJoined(Dictionary<string, object> playersInLobby)
+        public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            MusicManager.PlayPlayerJoinedSound();
-            UpdatePlayerList(playersInLobby);
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerJoinedSound();
+                UpdatePlayerList(playersInLobby);
+            }
+            
         }
 
-        public void PlayerLeft(Dictionary<string, object> playersInLobby)
+        public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
         {
-            MusicManager.PlayPlayerLeftSound();
-            UpdatePlayerList(playersInLobby);
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerLeftSound();
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
@@ -141,29 +164,37 @@ namespace ClienteDuo.Pages
                 App.Current.MainWindow.Content = mainMenu;
             }
 
+            ExitParty(SessionDetails.PartyCode, SessionDetails.Username);
+        }
+
+        public void ExitParty(int partyCode, string username)
+        {
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
-            client.LeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
+            client.LeaveParty(partyCode, username);
         }
 
-        public void GameStarted()
+        public void NotifyGameStarted()
         {
             CardTable cardTable = new CardTable();
             App.Current.MainWindow.Content = cardTable;
         }
 
-        public void PlayerKicked()
+        public void NotifyPlayerKicked()
         {
-            if (SessionDetails.IsGuest)
+            if (_isWPFRunning)
             {
-                Launcher launcher = new Launcher();
-                App.Current.MainWindow.Content = launcher;
-            }
-            else
-            {
-                MainMenu mainMenu = new MainMenu();
-                App.Current.MainWindow.Content = mainMenu;
+                if (SessionDetails.IsGuest)
+                {
+                    Launcher launcher = new Launcher();
+                    App.Current.MainWindow.Content = launcher;
+                }
+                else
+                {
+                    MainMenu mainMenu = new MainMenu();
+                    App.Current.MainWindow.Content = mainMenu;
+                }
             }
         }
     }
