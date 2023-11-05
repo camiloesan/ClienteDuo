@@ -145,15 +145,21 @@ namespace ClienteDuo.Pages
         }
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
-        {
-            InstanceContext instanceContext = new InstanceContext(this);
+        {InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
             client.StartGame(partyCode);
+
+            DataService.CardManagerClient cardManager = new DataService.CardManagerClient();
+            cardManager.DealCards(partyCode);
         }
 
         public void GameStarted()
         {
             CardTable cardTable = new CardTable();
+            InstanceContext instanceContext = new InstanceContext(cardTable);
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
+            
+            client.Subscribe(SessionDetails.PartyCode,SessionDetails.Username);
             App.Current.MainWindow.Content = cardTable;
         }
     }

@@ -1,5 +1,7 @@
 ﻿using ClienteDuo.Utilities;
 using System.Collections.Generic;
+using System.Runtime.Remoting;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,10 +10,11 @@ using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
 {
-    public partial class CardTable : Page
+    public partial class CardTable : Page, DataService.IMatchManagerCallback
     {
         DataService.Card[] _tableCards = new DataService.Card[3];
         GameMenu _gameMenu;
+        PlayerIcon[] _playerIcons = new PlayerIcon[3];
         List<Card> _selectedCards = new List<Card>();
         Label[] _cardLabels = new Label[3];
         Rectangle[] _cardColors = new Rectangle[3];
@@ -24,10 +27,6 @@ namespace ClienteDuo.Pages
             InitializeAttributes();
             LoadSettingsMenu();
             LoadPlayers();
-
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
-            _tableCards = client.GetCards(SessionDetails.PartyCode);
-            client.Close();
 
             UpdateTableCards();
 
@@ -68,6 +67,10 @@ namespace ClienteDuo.Pages
             _tableCards[0] = new DataService.Card();
             _tableCards[1] = new DataService.Card();
             _tableCards[2] = new DataService.Card();
+
+            _playerIcons[0] = _topPlayerIcon;
+            _playerIcons[1] = _leftPlayerIcon;
+            _playerIcons[2] = _rightPlayerIcon;
         }
 
         void LoadSettingsMenu()
@@ -81,7 +84,33 @@ namespace ClienteDuo.Pages
 
         void LoadPlayers()
         {
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
+            Dictionary <string, int> playerScores = client.GetPlayerScores(SessionDetails.PartyCode);
+            List<string> players = new List<string>();
+            List<int> scores = new List<int>();
 
+            foreach (KeyValuePair<string, int> entry in playerScores)
+            {
+                if (entry.Key != SessionDetails.Username)
+                {
+                    players.Add(entry.Key);
+                    scores.Add(entry.Value);
+                }
+            }
+
+            for (int i = 0; i < _playerIcons.Length; i++)
+            {
+                if (i < playerScores.Count)
+                {
+                    _playerIcons[i]._nameLabel.Content = players[i];
+                    _playerIcons[i]._scoreLabel.Content = scores[i] + " points";
+                }
+                else
+                {
+                    _playerIcons[i].Visibility = Visibility.Collapsed;
+                }
+            }
         }
 
         public void UpdateTableCards()
@@ -106,6 +135,21 @@ namespace ClienteDuo.Pages
 
             _matchingColors = 0;
             client.Close();
+        }
+
+        public void TurnFinished(string currentTurn)
+        {
+            _currentTurnLabel.Content = currentTurn;
+        }
+
+        public void RoundOver()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void GameOver()
+        {
+            throw new System.NotImplementedException();
         }
 
         void DealPlayerCard()
@@ -138,30 +182,33 @@ namespace ClienteDuo.Pages
             bool result = false;
             int selectionSum = 0;
 
-            for (int i = 0; i < _selectedCards.Count; i++)
+            if (_currentTurnLabel.Content.Equals(SessionDetails.Username))
             {
-                if (_selectedCards[i].Color.Equals("#000000") || _selectedCards[i].Color.Equals(_tableCards[position].Color))
+                for (int i = 0; i < _selectedCards.Count; i++)
                 {
-                    _matchingColors++;
-                }
-                else
-                {
-                    _matchingColors = -1;
+                    if (_selectedCards[i].Color.Equals("#000000") || _selectedCards[i].Color.Equals(_tableCards[position].Color))
+                    {
+                        _matchingColors++;
+                    }
+                    else
+                    {
+                        _matchingColors = -1;
+                    }
+
+                    if (_selectedCards[i].Number.Equals("#"))
+                    {
+                        result = true;
+                    }
+                    else
+                    {
+                        selectionSum += int.Parse(_selectedCards[i].Number);
+                    }
                 }
 
-                if (_selectedCards[i].Number.Equals("#"))
+                if (_tableCards[position].Number == selectionSum.ToString())
                 {
                     result = true;
                 }
-                else
-                {
-                    selectionSum += int.Parse(_selectedCards[i].Number);
-                }
-            }
-
-            if (_tableCards[position].Number == selectionSum.ToString())
-            {
-                result = true;
             }
 
             return result;
@@ -217,6 +264,14 @@ namespace ClienteDuo.Pages
                     PlayCard(2);
                 }
             }
+        }
+
+        void EndTurnButton_Click(object sender, RoutedEventArgs e)
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
+
+            client.EndTurn(SessionDetails.PartyCode);
         }
     }
 }

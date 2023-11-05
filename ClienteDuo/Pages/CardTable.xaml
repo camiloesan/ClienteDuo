@@ -62,7 +62,19 @@
                 <ImageBrush ImageSource="/Images/ExpandMenuIcon.png"/>
             </Button.Background>
         </Button>
-        <Label Content="Turno de [Jugador]" HorizontalAlignment="Center" Margin="0,395,0,0" VerticalAlignment="Top" Width="702" FontSize="36" FontWeight="Bold" FontFamily="Ink Free" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
+        <Label x:Name="_currentTurnLabel" Content="Turno de [Jugador]" HorizontalAlignment="Center" Margin="0,395,0,0" VerticalAlignment="Top" Width="702" FontSize="36" FontWeight="Bold" FontFamily="Ink Free" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="_endTurnButton" Content="GO!" HorizontalAlignment="Left" Margin="890,490,0,35" VerticalAlignment="Top" FontSize="50" RenderTransformOrigin="0.5,0.5" Click="EndTurnButton_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFD00000" Offset="1"/>
+                    <GradientStop Color="Red" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+
+        <local:PlayerIcon x:Name="_topPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152"/>
+        <local:PlayerIcon x:Name="_leftPlayerIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152"/>
+        <local:PlayerIcon x:Name="_rightPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Margin="848,0,0,0"/>
     </Grid>
 </Page>

@@ -346,9 +346,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\profile-user.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\trophy.png" />
   </ItemGroup>
   <ItemGroup>
@@ -356,7 +353,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\DataService\item.disco" />
-    <Resource Include="Pages\profile-user.png" />
+    <Resource Include="Images\profile-user.png" />
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

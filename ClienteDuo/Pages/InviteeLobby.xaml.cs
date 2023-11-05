@@ -115,7 +115,10 @@ namespace ClienteDuo.Pages
         public void GameStarted()
         {
             CardTable cardTable = new CardTable();
-            
+            InstanceContext instanceContext = new InstanceContext(cardTable);
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
+
+            client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
             App.Current.MainWindow.Content = cardTable;
         }
     }
