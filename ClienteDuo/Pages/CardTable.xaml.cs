@@ -26,8 +26,6 @@ namespace ClienteDuo.Pages
 
             InitializeAttributes();
             LoadSettingsMenu();
-            LoadPlayers();
-
             UpdateTableCards();
 
             for (int i = 0; i < 5; i++)
@@ -82,7 +80,7 @@ namespace ClienteDuo.Pages
             _background.Children.Add(_gameMenu);
         }
 
-        void LoadPlayers()
+        public void LoadPlayers()
         {
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
@@ -134,7 +132,6 @@ namespace ClienteDuo.Pages
             }
 
             _matchingColors = 0;
-            client.Close();
         }
 
         public void TurnFinished(string currentTurn)
@@ -164,7 +161,6 @@ namespace ClienteDuo.Pages
             card.GameTable = this;
 
             _playerDeck.Children.Add(card);
-            client.Close();
         }
 
         void _gameMenuButton_Click(object sender, RoutedEventArgs e)
@@ -229,7 +225,6 @@ namespace ClienteDuo.Pages
             }
 
             _selectedCards.Clear();
-            client.Close();
         }
 
         void PlayCardLeft(object sender, RoutedEventArgs e)

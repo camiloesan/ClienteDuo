@@ -119,6 +119,7 @@ namespace ClienteDuo.Pages
             DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
 
             client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+            cardTable.LoadPlayers();
             App.Current.MainWindow.Content = cardTable;
         }
     }
