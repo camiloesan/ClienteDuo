@@ -120,6 +120,7 @@ namespace ClienteDuo.Pages
 
             client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
             cardTable.LoadPlayers();
+            cardTable.UpdateTableCards();
             App.Current.MainWindow.Content = cardTable;
         }
     }

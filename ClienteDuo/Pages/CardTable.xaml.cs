@@ -26,7 +26,6 @@ namespace ClienteDuo.Pages
 
             InitializeAttributes();
             LoadSettingsMenu();
-            UpdateTableCards();
 
             for (int i = 0; i < 5; i++)
             {
@@ -114,7 +113,6 @@ namespace ClienteDuo.Pages
         public void UpdateTableCards()
         {
             DataService.CardManagerClient client = new DataService.CardManagerClient();
-            client.DealCards(SessionDetails.PartyCode); //This is only called here for test purposes
             _tableCards = client.GetCards(SessionDetails.PartyCode);
 
             for (int i = 0; i < _tableCards.Length; i++)

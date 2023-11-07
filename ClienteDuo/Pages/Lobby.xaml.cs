@@ -148,9 +148,6 @@ namespace ClienteDuo.Pages
         {InstanceContext instanceContext = new InstanceContext(this);
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
             client.StartGame(partyCode);
-
-            DataService.CardManagerClient cardManager = new DataService.CardManagerClient();
-            cardManager.DealCards(partyCode);
         }
 
         public void GameStarted()
@@ -161,6 +158,7 @@ namespace ClienteDuo.Pages
             
             client.Subscribe(SessionDetails.PartyCode,SessionDetails.Username);
             cardTable.LoadPlayers();
+            cardTable.UpdateTableCards();
             App.Current.MainWindow.Content = cardTable;
         }
     }
