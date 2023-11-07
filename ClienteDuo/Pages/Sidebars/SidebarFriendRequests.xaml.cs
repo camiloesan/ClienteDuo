@@ -4,9 +4,6 @@ using System.Windows.Controls;
 
 namespace ClienteDuo.Pages.Sidebars
 {
-    /// <summary>
-    /// Interaction logic for SidebarFriendRequests.xaml
-    /// </summary>
     public partial class SidebarFriendRequests : UserControl
     {
         public SidebarFriendRequests()

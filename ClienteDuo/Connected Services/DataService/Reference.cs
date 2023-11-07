@@ -411,6 +411,12 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
         System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(ClienteDuo.DataService.User user);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername", ReplyAction="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsernameResponse")]
+        bool DeleteUserFromDatabaseByUsername(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername", ReplyAction="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsernameResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUserFromDatabaseByUsernameAsync(string username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsLoginValid", ReplyAction="http://tempuri.org/IUsersManager/IsLoginValidResponse")]
         ClienteDuo.DataService.User IsLoginValid(string username, string password);
         
@@ -430,10 +436,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task<bool> IsEmailTakenAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/SendFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/SendFriendRequestResponse")]
-        bool SendFriendRequest(int senderID, int receiverID);
+        bool SendFriendRequest(string usernameSender, string usernameReceiver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/SendFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/SendFriendRequestResponse")]
-        System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int senderID, int receiverID);
+        System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string usernameSender, string usernameReceiver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AcceptFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/AcceptFriendRequestResponse")]
         bool AcceptFriendRequest(ClienteDuo.DataService.FriendRequest friendRequest);
@@ -501,6 +507,14 @@ namespace ClienteDuo.DataService {
             return base.Channel.AddUserToDatabaseAsync(user);
         }
         
+        public bool DeleteUserFromDatabaseByUsername(string username) {
+            return base.Channel.DeleteUserFromDatabaseByUsername(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUserFromDatabaseByUsernameAsync(string username) {
+            return base.Channel.DeleteUserFromDatabaseByUsernameAsync(username);
+        }
+        
         public ClienteDuo.DataService.User IsLoginValid(string username, string password) {
             return base.Channel.IsLoginValid(username, password);
         }
@@ -525,12 +539,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.IsEmailTakenAsync(email);
         }
         
-        public bool SendFriendRequest(int senderID, int receiverID) {
-            return base.Channel.SendFriendRequest(senderID, receiverID);
+        public bool SendFriendRequest(string usernameSender, string usernameReceiver) {
+            return base.Channel.SendFriendRequest(usernameSender, usernameReceiver);
         }
         
-        public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int senderID, int receiverID) {
-            return base.Channel.SendFriendRequestAsync(senderID, receiverID);
+        public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string usernameSender, string usernameReceiver) {
+            return base.Channel.SendFriendRequestAsync(usernameSender, usernameReceiver);
         }
         
         public bool AcceptFriendRequest(ClienteDuo.DataService.FriendRequest friendRequest) {
@@ -613,6 +627,12 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/IsPlayerActive")]
         System.Threading.Tasks.Task IsPlayerActiveAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/KickPlayer")]
+        void KickPlayer(int partyCode, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/KickPlayer")]
+        System.Threading.Tasks.Task KickPlayerAsync(int partyCode, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -629,6 +649,9 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerLeft", ReplyAction="http://tempuri.org/IPartyManager/PlayerLeftResponse")]
         void PlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerKicked", ReplyAction="http://tempuri.org/IPartyManager/PlayerKickedResponse")]
+        void PlayerKicked();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/GameStarted", ReplyAction="http://tempuri.org/IPartyManager/GameStartedResponse")]
         void GameStarted();
@@ -708,6 +731,14 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task IsPlayerActiveAsync() {
             return base.Channel.IsPlayerActiveAsync();
+        }
+        
+        public void KickPlayer(int partyCode, string username) {
+            base.Channel.KickPlayer(partyCode, username);
+        }
+        
+        public System.Threading.Tasks.Task KickPlayerAsync(int partyCode, string username) {
+            return base.Channel.KickPlayerAsync(partyCode, username);
         }
     }
     

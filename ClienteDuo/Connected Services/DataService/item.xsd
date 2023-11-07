@@ -16,6 +16,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DeleteUserFromDatabaseByUsername">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUserFromDatabaseByUsernameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteUserFromDatabaseByUsernameResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="IsLoginValid">
     <xs:complexType>
       <xs:sequence>
@@ -62,8 +76,8 @@
   <xs:element name="SendFriendRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="senderID" type="xs:int" />
-        <xs:element minOccurs="0" name="receiverID" type="xs:int" />
+        <xs:element minOccurs="0" name="usernameSender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usernameReceiver" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -188,6 +202,14 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="KickPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="PartyCreated">
     <xs:complexType>
       <xs:sequence>
@@ -232,6 +254,16 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="PlayerLeftResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerKicked">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerKickedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
