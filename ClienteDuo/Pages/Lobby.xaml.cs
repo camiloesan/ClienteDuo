@@ -1,4 +1,5 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -12,30 +13,52 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        int partyCode = 0;
-        Dictionary<string, object> players = new Dictionary<string, object>();
+        private readonly bool _isWPFRunning = true;
+        readonly InstanceContext _instanceContext;
+        readonly DataService.PartyManagerClient _partyManagerClient;
+        PartyManager partyManager;
+
+        public Lobby(string username)
+        {
+            InitializeComponent();
+            partyManager = new PartyManager();
+            _instanceContext = new InstanceContext(this);
+            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
+            CreateNewParty(username, this);
+            LoadNewPartyCreatedComponents();
+        }
 
         public Lobby()
         {
-            InitializeComponent();
-            CreateNewParty();
+            _instanceContext = new InstanceContext(this);
+            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
+            try
+            {
+                _ = App.Current.Windows;
+            }
+            catch
+            {
+                _isWPFRunning = false;
+            }
         }
 
-        private void CreateNewParty()
+        public int CreateNewParty(string username, IPartyManagerCallback callback)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
             Random rand = new Random();
-            partyCode = rand.Next(0, 10000);
+            SessionDetails.PartyCode = rand.Next(0, 10000);
+            SessionDetails.Username = username;
+            _partyManagerClient.NewParty(SessionDetails.PartyCode, SessionDetails.Username);
 
-            client.NewParty(partyCode, SessionDetails.Username);
-            LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
+            return SessionDetails.PartyCode;
+        }
 
+        private void LoadNewPartyCreatedComponents()
+        {
+            LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + SessionDetails.PartyCode;
             MusicManager.PlayPlayerJoinedSound();
         }
 
-        public void MessageReceived(string messageSent)
+        public void NotifyMessageReceived(string messageSent)
         {
             Label labelMessageReceived = new Label
             {
@@ -49,16 +72,13 @@ namespace ClienteDuo.Pages
             chatScrollViewer.ScrollToEnd();
         }
 
-        private void SendMessage(object sender, KeyEventArgs e)
+        private void OnEnterSendMessage(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && TBoxMessage.Text.Trim().Length > 0)
             {
-                InstanceContext instanceContext = new InstanceContext(this);
-                DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
                 string message = SessionDetails.Username + ": " + TBoxMessage.Text;
+                SendMessage(SessionDetails.PartyCode, message);
                 TBoxMessage.Text = "";
-                client.SendMessage(partyCode, message);
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
@@ -66,29 +86,40 @@ namespace ClienteDuo.Pages
             }
         }
 
+        public void SendMessage(int partyCode, string message)
+        {
+            _partyManagerClient.SendMessage(partyCode, message);
+        }
+
         private void BtnExitLobby(object sender, RoutedEventArgs e)
         {
             MusicManager.PlayPlayerLeftSound();
+            CloseParty(SessionDetails.PartyCode);
             MainMenu mainMenu = new MainMenu();
             App.Current.MainWindow.Content = mainMenu;
-
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.LeaveParty(partyCode, SessionDetails.Username);
         }
 
-        public void PlayerJoined(Dictionary<string, object> playersInLobby)
+        public void CloseParty(int partyCode)
         {
-            players = playersInLobby;
-            MusicManager.PlayPlayerJoinedSound();
-            UpdatePlayerList(playersInLobby);
+            _partyManagerClient.CloseParty(partyCode);
         }
 
-        public void PlayerLeft(Dictionary<string, object> playersInLobby)
+        public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            players = playersInLobby;
-            MusicManager.PlayPlayerLeftSound();
-            UpdatePlayerList(playersInLobby);
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerJoinedSound();
+                UpdatePlayerList(playersInLobby);
+            }
+        }
+
+        public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
+        {
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerLeftSound();
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
@@ -102,11 +133,21 @@ namespace ClienteDuo.Pages
 
         private void CreatePlayerPanel(string username)
         {
+            SolidColorBrush backgroundColor;
+            if (username == SessionDetails.Username)
+            {
+                backgroundColor = new SolidColorBrush(Colors.Gold);
+            }
+            else
+            {
+                backgroundColor = new SolidColorBrush(Colors.DimGray);
+            }
+
             StackPanel stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Background = new SolidColorBrush(Colors.DimGray),
+                Background = backgroundColor,
                 Margin = new Thickness(15, 20, 15, 20),
                 Width = 200,
                 Height = 40,
@@ -122,44 +163,60 @@ namespace ClienteDuo.Pages
             };
             stackPanel.Children.Add(usernameName);
 
-            Button BtnKick = new Button
+            if (username != SessionDetails.Username)
             {
-                Content = "*kick*",
-                Margin = new Thickness(5, 0, 0, 0),
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            stackPanel.Children.Add(BtnKick);
+                Button BtnKick = new Button
+                {
+                    Content = "*kick*",
+                    Margin = new Thickness(5, 0, 0, 0),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    DataContext = username,
+                };
+                BtnKick.Click += KickPlayerEvent;
+                stackPanel.Children.Add(BtnKick);
 
-            Button BtnViewProfile = new Button
-            {
-                Content = "*Profile*",
-                Margin = new Thickness(5, 0, 0, 0),
-                VerticalAlignment = VerticalAlignment.Center
-            };
-            stackPanel.Children.Add(BtnViewProfile);
+                Button BtnViewProfile = new Button
+                {
+                    Content = "*Profile*",
+                    Margin = new Thickness(5, 0, 0, 0),
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                stackPanel.Children.Add(BtnViewProfile);
+            }
         }
 
-        public void PartyCreated(Dictionary<string, object> playersInLobby)
+        private void KickPlayerEvent(object sender, RoutedEventArgs e)
         {
-            UpdatePlayerList(playersInLobby);
+            string username = ((FrameworkElement)sender).DataContext as string;
+            _partyManagerClient.KickPlayer(SessionDetails.PartyCode, username);
+        }
+
+        public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
+        {
+            if (_isWPFRunning)
+            {
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
-        {InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.StartGame(partyCode);
+        {
+            _partyManagerClient.StartGame(SessionDetails.PartyCode);
         }
 
-        public void GameStarted()
+        public void NotifyGameStarted()
         {
             CardTable cardTable = new CardTable();
-            InstanceContext instanceContext = new InstanceContext(cardTable);
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
-            
-            client.Subscribe(SessionDetails.PartyCode,SessionDetails.Username);
-            cardTable.LoadPlayers();
-            cardTable.UpdateTableCards();
             App.Current.MainWindow.Content = cardTable;
+        }
+
+        public void NotifyPlayerKicked()
+        {
+            if (_isWPFRunning)
+            {
+                MainMenu mainMenu = new MainMenu();
+                App.Current.MainWindow.Content = mainMenu;
+            }
         }
     }
 }
