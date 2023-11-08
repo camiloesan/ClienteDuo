@@ -12,17 +12,23 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        private bool _isWPFRunning = true;
+        private readonly bool _isWPFRunning = true;
+        readonly InstanceContext _instanceContext;
+        readonly DataService.PartyManagerClient _partyManagerClient;
 
         public Lobby(string username)
         {
             InitializeComponent();
+            _instanceContext = new InstanceContext(this);
+            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
             CreateNewParty(username);
             LoadNewPartyCreatedComponents();
         }
 
         public Lobby()
         {
+            _instanceContext = new InstanceContext(this);
+            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
             try
             {
                 _ = App.Current.Windows;
@@ -35,13 +41,10 @@ namespace ClienteDuo.Pages
 
         public int CreateNewParty(string username)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
             Random rand = new Random();
-
             SessionDetails.PartyCode = rand.Next(0, 10000);
             SessionDetails.Username = username;
-            client.NewParty(SessionDetails.PartyCode, SessionDetails.Username);
+            _partyManagerClient.NewParty(SessionDetails.PartyCode, SessionDetails.Username);
 
             return SessionDetails.PartyCode;
         }
@@ -82,9 +85,7 @@ namespace ClienteDuo.Pages
 
         public void SendMessage(int partyCode, string message)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.SendMessage(partyCode, message);
+            _partyManagerClient.SendMessage(partyCode, message);
         }
 
         private void BtnExitLobby(object sender, RoutedEventArgs e)
@@ -97,8 +98,7 @@ namespace ClienteDuo.Pages
 
         public void CloseParty(int partyCode)
         {
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(new InstanceContext(this));
-            client.CloseParty(partyCode);
+            _partyManagerClient.CloseParty(partyCode);
         }
 
         public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
@@ -167,12 +167,9 @@ namespace ClienteDuo.Pages
                     Content = "*kick*",
                     Margin = new Thickness(5, 0, 0, 0),
                     VerticalAlignment = VerticalAlignment.Center,
+                    DataContext = username,
                 };
-                BtnKick.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    DataService.PartyManagerClient client = new DataService.PartyManagerClient(new InstanceContext(this));
-                    client.KickPlayer(SessionDetails.PartyCode, username);
-                };
+                BtnKick.Click += KickPlayerEvent;
                 stackPanel.Children.Add(BtnKick);
 
                 Button BtnViewProfile = new Button
@@ -185,6 +182,12 @@ namespace ClienteDuo.Pages
             }
         }
 
+        private void KickPlayerEvent(object sender, RoutedEventArgs e)
+        {
+            string username = ((FrameworkElement)sender).DataContext as string;
+            _partyManagerClient.KickPlayer(SessionDetails.PartyCode, username);
+        }
+
         public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
         {
             if (_isWPFRunning)
@@ -195,9 +198,7 @@ namespace ClienteDuo.Pages
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-            client.StartGame(SessionDetails.PartyCode);
+            _partyManagerClient.StartGame(SessionDetails.PartyCode);
         }
 
         public void NotifyGameStarted()

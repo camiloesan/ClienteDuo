@@ -13,16 +13,19 @@ namespace ClienteDuo.Pages
     public partial class Login : Page
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        readonly DataService.UsersManagerClient _usersManagerClient;
 
         public Login()
         {
             InitializeComponent();
+            _usersManagerClient = new DataService.UsersManagerClient();
         }
 
         private void BtnLogin(object sender, RoutedEventArgs e)
         {
             CreateSession();
         }
+
         private void EnterKey(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -40,10 +43,10 @@ namespace ClienteDuo.Pages
 
             if (loggedUser != null)
             {
+                SessionDetails.UserID = loggedUser.ID;
                 SessionDetails.Username = loggedUser.UserName;
                 SessionDetails.Email = loggedUser.Email;
                 SessionDetails.IsGuest = false;
-                SessionDetails.UserID = loggedUser.ID;
 
                 MainMenu mainMenu = new MainMenu();
                 App.Current.MainWindow.Content = mainMenu;
@@ -59,8 +62,7 @@ namespace ClienteDuo.Pages
             User userCredentials = null;
             try
             {
-                DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-                userCredentials = client.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
+                userCredentials = _usersManagerClient.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
             }
             catch (Exception ex)
             {

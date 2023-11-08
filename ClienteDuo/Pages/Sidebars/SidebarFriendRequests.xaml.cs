@@ -7,18 +7,18 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarFriendRequests : UserControl
     {
+        readonly DataService.UsersManagerClient _usersManagerClient;
+
         public SidebarFriendRequests()
         {
             InitializeComponent();
+            _usersManagerClient = new DataService.UsersManagerClient();
             FillFriendRequestsPanel();
         }
 
         private void FillFriendRequestsPanel()
         {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            var list = client.GetFriendRequestsList(SessionDetails.UserID);
-
-
+            var list = _usersManagerClient.GetFriendRequestsList(SessionDetails.UserID);
             foreach (var item in list)
             {
                 StackPanel stackPanel = new StackPanel
@@ -37,54 +37,26 @@ namespace ClienteDuo.Pages.Sidebars
                 Button btnAccept = new Button
                 {
                     Content = Properties.Resources.BtnAccept,
+                    DataContext = item,
                 };
-                btnAccept.DataContext = item;
-                btnAccept.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    DataService.FriendRequest friendRequest = new DataService.FriendRequest
-                    {
-                        FriendRequestID = item.FriendRequestID,
-                        SenderID = item.SenderID,
-                        ReceiverID = item.ReceiverID
-                    };
-
-                    if (client.AcceptFriendRequest(friendRequest))
-                    {
-                        MainWindow.ShowMessageBox("ahora son amigos");
-                    }
-                    else
-                    {
-                        MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
-                    }
-                };
+                btnAccept.Click += AcceptFriendRequestEvent;
                 stackPanel.Children.Add(btnAccept);
 
                 Button btnReject = new Button
                 {
-                    Content = Properties.Resources.BtnReject
+                    Content = Properties.Resources.BtnReject,
+                    DataContext = item,
                 };
+                btnReject.Click += DeclineFriendRequestEvent;
                 stackPanel.Children.Add(btnReject);
-                btnReject.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    if (client.RejectFriendRequest(item.FriendRequestID))
-                    {
-                        MainWindow.ShowMessageBox("haz eliminado la solicitud");
-                    }
-                    else
-                    {
-                        MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
-                    }
-                };
             }
         }
 
-        public void AcceptFriendRequest(object sender, RoutedEventArgs e)
+        public void AcceptFriendRequestEvent(object sender, RoutedEventArgs e)
         {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-
             DataService.FriendRequest friendRequest = ((FrameworkElement)sender).DataContext as DataService.FriendRequest;
 
-            if (client.AcceptFriendRequest(friendRequest))
+            if (_usersManagerClient.AcceptFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("ahora son amigos");
             }
@@ -94,9 +66,17 @@ namespace ClienteDuo.Pages.Sidebars
             }
         }
 
-        public void DeclineFriendRequest()
+        public void DeclineFriendRequestEvent(object sender, RoutedEventArgs e)
         {
-
+            DataService.FriendRequest friendRequest = ((FrameworkElement)sender).DataContext as DataService.FriendRequest;
+            if (_usersManagerClient.RejectFriendRequest(friendRequest.FriendRequestID))
+            {
+                MainWindow.ShowMessageBox("haz eliminado la solicitud");
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+            }
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
@@ -13,16 +14,22 @@ namespace ClienteDuo.Pages
     public partial class InviteeLobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        private bool _isWPFRunning = true;
+        private readonly bool _isWPFRunning = true;
+        readonly InstanceContext _instanceContext;
+        readonly DataService.PartyManagerClient _partyManagerClient;
 
         public InviteeLobby(string username)
         {
             InitializeComponent();
+            _instanceContext = new InstanceContext(this);
+            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
             JoinGame(SessionDetails.PartyCode, username);
         }
 
         public InviteeLobby()
         {
+            _instanceContext = new InstanceContext(this);
+            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
             try
             {
                 _ = App.Current.Windows;
@@ -37,15 +44,12 @@ namespace ClienteDuo.Pages
         {
             SessionDetails.PartyCode = partyCode;
             SessionDetails.Username = username;
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
-            client.JoinParty(partyCode, username);
+            _partyManagerClient.JoinParty(partyCode, username);
         }
 
         private void CreatePlayerPanel(string username)
         {
-            var backgroundColor = new SolidColorBrush();
+            SolidColorBrush backgroundColor;
             if (username == SessionDetails.Username)
             {
                 backgroundColor = new SolidColorBrush(Colors.Gold);
@@ -101,21 +105,22 @@ namespace ClienteDuo.Pages
             chatScrollViewer.ScrollToEnd();
         }
 
-        private void SendMessage(object sender, KeyEventArgs e)
+        private void OnEnterSendMessage(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && TBoxMessage.Text.Trim() != null)
             {
-                InstanceContext instanceContext = new InstanceContext(this);
-                DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
                 string message = SessionDetails.Username + ": " + TBoxMessage.Text;
+                SendMessage(SessionDetails.PartyCode, message);
                 TBoxMessage.Text = "";
-                client.SendMessage(SessionDetails.PartyCode, message);
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters);
             }
+        }
+        public void SendMessage(int partyCode, string message)
+        {
+            _partyManagerClient.SendMessage(partyCode, message);
         }
 
         public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
@@ -130,7 +135,6 @@ namespace ClienteDuo.Pages
                 MusicManager.PlayPlayerJoinedSound();
                 UpdatePlayerList(playersInLobby);
             }
-            
         }
 
         public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
@@ -169,10 +173,7 @@ namespace ClienteDuo.Pages
 
         public void ExitParty(int partyCode, string username)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
-            client.LeaveParty(partyCode, username);
+            _partyManagerClient.LeaveParty(partyCode, username);
         }
 
         public void NotifyGameStarted()

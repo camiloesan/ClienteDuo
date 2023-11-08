@@ -7,8 +7,8 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarFriends : UserControl
     {
-        SidebarAddFriend sidebarAddFriend;
-        SidebarFriendRequests sidebarFriendRequests;
+        readonly SidebarAddFriend sidebarAddFriend;
+        readonly SidebarFriendRequests sidebarFriendRequests;
 
         public SidebarFriends()
         {
@@ -58,18 +58,22 @@ namespace ClienteDuo.Pages.Sidebars
             };
             panelFriends.Children.Add(stackPanel);
 
-            Label activeStatus = new Label();
-            activeStatus.Foreground = new SolidColorBrush(Colors.Black);
-            activeStatus.Content = "●";
-            activeStatus.Margin = new Thickness(10, 0, 5, 0);
-            activeStatus.VerticalAlignment = VerticalAlignment.Center;
+            Label activeStatus = new Label
+            {
+                Foreground = new SolidColorBrush(Colors.Black),
+                Content = "●",
+                Margin = new Thickness(10, 0, 5, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
             stackPanel.Children.Add(activeStatus);
 
-            Label usernameName = new Label();
-            usernameName.Foreground = new SolidColorBrush(Colors.Black);
-            usernameName.Content = username;
-            usernameName.Margin = new Thickness(5, 0, 10, 0);
-            usernameName.VerticalAlignment = VerticalAlignment.Center;
+            Label usernameName = new Label
+            {
+                Foreground = new SolidColorBrush(Colors.Black),
+                Content = username,
+                Margin = new Thickness(5, 0, 10, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
             stackPanel.Children.Add(usernameName);
         }
 

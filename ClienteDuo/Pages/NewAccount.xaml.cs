@@ -13,10 +13,12 @@ namespace ClienteDuo
     public partial class NewAccount : Page
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        readonly DataService.UsersManagerClient _usersManagerClient;
 
         public NewAccount()
         {
             InitializeComponent();
+            _usersManagerClient = new DataService.UsersManagerClient();
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
@@ -70,12 +72,10 @@ namespace ClienteDuo
 
         public bool IsUsernameAvailable(String username)
         {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-
             bool isTaken = false;
             try
             {
-                isTaken = client.IsUsernameTaken(username);
+                isTaken = _usersManagerClient.IsUsernameTaken(username);
 
             }
             catch (Exception ex)
@@ -94,12 +94,10 @@ namespace ClienteDuo
 
         public bool IsEmailAvailable(string email)
         {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-
             bool isTaken = false;
             try
             {
-                isTaken = client.IsEmailTaken(email);
+                isTaken = _usersManagerClient.IsEmailTaken(email);
             }
             catch (Exception ex)
             {
@@ -119,7 +117,7 @@ namespace ClienteDuo
         {
             try
             {
-                MailAddress mailAddress = new MailAddress(email);
+                _ = new MailAddress(email);
                 return true;
             }
             catch (FormatException)
@@ -194,12 +192,10 @@ namespace ClienteDuo
                 Password = Sha256Encryptor.SHA256_hash(password),
             };
 
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-
             bool result = false;
             try
             {
-                result = client.AddUserToDatabase(databaseUser);
+                result = _usersManagerClient.AddUserToDatabase(databaseUser);
             }
             catch (Exception ex)
             {
@@ -211,11 +207,10 @@ namespace ClienteDuo
 
         public bool DeleteUserFromDatabaseByUsername(string username)
         {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
             bool result = false;
             try
             {
-                result = client.DeleteUserFromDatabaseByUsername(username);
+                result = _usersManagerClient.DeleteUserFromDatabaseByUsername(username);
             }
             catch (Exception ex)
             {

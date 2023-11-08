@@ -9,10 +9,12 @@ namespace ClienteDuo.Pages
     public partial class JoinParty : Page
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        readonly DataService.PartyValidatorClient _partyValidatorClient;
 
         public JoinParty()
         {
             InitializeComponent();
+            _partyValidatorClient = new DataService.PartyValidatorClient();
         }
 
         private void BtnJoin(object sender, RoutedEventArgs e)
@@ -72,14 +74,12 @@ namespace ClienteDuo.Pages
 
         public bool IsPartyCodeExistent(int partyCode)
         {
-            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
-            return client.IsPartyExistent(partyCode);
+            return _partyValidatorClient.IsPartyExistent(partyCode);
         }
 
         public bool IsSpaceAvailable(int partyCode)
         {
-            DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
-            return client.IsSpaceAvailable(partyCode);
+            return _partyValidatorClient.IsSpaceAvailable(partyCode);
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
