@@ -1,7 +1,6 @@
 ﻿using ClienteDuo.Pages;
 using ClienteDuo.Utilities;
 using System;
-using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -27,17 +26,11 @@ namespace ClienteDuo
 
         private void BtnContinue(object sender, RoutedEventArgs e)
         {
-            string username = TBoxUsername.Text.Trim();
-            string email = TBoxEmail.Text.Trim();
-            string password = TBoxPassword.Password.Trim();
-
             if (AreFieldsValid())
             {
-                if (AddUserToDatabase(username, email, password))
+                if (AddUserToDatabase())
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess);
-                    Launcher launcher = new Launcher();
-                    App.Current.MainWindow.Content = launcher;
                 }
                 else
                 {
@@ -46,7 +39,7 @@ namespace ClienteDuo
             }
         }
 
-        public bool IsUsernameAvailable(String username)
+        private bool IsUsernameAvailable(String username)
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
 
@@ -70,7 +63,7 @@ namespace ClienteDuo
             return !isTaken;
         }
 
-        public bool IsEmailAvailable(string email)
+        private bool IsEmailAvailable(string email)
         {
             DataService.UsersManagerClient client = new DataService.UsersManagerClient();
 
@@ -93,34 +86,17 @@ namespace ClienteDuo
             return !isTaken;
         }
 
-        public bool IsEmailValid(string email)
-        {
-            try
-            {
-                MailAddress mailAddress = new MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
         private bool AreFieldsValid()
         {
             string username = TBoxUsername.Text.Trim();
             string email = TBoxEmail.Text.Trim();
             string password = TBoxPassword.Password.Trim();
-            string confirmedPassword = TBoxConfirmPassword.Password.Trim();
-
             if (!AreFieldsEmpty()
-                && AreFieldsLengthValid(username, email)
-                && IsPasswordMatch(password, confirmedPassword)
+                && AreFieldsLengthValid()
+                && IsPasswordMatch()
                 && IsPasswordSecure(password)
                 && IsUsernameAvailable(username)
-                && IsEmailAvailable(email)
-                && !UsernameContainsGuestKeyword(username)
-                && IsEmailValid(email))
+                && IsEmailAvailable(email))
             {
                 return true;
             }
@@ -128,19 +104,22 @@ namespace ClienteDuo
             return false;
         }
 
-        public bool IsPasswordMatch(string password, string confirmedPassword)
+        private bool IsPasswordMatch()
         {
-            return password.Equals(confirmedPassword);
+            return TBoxPassword.Password.Equals(TBoxConfirmPassword.Password);
         }
 
-        public bool AreFieldsLengthValid(string username, string email)
+        private bool AreFieldsLengthValid()
         {
-            if (username.Length > 30)
+            string usernameField = TBoxUsername.Text.Trim();
+            string emailField = TBoxEmail.Text.Trim();
+
+            if (usernameField.Length > 30)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameMaxCharacters);
                 return false;
             }
-            else if (email.Length > 30)
+            else if (emailField.Length > 30)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailMaxCharacters);
                 return false;
@@ -148,7 +127,7 @@ namespace ClienteDuo
             return true;
         }
 
-        public bool IsPasswordSecure(string password)
+        private bool IsPasswordSecure(string password)
         {
             Regex regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,}$");
             if (regex.IsMatch(password))
@@ -160,11 +139,6 @@ namespace ClienteDuo
                 MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword);
                 return false;
             }
-        }
-
-        public bool UsernameContainsGuestKeyword(string username)
-        {
-            return username.Contains("guest");
         }
 
         private bool AreFieldsEmpty()
@@ -185,8 +159,12 @@ namespace ClienteDuo
             return false;
         }
 
-        public bool AddUserToDatabase(string username, string email, string password)
+        private bool AddUserToDatabase()
         {
+            string username = TBoxUsername.Text;
+            string email = TBoxEmail.Text;
+            string password = TBoxPassword.Password;
+
             DataService.User databaseUser = new DataService.User
             {
                 UserName = username,
@@ -200,22 +178,6 @@ namespace ClienteDuo
             try
             {
                 result = client.AddUserToDatabase(databaseUser);
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex);
-            }
-
-            return result;
-        }
-
-        public bool DeleteUserFromDatabaseByUsername(string username)
-        {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            bool result = false;
-            try
-            {
-                result = client.DeleteUserFromDatabaseByUsername(username);
             }
             catch (Exception ex)
             {

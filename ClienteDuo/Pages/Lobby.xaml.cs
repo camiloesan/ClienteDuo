@@ -27,12 +27,10 @@ namespace ClienteDuo.Pages
             DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
 
             Random rand = new Random();
-            partyCode = rand.Next(0, 10000); //re do until it is not the same
-            SessionDetails.PartyCode = partyCode;
+            partyCode = rand.Next(0, 10000);
 
             client.NewParty(partyCode, SessionDetails.Username);
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + partyCode;
-
 
             MusicManager.PlayPlayerJoinedSound();
         }
@@ -104,21 +102,11 @@ namespace ClienteDuo.Pages
 
         private void CreatePlayerPanel(string username)
         {
-            var backgroundColor = new SolidColorBrush(); 
-            if (username == SessionDetails.Username)
-            {
-                backgroundColor = new SolidColorBrush(Colors.Gold);
-            }
-            else
-            {
-                backgroundColor = new SolidColorBrush(Colors.DimGray);
-            }
-
             StackPanel stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Background = backgroundColor,
+                Background = new SolidColorBrush(Colors.DimGray),
                 Margin = new Thickness(15, 20, 15, 20),
                 Width = 200,
                 Height = 40,
@@ -134,29 +122,21 @@ namespace ClienteDuo.Pages
             };
             stackPanel.Children.Add(usernameName);
 
-            if (username != SessionDetails.Username)
+            Button BtnKick = new Button
             {
-                Button BtnKick = new Button
-                {
-                    Content = "*kick*",
-                    Margin = new Thickness(5, 0, 0, 0),
-                    VerticalAlignment = VerticalAlignment.Center,
-                };
-                BtnKick.Click += (object sender, RoutedEventArgs e) =>
-                {
-                    DataService.PartyManagerClient client = new DataService.PartyManagerClient(new InstanceContext(this));
-                    client.KickPlayer(SessionDetails.PartyCode, username);
-                };
-                stackPanel.Children.Add(BtnKick);
+                Content = "*kick*",
+                Margin = new Thickness(5, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            stackPanel.Children.Add(BtnKick);
 
-                Button BtnViewProfile = new Button
-                {
-                    Content = "*Profile*",
-                    Margin = new Thickness(5, 0, 0, 0),
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                stackPanel.Children.Add(BtnViewProfile);
-            }
+            Button BtnViewProfile = new Button
+            {
+                Content = "*Profile*",
+                Margin = new Thickness(5, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            stackPanel.Children.Add(BtnViewProfile);
         }
 
         public void PartyCreated(Dictionary<string, object> playersInLobby)
@@ -180,11 +160,6 @@ namespace ClienteDuo.Pages
             cardTable.LoadPlayers();
             cardTable.UpdateTableCards();
             App.Current.MainWindow.Content = cardTable;
-        }
-
-        public void PlayerKicked()
-        {
-            
         }
     }
 }

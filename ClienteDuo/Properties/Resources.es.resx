@@ -225,9 +225,6 @@
   <data name="LblPlayers" xml:space="preserve">
     <value>Jugadores</value>
   </data>
-  <data name="LblUserID" xml:space="preserve">
-    <value>UserID</value>
-  </data>
   <data name="LblUsername" xml:space="preserve">
     <value>Nombre de Usuario</value>
   </data>

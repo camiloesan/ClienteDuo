@@ -21,24 +21,25 @@ namespace ClienteDuo.Pages
 
         private void BtnLogin(object sender, RoutedEventArgs e)
         {
-            CreateSession();
+            AttemptLogin();
         }
+
         private void EnterKey(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                CreateSession();
+                AttemptLogin();
             }
         }
 
-        private void CreateSession()
+        private void AttemptLogin()
         {
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
 
             User loggedUser = AreCredentialsValid(username, password);
 
-            if (loggedUser != null)
+            if (loggedUser.ID != 0)
             {
                 SessionDetails.Username = loggedUser.UserName;
                 SessionDetails.Email = loggedUser.Email;

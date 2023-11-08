@@ -74,12 +74,6 @@
   <wsdl:message name="IUsersManager_AddUserToDatabase_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserToDatabaseResponse" />
   </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteUserFromDatabaseByUsername_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteUserFromDatabaseByUsername" />
-  </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteUserFromDatabaseByUsername_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteUserFromDatabaseByUsernameResponse" />
-  </wsdl:message>
   <wsdl:message name="IUsersManager_IsLoginValid_InputMessage">
     <wsdl:part name="parameters" element="tns:IsLoginValid" />
   </wsdl:message>
@@ -152,9 +146,6 @@
   <wsdl:message name="IPartyManager_IsPlayerActive_InputMessage">
     <wsdl:part name="parameters" element="tns:IsPlayerActive" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_KickPlayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:KickPlayer" />
-  </wsdl:message>
   <wsdl:message name="IPartyManager_PartyCreated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PartyCreated" />
   </wsdl:message>
@@ -178,12 +169,6 @@
   </wsdl:message>
   <wsdl:message name="IPartyManager_PlayerLeft_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
-  </wsdl:message>
-  <wsdl:message name="IPartyManager_PlayerKicked_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:PlayerKicked" />
-  </wsdl:message>
-  <wsdl:message name="IPartyManager_PlayerKicked_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:PlayerKickedResponse" />
   </wsdl:message>
   <wsdl:message name="IPartyManager_GameStarted_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GameStarted" />
@@ -274,10 +259,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabase" message="tns:IUsersManager_AddUserToDatabase_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse" message="tns:IUsersManager_AddUserToDatabase_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteUserFromDatabaseByUsername">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername" message="tns:IUsersManager_DeleteUserFromDatabaseByUsername_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsernameResponse" message="tns:IUsersManager_DeleteUserFromDatabaseByUsername_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="IsLoginValid">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValid" message="tns:IUsersManager_IsLoginValid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValidResponse" message="tns:IUsersManager_IsLoginValid_OutputMessage" />
@@ -334,9 +315,6 @@
     <wsdl:operation name="IsPlayerActive">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/IsPlayerActive" message="tns:IPartyManager_IsPlayerActive_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="KickPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/KickPlayer" message="tns:IPartyManager_KickPlayer_InputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="PartyCreated">
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PartyCreated" message="tns:IPartyManager_PartyCreated_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PartyCreatedResponse" message="tns:IPartyManager_PartyCreated_InputCallbackMessage" />
@@ -352,10 +330,6 @@
     <wsdl:operation name="PlayerLeft">
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeft" message="tns:IPartyManager_PlayerLeft_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeftResponse" message="tns:IPartyManager_PlayerLeft_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="PlayerKicked">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerKicked" message="tns:IPartyManager_PlayerKicked_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerKickedResponse" message="tns:IPartyManager_PlayerKicked_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="GameStarted">
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/GameStarted" message="tns:IPartyManager_GameStarted_OutputCallbackMessage" />
@@ -431,15 +405,6 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="AddUserToDatabase">
       <soap12:operation soapAction="http://tempuri.org/IUsersManager/AddUserToDatabase" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DeleteUserFromDatabaseByUsername">
-      <soap12:operation soapAction="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -568,12 +533,6 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="KickPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/KickPlayer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
     <wsdl:operation name="PartyCreated">
       <soap12:operation soapAction="http://tempuri.org/IPartyManager/PartyCreated" style="document" />
       <wsdl:input>
@@ -603,15 +562,6 @@
     </wsdl:operation>
     <wsdl:operation name="PlayerLeft">
       <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerLeft" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="PlayerKicked">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerKicked" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

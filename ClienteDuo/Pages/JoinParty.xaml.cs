@@ -1,6 +1,5 @@
 ﻿using ClienteDuo.Utilities;
 using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,75 +12,63 @@ namespace ClienteDuo.Pages
         public JoinParty()
         {
             InitializeComponent();
+            EnableOrDisableGuestFields();
+        }
+
+        private void EnableOrDisableGuestFields()
+        {
+            if (SessionDetails.IsGuest)
+            {
+                LblUsername.Visibility = Visibility.Visible;
+                TBoxUsername.Visibility = Visibility.Visible;
+            }
         }
 
         private void BtnJoin(object sender, RoutedEventArgs e)
         {
             if (SessionDetails.IsGuest)
             {
-                GenerateGuestNameWithSeed(SessionDetails.PartyCode);
+                SessionDetails.Username = TBoxUsername.Text.Trim(); //validar longitud de nombre
             }
 
-            string partyCode = TBoxPartyCode.Text.Trim();
-            if (ArePartyConditionsValid(partyCode))
+            bool isInteger = false;
+            try // all this block in another function
             {
-                SessionDetails.PartyCode = Int32.Parse(partyCode);
-                InviteeLobby inviteeLobby = new InviteeLobby();
-                App.Current.MainWindow.Content = inviteeLobby;
+                SessionDetails.PartyCode = Int32.Parse(TBoxPartyCode.Text.Trim());
+                isInteger = true;
             }
-        }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                isInteger = false;
+            }
 
-        private bool ArePartyConditionsValid(string partyCode)
-        {
-            if (!IsInputInteger(partyCode))
+            if (!isInteger)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
             }
-            else if (!IsPartyCodeExistent(Int32.Parse(partyCode)))
+            else if (!IsPartyCodeCorrect(SessionDetails.PartyCode))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
             }
-            else if (!IsSpaceAvailable(Int32.Parse(partyCode)))
+            else if (!IsSpaceAvailable(SessionDetails.PartyCode))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
             }
             else
             {
-                return true;
+                InviteeLobby inviteeLobby = new InviteeLobby();
+                App.Current.MainWindow.Content = inviteeLobby;
             }
-
-            return false;
         }
 
-        private void GenerateGuestNameWithSeed(int seed)
-        {
-            Random rand = new Random(seed);
-            int id = rand.Next(0,1000); // validate in server if a player with same name exists
-            SessionDetails.Username = "guest" + id;
-        }
-
-        public bool IsInputInteger(string code)
-        {
-            bool isInteger = true;
-            try
-            {
-                Int32.Parse(code);
-            }
-            catch
-            {
-                return false;
-            }
-
-            return isInteger;
-        }
-
-        public bool IsPartyCodeExistent(int partyCode)
+        private bool IsPartyCodeCorrect(int partyCode)
         {
             DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
             return client.IsPartyExistent(partyCode);
         }
 
-        public bool IsSpaceAvailable(int partyCode)
+        private bool IsSpaceAvailable(int partyCode)
         {
             DataService.PartyValidatorClient client = new DataService.PartyValidatorClient();
             return client.IsSpaceAvailable(partyCode);
@@ -89,6 +76,7 @@ namespace ClienteDuo.Pages
 
         private void BtnCancel(object sender, RoutedEventArgs e)
         {
+
             if (SessionDetails.IsGuest)
             {
                 Launcher launcher = new Launcher();

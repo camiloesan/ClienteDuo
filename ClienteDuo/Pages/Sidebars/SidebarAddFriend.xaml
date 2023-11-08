@@ -9,11 +9,11 @@
              d:DesignHeight="600" d:DesignWidth="250">
     <Grid Background="{DynamicResource BtnBackground}">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="100">
-            <Label Content="{x:Static p:Resources.LblUsername}" HorizontalAlignment="Center" Foreground="White"/>
+            <Label Content="***IDUSUARIO***"/>
             <TextBox x:Name="TBoxUserReceiver" TextWrapping="Wrap" Width="120"/>
-            <Button Content="{x:Static p:Resources.BtnContinue}" Click="BtnSendFriendRequest" Width="80" Margin="0,25,0,0"/>
+            <Button Content="***ENVIAR***" Click="Button_Click"/>
 
         </StackPanel>
-        <Button Content="{x:Static p:Resources.BtnCancel}" Width="60" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnClose" Background="#FF97785F" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
+        <Button Content="***CERRAR***" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnClose"/>
     </Grid>
 </UserControl>

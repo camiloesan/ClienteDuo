@@ -421,15 +421,6 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UserID.
-        /// </summary>
-        public static string LblUserID {
-            get {
-                return ResourceManager.GetString("LblUserID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
         public static string LblUsername {
