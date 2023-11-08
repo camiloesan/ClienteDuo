@@ -16,6 +16,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="DeleteUserFromDatabaseByUsername">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteUserFromDatabaseByUsernameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteUserFromDatabaseByUsernameResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="IsLoginValid">
     <xs:complexType>
       <xs:sequence>
@@ -62,8 +76,8 @@
   <xs:element name="SendFriendRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="senderID" type="xs:int" />
-        <xs:element minOccurs="0" name="receiverID" type="xs:int" />
+        <xs:element minOccurs="0" name="usernameSender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usernameReceiver" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -176,6 +190,13 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CloseParty">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="StartGame">
     <xs:complexType>
       <xs:sequence>
@@ -188,60 +209,78 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PartyCreated">
+  <xs:element name="KickPlayer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyPartyCreated">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q7:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PartyCreatedResponse">
+  <xs:element name="NotifyPartyCreatedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerJoined">
+  <xs:element name="NotifyPlayerJoined">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q8:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerJoinedResponse">
+  <xs:element name="NotifyPlayerJoinedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="MessageReceived">
+  <xs:element name="NotifyMessageReceived">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="messageSent" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="MessageReceivedResponse">
+  <xs:element name="NotifyMessageReceivedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerLeft">
+  <xs:element name="NotifyPlayerLeft">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q9:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="PlayerLeftResponse">
+  <xs:element name="NotifyPlayerLeftResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GameStarted">
+  <xs:element name="NotifyPlayerKicked">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GameStartedResponse">
+  <xs:element name="NotifyPlayerKickedResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyGameStarted">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyGameStartedResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -274,105 +313,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="Subscribe">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="EndGame">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="EndRound">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="EndTurn">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCurrentTurn">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCurrentTurnResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GetCurrentTurnResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetPlayerScores">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetPlayerScoresResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayerScoresResult" nillable="true" type="q10:ArrayOfKeyValueOfstringint" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateTableCards">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateTableCardsResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TurnFinished">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="currentTurn" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TurnFinishedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RoundOver">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RoundOverResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GameOver">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GameOverResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="DrawCard">
     <xs:complexType>
       <xs:sequence />
@@ -381,35 +321,60 @@
   <xs:element name="DrawCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q11:Card" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q10:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetCards">
+  <xs:element name="GetTableCards">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTableCardsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetTableCardsResult" nillable="true" type="q11:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetCardsResponse">
+  <xs:element name="DealTableCards">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetCardsResult" nillable="true" type="q12:ArrayOfCard" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="DealCards">
+  <xs:element name="EndTurn">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
-      </xs:sequence>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndRound">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndGame">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndGameResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InitializeData">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InitializeDataResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="PlayCard">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
         <xs:element minOccurs="0" name="position" type="xs:int" />
       </xs:sequence>
     </xs:complexType>

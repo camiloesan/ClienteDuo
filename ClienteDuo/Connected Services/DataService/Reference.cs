@@ -411,6 +411,12 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
         System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(ClienteDuo.DataService.User user);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername", ReplyAction="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsernameResponse")]
+        bool DeleteUserFromDatabaseByUsername(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername", ReplyAction="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsernameResponse")]
+        System.Threading.Tasks.Task<bool> DeleteUserFromDatabaseByUsernameAsync(string username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsLoginValid", ReplyAction="http://tempuri.org/IUsersManager/IsLoginValidResponse")]
         ClienteDuo.DataService.User IsLoginValid(string username, string password);
         
@@ -430,10 +436,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task<bool> IsEmailTakenAsync(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/SendFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/SendFriendRequestResponse")]
-        bool SendFriendRequest(int senderID, int receiverID);
+        bool SendFriendRequest(string usernameSender, string usernameReceiver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/SendFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/SendFriendRequestResponse")]
-        System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int senderID, int receiverID);
+        System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string usernameSender, string usernameReceiver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AcceptFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/AcceptFriendRequestResponse")]
         bool AcceptFriendRequest(ClienteDuo.DataService.FriendRequest friendRequest);
@@ -501,6 +507,14 @@ namespace ClienteDuo.DataService {
             return base.Channel.AddUserToDatabaseAsync(user);
         }
         
+        public bool DeleteUserFromDatabaseByUsername(string username) {
+            return base.Channel.DeleteUserFromDatabaseByUsername(username);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteUserFromDatabaseByUsernameAsync(string username) {
+            return base.Channel.DeleteUserFromDatabaseByUsernameAsync(username);
+        }
+        
         public ClienteDuo.DataService.User IsLoginValid(string username, string password) {
             return base.Channel.IsLoginValid(username, password);
         }
@@ -525,12 +539,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.IsEmailTakenAsync(email);
         }
         
-        public bool SendFriendRequest(int senderID, int receiverID) {
-            return base.Channel.SendFriendRequest(senderID, receiverID);
+        public bool SendFriendRequest(string usernameSender, string usernameReceiver) {
+            return base.Channel.SendFriendRequest(usernameSender, usernameReceiver);
         }
         
-        public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(int senderID, int receiverID) {
-            return base.Channel.SendFriendRequestAsync(senderID, receiverID);
+        public System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string usernameSender, string usernameReceiver) {
+            return base.Channel.SendFriendRequestAsync(usernameSender, usernameReceiver);
         }
         
         public bool AcceptFriendRequest(ClienteDuo.DataService.FriendRequest friendRequest) {
@@ -602,6 +616,12 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/LeaveParty")]
         System.Threading.Tasks.Task LeavePartyAsync(int partyCode, string username);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/CloseParty")]
+        void CloseParty(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/CloseParty")]
+        System.Threading.Tasks.Task ClosePartyAsync(int partyCode);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/StartGame")]
         void StartGame(int partyCode);
         
@@ -613,25 +633,34 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/IsPlayerActive")]
         System.Threading.Tasks.Task IsPlayerActiveAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/KickPlayer")]
+        void KickPlayer(int partyCode, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/KickPlayer")]
+        System.Threading.Tasks.Task KickPlayerAsync(int partyCode, string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IPartyManagerCallback {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PartyCreated", ReplyAction="http://tempuri.org/IPartyManager/PartyCreatedResponse")]
-        void PartyCreated(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPartyCreated", ReplyAction="http://tempuri.org/IPartyManager/NotifyPartyCreatedResponse")]
+        void NotifyPartyCreated(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerJoined", ReplyAction="http://tempuri.org/IPartyManager/PlayerJoinedResponse")]
-        void PlayerJoined(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPlayerJoined", ReplyAction="http://tempuri.org/IPartyManager/NotifyPlayerJoinedResponse")]
+        void NotifyPlayerJoined(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/MessageReceived", ReplyAction="http://tempuri.org/IPartyManager/MessageReceivedResponse")]
-        void MessageReceived(string messageSent);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyMessageReceived", ReplyAction="http://tempuri.org/IPartyManager/NotifyMessageReceivedResponse")]
+        void NotifyMessageReceived(string messageSent);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerLeft", ReplyAction="http://tempuri.org/IPartyManager/PlayerLeftResponse")]
-        void PlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPlayerLeft", ReplyAction="http://tempuri.org/IPartyManager/NotifyPlayerLeftResponse")]
+        void NotifyPlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/GameStarted", ReplyAction="http://tempuri.org/IPartyManager/GameStartedResponse")]
-        void GameStarted();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyPlayerKicked", ReplyAction="http://tempuri.org/IPartyManager/NotifyPlayerKickedResponse")]
+        void NotifyPlayerKicked();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/NotifyGameStarted", ReplyAction="http://tempuri.org/IPartyManager/NotifyGameStartedResponse")]
+        void NotifyGameStarted();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -694,6 +723,14 @@ namespace ClienteDuo.DataService {
             return base.Channel.LeavePartyAsync(partyCode, username);
         }
         
+        public void CloseParty(int partyCode) {
+            base.Channel.CloseParty(partyCode);
+        }
+        
+        public System.Threading.Tasks.Task ClosePartyAsync(int partyCode) {
+            return base.Channel.ClosePartyAsync(partyCode);
+        }
+        
         public void StartGame(int partyCode) {
             base.Channel.StartGame(partyCode);
         }
@@ -708,6 +745,14 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task IsPlayerActiveAsync() {
             return base.Channel.IsPlayerActiveAsync();
+        }
+        
+        public void KickPlayer(int partyCode, string username) {
+            base.Channel.KickPlayer(partyCode, username);
+        }
+        
+        public System.Threading.Tasks.Task KickPlayerAsync(int partyCode, string username) {
+            return base.Channel.KickPlayerAsync(partyCode, username);
         }
     }
     
@@ -773,60 +818,56 @@ namespace ClienteDuo.DataService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IMatchManager", CallbackContract=typeof(ClienteDuo.DataService.IMatchManagerCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IMatchManager")]
     public interface IMatchManager {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/Subscribe")]
-        void Subscribe(int partyCode, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/DrawCard", ReplyAction="http://tempuri.org/IMatchManager/DrawCardResponse")]
+        ClienteDuo.DataService.Card DrawCard();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/Subscribe")]
-        System.Threading.Tasks.Task SubscribeAsync(int partyCode, string username);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/DrawCard", ReplyAction="http://tempuri.org/IMatchManager/DrawCardResponse")]
+        System.Threading.Tasks.Task<ClienteDuo.DataService.Card> DrawCardAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndGame")]
-        void EndGame(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetTableCards", ReplyAction="http://tempuri.org/IMatchManager/GetTableCardsResponse")]
+        ClienteDuo.DataService.Card[] GetTableCards();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndGame")]
-        System.Threading.Tasks.Task EndGameAsync(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetTableCards", ReplyAction="http://tempuri.org/IMatchManager/GetTableCardsResponse")]
+        System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetTableCardsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
-        void EndRound(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
+        void DealTableCards();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
-        System.Threading.Tasks.Task EndRoundAsync(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
-        void EndTurn(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/DealTableCards")]
+        System.Threading.Tasks.Task DealTableCardsAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
-        System.Threading.Tasks.Task EndTurnAsync(int partyCode);
+        void EndTurn();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetCurrentTurn", ReplyAction="http://tempuri.org/IMatchManager/GetCurrentTurnResponse")]
-        string GetCurrentTurn(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
+        System.Threading.Tasks.Task EndTurnAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetCurrentTurn", ReplyAction="http://tempuri.org/IMatchManager/GetCurrentTurnResponse")]
-        System.Threading.Tasks.Task<string> GetCurrentTurnAsync(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
+        void EndRound();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetPlayerScores", ReplyAction="http://tempuri.org/IMatchManager/GetPlayerScoresResponse")]
-        System.Collections.Generic.Dictionary<string, int> GetPlayerScores(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
+        System.Threading.Tasks.Task EndRoundAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetPlayerScores", ReplyAction="http://tempuri.org/IMatchManager/GetPlayerScoresResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetPlayerScoresAsync(int partyCode);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IMatchManagerCallback {
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/EndGame", ReplyAction="http://tempuri.org/IMatchManager/EndGameResponse")]
+        void EndGame();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/UpdateTableCards", ReplyAction="http://tempuri.org/IMatchManager/UpdateTableCardsResponse")]
-        void UpdateTableCards();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/EndGame", ReplyAction="http://tempuri.org/IMatchManager/EndGameResponse")]
+        System.Threading.Tasks.Task EndGameAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/TurnFinished", ReplyAction="http://tempuri.org/IMatchManager/TurnFinishedResponse")]
-        void TurnFinished(string currentTurn);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/InitializeData", ReplyAction="http://tempuri.org/IMatchManager/InitializeDataResponse")]
+        void InitializeData();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/RoundOver", ReplyAction="http://tempuri.org/IMatchManager/RoundOverResponse")]
-        void RoundOver();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/InitializeData", ReplyAction="http://tempuri.org/IMatchManager/InitializeDataResponse")]
+        System.Threading.Tasks.Task InitializeDataAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GameOver", ReplyAction="http://tempuri.org/IMatchManager/GameOverResponse")]
-        void GameOver();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCard")]
+        void PlayCard(int position);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/PlayCard")]
+        System.Threading.Tasks.Task PlayCardAsync(int position);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -835,130 +876,24 @@ namespace ClienteDuo.DataService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MatchManagerClient : System.ServiceModel.DuplexClientBase<ClienteDuo.DataService.IMatchManager>, ClienteDuo.DataService.IMatchManager {
+    public partial class MatchManagerClient : System.ServiceModel.ClientBase<ClienteDuo.DataService.IMatchManager>, ClienteDuo.DataService.IMatchManager {
         
-        public MatchManagerClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+        public MatchManagerClient() {
         }
         
-        public MatchManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
-        }
-        
-        public MatchManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public MatchManagerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
-        }
-        
-        public MatchManagerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
-        }
-        
-        public void Subscribe(int partyCode, string username) {
-            base.Channel.Subscribe(partyCode, username);
-        }
-        
-        public System.Threading.Tasks.Task SubscribeAsync(int partyCode, string username) {
-            return base.Channel.SubscribeAsync(partyCode, username);
-        }
-        
-        public void EndGame(int partyCode) {
-            base.Channel.EndGame(partyCode);
-        }
-        
-        public System.Threading.Tasks.Task EndGameAsync(int partyCode) {
-            return base.Channel.EndGameAsync(partyCode);
-        }
-        
-        public void EndRound(int partyCode) {
-            base.Channel.EndRound(partyCode);
-        }
-        
-        public System.Threading.Tasks.Task EndRoundAsync(int partyCode) {
-            return base.Channel.EndRoundAsync(partyCode);
-        }
-        
-        public void EndTurn(int partyCode) {
-            base.Channel.EndTurn(partyCode);
-        }
-        
-        public System.Threading.Tasks.Task EndTurnAsync(int partyCode) {
-            return base.Channel.EndTurnAsync(partyCode);
-        }
-        
-        public string GetCurrentTurn(int partyCode) {
-            return base.Channel.GetCurrentTurn(partyCode);
-        }
-        
-        public System.Threading.Tasks.Task<string> GetCurrentTurnAsync(int partyCode) {
-            return base.Channel.GetCurrentTurnAsync(partyCode);
-        }
-        
-        public System.Collections.Generic.Dictionary<string, int> GetPlayerScores(int partyCode) {
-            return base.Channel.GetPlayerScores(partyCode);
-        }
-        
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetPlayerScoresAsync(int partyCode) {
-            return base.Channel.GetPlayerScoresAsync(partyCode);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.ICardManager")]
-    public interface ICardManager {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/DrawCard", ReplyAction="http://tempuri.org/ICardManager/DrawCardResponse")]
-        ClienteDuo.DataService.Card DrawCard();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/DrawCard", ReplyAction="http://tempuri.org/ICardManager/DrawCardResponse")]
-        System.Threading.Tasks.Task<ClienteDuo.DataService.Card> DrawCardAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/GetCards", ReplyAction="http://tempuri.org/ICardManager/GetCardsResponse")]
-        ClienteDuo.DataService.Card[] GetCards(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICardManager/GetCards", ReplyAction="http://tempuri.org/ICardManager/GetCardsResponse")]
-        System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetCardsAsync(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/DealCards")]
-        void DealCards(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/DealCards")]
-        System.Threading.Tasks.Task DealCardsAsync(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/PlayCard")]
-        void PlayCard(int partyCode, int position);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/PlayCard")]
-        System.Threading.Tasks.Task PlayCardAsync(int partyCode, int position);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ICardManagerChannel : ClienteDuo.DataService.ICardManager, System.ServiceModel.IClientChannel {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CardManagerClient : System.ServiceModel.ClientBase<ClienteDuo.DataService.ICardManager>, ClienteDuo.DataService.ICardManager {
-        
-        public CardManagerClient() {
-        }
-        
-        public CardManagerClient(string endpointConfigurationName) : 
+        public MatchManagerClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public CardManagerClient(string endpointConfigurationName, string remoteAddress) : 
+        public MatchManagerClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CardManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MatchManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public CardManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public MatchManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
@@ -970,28 +905,60 @@ namespace ClienteDuo.DataService {
             return base.Channel.DrawCardAsync();
         }
         
-        public ClienteDuo.DataService.Card[] GetCards(int partyCode) {
-            return base.Channel.GetCards(partyCode);
+        public ClienteDuo.DataService.Card[] GetTableCards() {
+            return base.Channel.GetTableCards();
         }
         
-        public System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetCardsAsync(int partyCode) {
-            return base.Channel.GetCardsAsync(partyCode);
+        public System.Threading.Tasks.Task<ClienteDuo.DataService.Card[]> GetTableCardsAsync() {
+            return base.Channel.GetTableCardsAsync();
         }
         
-        public void DealCards(int partyCode) {
-            base.Channel.DealCards(partyCode);
+        public void DealTableCards() {
+            base.Channel.DealTableCards();
         }
         
-        public System.Threading.Tasks.Task DealCardsAsync(int partyCode) {
-            return base.Channel.DealCardsAsync(partyCode);
+        public System.Threading.Tasks.Task DealTableCardsAsync() {
+            return base.Channel.DealTableCardsAsync();
         }
         
-        public void PlayCard(int partyCode, int position) {
-            base.Channel.PlayCard(partyCode, position);
+        public void EndTurn() {
+            base.Channel.EndTurn();
         }
         
-        public System.Threading.Tasks.Task PlayCardAsync(int partyCode, int position) {
-            return base.Channel.PlayCardAsync(partyCode, position);
+        public System.Threading.Tasks.Task EndTurnAsync() {
+            return base.Channel.EndTurnAsync();
+        }
+        
+        public void EndRound() {
+            base.Channel.EndRound();
+        }
+        
+        public System.Threading.Tasks.Task EndRoundAsync() {
+            return base.Channel.EndRoundAsync();
+        }
+        
+        public void EndGame() {
+            base.Channel.EndGame();
+        }
+        
+        public System.Threading.Tasks.Task EndGameAsync() {
+            return base.Channel.EndGameAsync();
+        }
+        
+        public void InitializeData() {
+            base.Channel.InitializeData();
+        }
+        
+        public System.Threading.Tasks.Task InitializeDataAsync() {
+            return base.Channel.InitializeDataAsync();
+        }
+        
+        public void PlayCard(int position) {
+            base.Channel.PlayCard(position);
+        }
+        
+        public System.Threading.Tasks.Task PlayCardAsync(int position) {
+            return base.Channel.PlayCardAsync(position);
         }
     }
 }

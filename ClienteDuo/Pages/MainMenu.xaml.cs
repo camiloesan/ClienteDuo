@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.Pages.Sidebars;
+using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -47,7 +48,7 @@ namespace ClienteDuo.Pages
 
         private void BtnNewParty(object sender, RoutedEventArgs e)
         {
-            Lobby lobby = new Lobby();
+            Lobby lobby = new Lobby(SessionDetails.Username);
             App.Current.MainWindow.Content = lobby;
         }
 
