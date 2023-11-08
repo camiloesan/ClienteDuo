@@ -48,6 +48,18 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_ICardManager_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -61,12 +73,6 @@
   </wsdl:message>
   <wsdl:message name="IUsersManager_AddUserToDatabase_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserToDatabaseResponse" />
-  </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteUserFromDatabaseByUsername_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteUserFromDatabaseByUsername" />
-  </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteUserFromDatabaseByUsername_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteUserFromDatabaseByUsernameResponse" />
   </wsdl:message>
   <wsdl:message name="IUsersManager_IsLoginValid_InputMessage">
     <wsdl:part name="parameters" element="tns:IsLoginValid" />
@@ -134,53 +140,41 @@
   <wsdl:message name="IPartyManager_LeaveParty_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveParty" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_CloseParty_InputMessage">
-    <wsdl:part name="parameters" element="tns:CloseParty" />
-  </wsdl:message>
   <wsdl:message name="IPartyManager_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
   </wsdl:message>
   <wsdl:message name="IPartyManager_IsPlayerActive_InputMessage">
     <wsdl:part name="parameters" element="tns:IsPlayerActive" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_KickPlayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:KickPlayer" />
+  <wsdl:message name="IPartyManager_PartyCreated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreated" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPartyCreated_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPartyCreated" />
+  <wsdl:message name="IPartyManager_PartyCreated_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreatedResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPartyCreated_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPartyCreatedResponse" />
+  <wsdl:message name="IPartyManager_PlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoined" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerJoined_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerJoined" />
+  <wsdl:message name="IPartyManager_PlayerJoined_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoinedResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerJoined_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerJoinedResponse" />
+  <wsdl:message name="IPartyManager_MessageReceived_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageReceived" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyMessageReceived_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyMessageReceived" />
+  <wsdl:message name="IPartyManager_MessageReceived_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageReceivedResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyMessageReceived_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyMessageReceivedResponse" />
+  <wsdl:message name="IPartyManager_PlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeft" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerLeft_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerLeft" />
+  <wsdl:message name="IPartyManager_PlayerLeft_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerLeft_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerLeftResponse" />
+  <wsdl:message name="IPartyManager_GameStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStarted" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerKicked_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerKicked" />
-  </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerKicked_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerKickedResponse" />
-  </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyGameStarted_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyGameStarted" />
-  </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyGameStarted_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyGameStartedResponse" />
+  <wsdl:message name="IPartyManager_GameStarted_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStartedResponse" />
   </wsdl:message>
   <wsdl:message name="IPartyValidator_IsPartyExistent_InputMessage">
     <wsdl:part name="parameters" element="tns:IsPartyExistent" />
@@ -194,50 +188,76 @@
   <wsdl:message name="IPartyValidator_IsSpaceAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsSpaceAvailableResponse" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_DrawCard_InputMessage">
-    <wsdl:part name="parameters" element="tns:DrawCard" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_DrawCard_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DrawCardResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_GetTableCards_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetTableCards" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_GetTableCards_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetTableCardsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_DealTableCards_InputMessage">
-    <wsdl:part name="parameters" element="tns:DealTableCards" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_EndTurn_InputMessage">
-    <wsdl:part name="parameters" element="tns:EndTurn" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_EndRound_InputMessage">
-    <wsdl:part name="parameters" element="tns:EndRound" />
+  <wsdl:message name="IMatchManager_Subscribe_InputMessage">
+    <wsdl:part name="parameters" element="tns:Subscribe" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_EndGame_InputMessage">
     <wsdl:part name="parameters" element="tns:EndGame" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_EndGame_OutputMessage">
-    <wsdl:part name="parameters" element="tns:EndGameResponse" />
+  <wsdl:message name="IMatchManager_EndRound_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndRound" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_InitializeData_InputMessage">
-    <wsdl:part name="parameters" element="tns:InitializeData" />
+  <wsdl:message name="IMatchManager_EndTurn_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndTurn" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_InitializeData_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InitializeDataResponse" />
+  <wsdl:message name="IMatchManager_GetCurrentTurn_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentTurn" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_PlayCard_InputMessage">
+  <wsdl:message name="IMatchManager_GetCurrentTurn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentTurnResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_GetPlayerScores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerScores" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_GetPlayerScores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerScoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_UpdateTableCards_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTableCards" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_UpdateTableCards_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTableCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_TurnFinished_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TurnFinished" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_TurnFinished_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:TurnFinishedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_RoundOver_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RoundOver" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_RoundOver_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RoundOverResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_GameOver_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameOver" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_GameOver_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameOverResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICardManager_DrawCard_InputMessage">
+    <wsdl:part name="parameters" element="tns:DrawCard" />
+  </wsdl:message>
+  <wsdl:message name="ICardManager_DrawCard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DrawCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICardManager_GetCards_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCards" />
+  </wsdl:message>
+  <wsdl:message name="ICardManager_GetCards_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICardManager_DealCards_InputMessage">
+    <wsdl:part name="parameters" element="tns:DealCards" />
+  </wsdl:message>
+  <wsdl:message name="ICardManager_PlayCard_InputMessage">
     <wsdl:part name="parameters" element="tns:PlayCard" />
   </wsdl:message>
   <wsdl:portType name="IUsersManager">
     <wsdl:operation name="AddUserToDatabase">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabase" message="tns:IUsersManager_AddUserToDatabase_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse" message="tns:IUsersManager_AddUserToDatabase_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="DeleteUserFromDatabaseByUsername">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername" message="tns:IUsersManager_DeleteUserFromDatabaseByUsername_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsernameResponse" message="tns:IUsersManager_DeleteUserFromDatabaseByUsername_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsLoginValid">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsLoginValid" message="tns:IUsersManager_IsLoginValid_InputMessage" />
@@ -289,41 +309,31 @@
     <wsdl:operation name="LeaveParty">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/LeaveParty" message="tns:IPartyManager_LeaveParty_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CloseParty">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/CloseParty" message="tns:IPartyManager_CloseParty_InputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/StartGame" message="tns:IPartyManager_StartGame_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsPlayerActive">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/IsPlayerActive" message="tns:IPartyManager_IsPlayerActive_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="KickPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/KickPlayer" message="tns:IPartyManager_KickPlayer_InputMessage" />
+    <wsdl:operation name="PartyCreated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PartyCreated" message="tns:IPartyManager_PartyCreated_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PartyCreatedResponse" message="tns:IPartyManager_PartyCreated_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPartyCreated">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPartyCreated" message="tns:IPartyManager_NotifyPartyCreated_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPartyCreatedResponse" message="tns:IPartyManager_NotifyPartyCreated_InputCallbackMessage" />
+    <wsdl:operation name="PlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerJoined" message="tns:IPartyManager_PlayerJoined_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerJoinedResponse" message="tns:IPartyManager_PlayerJoined_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerJoined">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerJoined" message="tns:IPartyManager_NotifyPlayerJoined_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerJoinedResponse" message="tns:IPartyManager_NotifyPlayerJoined_InputCallbackMessage" />
+    <wsdl:operation name="MessageReceived">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/MessageReceived" message="tns:IPartyManager_MessageReceived_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/MessageReceivedResponse" message="tns:IPartyManager_MessageReceived_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyMessageReceived">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyMessageReceived" message="tns:IPartyManager_NotifyMessageReceived_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyMessageReceivedResponse" message="tns:IPartyManager_NotifyMessageReceived_InputCallbackMessage" />
+    <wsdl:operation name="PlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeft" message="tns:IPartyManager_PlayerLeft_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeftResponse" message="tns:IPartyManager_PlayerLeft_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerLeft">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerLeft" message="tns:IPartyManager_NotifyPlayerLeft_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerLeftResponse" message="tns:IPartyManager_NotifyPlayerLeft_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerKicked">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerKicked" message="tns:IPartyManager_NotifyPlayerKicked_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerKickedResponse" message="tns:IPartyManager_NotifyPlayerKicked_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="NotifyGameStarted">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyGameStarted" message="tns:IPartyManager_NotifyGameStarted_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyGameStartedResponse" message="tns:IPartyManager_NotifyGameStarted_InputCallbackMessage" />
+    <wsdl:operation name="GameStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/GameStarted" message="tns:IPartyManager_GameStarted_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/GameStartedResponse" message="tns:IPartyManager_GameStarted_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyValidator">
@@ -337,33 +347,57 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMatchManager">
-    <wsdl:operation name="DrawCard">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/DrawCard" message="tns:IMatchManager_DrawCard_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/DrawCardResponse" message="tns:IMatchManager_DrawCard_OutputMessage" />
+    <wsdl:operation name="Subscribe">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/Subscribe" message="tns:IMatchManager_Subscribe_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetTableCards">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetTableCards" message="tns:IMatchManager_GetTableCards_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetTableCardsResponse" message="tns:IMatchManager_GetTableCards_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="DealTableCards">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/DealTableCards" message="tns:IMatchManager_DealTableCards_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="EndTurn">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndTurn" message="tns:IMatchManager_EndTurn_InputMessage" />
+    <wsdl:operation name="EndGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndGame" message="tns:IMatchManager_EndGame_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EndRound">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndRound" message="tns:IMatchManager_EndRound_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="EndGame">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndGame" message="tns:IMatchManager_EndGame_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/EndGameResponse" message="tns:IMatchManager_EndGame_OutputMessage" />
+    <wsdl:operation name="EndTurn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndTurn" message="tns:IMatchManager_EndTurn_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="InitializeData">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/InitializeData" message="tns:IMatchManager_InitializeData_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/InitializeDataResponse" message="tns:IMatchManager_InitializeData_OutputMessage" />
+    <wsdl:operation name="GetCurrentTurn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetCurrentTurn" message="tns:IMatchManager_GetCurrentTurn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetCurrentTurnResponse" message="tns:IMatchManager_GetCurrentTurn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerScores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetPlayerScores" message="tns:IMatchManager_GetPlayerScores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetPlayerScoresResponse" message="tns:IMatchManager_GetPlayerScores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTableCards">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/UpdateTableCards" message="tns:IMatchManager_UpdateTableCards_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/UpdateTableCardsResponse" message="tns:IMatchManager_UpdateTableCards_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TurnFinished">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/TurnFinished" message="tns:IMatchManager_TurnFinished_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/TurnFinishedResponse" message="tns:IMatchManager_TurnFinished_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RoundOver">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/RoundOver" message="tns:IMatchManager_RoundOver_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/RoundOverResponse" message="tns:IMatchManager_RoundOver_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameOver">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GameOver" message="tns:IMatchManager_GameOver_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GameOverResponse" message="tns:IMatchManager_GameOver_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ICardManager">
+    <wsdl:operation name="DrawCard">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardManager/DrawCard" message="tns:ICardManager_DrawCard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardManager/DrawCardResponse" message="tns:ICardManager_DrawCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCards">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardManager/GetCards" message="tns:ICardManager_GetCards_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICardManager/GetCardsResponse" message="tns:ICardManager_GetCards_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DealCards">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardManager/DealCards" message="tns:ICardManager_DealCards_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="PlayCard">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/PlayCard" message="tns:IMatchManager_PlayCard_InputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ICardManager/PlayCard" message="tns:ICardManager_PlayCard_InputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUsersManager" type="tns:IUsersManager">
@@ -371,15 +405,6 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="AddUserToDatabase">
       <soap12:operation soapAction="http://tempuri.org/IUsersManager/AddUserToDatabase" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DeleteUserFromDatabaseByUsername">
-      <soap12:operation soapAction="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -496,12 +521,6 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="CloseParty">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/CloseParty" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
     <wsdl:operation name="StartGame">
       <soap12:operation soapAction="http://tempuri.org/IPartyManager/StartGame" style="document" />
       <wsdl:input>
@@ -514,14 +533,8 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="KickPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/KickPlayer" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyPartyCreated">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPartyCreated" style="document" />
+    <wsdl:operation name="PartyCreated">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PartyCreated" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -529,8 +542,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerJoined">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPlayerJoined" style="document" />
+    <wsdl:operation name="PlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerJoined" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -538,8 +551,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyMessageReceived">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyMessageReceived" style="document" />
+    <wsdl:operation name="MessageReceived">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/MessageReceived" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -547,8 +560,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerLeft">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPlayerLeft" style="document" />
+    <wsdl:operation name="PlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerLeft" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -556,17 +569,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerKicked">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPlayerKicked" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyGameStarted">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyGameStarted" style="document" />
+    <wsdl:operation name="GameStarted">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/GameStarted" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -600,32 +604,14 @@
   <wsdl:binding name="NetTcpBinding_IMatchManager" type="tns:IMatchManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IMatchManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="DrawCard">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/DrawCard" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetTableCards">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/GetTableCards" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="DealTableCards">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/DealTableCards" style="document" />
+    <wsdl:operation name="Subscribe">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/Subscribe" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="EndTurn">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/EndTurn" style="document" />
+    <wsdl:operation name="EndGame">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/EndGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -636,8 +622,14 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="EndGame">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/EndGame" style="document" />
+    <wsdl:operation name="EndTurn">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/EndTurn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentTurn">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/GetCurrentTurn" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -645,17 +637,81 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InitializeData">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/InitializeData" style="document" />
+    <wsdl:operation name="GetPlayerScores">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/GetPlayerScores" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTableCards">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/UpdateTableCards" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TurnFinished">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/TurnFinished" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RoundOver">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/RoundOver" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameOver">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/GameOver" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_ICardManager" type="tns:ICardManager">
+    <wsp:PolicyReference URI="#NetTcpBinding_ICardManager_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="DrawCard">
+      <soap12:operation soapAction="http://tempuri.org/ICardManager/DrawCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCards">
+      <soap12:operation soapAction="http://tempuri.org/ICardManager/GetCards" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DealCards">
+      <soap12:operation soapAction="http://tempuri.org/ICardManager/DealCards" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
     </wsdl:operation>
     <wsdl:operation name="PlayCard">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/PlayCard" style="document" />
+      <soap12:operation soapAction="http://tempuri.org/ICardManager/PlayCard" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -681,6 +737,12 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchManager" binding="tns:NetTcpBinding_IMatchManager">
+      <soap12:address location="net.tcp://localhost:8080/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8080/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_ICardManager" binding="tns:NetTcpBinding_ICardManager">
       <soap12:address location="net.tcp://localhost:8080/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8080/Service</wsa10:Address>

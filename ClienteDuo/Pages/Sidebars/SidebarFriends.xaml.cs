@@ -1,6 +1,4 @@
-﻿using ClienteDuo.DataService;
-using ClienteDuo.Utilities;
-using System.Collections.Generic;
+﻿using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,18 +9,10 @@ namespace ClienteDuo.Pages.Sidebars
     {
         SidebarAddFriend sidebarAddFriend;
         SidebarFriendRequests sidebarFriendRequests;
-        readonly FriendManager friendManager;
 
         public SidebarFriends()
         {
             InitializeComponent();
-            friendManager = new FriendManager();
-            InitializeBars();
-            FillFriendsPanel();
-        }
-
-        private void InitializeBars()
-        {
             sidebarAddFriend = new SidebarAddFriend
             {
                 Visibility = Visibility.Collapsed,
@@ -34,11 +24,14 @@ namespace ClienteDuo.Pages.Sidebars
                 Visibility = Visibility.Collapsed,
             };
             FriendsBar.Children.Add(sidebarFriendRequests);
+
+            FillFriendsPanel();
         }
 
         private void FillFriendsPanel()
         {
-            var friendsList = friendManager.GetFriendsListByUserID(SessionDetails.UserID);
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+            var friendsList = client.GetFriendsList(SessionDetails.UserID);
 
             foreach (var friend in friendsList)
             {
@@ -65,22 +58,18 @@ namespace ClienteDuo.Pages.Sidebars
             };
             panelFriends.Children.Add(stackPanel);
 
-            Label activeStatus = new Label
-            {
-                Foreground = new SolidColorBrush(Colors.Black),
-                Content = "●",
-                Margin = new Thickness(10, 0, 5, 0),
-                VerticalAlignment = VerticalAlignment.Center
-            };
+            Label activeStatus = new Label();
+            activeStatus.Foreground = new SolidColorBrush(Colors.Black);
+            activeStatus.Content = "●";
+            activeStatus.Margin = new Thickness(10, 0, 5, 0);
+            activeStatus.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Children.Add(activeStatus);
 
-            Label usernameName = new Label
-            {
-                Foreground = new SolidColorBrush(Colors.Black),
-                Content = username,
-                Margin = new Thickness(5, 0, 10, 0),
-                VerticalAlignment = VerticalAlignment.Center
-            };
+            Label usernameName = new Label();
+            usernameName.Foreground = new SolidColorBrush(Colors.Black);
+            usernameName.Content = username;
+            usernameName.Margin = new Thickness(5, 0, 10, 0);
+            usernameName.VerticalAlignment = VerticalAlignment.Center;
             stackPanel.Children.Add(usernameName);
         }
 

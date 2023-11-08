@@ -10,6 +10,6 @@
     <Grid Background="{DynamicResource BtnBackground}">
         <Label Content="{x:Static p:Resources.BtnFriendRequests}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
         <StackPanel x:Name="panelFriendRequests" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="350"/>
-        <Button Content="{x:Static p:Resources.BtnCancel}" Width="60" Height="28" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel" Background="#FF97785F" Foreground="White"/>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel"/>
     </Grid>
 </UserControl>
