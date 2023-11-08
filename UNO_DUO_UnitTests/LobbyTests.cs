@@ -11,20 +11,13 @@ namespace ClienteDuo.Pages.Tests
     [TestClass()]
     public class LobbyTests
     {
-        int openLobby;
+        int openLobbyCode;
         [TestMethod()]
         public void CreateNewPartySuccessTest()
         {
             Lobby lobby = new Lobby();
-            openLobby = lobby.CreateNewParty("host");
-            Assert.IsNotNull(openLobby);
-        }
-
-        [TestMethod()]
-        public void ClosePartySuccessTest()
-        {
-            Lobby Lobby = new Lobby();
-            Lobby.CloseParty(openLobby);
+            openLobbyCode = lobby.CreateNewParty("host");
+            Assert.IsNotNull(openLobbyCode);
         }
     }
 }

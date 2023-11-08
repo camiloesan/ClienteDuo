@@ -12,7 +12,6 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        Dictionary<string, object> players = new Dictionary<string, object>();
         private bool _isWPFRunning = true;
 
         public Lobby(string username)
@@ -67,21 +66,25 @@ namespace ClienteDuo.Pages
             chatScrollViewer.ScrollToEnd();
         }
 
-        private void SendMessage(object sender, KeyEventArgs e)
+        private void OnEnterSendMessage(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && TBoxMessage.Text.Trim().Length > 0)
             {
-                InstanceContext instanceContext = new InstanceContext(this);
-                DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
-
                 string message = SessionDetails.Username + ": " + TBoxMessage.Text;
+                SendMessage(SessionDetails.PartyCode, message);
                 TBoxMessage.Text = "";
-                client.SendMessage(SessionDetails.PartyCode, message);
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters);
             }
+        }
+
+        public void SendMessage(int partyCode, string message)
+        {
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            client.SendMessage(partyCode, message);
         }
 
         private void BtnExitLobby(object sender, RoutedEventArgs e)
@@ -102,7 +105,6 @@ namespace ClienteDuo.Pages
         {
             if (_isWPFRunning)
             {
-                players = playersInLobby;
                 MusicManager.PlayPlayerJoinedSound();
                 UpdatePlayerList(playersInLobby);
             }
@@ -112,7 +114,6 @@ namespace ClienteDuo.Pages
         {
             if (_isWPFRunning)
             {
-                players = playersInLobby;
                 MusicManager.PlayPlayerLeftSound();
                 UpdatePlayerList(playersInLobby);
             }

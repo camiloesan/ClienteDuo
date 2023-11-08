@@ -1,4 +1,5 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -37,6 +38,7 @@ namespace ClienteDuo.Pages.Sidebars
                 {
                     Content = Properties.Resources.BtnAccept,
                 };
+                btnAccept.DataContext = item;
                 btnAccept.Click += (object sender, RoutedEventArgs e) =>
                 {
                     DataService.FriendRequest friendRequest = new DataService.FriendRequest
@@ -74,6 +76,27 @@ namespace ClienteDuo.Pages.Sidebars
                     }
                 };
             }
+        }
+
+        public void AcceptFriendRequest(object sender, RoutedEventArgs e)
+        {
+            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
+
+            DataService.FriendRequest friendRequest = ((FrameworkElement)sender).DataContext as DataService.FriendRequest;
+
+            if (client.AcceptFriendRequest(friendRequest))
+            {
+                MainWindow.ShowMessageBox("ahora son amigos");
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+            }
+        }
+
+        public void DeclineFriendRequest()
+        {
+
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)

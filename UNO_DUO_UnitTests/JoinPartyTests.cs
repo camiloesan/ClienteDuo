@@ -66,7 +66,7 @@ namespace ClienteDuo.Pages.Tests
         }
 
         [TestMethod()]
-        public void IsPartySpaceUnavailableTest()
+        public void IsPartyFullTest()
         {
             JoinParty joinParty = new JoinParty();
             string player1 = "pepe1109";
