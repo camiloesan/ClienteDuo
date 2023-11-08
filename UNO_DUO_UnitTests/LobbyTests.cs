@@ -5,19 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
+using ClienteDuo.DataService;
 
 namespace ClienteDuo.Pages.Tests
 {
     [TestClass()]
     public class LobbyTests
     {
-        int openLobbyCode;
         [TestMethod()]
-        public void CreateNewPartySuccessTest()
+        public void CreateNewPartyTest()
         {
+            var mockNewParty = new Mock<IPartyManagerCallback>();
             Lobby lobby = new Lobby();
-            openLobbyCode = lobby.CreateNewParty("host");
-            Assert.IsNotNull(openLobbyCode);
+            lobby.CreateNewParty("host", mockNewParty.Object);
+            mockNewParty.Verify(x => x.NotifyPartyCreated(It.IsAny<Dictionary<string, object>>()), Times.Once);
         }
     }
 }

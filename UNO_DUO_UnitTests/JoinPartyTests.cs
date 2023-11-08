@@ -20,7 +20,7 @@ namespace ClienteDuo.Pages.Tests
         public void Init()
         {
             lobby = new Lobby();
-            partyCode = lobby.CreateNewParty(hostUser);
+            partyCode = lobby.CreateNewParty(hostUser, lobby);
         }
 
         [TestCleanup]

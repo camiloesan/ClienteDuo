@@ -7,19 +7,19 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarFriendRequests : UserControl
     {
-        readonly DataService.UsersManagerClient _usersManagerClient;
+        readonly FriendManager friendManager;
 
         public SidebarFriendRequests()
         {
             InitializeComponent();
-            _usersManagerClient = new DataService.UsersManagerClient();
+            friendManager = new FriendManager();
             FillFriendRequestsPanel();
         }
 
         private void FillFriendRequestsPanel()
         {
-            var list = _usersManagerClient.GetFriendRequestsList(SessionDetails.UserID);
-            foreach (var item in list)
+            var friendRequestsList = friendManager.GetFriendRequestsByUserID(SessionDetails.UserID);
+            foreach (var friendRequest in friendRequestsList)
             {
                 StackPanel stackPanel = new StackPanel
                 {
@@ -30,14 +30,14 @@ namespace ClienteDuo.Pages.Sidebars
 
                 Label lblSender = new Label
                 {
-                    Content = item.SenderUsername
+                    Content = friendRequest.SenderUsername
                 };
                 stackPanel.Children.Add(lblSender);
 
                 Button btnAccept = new Button
                 {
                     Content = Properties.Resources.BtnAccept,
-                    DataContext = item,
+                    DataContext = friendRequest,
                 };
                 btnAccept.Click += AcceptFriendRequestEvent;
                 stackPanel.Children.Add(btnAccept);
@@ -45,18 +45,17 @@ namespace ClienteDuo.Pages.Sidebars
                 Button btnReject = new Button
                 {
                     Content = Properties.Resources.BtnReject,
-                    DataContext = item,
+                    DataContext = friendRequest,
                 };
                 btnReject.Click += DeclineFriendRequestEvent;
                 stackPanel.Children.Add(btnReject);
             }
         }
 
-        public void AcceptFriendRequestEvent(object sender, RoutedEventArgs e)
+        private void AcceptFriendRequestEvent(object sender, RoutedEventArgs e)
         {
             DataService.FriendRequest friendRequest = ((FrameworkElement)sender).DataContext as DataService.FriendRequest;
-
-            if (_usersManagerClient.AcceptFriendRequest(friendRequest))
+            if (friendManager.AcceptFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("ahora son amigos");
             }
@@ -66,10 +65,10 @@ namespace ClienteDuo.Pages.Sidebars
             }
         }
 
-        public void DeclineFriendRequestEvent(object sender, RoutedEventArgs e)
+        private void DeclineFriendRequestEvent(object sender, RoutedEventArgs e)
         {
             DataService.FriendRequest friendRequest = ((FrameworkElement)sender).DataContext as DataService.FriendRequest;
-            if (_usersManagerClient.RejectFriendRequest(friendRequest.FriendRequestID))
+            if (friendManager.DeclineFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("haz eliminado la solicitud");
             }

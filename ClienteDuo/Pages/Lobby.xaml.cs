@@ -1,4 +1,5 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -15,13 +16,15 @@ namespace ClienteDuo.Pages
         private readonly bool _isWPFRunning = true;
         readonly InstanceContext _instanceContext;
         readonly DataService.PartyManagerClient _partyManagerClient;
+        PartyManager partyManager;
 
         public Lobby(string username)
         {
             InitializeComponent();
+            partyManager = new PartyManager();
             _instanceContext = new InstanceContext(this);
             _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
-            CreateNewParty(username);
+            CreateNewParty(username, this);
             LoadNewPartyCreatedComponents();
         }
 
@@ -39,7 +42,7 @@ namespace ClienteDuo.Pages
             }
         }
 
-        public int CreateNewParty(string username)
+        public int CreateNewParty(string username, IPartyManagerCallback callback)
         {
             Random rand = new Random();
             SessionDetails.PartyCode = rand.Next(0, 10000);

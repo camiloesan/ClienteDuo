@@ -1,4 +1,6 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -7,12 +9,20 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarFriends : UserControl
     {
-        readonly SidebarAddFriend sidebarAddFriend;
-        readonly SidebarFriendRequests sidebarFriendRequests;
+        SidebarAddFriend sidebarAddFriend;
+        SidebarFriendRequests sidebarFriendRequests;
+        readonly FriendManager friendManager;
 
         public SidebarFriends()
         {
             InitializeComponent();
+            friendManager = new FriendManager();
+            InitializeBars();
+            FillFriendsPanel();
+        }
+
+        private void InitializeBars()
+        {
             sidebarAddFriend = new SidebarAddFriend
             {
                 Visibility = Visibility.Collapsed,
@@ -24,14 +34,11 @@ namespace ClienteDuo.Pages.Sidebars
                 Visibility = Visibility.Collapsed,
             };
             FriendsBar.Children.Add(sidebarFriendRequests);
-
-            FillFriendsPanel();
         }
 
         private void FillFriendsPanel()
         {
-            DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-            var friendsList = client.GetFriendsList(SessionDetails.UserID);
+            var friendsList = friendManager.GetFriendsListByUserID(SessionDetails.UserID);
 
             foreach (var friend in friendsList)
             {

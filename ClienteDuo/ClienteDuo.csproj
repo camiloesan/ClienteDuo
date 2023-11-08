@@ -128,7 +128,9 @@
     </Compile>
     <Compile Include="Properties\Resources.fr.Designer.cs" />
     <Compile Include="Properties\Resources.jp.Designer.cs" />
+    <Compile Include="Utilities\FriendManager.cs" />
     <Compile Include="Utilities\MusicManager.cs" />
+    <Compile Include="Utilities\PartyManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
     <Compile Include="Utilities\Sha256Encryptor.cs" />
     <Page Include="Pages\CardTable.xaml">

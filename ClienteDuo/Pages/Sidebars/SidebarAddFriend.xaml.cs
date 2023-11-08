@@ -6,9 +6,12 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarAddFriend : UserControl
     {
+        FriendManager friendManager;
+
         public SidebarAddFriend()
         {
             InitializeComponent();
+            friendManager = new FriendManager();
         }
 
         private void BtnClose(object sender, RoutedEventArgs e)
@@ -18,7 +21,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void BtnSendFriendRequest(object sender, RoutedEventArgs e)
         {
-            if (SendFriendRequest(SessionDetails.Username, TBoxUserReceiver.Text))
+            if (friendManager.SendFriendRequest(SessionDetails.Username, TBoxUserReceiver.Text))
             {
                 MainWindow.ShowMessageBox("friend request sent ***");
             }
@@ -26,21 +29,6 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 MainWindow.ShowMessageBox("username does not exist or service is unavailable***");
             }
-        }
-
-        public bool SendFriendRequest(string usernameSender ,string usernameReceiver)
-        {
-            usernameSender = usernameSender.Trim();
-            usernameReceiver = usernameReceiver.Trim();
-
-            bool result = false;
-            if (usernameSender.Length > 0 && usernameReceiver.Length > 0)
-            {
-                DataService.UsersManagerClient client = new DataService.UsersManagerClient();
-                result = client.SendFriendRequest(usernameSender, usernameReceiver);
-            }
-
-            return result;
         }
     }
 }
