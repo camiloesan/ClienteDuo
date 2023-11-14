@@ -827,17 +827,17 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/Subscribe")]
         System.Threading.Tasks.Task SubscribeAsync(int partyCode, string username);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/setGameScore")]
+        void setGameScore(int partyCode, string username, int cardCount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/setGameScore")]
+        System.Threading.Tasks.Task setGameScoreAsync(int partyCode, string username, int cardCount);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndGame")]
         void EndGame(int partyCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndGame")]
         System.Threading.Tasks.Task EndGameAsync(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
-        void EndRound(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndRound")]
-        System.Threading.Tasks.Task EndRoundAsync(int partyCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndTurn")]
         void EndTurn(int partyCode);
@@ -866,9 +866,6 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/TurnFinished", ReplyAction="http://tempuri.org/IMatchManager/TurnFinishedResponse")]
         void TurnFinished(string currentTurn);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/RoundOver", ReplyAction="http://tempuri.org/IMatchManager/RoundOverResponse")]
-        void RoundOver();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GameOver", ReplyAction="http://tempuri.org/IMatchManager/GameOverResponse")]
         void GameOver();
@@ -910,20 +907,20 @@ namespace ClienteDuo.DataService {
             return base.Channel.SubscribeAsync(partyCode, username);
         }
         
+        public void setGameScore(int partyCode, string username, int cardCount) {
+            base.Channel.setGameScore(partyCode, username, cardCount);
+        }
+        
+        public System.Threading.Tasks.Task setGameScoreAsync(int partyCode, string username, int cardCount) {
+            return base.Channel.setGameScoreAsync(partyCode, username, cardCount);
+        }
+        
         public void EndGame(int partyCode) {
             base.Channel.EndGame(partyCode);
         }
         
         public System.Threading.Tasks.Task EndGameAsync(int partyCode) {
             return base.Channel.EndGameAsync(partyCode);
-        }
-        
-        public void EndRound(int partyCode) {
-            base.Channel.EndRound(partyCode);
-        }
-        
-        public System.Threading.Tasks.Task EndRoundAsync(int partyCode) {
-            return base.Channel.EndRoundAsync(partyCode);
         }
         
         public void EndTurn(int partyCode) {
@@ -974,10 +971,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task DealCardsAsync(int partyCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/PlayCard")]
-        void PlayCard(int partyCode, int position);
+        void PlayCard(int partyCode, int position, ClienteDuo.DataService.Card card);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/ICardManager/PlayCard")]
-        System.Threading.Tasks.Task PlayCardAsync(int partyCode, int position);
+        System.Threading.Tasks.Task PlayCardAsync(int partyCode, int position, ClienteDuo.DataService.Card card);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1031,12 +1028,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.DealCardsAsync(partyCode);
         }
         
-        public void PlayCard(int partyCode, int position) {
-            base.Channel.PlayCard(partyCode, position);
+        public void PlayCard(int partyCode, int position, ClienteDuo.DataService.Card card) {
+            base.Channel.PlayCard(partyCode, position, card);
         }
         
-        public System.Threading.Tasks.Task PlayCardAsync(int partyCode, int position) {
-            return base.Channel.PlayCardAsync(partyCode, position);
+        public System.Threading.Tasks.Task PlayCardAsync(int partyCode, int position, ClienteDuo.DataService.Card card) {
+            return base.Channel.PlayCardAsync(partyCode, position, card);
         }
     }
 }

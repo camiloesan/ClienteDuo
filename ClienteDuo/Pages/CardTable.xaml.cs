@@ -12,6 +12,7 @@ namespace ClienteDuo.Pages
 {
     public partial class CardTable : Page, DataService.IMatchManagerCallback
     {
+        bool _hasDrawnCard;
         DataService.Card[] _tableCards = new DataService.Card[3];
         GameMenu _gameMenu;
         PlayerIcon[] _playerIcons = new PlayerIcon[3];
@@ -31,6 +32,8 @@ namespace ClienteDuo.Pages
             {
                 DealPlayerCard();
             }
+
+            _hasDrawnCard = false;
         }
 
         public bool SelectCard(Card selectedCard)
@@ -86,6 +89,7 @@ namespace ClienteDuo.Pages
             Dictionary <string, int> playerScores = client.GetPlayerScores(SessionDetails.PartyCode);
             List<string> players = new List<string>();
             List<int> scores = new List<int>();
+            _currentTurnLabel.Content = client.GetCurrentTurn(SessionDetails.PartyCode);
 
             foreach (KeyValuePair<string, int> entry in playerScores)
             {
@@ -96,17 +100,11 @@ namespace ClienteDuo.Pages
                 }
             }
 
-            for (int i = 0; i < _playerIcons.Length; i++)
+            for (int i = 0; i < players.Count; i++)
             {
-                if (i < playerScores.Count)
-                {
-                    _playerIcons[i]._nameLabel.Content = players[i];
-                    _playerIcons[i]._scoreLabel.Content = scores[i] + " points";
-                }
-                else
-                {
-                    _playerIcons[i].Visibility = Visibility.Collapsed;
-                }
+                _playerIcons[i]._nameLabel.Content = players[i];
+                _playerIcons[i]._scoreLabel.Content = scores[i] + " points";
+                _playerIcons[i].Visibility = Visibility.Visible;
             }
         }
 
@@ -135,11 +133,13 @@ namespace ClienteDuo.Pages
         public void TurnFinished(string currentTurn)
         {
             _currentTurnLabel.Content = currentTurn;
-        }
 
-        public void RoundOver()
-        {
-            throw new System.NotImplementedException();
+            if (currentTurn.Equals(SessionDetails.Username))
+            {
+                _endTurnButton.Visibility = Visibility.Visible;
+            }
+
+            UpdateTableCards();
         }
 
         public void GameOver()
@@ -152,6 +152,7 @@ namespace ClienteDuo.Pages
             Card card = new Card();
             DataService.CardManagerClient client = new DataService.CardManagerClient();
             DataService.Card dealtCard = client.DrawCard();
+            _hasDrawnCard = true;
 
             card.Number = dealtCard.Number;
             card.Color = dealtCard.Color;
@@ -168,7 +169,10 @@ namespace ClienteDuo.Pages
 
         void Deck_Click(object sender, RoutedEventArgs e)
         {
-            DealPlayerCard();
+            if (_currentTurnLabel.Content.Equals(SessionDetails.Username))
+            {
+                DealPlayerCard();
+            }
         }
 
         bool isValidMove(int position)
@@ -211,11 +215,11 @@ namespace ClienteDuo.Pages
         void PlayCard(int position)
         {
             DataService.CardManagerClient client = new DataService.CardManagerClient();
-            client.PlayCard(SessionDetails.PartyCode, position);
+            client.PlayCard(SessionDetails.PartyCode, position, _tableCards[position]);
 
             for (int i = 0; i < _selectedCards.Count; i++)
             {
-                    _tableCards[position].Number = "";
+                _tableCards[position].Number = "";
                 _cardLabels[position].Content = _selectedCards[i].Number;
                 _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
                     
@@ -223,6 +227,13 @@ namespace ClienteDuo.Pages
             }
 
             _selectedCards.Clear();
+
+            if (_playerDeck.Children.Count == 0)
+            {
+                GameOver();
+            }
+
+            _endTurnButton.Visibility = Visibility.Visible;
         }
 
         void PlayCardLeft(object sender, RoutedEventArgs e)
@@ -245,7 +256,7 @@ namespace ClienteDuo.Pages
         {
             if (_tableCards[2].Number.Equals(""))
             {
-                if (_matchingColors >= 1)
+                if (_matchingColors >= 1 || _hasDrawnCard)
                 {
                     PlayCard(2);
                 }
@@ -263,6 +274,11 @@ namespace ClienteDuo.Pages
         {
             InstanceContext instanceContext = new InstanceContext(this);
             DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
+            _endTurnButton.Visibility = Visibility.Collapsed;
+
+            Card card = new Card();
+            DataService.CardManagerClient cardClient = new DataService.CardManagerClient();
+            cardClient.DealCards(SessionDetails.PartyCode);
 
             client.EndTurn(SessionDetails.PartyCode);
         }

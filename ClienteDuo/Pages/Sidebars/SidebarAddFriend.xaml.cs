@@ -30,5 +30,10 @@ namespace ClienteDuo.Pages.Sidebars
                 MainWindow.ShowMessageBox("username does not exist or service is unavailable***");
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

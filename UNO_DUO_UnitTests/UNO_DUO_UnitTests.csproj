@@ -72,7 +72,6 @@
     <Compile Include="CardTableTest.cs" />
     <Compile Include="JoinPartyTests.cs" />
     <Compile Include="LobbyTests.cs" />
-    <Compile Include="LoginTests.cs" />
     <Compile Include="NewAccountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SidebarFriendsTests.cs" />

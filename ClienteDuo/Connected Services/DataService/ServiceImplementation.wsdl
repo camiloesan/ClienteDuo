@@ -209,11 +209,11 @@
   <wsdl:message name="IMatchManager_Subscribe_InputMessage">
     <wsdl:part name="parameters" element="tns:Subscribe" />
   </wsdl:message>
+  <wsdl:message name="IMatchManager_setGameScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:setGameScore" />
+  </wsdl:message>
   <wsdl:message name="IMatchManager_EndGame_InputMessage">
     <wsdl:part name="parameters" element="tns:EndGame" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_EndRound_InputMessage">
-    <wsdl:part name="parameters" element="tns:EndRound" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_EndTurn_InputMessage">
     <wsdl:part name="parameters" element="tns:EndTurn" />
@@ -241,12 +241,6 @@
   </wsdl:message>
   <wsdl:message name="IMatchManager_TurnFinished_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:TurnFinishedResponse" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_RoundOver_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:RoundOver" />
-  </wsdl:message>
-  <wsdl:message name="IMatchManager_RoundOver_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:RoundOverResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_GameOver_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:GameOver" />
@@ -382,11 +376,11 @@
     <wsdl:operation name="Subscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/Subscribe" message="tns:IMatchManager_Subscribe_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="setGameScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/setGameScore" message="tns:IMatchManager_setGameScore_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="EndGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndGame" message="tns:IMatchManager_EndGame_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="EndRound">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndRound" message="tns:IMatchManager_EndRound_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EndTurn">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndTurn" message="tns:IMatchManager_EndTurn_InputMessage" />
@@ -406,10 +400,6 @@
     <wsdl:operation name="TurnFinished">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/TurnFinished" message="tns:IMatchManager_TurnFinished_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/TurnFinishedResponse" message="tns:IMatchManager_TurnFinished_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="RoundOver">
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/RoundOver" message="tns:IMatchManager_RoundOver_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/RoundOverResponse" message="tns:IMatchManager_RoundOver_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="GameOver">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GameOver" message="tns:IMatchManager_GameOver_OutputCallbackMessage" />
@@ -672,14 +662,14 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="EndGame">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/EndGame" style="document" />
+    <wsdl:operation name="setGameScore">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/setGameScore" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="EndRound">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/EndRound" style="document" />
+    <wsdl:operation name="EndGame">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/EndGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -719,15 +709,6 @@
     </wsdl:operation>
     <wsdl:operation name="TurnFinished">
       <soap12:operation soapAction="http://tempuri.org/IMatchManager/TurnFinished" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="RoundOver">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/RoundOver" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

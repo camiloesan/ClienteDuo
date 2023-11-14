@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="CardTable" Height="600" Width="1000">
     <Grid x:Name="_background" Background="#FF2CAB00">
-
-        <ScrollViewer Margin="0,440,0,0" Height="130" Width="702" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="#FF003E01" >
+        <ScrollViewer Margin="28,455,0,0" Height="130" Width="840" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="#FF003E01" >
             <StackPanel x:Name="_playerDeck" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
@@ -63,8 +62,8 @@
             </Button.Background>
         </Button>
 
-        <Label x:Name="_currentTurnLabel" Content="Turno de [Jugador]" HorizontalAlignment="Center" Margin="0,395,0,0" VerticalAlignment="Top" Width="702" FontSize="36" FontWeight="Bold" FontFamily="Ink Free" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="_endTurnButton" Content="GO!" HorizontalAlignment="Left" Margin="890,490,0,35" VerticalAlignment="Top" FontSize="50" RenderTransformOrigin="0.5,0.5" Click="EndTurnButton_Click">
+        <Label x:Name="_currentTurnLabel" Content="Current Turn: [Username]" HorizontalAlignment="Center" Margin="0,395,0,0" VerticalAlignment="Top" Width="702" FontSize="36" FontWeight="Bold" FontFamily="Ink Free" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button x:Name="_endTurnButton" Content="GO!" HorizontalAlignment="Left" Margin="890,490,0,35" VerticalAlignment="Top" FontSize="50" RenderTransformOrigin="0.5,0.5" Click="EndTurnButton_Click" Visibility="Collapsed">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFD00000" Offset="1"/>
@@ -73,8 +72,8 @@
             </Button.Background>
         </Button>
 
-        <local:PlayerIcon x:Name="_topPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152"/>
-        <local:PlayerIcon x:Name="_leftPlayerIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152"/>
-        <local:PlayerIcon x:Name="_rightPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Margin="848,0,0,0"/>
+        <local:PlayerIcon x:Name="_topPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Visibility="Collapsed"/>
+        <local:PlayerIcon x:Name="_leftPlayerIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152" Visibility="Collapsed"/>
+        <local:PlayerIcon x:Name="_rightPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Margin="848,0,0,0" Visibility="Collapsed"/>
     </Grid>
 </Page>

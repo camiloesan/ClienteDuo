@@ -3,6 +3,7 @@ using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -201,12 +202,22 @@ namespace ClienteDuo.Pages
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
         {
-            _partyManagerClient.StartGame(SessionDetails.PartyCode);
+            InstanceContext instanceContext = new InstanceContext(this);
+            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            client.StartGame(SessionDetails.PartyCode);
         }
 
         public void NotifyGameStarted()
         {
             CardTable cardTable = new CardTable();
+            InstanceContext instanceContext = new InstanceContext(cardTable);
+            DataService.MatchManagerClient client = new MatchManagerClient(instanceContext);
+
+            client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+            Thread.Sleep(5000);
+
+            cardTable.LoadPlayers();
+            cardTable.UpdateTableCards();
             App.Current.MainWindow.Content = cardTable;
         }
 

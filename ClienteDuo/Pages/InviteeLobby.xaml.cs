@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -179,6 +180,14 @@ namespace ClienteDuo.Pages
         public void NotifyGameStarted()
         {
             CardTable cardTable = new CardTable();
+            InstanceContext instanceContext = new InstanceContext(cardTable);
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
+
+            client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+            Thread.Sleep(5000);
+
+            cardTable.LoadPlayers();
+            cardTable.UpdateTableCards();
             App.Current.MainWindow.Content = cardTable;
         }
 
