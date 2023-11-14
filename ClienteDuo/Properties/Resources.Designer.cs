@@ -169,6 +169,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string BtnProfile {
+            get {
+                return ResourceManager.GetString("BtnProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quit Game.
         /// </summary>
         public static string BtnQuitGame {
@@ -192,6 +201,15 @@ namespace ClienteDuo.Properties {
         public static string BtnStartGame {
             get {
                 return ResourceManager.GetString("BtnStartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unfriend.
+        /// </summary>
+        public static string BtnUnfriend {
+            get {
+                return ResourceManager.GetString("BtnUnfriend", resourceCulture);
             }
         }
         

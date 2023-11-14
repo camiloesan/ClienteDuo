@@ -85,15 +85,18 @@ namespace ClienteDuo.Pages.Sidebars
 
             Button btnViewProfile = new Button
             {
-                Content = "*view profile*",
-                DataContext = friendshipID
+                Content = Properties.Resources.BtnProfile,
             };
             btnViewProfile.Click += UnfriendEvent;
             stackPanel.Children.Add(btnViewProfile);
 
-            Button btnUnfriend = new Button();
-
+            Button btnUnfriend = new Button
+            {
+                Content = Properties.Resources.BtnUnfriend,
+                DataContext = friendshipID
+            };
             btnUnfriend.Click += UnfriendEvent;
+            stackPanel.Children.Add(btnUnfriend);
         }
 
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
@@ -103,7 +106,9 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void UnfriendEvent(object sender, RoutedEventArgs e)
         {
-            //todo unfriend
+            int friendshipID = (int)((FrameworkElement)sender).DataContext;
+            friendManager.DeleteFriendshipByID(friendshipID);
+            //notify you are no longer friends
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)

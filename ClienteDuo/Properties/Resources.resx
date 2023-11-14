@@ -153,6 +153,9 @@
   <data name="BtnNewParty" xml:space="preserve">
     <value>New Party</value>
   </data>
+  <data name="BtnProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
   <data name="BtnQuitGame" xml:space="preserve">
     <value>Quit Game</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="BtnStartGame" xml:space="preserve">
     <value>Start Game</value>
+  </data>
+  <data name="BtnUnfriend" xml:space="preserve">
+    <value>Unfriend</value>
   </data>
   <data name="DlgConnectionError" xml:space="preserve">
     <value>There was an error connecting with the service, try again later</value>

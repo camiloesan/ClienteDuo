@@ -150,6 +150,9 @@
   <data name="BtnNewParty" xml:space="preserve">
     <value>Nueva Partida</value>
   </data>
+  <data name="BtnProfile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
   <data name="BtnQuitGame" xml:space="preserve">
     <value>Salir del juego</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="BtnStartGame" xml:space="preserve">
     <value>Iniciar Partida</value>
+  </data>
+  <data name="BtnUnfriend" xml:space="preserve">
+    <value>Eliminar Amigo</value>
   </data>
   <data name="DlgConnectionError" xml:space="preserve">
     <value>Hubo un error al conectarse con el servicio, inténtelo de nuevo más tarde</value>

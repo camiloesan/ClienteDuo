@@ -58,6 +58,7 @@ namespace ClienteDuo.Pages.Sidebars
             if (friendManager.AcceptFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("ahora son amigos");
+                //refresh friends panel
             }
             else
             {

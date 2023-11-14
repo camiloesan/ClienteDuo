@@ -49,5 +49,10 @@ namespace ClienteDuo.Utilities
         {
             return _usersManagerClient.GetFriendsList(userID);
         }
+
+        public bool DeleteFriendshipByID(int friendshipID)
+        {
+            return _usersManagerClient.DeleteFriendshipByID(friendshipID);
+        }
     }
 }

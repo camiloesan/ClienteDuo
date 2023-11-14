@@ -122,6 +122,12 @@
   <wsdl:message name="IUsersManager_GetOnlineFriends_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOnlineFriendsResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersManager_DeleteFriendshipByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendshipByID" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_DeleteFriendshipByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendshipByIDResponse" />
+  </wsdl:message>
   <wsdl:message name="IPartyManager_NewParty_InputMessage">
     <wsdl:part name="parameters" element="tns:NewParty" />
   </wsdl:message>
@@ -274,6 +280,10 @@
     <wsdl:operation name="GetOnlineFriends">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriends" message="tns:IUsersManager_GetOnlineFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse" message="tns:IUsersManager_GetOnlineFriends_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriendshipByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID" message="tns:IUsersManager_DeleteFriendshipByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse" message="tns:IUsersManager_DeleteFriendshipByID_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyManager">
@@ -461,6 +471,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetOnlineFriends">
       <soap12:operation soapAction="http://tempuri.org/IUsersManager/GetOnlineFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFriendshipByID">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/DeleteFriendshipByID" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

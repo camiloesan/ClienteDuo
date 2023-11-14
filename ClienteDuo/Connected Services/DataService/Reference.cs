@@ -470,6 +470,12 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
         System.Threading.Tasks.Task<string[]> GetOnlineFriendsAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse")]
+        bool DeleteFriendshipByID(int friendshipID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse")]
+        System.Threading.Tasks.Task<bool> DeleteFriendshipByIDAsync(int friendshipID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -585,6 +591,14 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task<string[]> GetOnlineFriendsAsync(string username) {
             return base.Channel.GetOnlineFriendsAsync(username);
+        }
+        
+        public bool DeleteFriendshipByID(int friendshipID) {
+            return base.Channel.DeleteFriendshipByID(friendshipID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> DeleteFriendshipByIDAsync(int friendshipID) {
+            return base.Channel.DeleteFriendshipByIDAsync(friendshipID);
         }
     }
     
