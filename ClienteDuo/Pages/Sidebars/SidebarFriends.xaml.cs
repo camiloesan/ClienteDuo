@@ -44,16 +44,16 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 if (friend.Friend1ID != SessionDetails.UserID)
                 {
-                    CreateFriendPanel(friend.Friend1Username);
+                    CreateFriendPanel(friend.Friend1Username, friend.FriendshipID);
                 }
                 else if (friend.Friend2ID != SessionDetails.UserID)
                 {
-                    CreateFriendPanel(friend.Friend2Username);
+                    CreateFriendPanel(friend.Friend2Username, friend.FriendshipID);
                 }
             }
         }
 
-        private void CreateFriendPanel(string username)
+        private void CreateFriendPanel(string username, int friendshipID)
         {
             StackPanel stackPanel = new StackPanel
             {
@@ -82,8 +82,29 @@ namespace ClienteDuo.Pages.Sidebars
                 VerticalAlignment = VerticalAlignment.Center
             };
             stackPanel.Children.Add(usernameName);
+
+            Button btnViewProfile = new Button
+            {
+                Content = "*view profile*",
+                DataContext = friendshipID
+            };
+            btnViewProfile.Click += UnfriendEvent;
+            stackPanel.Children.Add(btnViewProfile);
+
+            Button btnUnfriend = new Button();
+
+            btnUnfriend.Click += UnfriendEvent;
         }
 
+        private void ViewProfileEvent(object sender, RoutedEventArgs e)
+        {
+            //todo view profile
+        }
+
+        private void UnfriendEvent(object sender, RoutedEventArgs e)
+        {
+            //todo unfriend
+        }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
         {

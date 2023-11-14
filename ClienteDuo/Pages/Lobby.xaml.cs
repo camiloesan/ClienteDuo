@@ -56,20 +56,6 @@ namespace ClienteDuo.Pages
             MusicManager.PlayPlayerJoinedSound();
         }
 
-        public void NotifyMessageReceived(string messageSent)
-        {
-            Label labelMessageReceived = new Label
-            {
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Foreground = new SolidColorBrush(Colors.White),
-                FontSize = 14,
-                Content = messageSent
-            };
-
-            chatPanel.Children.Add(labelMessageReceived);
-            chatScrollViewer.ScrollToEnd();
-        }
-
         private void OnEnterSendMessage(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && TBoxMessage.Text.Trim().Length > 0)
@@ -100,24 +86,6 @@ namespace ClienteDuo.Pages
         public void CloseParty(int partyCode)
         {
             _partyManagerClient.CloseParty(partyCode);
-        }
-
-        public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
-        {
-            if (_isWPFRunning)
-            {
-                MusicManager.PlayPlayerJoinedSound();
-                UpdatePlayerList(playersInLobby);
-            }
-        }
-
-        public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
-        {
-            if (_isWPFRunning)
-            {
-                MusicManager.PlayPlayerLeftSound();
-                UpdatePlayerList(playersInLobby);
-            }
         }
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
@@ -189,17 +157,49 @@ namespace ClienteDuo.Pages
             _partyManagerClient.KickPlayer(SessionDetails.PartyCode, username);
         }
 
+        private void BtnStartGame(object sender, RoutedEventArgs e)
+        {
+            _partyManagerClient.StartGame(SessionDetails.PartyCode);
+        }
+
+        public void NotifyMessageReceived(string messageSent)
+        {
+            Label labelMessageReceived = new Label
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 14,
+                Content = messageSent
+            };
+
+            chatPanel.Children.Add(labelMessageReceived);
+            chatScrollViewer.ScrollToEnd();
+        }
+
+        public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
+        {
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerJoinedSound();
+                UpdatePlayerList(playersInLobby);
+            }
+        }
+
+        public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
+        {
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerLeftSound();
+                UpdatePlayerList(playersInLobby);
+            }
+        }
+
         public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
         {
             if (_isWPFRunning)
             {
                 UpdatePlayerList(playersInLobby);
             }
-        }
-
-        private void BtnStartGame(object sender, RoutedEventArgs e)
-        {
-            _partyManagerClient.StartGame(SessionDetails.PartyCode);
         }
 
         public void NotifyGameStarted()

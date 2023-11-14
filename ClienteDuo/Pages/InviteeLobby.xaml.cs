@@ -11,25 +11,25 @@ using System.Windows.Media;
 
 namespace ClienteDuo.Pages
 {
-    public partial class InviteeLobby : Page, DataService.IPartyManagerCallback
+    public partial class InviteeLobby : Page, IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
         private readonly bool _isWPFRunning = true;
         readonly InstanceContext _instanceContext;
-        readonly DataService.PartyManagerClient _partyManagerClient;
+        readonly PartyManagerClient _partyManagerClient;
 
         public InviteeLobby(string username)
         {
             InitializeComponent();
             _instanceContext = new InstanceContext(this);
-            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
+            _partyManagerClient = new PartyManagerClient(_instanceContext);
             JoinGame(SessionDetails.PartyCode, username);
         }
 
         public InviteeLobby()
         {
             _instanceContext = new InstanceContext(this);
-            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
+            _partyManagerClient = new PartyManagerClient(_instanceContext);
             try
             {
                 _ = App.Current.Windows;
@@ -91,20 +91,6 @@ namespace ClienteDuo.Pages
             }
         }
 
-        public void NotifyMessageReceived(string messageSent)
-        {
-            Label labelMessageReceived = new Label
-            {
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Foreground = new SolidColorBrush(Colors.White),
-                FontSize = 14,
-                Content = messageSent
-            };
-
-            chatPanel.Children.Add(labelMessageReceived);
-            chatScrollViewer.ScrollToEnd();
-        }
-
         private void OnEnterSendMessage(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return && TBoxMessage.Text.Trim() != null)
@@ -121,29 +107,6 @@ namespace ClienteDuo.Pages
         public void SendMessage(int partyCode, string message)
         {
             _partyManagerClient.SendMessage(partyCode, message);
-        }
-
-        public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
-        {
-            if (_isWPFRunning)
-            {
-                MusicManager.PlayPlayerJoinedSound();
-                UpdatePlayerList(playersInLobby);
-            }
-        }
-
-        public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
-        {
-            if (_isWPFRunning)
-            {
-                MusicManager.PlayPlayerLeftSound();
-                UpdatePlayerList(playersInLobby);
-            }
         }
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
@@ -174,6 +137,43 @@ namespace ClienteDuo.Pages
         public void ExitParty(int partyCode, string username)
         {
             _partyManagerClient.LeaveParty(partyCode, username);
+        }
+
+        public void NotifyMessageReceived(string messageSent)
+        {
+            Label labelMessageReceived = new Label
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 14,
+                Content = messageSent
+            };
+
+            chatPanel.Children.Add(labelMessageReceived);
+            chatScrollViewer.ScrollToEnd();
+        }
+
+        public void NotifyPartyCreated(Dictionary<string, object> playersInLobby)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyPlayerLeft(Dictionary<string, object> playersInLobby)
+        {
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerLeftSound();
+                UpdatePlayerList(playersInLobby);
+            }
+        }
+
+        public void NotifyPlayerJoined(Dictionary<string, object> playersInLobby)
+        {
+            if (_isWPFRunning)
+            {
+                MusicManager.PlayPlayerJoinedSound();
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         public void NotifyGameStarted()
