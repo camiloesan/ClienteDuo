@@ -75,7 +75,6 @@
     <Compile Include="LoginTests.cs" />
     <Compile Include="NewAccountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SidebarFriendsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

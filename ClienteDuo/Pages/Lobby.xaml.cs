@@ -10,20 +10,18 @@ using System.Windows.Media;
 
 namespace ClienteDuo.Pages
 {
-    public partial class Lobby : Page, DataService.IPartyManagerCallback
+    public partial class Lobby : Page, IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
         private readonly bool _isWPFRunning = true;
         readonly InstanceContext _instanceContext;
-        readonly DataService.PartyManagerClient _partyManagerClient;
-        PartyManager partyManager;
+        readonly PartyManagerClient _partyManagerClient;
 
         public Lobby(string username)
         {
             InitializeComponent();
-            partyManager = new PartyManager();
             _instanceContext = new InstanceContext(this);
-            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
+            _partyManagerClient = new PartyManagerClient(_instanceContext);
             CreateNewParty(username, this);
             LoadNewPartyCreatedComponents();
         }
@@ -31,7 +29,7 @@ namespace ClienteDuo.Pages
         public Lobby()
         {
             _instanceContext = new InstanceContext(this);
-            _partyManagerClient = new DataService.PartyManagerClient(_instanceContext);
+            _partyManagerClient = new PartyManagerClient(_instanceContext);
             try
             {
                 _ = App.Current.Windows;
