@@ -441,6 +441,12 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/SendFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/SendFriendRequestResponse")]
         System.Threading.Tasks.Task<bool> SendFriendRequestAsync(string usernameSender, string usernameReceiver);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsFriendRequestAlreadyExistent", ReplyAction="http://tempuri.org/IUsersManager/IsFriendRequestAlreadyExistentResponse")]
+        bool IsFriendRequestAlreadyExistent(string usernameSender, string usernameReceiver);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsFriendRequestAlreadyExistent", ReplyAction="http://tempuri.org/IUsersManager/IsFriendRequestAlreadyExistentResponse")]
+        System.Threading.Tasks.Task<bool> IsFriendRequestAlreadyExistentAsync(string usernameSender, string usernameReceiver);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AcceptFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/AcceptFriendRequestResponse")]
         bool AcceptFriendRequest(ClienteDuo.DataService.FriendRequest friendRequest);
         
@@ -476,6 +482,12 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse")]
         System.Threading.Tasks.Task<bool> DeleteFriendshipByIDAsync(int friendshipID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsAlreadyFriend", ReplyAction="http://tempuri.org/IUsersManager/IsAlreadyFriendResponse")]
+        bool IsAlreadyFriend(string senderUsername, string receiverUsername);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsAlreadyFriend", ReplyAction="http://tempuri.org/IUsersManager/IsAlreadyFriendResponse")]
+        System.Threading.Tasks.Task<bool> IsAlreadyFriendAsync(string senderUsername, string receiverUsername);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -553,6 +565,14 @@ namespace ClienteDuo.DataService {
             return base.Channel.SendFriendRequestAsync(usernameSender, usernameReceiver);
         }
         
+        public bool IsFriendRequestAlreadyExistent(string usernameSender, string usernameReceiver) {
+            return base.Channel.IsFriendRequestAlreadyExistent(usernameSender, usernameReceiver);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsFriendRequestAlreadyExistentAsync(string usernameSender, string usernameReceiver) {
+            return base.Channel.IsFriendRequestAlreadyExistentAsync(usernameSender, usernameReceiver);
+        }
+        
         public bool AcceptFriendRequest(ClienteDuo.DataService.FriendRequest friendRequest) {
             return base.Channel.AcceptFriendRequest(friendRequest);
         }
@@ -600,6 +620,14 @@ namespace ClienteDuo.DataService {
         public System.Threading.Tasks.Task<bool> DeleteFriendshipByIDAsync(int friendshipID) {
             return base.Channel.DeleteFriendshipByIDAsync(friendshipID);
         }
+        
+        public bool IsAlreadyFriend(string senderUsername, string receiverUsername) {
+            return base.Channel.IsAlreadyFriend(senderUsername, receiverUsername);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsAlreadyFriendAsync(string senderUsername, string receiverUsername) {
+            return base.Channel.IsAlreadyFriendAsync(senderUsername, receiverUsername);
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -641,12 +669,6 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/StartGame")]
         System.Threading.Tasks.Task StartGameAsync(int partyCode);
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/IsPlayerActive")]
-        void IsPlayerActive();
-        
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/IsPlayerActive")]
-        System.Threading.Tasks.Task IsPlayerActiveAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/KickPlayer")]
         void KickPlayer(int partyCode, string username);
@@ -751,14 +773,6 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task StartGameAsync(int partyCode) {
             return base.Channel.StartGameAsync(partyCode);
-        }
-        
-        public void IsPlayerActive() {
-            base.Channel.IsPlayerActive();
-        }
-        
-        public System.Threading.Tasks.Task IsPlayerActiveAsync() {
-            return base.Channel.IsPlayerActiveAsync();
         }
         
         public void KickPlayer(int partyCode, string username) {
@@ -973,6 +987,78 @@ namespace ClienteDuo.DataService {
         
         public System.Threading.Tasks.Task PlayCardAsync(int position) {
             return base.Channel.PlayCardAsync(position);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IUserConnectionHandler", CallbackContract=typeof(ClienteDuo.DataService.IUserConnectionHandlerCallback))]
+    public interface IUserConnectionHandler {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUserConnectionHandler/NotifyLogIn")]
+        void NotifyLogIn(ClienteDuo.DataService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUserConnectionHandler/NotifyLogIn")]
+        System.Threading.Tasks.Task NotifyLogInAsync(ClienteDuo.DataService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUserConnectionHandler/NotifyLogOut")]
+        void NotifyLogOut(ClienteDuo.DataService.User user);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IUserConnectionHandler/NotifyLogOut")]
+        System.Threading.Tasks.Task NotifyLogOutAsync(ClienteDuo.DataService.User user);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUserConnectionHandlerCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserConnectionHandler/UserLogged", ReplyAction="http://tempuri.org/IUserConnectionHandler/UserLoggedResponse")]
+        void UserLogged(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserConnectionHandler/UserLoggedOut", ReplyAction="http://tempuri.org/IUserConnectionHandler/UserLoggedOutResponse")]
+        void UserLoggedOut(string username);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IUserConnectionHandlerChannel : ClienteDuo.DataService.IUserConnectionHandler, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class UserConnectionHandlerClient : System.ServiceModel.DuplexClientBase<ClienteDuo.DataService.IUserConnectionHandler>, ClienteDuo.DataService.IUserConnectionHandler {
+        
+        public UserConnectionHandlerClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
+        }
+        
+        public UserConnectionHandlerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
+        }
+        
+        public UserConnectionHandlerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UserConnectionHandlerClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+        }
+        
+        public UserConnectionHandlerClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
+        }
+        
+        public void NotifyLogIn(ClienteDuo.DataService.User user) {
+            base.Channel.NotifyLogIn(user);
+        }
+        
+        public System.Threading.Tasks.Task NotifyLogInAsync(ClienteDuo.DataService.User user) {
+            return base.Channel.NotifyLogInAsync(user);
+        }
+        
+        public void NotifyLogOut(ClienteDuo.DataService.User user) {
+            base.Channel.NotifyLogOut(user);
+        }
+        
+        public System.Threading.Tasks.Task NotifyLogOutAsync(ClienteDuo.DataService.User user) {
+            return base.Channel.NotifyLogOutAsync(user);
         }
     }
 }

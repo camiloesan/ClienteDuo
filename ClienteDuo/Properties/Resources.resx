@@ -144,6 +144,9 @@
   <data name="BtnJoinParty" xml:space="preserve">
     <value>Join Party</value>
   </data>
+  <data name="BtnKick" xml:space="preserve">
+    <value>Kick</value>
+  </data>
   <data name="BtnLogin" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Incorrect email or password</value>
   </data>
+  <data name="DlgFriendRequestSent" xml:space="preserve">
+    <value>Friend request sent</value>
+  </data>
   <data name="DlgFullParty" xml:space="preserve">
     <value>The party is already full, try again later</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
     <value>Party code needs to be a number with a max of 4 digits</value>
+  </data>
+  <data name="DlgIsNowActive" xml:space="preserve">
+    <value>is now active</value>
   </data>
   <data name="DlgMessageMaxCharacters" xml:space="preserve">
     <value>A message can only contain 250 characters</value>
@@ -203,6 +212,9 @@
   </data>
   <data name="DlgServiceException" xml:space="preserve">
     <value>There was an error connecting with the service, try again later</value>
+  </data>
+  <data name="DlgUnfriend" xml:space="preserve">
+    <value>You are no longer friends</value>
   </data>
   <data name="DlgUsernameMaxCharacters" xml:space="preserve">
     <value>Max characters for username is 30</value>

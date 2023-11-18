@@ -2,6 +2,7 @@
 using ClienteDuo.Utilities;
 using System;
 using System.Security.Cryptography;
+using System.ServiceModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,8 +49,15 @@ namespace ClienteDuo.Pages
                 SessionDetails.Email = loggedUser.Email;
                 SessionDetails.IsGuest = false;
 
+                User user = new User
+                {
+                    UserName = SessionDetails.Username,
+                    ID = SessionDetails.UserID
+                };
+
                 MainMenu mainMenu = new MainMenu();
                 App.Current.MainWindow.Content = mainMenu;
+                MainWindow.NotifyLogin(user);
             }
             else
             {

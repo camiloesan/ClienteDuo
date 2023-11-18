@@ -18,9 +18,11 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void FillFriendRequestsPanel()
         {
+            panelFriendRequests.Children.Clear();
             var friendRequestsList = friendManager.GetFriendRequestsByUserID(SessionDetails.UserID);
             foreach (var friendRequest in friendRequestsList)
             {
+                panelFriendRequests.Children.Clear();
                 StackPanel stackPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
@@ -58,7 +60,7 @@ namespace ClienteDuo.Pages.Sidebars
             if (friendManager.AcceptFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("ahora son amigos");
-                //refresh friends panel
+                FillFriendRequestsPanel();
             }
             else
             {
@@ -72,6 +74,7 @@ namespace ClienteDuo.Pages.Sidebars
             if (friendManager.DeclineFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("haz eliminado la solicitud");
+                FillFriendRequestsPanel();
             }
             else
             {

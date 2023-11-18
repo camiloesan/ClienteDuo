@@ -48,6 +48,18 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="NetTcpBinding_IUserConnectionHandler_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd0" namespace="http://tempuri.org/" />
@@ -92,6 +104,12 @@
   <wsdl:message name="IUsersManager_SendFriendRequest_OutputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersManager_IsFriendRequestAlreadyExistent_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsFriendRequestAlreadyExistent" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_IsFriendRequestAlreadyExistent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsFriendRequestAlreadyExistentResponse" />
+  </wsdl:message>
   <wsdl:message name="IUsersManager_AcceptFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
   </wsdl:message>
@@ -128,6 +146,12 @@
   <wsdl:message name="IUsersManager_DeleteFriendshipByID_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteFriendshipByIDResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersManager_IsAlreadyFriend_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAlreadyFriend" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_IsAlreadyFriend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAlreadyFriendResponse" />
+  </wsdl:message>
   <wsdl:message name="IPartyManager_NewParty_InputMessage">
     <wsdl:part name="parameters" element="tns:NewParty" />
   </wsdl:message>
@@ -145,9 +169,6 @@
   </wsdl:message>
   <wsdl:message name="IPartyManager_StartGame_InputMessage">
     <wsdl:part name="parameters" element="tns:StartGame" />
-  </wsdl:message>
-  <wsdl:message name="IPartyManager_IsPlayerActive_InputMessage">
-    <wsdl:part name="parameters" element="tns:IsPlayerActive" />
   </wsdl:message>
   <wsdl:message name="IPartyManager_KickPlayer_InputMessage">
     <wsdl:part name="parameters" element="tns:KickPlayer" />
@@ -236,6 +257,24 @@
   <wsdl:message name="IMatchManager_PlayCard_InputMessage">
     <wsdl:part name="parameters" element="tns:PlayCard" />
   </wsdl:message>
+  <wsdl:message name="IUserConnectionHandler_NotifyLogIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyLogIn" />
+  </wsdl:message>
+  <wsdl:message name="IUserConnectionHandler_NotifyLogOut_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyLogOut" />
+  </wsdl:message>
+  <wsdl:message name="IUserConnectionHandler_UserLogged_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UserLogged" />
+  </wsdl:message>
+  <wsdl:message name="IUserConnectionHandler_UserLogged_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UserLoggedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserConnectionHandler_UserLoggedOut_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UserLoggedOut" />
+  </wsdl:message>
+  <wsdl:message name="IUserConnectionHandler_UserLoggedOut_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UserLoggedOutResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUsersManager">
     <wsdl:operation name="AddUserToDatabase">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabase" message="tns:IUsersManager_AddUserToDatabase_InputMessage" />
@@ -261,6 +300,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/SendFriendRequest" message="tns:IUsersManager_SendFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/SendFriendRequestResponse" message="tns:IUsersManager_SendFriendRequest_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsFriendRequestAlreadyExistent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsFriendRequestAlreadyExistent" message="tns:IUsersManager_IsFriendRequestAlreadyExistent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsFriendRequestAlreadyExistentResponse" message="tns:IUsersManager_IsFriendRequestAlreadyExistent_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AcceptFriendRequest">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/AcceptFriendRequest" message="tns:IUsersManager_AcceptFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/AcceptFriendRequestResponse" message="tns:IUsersManager_AcceptFriendRequest_OutputMessage" />
@@ -285,6 +328,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID" message="tns:IUsersManager_DeleteFriendshipByID_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse" message="tns:IUsersManager_DeleteFriendshipByID_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsAlreadyFriend">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsAlreadyFriend" message="tns:IUsersManager_IsAlreadyFriend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsAlreadyFriendResponse" message="tns:IUsersManager_IsAlreadyFriend_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyManager">
     <wsdl:operation name="NewParty">
@@ -304,9 +351,6 @@
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/StartGame" message="tns:IPartyManager_StartGame_InputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="IsPlayerActive">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/IsPlayerActive" message="tns:IPartyManager_IsPlayerActive_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="KickPlayer">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/KickPlayer" message="tns:IPartyManager_KickPlayer_InputMessage" />
@@ -376,6 +420,22 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/PlayCard" message="tns:IMatchManager_PlayCard_InputMessage" />
     </wsdl:operation>
   </wsdl:portType>
+  <wsdl:portType name="IUserConnectionHandler">
+    <wsdl:operation name="NotifyLogIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserConnectionHandler/NotifyLogIn" message="tns:IUserConnectionHandler_NotifyLogIn_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NotifyLogOut">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserConnectionHandler/NotifyLogOut" message="tns:IUserConnectionHandler_NotifyLogOut_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogged">
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLogged" message="tns:IUserConnectionHandler_UserLogged_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLoggedResponse" message="tns:IUserConnectionHandler_UserLogged_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoggedOut">
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLoggedOut" message="tns:IUserConnectionHandler_UserLoggedOut_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLoggedOutResponse" message="tns:IUserConnectionHandler_UserLoggedOut_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUsersManager" type="tns:IUsersManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IUsersManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
@@ -426,6 +486,15 @@
     </wsdl:operation>
     <wsdl:operation name="SendFriendRequest">
       <soap12:operation soapAction="http://tempuri.org/IUsersManager/SendFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsFriendRequestAlreadyExistent">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsFriendRequestAlreadyExistent" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -487,6 +556,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsAlreadyFriend">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsAlreadyFriend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IPartyManager" type="tns:IPartyManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IPartyManager_policy" />
@@ -523,12 +601,6 @@
     </wsdl:operation>
     <wsdl:operation name="StartGame">
       <soap12:operation soapAction="http://tempuri.org/IPartyManager/StartGame" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-    </wsdl:operation>
-    <wsdl:operation name="IsPlayerActive">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/IsPlayerActive" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -680,6 +752,40 @@
       </wsdl:input>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="NetTcpBinding_IUserConnectionHandler" type="tns:IUserConnectionHandler">
+    <wsp:PolicyReference URI="#NetTcpBinding_IUserConnectionHandler_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="NotifyLogIn">
+      <soap12:operation soapAction="http://tempuri.org/IUserConnectionHandler/NotifyLogIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="NotifyLogOut">
+      <soap12:operation soapAction="http://tempuri.org/IUserConnectionHandler/NotifyLogOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogged">
+      <soap12:operation soapAction="http://tempuri.org/IUserConnectionHandler/UserLogged" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoggedOut">
+      <soap12:operation soapAction="http://tempuri.org/IUserConnectionHandler/UserLoggedOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="ServiceImplementation">
     <wsdl:port name="NetTcpBinding_IUsersManager" binding="tns:NetTcpBinding_IUsersManager">
       <soap12:address location="net.tcp://localhost:8080/Service" />
@@ -700,6 +806,12 @@
       </wsa10:EndpointReference>
     </wsdl:port>
     <wsdl:port name="NetTcpBinding_IMatchManager" binding="tns:NetTcpBinding_IMatchManager">
+      <soap12:address location="net.tcp://localhost:8080/Service" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8080/Service</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="NetTcpBinding_IUserConnectionHandler" binding="tns:NetTcpBinding_IUserConnectionHandler">
       <soap12:address location="net.tcp://localhost:8080/Service" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8080/Service</wsa10:Address>

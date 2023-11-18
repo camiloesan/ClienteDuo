@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace ClienteDuo.Pages
         private readonly bool _isWPFRunning = true;
         readonly InstanceContext _instanceContext;
         readonly PartyManagerClient _partyManagerClient;
+        PopUpUserDetails _popUpUserDetails;
 
         public Lobby(string username)
         {
@@ -54,6 +56,15 @@ namespace ClienteDuo.Pages
         {
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + SessionDetails.PartyCode;
             MusicManager.PlayPlayerJoinedSound();
+            _popUpUserDetails = new PopUpUserDetails
+            {
+                Width = 350,
+                Height = 200,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Visibility = Visibility.Collapsed
+            };
+            masterGrid.Children.Add(_popUpUserDetails);
         }
 
         private void OnEnterSendMessage(object sender, KeyEventArgs e)
@@ -133,7 +144,7 @@ namespace ClienteDuo.Pages
             {
                 Button BtnKick = new Button
                 {
-                    Content = "*kick*",
+                    Content = Properties.Resources.BtnKick,
                     Margin = new Thickness(5, 0, 0, 0),
                     VerticalAlignment = VerticalAlignment.Center,
                     DataContext = username,
@@ -143,12 +154,25 @@ namespace ClienteDuo.Pages
 
                 Button BtnViewProfile = new Button
                 {
-                    Content = "*Profile*",
+                    Content = Properties.Resources.BtnProfile,
                     Margin = new Thickness(5, 0, 0, 0),
-                    VerticalAlignment = VerticalAlignment.Center
+                    VerticalAlignment = VerticalAlignment.Center,
+                    DataContext = username,
                 };
-                stackPanel.Children.Add(BtnViewProfile);
+                BtnViewProfile.Click += ViewProfileEvent;
+
+                if (!username.Contains("guest"))
+                {
+                    stackPanel.Children.Add(BtnViewProfile);
+                }
             }
+        }
+
+        private void ViewProfileEvent(object sender, RoutedEventArgs e)
+        {
+            string username = ((FrameworkElement)sender).DataContext as string;
+            _popUpUserDetails.SetDataContext(username, false);
+            _popUpUserDetails.Visibility = Visibility.Visible;
         }
 
         private void KickPlayerEvent(object sender, RoutedEventArgs e)

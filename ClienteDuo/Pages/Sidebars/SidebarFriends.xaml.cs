@@ -9,37 +9,38 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarFriends : UserControl
     {
-        SidebarAddFriend sidebarAddFriend;
-        SidebarFriendRequests sidebarFriendRequests;
-        readonly FriendManager friendManager;
+        SidebarAddFriend _sidebarAddFriend;
+        SidebarFriendRequests _sidebarFriendRequests;
+        readonly FriendManager _friendManager;
 
         public SidebarFriends()
         {
             InitializeComponent();
-            friendManager = new FriendManager();
+            _friendManager = new FriendManager();
             InitializeBars();
             FillFriendsPanel();
         }
 
         private void InitializeBars()
         {
-            sidebarAddFriend = new SidebarAddFriend
+            _sidebarAddFriend = new SidebarAddFriend
             {
                 Visibility = Visibility.Collapsed,
             };
-            FriendsBar.Children.Add(sidebarAddFriend);
+            FriendsBar.Children.Add(_sidebarAddFriend);
 
-            sidebarFriendRequests = new SidebarFriendRequests
+            _sidebarFriendRequests = new SidebarFriendRequests
             {
                 Visibility = Visibility.Collapsed,
             };
-            FriendsBar.Children.Add(sidebarFriendRequests);
+            FriendsBar.Children.Add(_sidebarFriendRequests);
         }
 
         private void FillFriendsPanel()
         {
-            var friendsList = friendManager.GetFriendsListByUserID(SessionDetails.UserID);
-
+            panelFriends.Children.Clear();
+            var friendsList = _friendManager
+                .GetFriendsListByUserID(SessionDetails.UserID);
             foreach (var friend in friendsList)
             {
                 if (friend.Friend1ID != SessionDetails.UserID)
@@ -86,14 +87,15 @@ namespace ClienteDuo.Pages.Sidebars
             Button btnViewProfile = new Button
             {
                 Content = Properties.Resources.BtnProfile,
+                DataContext = username,
             };
-            btnViewProfile.Click += UnfriendEvent;
+            btnViewProfile.Click += ViewProfileEvent;
             stackPanel.Children.Add(btnViewProfile);
 
             Button btnUnfriend = new Button
             {
                 Content = Properties.Resources.BtnUnfriend,
-                DataContext = friendshipID
+                DataContext = friendshipID,
             };
             btnUnfriend.Click += UnfriendEvent;
             stackPanel.Children.Add(btnUnfriend);
@@ -101,14 +103,19 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
         {
-            //todo view profile
+            string username = ((FrameworkElement)sender).DataContext as string;
+            MainMenu.ShowPopUpUserDetails(username);
         }
 
         private void UnfriendEvent(object sender, RoutedEventArgs e)
         {
             int friendshipID = (int)((FrameworkElement)sender).DataContext;
-            friendManager.DeleteFriendshipByID(friendshipID);
-            //notify you are no longer friends
+            
+            if (_friendManager.DeleteFriendshipByID(friendshipID))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend);
+                FillFriendsPanel();
+            }
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
@@ -118,12 +125,12 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void BtnFriendRequests(object sender, RoutedEventArgs e)
         {
-            sidebarFriendRequests.Visibility = Visibility.Visible;
+            _sidebarFriendRequests.Visibility = Visibility.Visible;
         }
 
         private void BtnAddFriend(object sender, RoutedEventArgs e)
         {
-            sidebarAddFriend.Visibility = Visibility.Visible;
+            _sidebarAddFriend.Visibility = Visibility.Visible;
         }
     }
 }

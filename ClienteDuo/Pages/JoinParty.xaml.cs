@@ -21,13 +21,13 @@ namespace ClienteDuo.Pages
         {
             if (SessionDetails.IsGuest)
             {
-                GenerateGuestNameWithSeed(SessionDetails.PartyCode);
+                GenerateGuestNameWithSeed();
             }
 
-            string partyCode = TBoxPartyCode.Text.Trim();
-            if (ArePartyConditionsValid(partyCode))
+            string partyCodeString = TBoxPartyCode.Text.Trim();
+            if (ArePartyConditionsValid(partyCodeString))
             {
-                JoinLobby(Int32.Parse(partyCode));
+                JoinLobby(Int32.Parse(partyCodeString));
             }
         }
 
@@ -60,9 +60,9 @@ namespace ClienteDuo.Pages
             return false;
         }
 
-        private void GenerateGuestNameWithSeed(int seed)
+        private void GenerateGuestNameWithSeed()
         {
-            Random rand = new Random(seed);
+            Random rand = new Random();
             int id = rand.Next(0,1000); // validate in server if a player with same name exists
             SessionDetails.Username = "guest" + id;
         }

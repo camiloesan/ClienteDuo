@@ -11,5 +11,14 @@
         public static bool IsGuest { get; set; } = true;
         public static string Email { get; set; }
         public static int PartyCode { get; set; }
+
+        public static void CleanSessionDetails()
+        {
+            UserID = 0;
+            Username = string.Empty;
+            Email = string.Empty;
+            PartyCode = 0;
+            IsGuest = true;
+        }
     }
 }

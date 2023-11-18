@@ -6,7 +6,7 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarAddFriend : UserControl
     {
-        FriendManager friendManager;
+        readonly FriendManager friendManager;
 
         public SidebarAddFriend()
         {
@@ -21,13 +21,25 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void BtnSendFriendRequest(object sender, RoutedEventArgs e)
         {
-            if (friendManager.SendFriendRequest(SessionDetails.Username, TBoxUserReceiver.Text))
+            if (friendManager.IsFriendRequestAlreadyExistent(SessionDetails.Username, TBoxUserReceiver.Text.Trim()))
             {
-                MainWindow.ShowMessageBox("friend request sent ***");
+                MainWindow.ShowMessageBox("a friend request has already been sent");
+            } 
+            else if (friendManager.IsAlreadyFriend(SessionDetails.Username, TBoxUserReceiver.Text.Trim()))
+            {
+                MainWindow.ShowMessageBox("this user is your friend already");
             }
             else
             {
-                MainWindow.ShowMessageBox("username does not exist or service is unavailable***");
+                if (friendManager.SendFriendRequest(SessionDetails.Username, TBoxUserReceiver.Text))
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent);
+                    Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox("username does not exist or service is unavailable***");
+                }
             }
         }
     }

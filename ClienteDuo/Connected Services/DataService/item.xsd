@@ -88,6 +88,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="IsFriendRequestAlreadyExistent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="usernameSender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usernameReceiver" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsFriendRequestAlreadyExistentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsFriendRequestAlreadyExistentResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AcceptFriendRequest">
     <xs:complexType>
       <xs:sequence>
@@ -172,6 +187,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="IsAlreadyFriend">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="senderUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="receiverUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsAlreadyFriendResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsAlreadyFriendResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NewParty">
     <xs:complexType>
       <xs:sequence>
@@ -216,11 +246,6 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="partyCode" type="xs:int" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="IsPlayerActive">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="KickPlayer">
@@ -391,6 +416,44 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="position" type="xs:int" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyLogIn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q12:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotifyLogOut">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q13:User" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserLogged">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserLoggedResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserLoggedOut">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserLoggedOutResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

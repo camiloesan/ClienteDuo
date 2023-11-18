@@ -44,6 +44,7 @@ namespace ClienteDuo.Pages
         {
             SessionDetails.PartyCode = partyCode;
             SessionDetails.Username = username;
+            MainWindow.ShowMessageBox("pc: " + partyCode + "\n" + username);
             _partyManagerClient.JoinParty(partyCode, username);
         }
 
