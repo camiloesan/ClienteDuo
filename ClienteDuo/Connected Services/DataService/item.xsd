@@ -358,17 +358,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPlayerScores">
+  <xs:element name="GetPlayerList">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="partyCode" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetPlayerScoresResponse">
+  <xs:element name="GetPlayerListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayerScoresResult" nillable="true" type="q10:ArrayOfKeyValueOfstringint" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayerListResult" nillable="true" type="q10:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMatchResults">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMatchResultsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetMatchResultsResult" nillable="true" type="q11:ArrayOfKeyValueOfstringint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -378,6 +392,18 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTableCardsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerLeft">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlayerLeftResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -412,7 +438,7 @@
   <xs:element name="DrawCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q11:Card" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q12:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -426,7 +452,7 @@
   <xs:element name="GetCardsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetCardsResult" nillable="true" type="q12:ArrayOfCard" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetCardsResult" nillable="true" type="q13:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -442,7 +468,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="partyCode" type="xs:int" />
         <xs:element minOccurs="0" name="position" type="xs:int" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="card" nillable="true" type="q13:Card" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="card" nillable="true" type="q14:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

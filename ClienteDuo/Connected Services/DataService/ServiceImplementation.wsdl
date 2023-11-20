@@ -224,17 +224,29 @@
   <wsdl:message name="IMatchManager_GetCurrentTurn_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCurrentTurnResponse" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_GetPlayerScores_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerScores" />
+  <wsdl:message name="IMatchManager_GetPlayerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerList" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_GetPlayerScores_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPlayerScoresResponse" />
+  <wsdl:message name="IMatchManager_GetPlayerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_GetMatchResults_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatchResults" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_GetMatchResults_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatchResultsResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_UpdateTableCards_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateTableCards" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_UpdateTableCards_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UpdateTableCardsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_PlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeft" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_PlayerLeft_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_TurnFinished_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:TurnFinished" />
@@ -389,13 +401,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetCurrentTurn" message="tns:IMatchManager_GetCurrentTurn_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetCurrentTurnResponse" message="tns:IMatchManager_GetCurrentTurn_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetPlayerScores">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetPlayerScores" message="tns:IMatchManager_GetPlayerScores_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetPlayerScoresResponse" message="tns:IMatchManager_GetPlayerScores_OutputMessage" />
+    <wsdl:operation name="GetPlayerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetPlayerList" message="tns:IMatchManager_GetPlayerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetPlayerListResponse" message="tns:IMatchManager_GetPlayerList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMatchResults">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/GetMatchResults" message="tns:IMatchManager_GetMatchResults_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/GetMatchResultsResponse" message="tns:IMatchManager_GetMatchResults_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateTableCards">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/UpdateTableCards" message="tns:IMatchManager_UpdateTableCards_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/UpdateTableCardsResponse" message="tns:IMatchManager_UpdateTableCards_InputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/PlayerLeft" message="tns:IMatchManager_PlayerLeft_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/PlayerLeftResponse" message="tns:IMatchManager_PlayerLeft_InputCallbackMessage" />
     </wsdl:operation>
     <wsdl:operation name="TurnFinished">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchManager/TurnFinished" message="tns:IMatchManager_TurnFinished_OutputCallbackMessage" />
@@ -689,8 +709,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetPlayerScores">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/GetPlayerScores" style="document" />
+    <wsdl:operation name="GetPlayerList">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/GetPlayerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMatchResults">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/GetMatchResults" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -700,6 +729,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTableCards">
       <soap12:operation soapAction="http://tempuri.org/IMatchManager/UpdateTableCards" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/PlayerLeft" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

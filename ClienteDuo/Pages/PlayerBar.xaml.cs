@@ -16,29 +16,32 @@ using System.Windows.Shapes;
 namespace ClienteDuo.Pages
 {
     /// <summary>
-    /// Interaction logic for PlayerIcon.xaml
+    /// Interaction logic for PlayerBar.xaml
     /// </summary>
-    public partial class PlayerIcon : UserControl
+    public partial class PlayerBar : UserControl
     {
-        string username;
+        private string _username;
 
-        public PlayerIcon()
+        public PlayerBar()
         {
             InitializeComponent();
         }
 
-        public string Username 
-        {
-            set {
-                username = value;
-                _nameLabel.Content = username;
-            }
-
+        public string Username {
             get
             {
-                return username;
+                return _username;
             }
-             
+            set
+            {
+                _username = value;
+                usernameLabel.Content = _username;
+            }
+        }
+
+        private void BtnAddFriend(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

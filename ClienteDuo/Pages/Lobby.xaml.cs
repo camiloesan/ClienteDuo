@@ -14,7 +14,8 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, DataService.IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        private readonly bool _isWPFRunning = true;
+        CardTable _cardTable;
+        readonly bool _isWPFRunning = true;
         readonly InstanceContext _instanceContext;
         readonly DataService.PartyManagerClient _partyManagerClient;
         PartyManager partyManager;
@@ -48,6 +49,7 @@ namespace ClienteDuo.Pages
             Random rand = new Random();
             SessionDetails.PartyCode = rand.Next(0, 10000);
             SessionDetails.Username = username;
+            SessionDetails.IsHost = true;
             _partyManagerClient.NewParty(SessionDetails.PartyCode, SessionDetails.Username);
 
             return SessionDetails.PartyCode;
@@ -97,6 +99,8 @@ namespace ClienteDuo.Pages
             MusicManager.PlayPlayerLeftSound();
             CloseParty(SessionDetails.PartyCode);
             MainMenu mainMenu = new MainMenu();
+            SessionDetails.IsHost = false;
+
             App.Current.MainWindow.Content = mainMenu;
         }
 
@@ -203,22 +207,22 @@ namespace ClienteDuo.Pages
         private void BtnStartGame(object sender, RoutedEventArgs e)
         {
             InstanceContext instanceContext = new InstanceContext(this);
-            DataService.PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            
+            _cardTable = new CardTable();
+            InstanceContext tableContext = new InstanceContext(_cardTable);
+            MatchManagerClient tableClient = new MatchManagerClient(tableContext);
+            tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+
             client.StartGame(SessionDetails.PartyCode);
         }
 
         public void NotifyGameStarted()
         {
-            CardTable cardTable = new CardTable();
-            InstanceContext instanceContext = new InstanceContext(cardTable);
-            DataService.MatchManagerClient client = new MatchManagerClient(instanceContext);
+            _cardTable.LoadPlayers();
+            _cardTable.UpdateTableCards();
 
-            client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
-            Thread.Sleep(5000);
-
-            cardTable.LoadPlayers();
-            cardTable.UpdateTableCards();
-            App.Current.MainWindow.Content = cardTable;
+            App.Current.MainWindow.Content = _cardTable;
         }
 
         public void NotifyPlayerKicked()

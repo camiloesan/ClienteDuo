@@ -22,5 +22,18 @@ namespace ClienteDuo.Pages
             MessageBoxImage warningIcon = MessageBoxImage.Warning;
             MessageBox.Show(messageBoxText, caption, okButton, warningIcon);
         }
+
+        public static bool ShowConfirmationBox(string message)
+        {
+            string messageBoxText = message;
+            string caption = Properties.Resources.TitleAlert;
+
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Question;
+
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, buttons, icon);
+            return result == MessageBoxResult.Yes;
+        }
+
     }
 }

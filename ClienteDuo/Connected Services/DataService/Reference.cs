@@ -851,11 +851,17 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetCurrentTurn", ReplyAction="http://tempuri.org/IMatchManager/GetCurrentTurnResponse")]
         System.Threading.Tasks.Task<string> GetCurrentTurnAsync(int partyCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetPlayerScores", ReplyAction="http://tempuri.org/IMatchManager/GetPlayerScoresResponse")]
-        System.Collections.Generic.Dictionary<string, int> GetPlayerScores(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetPlayerList", ReplyAction="http://tempuri.org/IMatchManager/GetPlayerListResponse")]
+        string[] GetPlayerList(int partyCode);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetPlayerScores", ReplyAction="http://tempuri.org/IMatchManager/GetPlayerScoresResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetPlayerScoresAsync(int partyCode);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetPlayerList", ReplyAction="http://tempuri.org/IMatchManager/GetPlayerListResponse")]
+        System.Threading.Tasks.Task<string[]> GetPlayerListAsync(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetMatchResults", ReplyAction="http://tempuri.org/IMatchManager/GetMatchResultsResponse")]
+        System.Collections.Generic.Dictionary<string, int> GetMatchResults(int partyCode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/GetMatchResults", ReplyAction="http://tempuri.org/IMatchManager/GetMatchResultsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetMatchResultsAsync(int partyCode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -863,6 +869,9 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/UpdateTableCards", ReplyAction="http://tempuri.org/IMatchManager/UpdateTableCardsResponse")]
         void UpdateTableCards();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/PlayerLeft", ReplyAction="http://tempuri.org/IMatchManager/PlayerLeftResponse")]
+        void PlayerLeft(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/TurnFinished", ReplyAction="http://tempuri.org/IMatchManager/TurnFinishedResponse")]
         void TurnFinished(string currentTurn);
@@ -939,12 +948,20 @@ namespace ClienteDuo.DataService {
             return base.Channel.GetCurrentTurnAsync(partyCode);
         }
         
-        public System.Collections.Generic.Dictionary<string, int> GetPlayerScores(int partyCode) {
-            return base.Channel.GetPlayerScores(partyCode);
+        public string[] GetPlayerList(int partyCode) {
+            return base.Channel.GetPlayerList(partyCode);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetPlayerScoresAsync(int partyCode) {
-            return base.Channel.GetPlayerScoresAsync(partyCode);
+        public System.Threading.Tasks.Task<string[]> GetPlayerListAsync(int partyCode) {
+            return base.Channel.GetPlayerListAsync(partyCode);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, int> GetMatchResults(int partyCode) {
+            return base.Channel.GetMatchResults(partyCode);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, int>> GetMatchResultsAsync(int partyCode) {
+            return base.Channel.GetMatchResultsAsync(partyCode);
         }
     }
     

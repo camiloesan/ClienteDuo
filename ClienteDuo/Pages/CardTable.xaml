@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="CardTable" Height="600" Width="1000">
     <Grid x:Name="_background" Background="#FF2CAB00">
-        <ScrollViewer Margin="28,455,0,0" Height="130" Width="840" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="#FF003E01" >
+        <ScrollViewer Margin="15,455,0,0" Height="130" Width="840" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="#FF003E01" HorizontalAlignment="Left" VerticalAlignment="Top" >
             <StackPanel x:Name="_playerDeck" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
@@ -17,7 +17,6 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </StackPanel.RenderTransform>
-
             </StackPanel>
         </ScrollViewer>
 
@@ -72,8 +71,9 @@
             </Button.Background>
         </Button>
 
-        <local:PlayerIcon x:Name="_topPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Visibility="Collapsed"/>
-        <local:PlayerIcon x:Name="_leftPlayerIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152" Visibility="Collapsed"/>
+        <local:PlayerIcon x:Name="_topPlayerIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152" Visibility="Collapsed"/>
+        <local:PlayerIcon x:Name="_leftPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Visibility="Collapsed"/>
         <local:PlayerIcon x:Name="_rightPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Margin="848,0,0,0" Visibility="Collapsed"/>
+
     </Grid>
 </Page>
