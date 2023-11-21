@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages.Sidebars
 {
-    /// <summary>
-    /// Interaction logic for PopUpUserLogged.xaml
-    /// </summary>
     public partial class PopUpUserLogged : UserControl
     {
         public PopUpUserLogged()
