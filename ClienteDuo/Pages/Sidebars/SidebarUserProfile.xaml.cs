@@ -14,7 +14,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void FillLabels()
         {
-            LblPlayerID.Content = SessionDetails.UserID;
+            LblPlayerID.Content = SessionDetails.UserId;
             LblUsername.Content = SessionDetails.Username;
             LblEmail.Content = SessionDetails.Email;
         }

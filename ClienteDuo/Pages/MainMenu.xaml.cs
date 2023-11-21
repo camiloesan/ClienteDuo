@@ -1,5 +1,9 @@
-﻿using ClienteDuo.Pages.Sidebars;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
+using System;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,38 +11,72 @@ namespace ClienteDuo.Pages
 {
     public partial class MainMenu : Page
     {
-        SidebarUserProfile sidebarUserProfile;
-        SidebarFriends sidebarFriends;
-        SidebarLeaderboard sidebarLeaderboard;
+        private SidebarUserProfile _sidebarUserProfile;
+        private SidebarFriends _sidebarFriends;
+        private SidebarLeaderboard _sidebarLeaderboard;
+        private static PopUpUserDetails _popUpUserDetails;
+        private static PopUpUserLogged _popUpUserLogged;
 
         public MainMenu()
         {
             InitializeComponent();
-            InitializeSidebars();
+            InitializeAddOns();
         }
 
-        void InitializeSidebars()
+        public static void ShowPopUpFriendLogged(string username)
         {
-            sidebarUserProfile = new SidebarUserProfile
+            _popUpUserLogged.SetLabelText(username);
+            _popUpUserLogged.Visibility = Visibility.Visible;
+        }
+
+        public static void ShowPopUpUserDetails(string username)
+        {
+            _popUpUserDetails.SetDataContext(username, true);
+            _popUpUserDetails.Visibility = Visibility.Visible;
+        }
+
+        private void InitializeAddOns()
+        {
+            _sidebarUserProfile = new SidebarUserProfile
             {
                 Margin = new Thickness(0, 0, 700, 0),
                 Visibility = Visibility.Collapsed
             };
-            MainGrid.Children.Add(sidebarUserProfile);
+            MainGrid.Children.Add(_sidebarUserProfile);
 
-            sidebarFriends = new SidebarFriends
+            _sidebarFriends = new SidebarFriends
             {
                 Margin = new Thickness(700, 0, 0, 0),
                 Visibility = Visibility.Collapsed
             };
-            MainGrid.Children.Add(sidebarFriends);
+            MainGrid.Children.Add(_sidebarFriends);
 
-            sidebarLeaderboard = new SidebarLeaderboard
+            _sidebarLeaderboard = new SidebarLeaderboard
             {
                 Margin = new Thickness(700, 0, 0, 0),
                 Visibility = Visibility.Collapsed
             };
-            MainGrid.Children.Add(sidebarLeaderboard);
+            MainGrid.Children.Add(_sidebarLeaderboard);
+
+            _popUpUserLogged = new PopUpUserLogged
+            {
+                Width = 200,
+                Height = 80,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Visibility = Visibility.Collapsed
+            };
+            MainGrid.Children.Add(_popUpUserLogged);
+
+            _popUpUserDetails = new PopUpUserDetails
+            {
+                Width = 350,
+                Height = 200,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Visibility = Visibility.Collapsed,
+            };
+            MainGrid.Children.Add(_popUpUserDetails);
         }
 
         private void BtnQuitGame(object sender, RoutedEventArgs e)
@@ -48,29 +86,29 @@ namespace ClienteDuo.Pages
 
         private void BtnNewParty(object sender, RoutedEventArgs e)
         {
-            Lobby lobby = new Lobby(SessionDetails.Username);
-            App.Current.MainWindow.Content = lobby;
+            var lobby = new Lobby(SessionDetails.Username);
+            Application.Current.MainWindow.Content = lobby;
         }
 
         private void BtnJoinParty(object sender, RoutedEventArgs e)
         {
-            JoinParty joinParty = new JoinParty();
-            App.Current.MainWindow.Content = joinParty;
+            var joinParty = new JoinParty();
+            Application.Current.MainWindow.Content = joinParty;
         }
 
         private void BtnMyProfileSidebar(object sender, RoutedEventArgs e)
         {
-            sidebarUserProfile.Visibility = Visibility.Visible;
+            _sidebarUserProfile.Visibility = Visibility.Visible;
         }
 
         private void BtnFriendsSidebar(object sender, RoutedEventArgs e)
         {
-            sidebarFriends.Visibility = Visibility.Visible;
+            _sidebarFriends.Visibility = Visibility.Visible;
         }
 
         private void BtnLeaderboard(object sender, RoutedEventArgs e)
         {
-            sidebarLeaderboard.Visibility = Visibility.Visible;
+            _sidebarLeaderboard.Visibility = Visibility.Visible;
         }
     }
 }
