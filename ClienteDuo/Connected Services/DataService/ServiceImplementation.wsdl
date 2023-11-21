@@ -152,62 +152,68 @@
   <wsdl:message name="IUsersManager_IsAlreadyFriend_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsAlreadyFriendResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NewParty_InputMessage">
-    <wsdl:part name="parameters" element="tns:NewParty" />
+  <wsdl:message name="IUsersManager_IsUserAlreadyLoggedIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserAlreadyLoggedIn" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_JoinParty_InputMessage">
-    <wsdl:part name="parameters" element="tns:JoinParty" />
+  <wsdl:message name="IUsersManager_IsUserAlreadyLoggedIn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserAlreadyLoggedInResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_SendMessage_InputMessage">
-    <wsdl:part name="parameters" element="tns:SendMessage" />
+  <wsdl:message name="IPartyManager_NotifyCreateParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyCreateParty" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_LeaveParty_InputMessage">
-    <wsdl:part name="parameters" element="tns:LeaveParty" />
+  <wsdl:message name="IPartyManager_NotifyJoinParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyJoinParty" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_CloseParty_InputMessage">
-    <wsdl:part name="parameters" element="tns:CloseParty" />
+  <wsdl:message name="IPartyManager_NotifySendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifySendMessage" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_StartGame_InputMessage">
-    <wsdl:part name="parameters" element="tns:StartGame" />
+  <wsdl:message name="IPartyManager_NotifyLeaveParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyLeaveParty" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_KickPlayer_InputMessage">
-    <wsdl:part name="parameters" element="tns:KickPlayer" />
+  <wsdl:message name="IPartyManager_NotifyCloseParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyCloseParty" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPartyCreated_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPartyCreated" />
+  <wsdl:message name="IPartyManager_NotifyStartGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyStartGame" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPartyCreated_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPartyCreatedResponse" />
+  <wsdl:message name="IPartyManager_NotifyKickPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:NotifyKickPlayer" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerJoined_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerJoined" />
+  <wsdl:message name="IPartyManager_PartyCreated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreated" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerJoined_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerJoinedResponse" />
+  <wsdl:message name="IPartyManager_PartyCreated_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PartyCreatedResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyMessageReceived_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyMessageReceived" />
+  <wsdl:message name="IPartyManager_PlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoined" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyMessageReceived_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyMessageReceivedResponse" />
+  <wsdl:message name="IPartyManager_PlayerJoined_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerJoinedResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerLeft_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerLeft" />
+  <wsdl:message name="IPartyManager_MessageReceived_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageReceived" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerLeft_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerLeftResponse" />
+  <wsdl:message name="IPartyManager_MessageReceived_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:MessageReceivedResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerKicked_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerKicked" />
+  <wsdl:message name="IPartyManager_PlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeft" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyPlayerKicked_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyPlayerKickedResponse" />
+  <wsdl:message name="IPartyManager_PlayerLeft_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerLeftResponse" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyGameStarted_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyGameStarted" />
+  <wsdl:message name="IPartyManager_PlayerKicked_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerKicked" />
   </wsdl:message>
-  <wsdl:message name="IPartyManager_NotifyGameStarted_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:NotifyGameStartedResponse" />
+  <wsdl:message name="IPartyManager_PlayerKicked_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:PlayerKickedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_GameStarted_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStarted" />
+  </wsdl:message>
+  <wsdl:message name="IPartyManager_GameStarted_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GameStartedResponse" />
   </wsdl:message>
   <wsdl:message name="IPartyValidator_IsPartyExistent_InputMessage">
     <wsdl:part name="parameters" element="tns:IsPartyExistent" />
@@ -220,6 +226,12 @@
   </wsdl:message>
   <wsdl:message name="IPartyValidator_IsSpaceAvailable_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsSpaceAvailableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyValidator_IsUsernameInParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsernameInParty" />
+  </wsdl:message>
+  <wsdl:message name="IPartyValidator_IsUsernameInParty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUsernameInPartyResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_DrawCard_InputMessage">
     <wsdl:part name="parameters" element="tns:DrawCard" />
@@ -332,52 +344,56 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsAlreadyFriend" message="tns:IUsersManager_IsAlreadyFriend_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsAlreadyFriendResponse" message="tns:IUsersManager_IsAlreadyFriend_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsUserAlreadyLoggedIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsUserAlreadyLoggedIn" message="tns:IUsersManager_IsUserAlreadyLoggedIn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsUserAlreadyLoggedInResponse" message="tns:IUsersManager_IsUserAlreadyLoggedIn_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyManager">
-    <wsdl:operation name="NewParty">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NewParty" message="tns:IPartyManager_NewParty_InputMessage" />
+    <wsdl:operation name="NotifyCreateParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyCreateParty" message="tns:IPartyManager_NotifyCreateParty_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="JoinParty">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/JoinParty" message="tns:IPartyManager_JoinParty_InputMessage" />
+    <wsdl:operation name="NotifyJoinParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyJoinParty" message="tns:IPartyManager_NotifyJoinParty_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SendMessage">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/SendMessage" message="tns:IPartyManager_SendMessage_InputMessage" />
+    <wsdl:operation name="NotifySendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifySendMessage" message="tns:IPartyManager_NotifySendMessage_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="LeaveParty">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/LeaveParty" message="tns:IPartyManager_LeaveParty_InputMessage" />
+    <wsdl:operation name="NotifyLeaveParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyLeaveParty" message="tns:IPartyManager_NotifyLeaveParty_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="CloseParty">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/CloseParty" message="tns:IPartyManager_CloseParty_InputMessage" />
+    <wsdl:operation name="NotifyCloseParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyCloseParty" message="tns:IPartyManager_NotifyCloseParty_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="StartGame">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/StartGame" message="tns:IPartyManager_StartGame_InputMessage" />
+    <wsdl:operation name="NotifyStartGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyStartGame" message="tns:IPartyManager_NotifyStartGame_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="KickPlayer">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/KickPlayer" message="tns:IPartyManager_KickPlayer_InputMessage" />
+    <wsdl:operation name="NotifyKickPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyKickPlayer" message="tns:IPartyManager_NotifyKickPlayer_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPartyCreated">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPartyCreated" message="tns:IPartyManager_NotifyPartyCreated_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPartyCreatedResponse" message="tns:IPartyManager_NotifyPartyCreated_InputCallbackMessage" />
+    <wsdl:operation name="PartyCreated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PartyCreated" message="tns:IPartyManager_PartyCreated_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PartyCreatedResponse" message="tns:IPartyManager_PartyCreated_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerJoined">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerJoined" message="tns:IPartyManager_NotifyPlayerJoined_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerJoinedResponse" message="tns:IPartyManager_NotifyPlayerJoined_InputCallbackMessage" />
+    <wsdl:operation name="PlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerJoined" message="tns:IPartyManager_PlayerJoined_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerJoinedResponse" message="tns:IPartyManager_PlayerJoined_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyMessageReceived">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyMessageReceived" message="tns:IPartyManager_NotifyMessageReceived_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyMessageReceivedResponse" message="tns:IPartyManager_NotifyMessageReceived_InputCallbackMessage" />
+    <wsdl:operation name="MessageReceived">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/MessageReceived" message="tns:IPartyManager_MessageReceived_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/MessageReceivedResponse" message="tns:IPartyManager_MessageReceived_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerLeft">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerLeft" message="tns:IPartyManager_NotifyPlayerLeft_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerLeftResponse" message="tns:IPartyManager_NotifyPlayerLeft_InputCallbackMessage" />
+    <wsdl:operation name="PlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeft" message="tns:IPartyManager_PlayerLeft_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerLeftResponse" message="tns:IPartyManager_PlayerLeft_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerKicked">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerKicked" message="tns:IPartyManager_NotifyPlayerKicked_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyPlayerKickedResponse" message="tns:IPartyManager_NotifyPlayerKicked_InputCallbackMessage" />
+    <wsdl:operation name="PlayerKicked">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/PlayerKicked" message="tns:IPartyManager_PlayerKicked_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/PlayerKickedResponse" message="tns:IPartyManager_PlayerKicked_InputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation name="NotifyGameStarted">
-      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/NotifyGameStarted" message="tns:IPartyManager_NotifyGameStarted_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/NotifyGameStartedResponse" message="tns:IPartyManager_NotifyGameStarted_InputCallbackMessage" />
+    <wsdl:operation name="GameStarted">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyManager/GameStarted" message="tns:IPartyManager_GameStarted_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyManager/GameStartedResponse" message="tns:IPartyManager_GameStarted_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyValidator">
@@ -388,6 +404,10 @@
     <wsdl:operation name="IsSpaceAvailable">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyValidator/IsSpaceAvailable" message="tns:IPartyValidator_IsSpaceAvailable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyValidator/IsSpaceAvailableResponse" message="tns:IPartyValidator_IsSpaceAvailable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUsernameInParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyValidator/IsUsernameInParty" message="tns:IPartyValidator_IsUsernameInParty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyValidator/IsUsernameInPartyResponse" message="tns:IPartyValidator_IsUsernameInParty_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IMatchManager">
@@ -565,63 +585,63 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsUserAlreadyLoggedIn">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsUserAlreadyLoggedIn" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IPartyManager" type="tns:IPartyManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IPartyManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="NewParty">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NewParty" style="document" />
+    <wsdl:operation name="NotifyCreateParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyCreateParty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="JoinParty">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/JoinParty" style="document" />
+    <wsdl:operation name="NotifyJoinParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyJoinParty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="SendMessage">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/SendMessage" style="document" />
+    <wsdl:operation name="NotifySendMessage">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifySendMessage" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="LeaveParty">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/LeaveParty" style="document" />
+    <wsdl:operation name="NotifyLeaveParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyLeaveParty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="CloseParty">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/CloseParty" style="document" />
+    <wsdl:operation name="NotifyCloseParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyCloseParty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="StartGame">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/StartGame" style="document" />
+    <wsdl:operation name="NotifyStartGame">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyStartGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="KickPlayer">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/KickPlayer" style="document" />
+    <wsdl:operation name="NotifyKickPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyKickPlayer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPartyCreated">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPartyCreated" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerJoined">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPlayerJoined" style="document" />
+    <wsdl:operation name="PartyCreated">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PartyCreated" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -629,8 +649,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyMessageReceived">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyMessageReceived" style="document" />
+    <wsdl:operation name="PlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerJoined" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -638,8 +658,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerLeft">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPlayerLeft" style="document" />
+    <wsdl:operation name="MessageReceived">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/MessageReceived" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -647,8 +667,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyPlayerKicked">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyPlayerKicked" style="document" />
+    <wsdl:operation name="PlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerLeft" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -656,8 +676,17 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="NotifyGameStarted">
-      <soap12:operation soapAction="http://tempuri.org/IPartyManager/NotifyGameStarted" style="document" />
+    <wsdl:operation name="PlayerKicked">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/PlayerKicked" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameStarted">
+      <soap12:operation soapAction="http://tempuri.org/IPartyManager/GameStarted" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -680,6 +709,15 @@
     </wsdl:operation>
     <wsdl:operation name="IsSpaceAvailable">
       <soap12:operation soapAction="http://tempuri.org/IPartyValidator/IsSpaceAvailable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUsernameInParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyValidator/IsUsernameInParty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

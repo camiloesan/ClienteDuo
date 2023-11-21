@@ -107,6 +107,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Connected Services\DataService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Sidebars\PopUpUserDetails.xaml.cs">
       <DependentUpon>PopUpUserDetails.xaml</DependentUpon>
     </Compile>
@@ -134,7 +139,6 @@
     </Compile>
     <Compile Include="Properties\Resources.fr.Designer.cs" />
     <Compile Include="Properties\Resources.jp.Designer.cs" />
-    <Compile Include="Utilities\FriendManager.cs" />
     <Compile Include="Utilities\MusicManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
     <Compile Include="Utilities\Sha256Encryptor.cs" />
@@ -220,11 +224,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\DataService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
@@ -340,21 +339,6 @@
     <Resource Include="Images\united-states-of-america.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\DataService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\DataService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\DataService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\DataService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\profile-user.png" />
   </ItemGroup>
   <ItemGroup>
@@ -365,6 +349,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\DataService\item.disco" />
+    <None Include="Connected Services\DataService\configuration91.svcinfo" />
+    <None Include="Connected Services\DataService\configuration.svcinfo" />
+    <None Include="Connected Services\DataService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -373,6 +363,9 @@
     <Content Include="SFX\playerJoinedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DataService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

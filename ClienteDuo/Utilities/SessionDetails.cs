@@ -6,7 +6,7 @@
         {
         }
 
-        public static int UserID { get; set; }
+        public static int UserId { get; set; }
         public static string Username { get; set; }
         public static bool IsGuest { get; set; } = true;
         public static string Email { get; set; }
@@ -14,7 +14,7 @@
 
         public static void CleanSessionDetails()
         {
-            UserID = 0;
+            UserId = 0;
             Username = string.Empty;
             Email = string.Empty;
             PartyCode = 0;
