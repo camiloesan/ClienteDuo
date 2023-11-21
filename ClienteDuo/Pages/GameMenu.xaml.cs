@@ -41,6 +41,11 @@ namespace ClienteDuo.Pages
                         playerBar.kickButton.Visibility = Visibility.Visible;
                     }
 
+                    if (SessionDetails.IsGuest)
+                    {
+                        playerBar.addFriendButton.Visibility = Visibility.Collapsed;
+                    }
+
                     playerBar.Visibility = Visibility.Visible;
 
                     playerStackPanel.Children.Add(playerBar);
