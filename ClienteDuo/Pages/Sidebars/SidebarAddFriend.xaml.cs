@@ -1,17 +1,17 @@
 ﻿using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
+using ClienteDuo.DataService;
 
 namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarAddFriend : UserControl
     {
-        FriendManager friendManager;
+        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
 
         public SidebarAddFriend()
         {
             InitializeComponent();
-            friendManager = new FriendManager();
         }
 
         private void BtnClose(object sender, RoutedEventArgs e)
@@ -21,19 +21,70 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void BtnSendFriendRequest(object sender, RoutedEventArgs e)
         {
-            if (friendManager.SendFriendRequest(SessionDetails.Username, TBoxUserReceiver.Text))
+            string usernameSender = SessionDetails.Username;
+            string usernameReceiver = TBoxUserReceiver.Text.Trim();
+            if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox("friend request sent ***");
+                MainWindow.ShowMessageBox("a friend request has already been sent");
+            } 
+            else if (IsAlreadyFriend(usernameSender, usernameReceiver))
+            {
+                MainWindow.ShowMessageBox("this user is your friend already");
             }
             else
             {
-                MainWindow.ShowMessageBox("username does not exist or service is unavailable***");
+                if (SendFriendRequest(usernameSender, usernameReceiver))
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent);
+                    Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox("username does not exist or service is unavailable***");
+                }
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private bool SendFriendRequest(string usernameSender, string usernameReceiver)
         {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.SendFriendRequest(usernameSender, usernameReceiver);
+            }
+            catch
+            {
+                result = false;
+            }
+            return result;
+        }
 
+        private bool IsAlreadyFriend(string usernameSender, string usernameReceiver)
+        {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.IsAlreadyFriend(usernameSender, usernameReceiver);
+            }
+            catch
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        private bool IsFriendRequestAlreadySent(string usernameSender, string usernameReceiver)
+        {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.IsFriendRequestAlreadyExistent(usernameSender, usernameReceiver);
+            }
+            catch
+            {
+                result = false;
+            }
+            return result;
         }
     }
 }

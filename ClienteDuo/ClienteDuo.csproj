@@ -107,9 +107,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pages\PlayerBar.xaml.cs">
-      <DependentUpon>PlayerBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\PlayerIcon.xaml.cs">
       <DependentUpon>PlayerIcon.xaml</DependentUpon>
     </Compile>
@@ -131,9 +128,6 @@
     <Compile Include="Pages\Sidebars\SidebarUserProfile.xaml.cs">
       <DependentUpon>SidebarUserProfile.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Pages\GameOver.xaml.cs">
-      <DependentUpon>GameOver.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.fr.Designer.cs" />
     <Compile Include="Properties\Resources.ja.Designer.cs">
@@ -190,10 +184,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PlayerBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\PlayerIcon.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -221,10 +211,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-    <Page Include="Pages\GameOver.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -371,9 +357,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\DataService\item.disco" />
-    <Resource Include="Images\AddFriendIcon.png" />
-    <Resource Include="Images\XIcon.png" />
-    <Content Include="SFX\cardFlippedSound.wav" />
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

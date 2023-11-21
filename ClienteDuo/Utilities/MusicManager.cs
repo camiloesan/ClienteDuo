@@ -4,23 +4,22 @@ namespace ClienteDuo.Utilities
 {
     public class MusicManager
     {
-        private WaveOutEvent waveOut;
-        private AudioFileReader audioFileReader;
-        private bool isMusicEnabled = true;
-        private float volume = 0.5f;
+        private readonly WaveOutEvent _waveOutEvent;
+        private bool _isMusicEnabled = true;
+        private float _volume = 0.5f;
 
         public MusicManager(string musicFilePath)
         {
-            audioFileReader = new AudioFileReader(musicFilePath);
-            waveOut = new WaveOutEvent();
-            waveOut.Init(audioFileReader);
+            var audioFileReader = new AudioFileReader(musicFilePath);
+            _waveOutEvent = new WaveOutEvent();
+            _waveOutEvent.Init(audioFileReader);
         }
 
         public void ToggleMusic()
         {
-            isMusicEnabled = !isMusicEnabled;
+            _isMusicEnabled = !_isMusicEnabled;
 
-            if (isMusicEnabled)
+            if (_isMusicEnabled)
             {
                 PlayMusic();
             }
@@ -32,8 +31,8 @@ namespace ClienteDuo.Utilities
 
         public static void PlayPlayerJoinedSound()
         {
-            AudioFileReader audioFileReader = new AudioFileReader("SFX\\playerJoinedSound.wav");
-            WaveOutEvent waveOut = new WaveOutEvent();
+            var audioFileReader = new AudioFileReader("SFX\\playerJoinedSound.wav");
+            var waveOut = new WaveOutEvent();
             waveOut.Init(audioFileReader);
             waveOut.Volume = 0.5f;
             waveOut.Play();
@@ -41,46 +40,41 @@ namespace ClienteDuo.Utilities
 
         public static void PlayPlayerLeftSound()
         {
-            AudioFileReader audioFileReader = new AudioFileReader("SFX\\playerLeftSound.wav");
-            WaveOutEvent waveOut = new WaveOutEvent();
+            var audioFileReader = new AudioFileReader("SFX\\playerLeftSound.wav");
+            var waveOut = new WaveOutEvent();
             waveOut.Init(audioFileReader);
             waveOut.Volume = 0.5f;
             waveOut.Play();
         }
 
-        public void PlayMusic()
+        private void PlayMusic()
         {
-            if (isMusicEnabled)
-            {
-                waveOut.Volume = volume;
-                waveOut.Play();
-            }
+            if (!_isMusicEnabled) return;
+            _waveOutEvent.Volume = _volume;
+            _waveOutEvent.Play();
         }
 
-        public void StopMusic()
+        private void StopMusic()
         {
-            waveOut.Stop();
+            _waveOutEvent.Stop();
         }
 
         public float Volume
         {
-            get { return volume; }
+            get => _volume;
             set
             {
-                if (value < 0) volume = 0f;
-                else if (value > 1) volume = 1f;
-                else volume = value;
+                if (value < 0) _volume = 0f;
+                else if (value > 1) _volume = 1f;
+                else _volume = value;
 
-                if (isMusicEnabled)
+                if (_isMusicEnabled)
                 {
-                    waveOut.Volume = volume;
+                    _waveOutEvent.Volume = _volume;
                 }
             }
         }
 
-        public bool IsMusicEnabled
-        {
-            get { return isMusicEnabled; }
-        }
+        public bool IsMusicEnabled => _isMusicEnabled;
     }
 }

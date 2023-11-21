@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,35 +14,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClienteDuo.Pages
+namespace ClienteDuo.Pages.Sidebars
 {
     /// <summary>
-    /// Interaction logic for PlayerBar.xaml
+    /// Interaction logic for PopUpUserLogged.xaml
     /// </summary>
-    public partial class PlayerBar : UserControl
+    public partial class PopUpUserLogged : UserControl
     {
-        private string _username;
-
-        public PlayerBar()
+        public PopUpUserLogged()
         {
             InitializeComponent();
         }
 
-        public string Username {
-            get
-            {
-                return _username;
-            }
-            set
-            {
-                _username = value;
-                usernameLabel.Content = _username;
-            }
-        }
-
-        private void BtnAddFriend(object sender, RoutedEventArgs e)
+        public void SetLabelText(string username)
         {
-
+            LblMessage.Content = username + " " + Properties.Resources.DlgIsNowActive;
         }
     }
 }
