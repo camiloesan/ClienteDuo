@@ -20,25 +20,9 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class PlayerIcon : UserControl
     {
-        string username;
-
         public PlayerIcon()
         {
             InitializeComponent();
-        }
-
-        public string Username 
-        {
-            set {
-                username = value;
-                _nameLabel.Content = username;
-            }
-
-            get
-            {
-                return username;
-            }
-             
         }
     }
 }
