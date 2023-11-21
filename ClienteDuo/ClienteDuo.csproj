@@ -110,6 +110,12 @@
     <Compile Include="Pages\PlayerIcon.xaml.cs">
       <DependentUpon>PlayerIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Sidebars\PopUpUserDetails.xaml.cs">
+      <DependentUpon>PopUpUserDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\PopUpUserLogged.xaml.cs">
+      <DependentUpon>PopUpUserLogged.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Sidebars\SidebarAddFriend.xaml.cs">
       <DependentUpon>SidebarAddFriend.xaml</DependentUpon>
     </Compile>
@@ -185,6 +191,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PlayerIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Sidebars\PopUpUserDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Sidebars\PopUpUserLogged.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
