@@ -10,7 +10,7 @@
     <Grid x:Name="FriendsBar" Background="#FF6B472B">
         <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
         <StackPanel x:Name="panelFriends" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="350"/>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel" Background="#FF97785F" Foreground="White" Height="28" Width="60" BorderBrush="#FF6B552B"/>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
         <Button Content="{x:Static p:Resources.BtnAddFriend}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,60" FontSize="14" Width="120" Click="BtnAddFriend" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
         <Button Content="{x:Static p:Resources.BtnFriendRequests}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,60" FontSize="14" Click="BtnFriendRequests" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
     </Grid>

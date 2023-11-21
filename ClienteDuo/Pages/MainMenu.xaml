@@ -12,9 +12,9 @@
     <Grid x:Name="MainGrid">
         <Grid Background="{DynamicResource Background}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="89*"/>
-                <RowDefinition Height="422*"/>
-                <RowDefinition Height="88.816"/>
+                <RowDefinition Height="90*"/>
+                <RowDefinition Height="428*"/>
+                <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
             <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Width="336" Height="98" Margin="0,162,0,0" Grid.Row="1">
                 <Grid.RowDefinitions>

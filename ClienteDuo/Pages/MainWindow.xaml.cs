@@ -44,5 +44,18 @@ namespace ClienteDuo.Pages
         {
             throw new NotImplementedException();
         }
+
+        public static bool ShowConfirmationBox(string message)
+        {
+            string messageBoxText = message;
+            string caption = Properties.Resources.TitleAlert;
+
+            MessageBoxButton buttons = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Question;
+
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, buttons, icon);
+            return result == MessageBoxResult.Yes;
+        }
+
     }
 }
