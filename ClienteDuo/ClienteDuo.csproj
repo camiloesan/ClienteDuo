@@ -373,6 +373,7 @@
     <None Include="Connected Services\DataService\item.disco" />
     <Resource Include="Images\AddFriendIcon.png" />
     <Resource Include="Images\XIcon.png" />
+    <Resource Include="Images\DuoIcon.ico" />
     <Content Include="SFX\cardFlippedSound.wav" />
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
