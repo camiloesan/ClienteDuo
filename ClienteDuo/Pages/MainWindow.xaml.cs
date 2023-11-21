@@ -9,18 +9,16 @@ namespace ClienteDuo.Pages
 {
     public partial class MainWindow : Window, IUserConnectionHandlerCallback
     {
-        static InstanceContext _instanceContext;
-        static UserConnectionHandlerClient _userConnectionHandlerClient;
+        private static UserConnectionHandlerClient _userConnectionHandlerClient;
 
         public MainWindow()
         {
             InitializeComponent();
-            _instanceContext = new InstanceContext(this);
-            _userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
-            Launcher launcher = new Launcher();
-            this.ResizeMode = ResizeMode.NoResize;
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            this.Content = launcher;
+            _userConnectionHandlerClient = new DataService.UserConnectionHandlerClient(new InstanceContext(this));
+            var launcher = new Launcher();
+            ResizeMode = ResizeMode.NoResize;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            Content = launcher;
         }
 
         public static void NotifyLogin(User user)
@@ -30,12 +28,11 @@ namespace ClienteDuo.Pages
 
         public static void ShowMessageBox(string message)
         {
-            string messageBoxText = message;
             string caption = Properties.Resources.TitleAlert;
 
-            MessageBoxButton okButton = MessageBoxButton.OK;
-            MessageBoxImage warningIcon = MessageBoxImage.Warning;
-            MessageBox.Show(messageBoxText, caption, okButton, warningIcon);
+            const MessageBoxButton okButton = MessageBoxButton.OK;
+            const MessageBoxImage warningIcon = MessageBoxImage.Warning;
+            MessageBox.Show(message, caption, okButton, warningIcon);
         }
 
         public void UserLogged(string username)

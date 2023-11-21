@@ -9,14 +9,13 @@ namespace ClienteDuo.Pages.Sidebars
 {
     public partial class SidebarFriends : UserControl
     {
-        SidebarAddFriend _sidebarAddFriend;
-        SidebarFriendRequests _sidebarFriendRequests;
-        readonly FriendManager _friendManager;
+        private SidebarAddFriend _sidebarAddFriend;
+        private SidebarFriendRequests _sidebarFriendRequests;
+        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
 
         public SidebarFriends()
         {
             InitializeComponent();
-            _friendManager = new FriendManager();
             InitializeBars();
             FillFriendsPanel();
         }
@@ -39,15 +38,14 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendsPanel()
         {
             panelFriends.Children.Clear();
-            var friendsList = _friendManager
-                .GetFriendsListByUserID(SessionDetails.UserID);
+            var friendsList = GetFriendsListByUserId(SessionDetails.UserId);
             foreach (var friend in friendsList)
             {
-                if (friend.Friend1ID != SessionDetails.UserID)
+                if (friend.Friend1ID != SessionDetails.UserId)
                 {
                     CreateFriendPanel(friend.Friend1Username, friend.FriendshipID);
                 }
-                else if (friend.Friend2ID != SessionDetails.UserID)
+                else if (friend.Friend2ID != SessionDetails.UserId)
                 {
                     CreateFriendPanel(friend.Friend2Username, friend.FriendshipID);
                 }
@@ -56,17 +54,17 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void CreateFriendPanel(string username, int friendshipID)
         {
-            StackPanel stackPanel = new StackPanel
+            var stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Background = new SolidColorBrush(Colors.DimGray),
                 Width = 200,
-                Height = 40,
+                Height = 40
             };
             panelFriends.Children.Add(stackPanel);
 
-            Label activeStatus = new Label
+            var activeStatus = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
                 Content = "●",
@@ -75,7 +73,7 @@ namespace ClienteDuo.Pages.Sidebars
             };
             stackPanel.Children.Add(activeStatus);
 
-            Label usernameName = new Label
+            var usernameName = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
                 Content = username,
@@ -84,7 +82,7 @@ namespace ClienteDuo.Pages.Sidebars
             };
             stackPanel.Children.Add(usernameName);
 
-            Button btnViewProfile = new Button
+            var btnViewProfile = new Button
             {
                 Content = Properties.Resources.BtnProfile,
                 DataContext = username,
@@ -92,7 +90,7 @@ namespace ClienteDuo.Pages.Sidebars
             btnViewProfile.Click += ViewProfileEvent;
             stackPanel.Children.Add(btnViewProfile);
 
-            Button btnUnfriend = new Button
+            var btnUnfriend = new Button
             {
                 Content = Properties.Resources.BtnUnfriend,
                 DataContext = friendshipID,
@@ -103,19 +101,18 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
         {
-            string username = ((FrameworkElement)sender).DataContext as string;
+            var username = ((FrameworkElement)sender).DataContext as string;
             MainMenu.ShowPopUpUserDetails(username);
         }
 
         private void UnfriendEvent(object sender, RoutedEventArgs e)
         {
-            int friendshipID = (int)((FrameworkElement)sender).DataContext;
+            var friendshipId = (int)((FrameworkElement)sender).DataContext;
+
+            if (!DeleteFriendshipById(friendshipId)) return;
             
-            if (_friendManager.DeleteFriendshipByID(friendshipID))
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend);
-                FillFriendsPanel();
-            }
+            MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend);
+            FillFriendsPanel();
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
@@ -131,6 +128,26 @@ namespace ClienteDuo.Pages.Sidebars
         private void BtnAddFriend(object sender, RoutedEventArgs e)
         {
             _sidebarAddFriend.Visibility = Visibility.Visible;
+        }
+        
+        private IEnumerable<Friendship> GetFriendsListByUserId(int userId)
+        {
+            return _usersManagerClient.GetFriendsList(userId);
+        }
+
+        private bool DeleteFriendshipById(int friendshipId)
+        {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.DeleteFriendshipByID(friendshipId);
+            }
+            catch
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

@@ -11,11 +11,11 @@ namespace ClienteDuo.Pages
 {
     public partial class MainMenu : Page
     {
-        SidebarUserProfile _sidebarUserProfile;
-        SidebarFriends _sidebarFriends;
-        SidebarLeaderboard _sidebarLeaderboard;
-        static PopUpUserDetails _popUpUserDetails;
-        static PopUpUserLogged _popUpUserLogged;
+        private SidebarUserProfile _sidebarUserProfile;
+        private SidebarFriends _sidebarFriends;
+        private SidebarLeaderboard _sidebarLeaderboard;
+        private static PopUpUserDetails _popUpUserDetails;
+        private static PopUpUserLogged _popUpUserLogged;
 
         public MainMenu()
         {
@@ -35,7 +35,7 @@ namespace ClienteDuo.Pages
             _popUpUserDetails.Visibility = Visibility.Visible;
         }
 
-        void InitializeAddOns()
+        private void InitializeAddOns()
         {
             _sidebarUserProfile = new SidebarUserProfile
             {
@@ -74,7 +74,7 @@ namespace ClienteDuo.Pages
                 Height = 200,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Visibility = Visibility.Collapsed
+                Visibility = Visibility.Collapsed,
             };
             MainGrid.Children.Add(_popUpUserDetails);
         }
@@ -86,14 +86,14 @@ namespace ClienteDuo.Pages
 
         private void BtnNewParty(object sender, RoutedEventArgs e)
         {
-            Lobby lobby = new Lobby(SessionDetails.Username);
-            App.Current.MainWindow.Content = lobby;
+            var lobby = new Lobby(SessionDetails.Username);
+            Application.Current.MainWindow.Content = lobby;
         }
 
         private void BtnJoinParty(object sender, RoutedEventArgs e)
         {
-            JoinParty joinParty = new JoinParty();
-            App.Current.MainWindow.Content = joinParty;
+            var joinParty = new JoinParty();
+            Application.Current.MainWindow.Content = joinParty;
         }
 
         private void BtnMyProfileSidebar(object sender, RoutedEventArgs e)
