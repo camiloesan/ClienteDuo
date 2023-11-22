@@ -162,6 +162,9 @@
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>Tous les champes doivent être remplis</value>
   </data>
+  <data name="DlgExitMatchConfirmation" xml:space="preserve">
+    <value>¿Étes vous sur de voulouir sortir le jeu? Vous ne pourrez pas rejoindre autre fois</value>
+  </data>
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Nom d'utilisateur ou courriel incorrectes</value>
   </data>
@@ -195,6 +198,9 @@
   <data name="LblAddNewFriend" xml:space="preserve">
     <value>Ajouter nouvel ami</value>
   </data>
+  <data name="LblCardsLeft" xml:space="preserve">
+    <value>cartes en restant</value>
+  </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>
   </data>
@@ -203,6 +209,9 @@
   </data>
   <data name="LblEmail" xml:space="preserve">
     <value>Courriel</value>
+  </data>
+  <data name="LblGameOver" xml:space="preserve">
+    <value>Fin de jeu</value>
   </data>
   <data name="LblGameSettings" xml:space="preserve">
     <value>Configuration de jeu</value>
@@ -230,6 +239,9 @@
   </data>
   <data name="LblUsername" xml:space="preserve">
     <value>Nom d'utilisateur</value>
+  </data>
+  <data name="LblWinner" xml:space="preserve">
+    <value>Gagneur</value>
   </data>
   <data name="TitleAlert" xml:space="preserve">
     <value>Alerte</value>

@@ -4,13 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClienteDuo.Pages"
+             xmlns:p="clr-namespace:ClienteDuo.Properties"
              mc:Ignorable="d" d:DesignWidth="500" Height="377">
     <Grid Background="#FF964B00">
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="37*"/>
         </Grid.RowDefinitions>
-        <Label x:Name="resultLabel" Content="Finish" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36" Grid.RowSpan="2" Width="298" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="resultLabel" Content="{x:Static p:Resources.LblGameOver}" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="36" Width="450" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <ScrollViewer Margin="0,68,0,0" Width="450" VerticalAlignment="Top" HorizontalAlignment="Center" Height="230" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto">
             <StackPanel x:Name="resultStackPanel" Background="White" Height="230" Width="450" RenderTransformOrigin="0.5,0.5">
                 <StackPanel.RenderTransform>

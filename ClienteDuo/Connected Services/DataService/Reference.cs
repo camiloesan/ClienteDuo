@@ -827,11 +827,17 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/Subscribe")]
         System.Threading.Tasks.Task SubscribeAsync(int partyCode, string username);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/setGameScore")]
-        void setGameScore(int partyCode, string username, int cardCount);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/SetGameScore")]
+        void SetGameScore(int partyCode, string username, int cardCount);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/setGameScore")]
-        System.Threading.Tasks.Task setGameScoreAsync(int partyCode, string username, int cardCount);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/SetGameScore")]
+        System.Threading.Tasks.Task SetGameScoreAsync(int partyCode, string username, int cardCount);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/KickPlayerFromGame")]
+        void KickPlayerFromGame(int partyCode, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/KickPlayerFromGame")]
+        System.Threading.Tasks.Task KickPlayerFromGameAsync(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndGame")]
         void EndGame(int partyCode);
@@ -916,12 +922,20 @@ namespace ClienteDuo.DataService {
             return base.Channel.SubscribeAsync(partyCode, username);
         }
         
-        public void setGameScore(int partyCode, string username, int cardCount) {
-            base.Channel.setGameScore(partyCode, username, cardCount);
+        public void SetGameScore(int partyCode, string username, int cardCount) {
+            base.Channel.SetGameScore(partyCode, username, cardCount);
         }
         
-        public System.Threading.Tasks.Task setGameScoreAsync(int partyCode, string username, int cardCount) {
-            return base.Channel.setGameScoreAsync(partyCode, username, cardCount);
+        public System.Threading.Tasks.Task SetGameScoreAsync(int partyCode, string username, int cardCount) {
+            return base.Channel.SetGameScoreAsync(partyCode, username, cardCount);
+        }
+        
+        public void KickPlayerFromGame(int partyCode, string username) {
+            base.Channel.KickPlayerFromGame(partyCode, username);
+        }
+        
+        public System.Threading.Tasks.Task KickPlayerFromGameAsync(int partyCode, string username) {
+            return base.Channel.KickPlayerFromGameAsync(partyCode, username);
         }
         
         public void EndGame(int partyCode) {

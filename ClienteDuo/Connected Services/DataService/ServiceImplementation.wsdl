@@ -209,8 +209,11 @@
   <wsdl:message name="IMatchManager_Subscribe_InputMessage">
     <wsdl:part name="parameters" element="tns:Subscribe" />
   </wsdl:message>
-  <wsdl:message name="IMatchManager_setGameScore_InputMessage">
-    <wsdl:part name="parameters" element="tns:setGameScore" />
+  <wsdl:message name="IMatchManager_SetGameScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetGameScore" />
+  </wsdl:message>
+  <wsdl:message name="IMatchManager_KickPlayerFromGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:KickPlayerFromGame" />
   </wsdl:message>
   <wsdl:message name="IMatchManager_EndGame_InputMessage">
     <wsdl:part name="parameters" element="tns:EndGame" />
@@ -388,8 +391,11 @@
     <wsdl:operation name="Subscribe">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/Subscribe" message="tns:IMatchManager_Subscribe_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="setGameScore">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/setGameScore" message="tns:IMatchManager_setGameScore_InputMessage" />
+    <wsdl:operation name="SetGameScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/SetGameScore" message="tns:IMatchManager_SetGameScore_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="KickPlayerFromGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/KickPlayerFromGame" message="tns:IMatchManager_KickPlayerFromGame_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="EndGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/EndGame" message="tns:IMatchManager_EndGame_InputMessage" />
@@ -682,8 +688,14 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="setGameScore">
-      <soap12:operation soapAction="http://tempuri.org/IMatchManager/setGameScore" style="document" />
+    <wsdl:operation name="SetGameScore">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/SetGameScore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="KickPlayerFromGame">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/KickPlayerFromGame" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -7,21 +7,9 @@ namespace UNO_DUO_UnitTests
     public class CardTableTest
     {
         [TestMethod]
-        public void dealCardLeftTest()
+        public void dealCardTest()
         {
 
-        }
-
-        [TestMethod]
-        public void dealCardRightTest()
-        {
-
-        }
-
-        [TestMethod]
-        public void dealCardTopTest()
-        {
-            
         }
     }
 }

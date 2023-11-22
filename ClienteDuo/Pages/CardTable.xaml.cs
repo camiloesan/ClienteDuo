@@ -3,6 +3,7 @@ using ClienteDuo.Utilities;
 using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.ServiceModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -57,32 +58,56 @@ namespace ClienteDuo.Pages
 
         public void PlayerLeft(string username)
         {
-            foreach(PlayerIcon playerIcon in _playerIcons)
+            if (username.Equals(SessionDetails.Username))
             {
-                if (playerIcon.Username.Equals(username))
+                if (SessionDetails.IsGuest)
                 {
-                    playerIcon.Visibility = Visibility.Collapsed;
+                    Launcher launcher = new Launcher();
+
+                    App.Current.MainWindow.Content = launcher;
+                }
+                else
+                {
+                    MainMenu mainMenu = new MainMenu();
+
+                    App.Current.MainWindow.Content = mainMenu;
+                }
+
+                MainWindow.ShowMessageBox("You have been kicked from the game");
+            }
+            else
+            {
+                foreach (PlayerIcon playerIcon in _playerIcons)
+                {
+                    //The '?' operator is not available in the C# version I used for this and I'm too lazy to update
+                    if (playerIcon.Username != null)
+                    {
+                        if (playerIcon.Username.Equals(username))
+                        {
+                            playerIcon.Visibility = Visibility.Collapsed;
+                        }
+                    }
                 }
             }
         }
 
         private void InitializeAttributes()
         {
-            _cardLabels[0] = _leftCardLabel;
-            _cardLabels[1] = _middleCardLabel;
-            _cardLabels[2] = _rightCardLabel;
+            _cardLabels[0] = leftCardLabel;
+            _cardLabels[1] = middleCardLabel;
+            _cardLabels[2] = rightCardLabel;
 
-            _cardColors[0] = _leftCardColor;
-            _cardColors[1] = _middleCardColor;
-            _cardColors[2] = _rightCardColor;
+            _cardColors[0] = leftCardColor;
+            _cardColors[1] = middleCardColor;
+            _cardColors[2] = rightCardColor;
 
             _tableCards[0] = new DataService.Card();
             _tableCards[1] = new DataService.Card();
             _tableCards[2] = new DataService.Card();
 
-            _playerIcons[0] = _topPlayerIcon;
-            _playerIcons[1] = _leftPlayerIcon;
-            _playerIcons[2] = _rightPlayerIcon;
+            _playerIcons[0] = topPlayerIcon;
+            _playerIcons[1] = leftPlayerIcon;
+            _playerIcons[2] = rightPlayerIcon;
         }
 
         private void LoadSettingsMenu()
@@ -99,7 +124,7 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             MatchManagerClient client = new MatchManagerClient(instanceContext);
             List<string> matchPlayers = new List<string>(client.GetPlayerList(SessionDetails.PartyCode));
-            _currentTurnLabel.Content = client.GetCurrentTurn(SessionDetails.PartyCode);
+            currentTurnLabel.Content = client.GetCurrentTurn(SessionDetails.PartyCode);
 
             List<string> otherPlayers = new List<string>();
             foreach (string player in matchPlayers)
@@ -141,7 +166,7 @@ namespace ClienteDuo.Pages
 
         public void TurnFinished(string currentTurn)
         {
-            _currentTurnLabel.Content = currentTurn;
+            currentTurnLabel.Content = currentTurn;
 
             UpdateTableCards();
         }
@@ -149,8 +174,12 @@ namespace ClienteDuo.Pages
         public void GameOver()
         {
             GameOver gameOverScreen = new GameOver();
+            InstanceContext context = new InstanceContext(this);
+            MatchManagerClient client = new MatchManagerClient(context);
+            client.SetGameScore(SessionDetails.PartyCode, SessionDetails.Username, playerDeck.Children.Count);
 
-            gameOverScreen.LoadPlayers();
+            Thread.Sleep(3000);
+            gameOverScreen.LoadPlayers(client.GetMatchResults(SessionDetails.PartyCode));
 
             gameOverScreen.Visibility = Visibility.Visible;
         }
@@ -158,7 +187,7 @@ namespace ClienteDuo.Pages
         private void DealPlayerCard()
         {
             Card card = new Card();
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
+            CardManagerClient client = new CardManagerClient();
             DataService.Card dealtCard = client.DrawCard();
             _hasDrawnCard = true;
 
@@ -167,7 +196,7 @@ namespace ClienteDuo.Pages
             card.Visibility = Visibility.Visible;
             card.GameTable = this;
 
-            _playerDeck.Children.Add(card);
+            playerDeck.Children.Add(card);
         }
 
         private void _gameMenuButton_Click(object sender, RoutedEventArgs e)
@@ -177,7 +206,7 @@ namespace ClienteDuo.Pages
 
         private void Deck_Click(object sender, RoutedEventArgs e)
         {
-            if (_currentTurnLabel.Content.Equals(SessionDetails.Username))
+            if (currentTurnLabel.Content.Equals(SessionDetails.Username))
             {
                 DealPlayerCard();
             }
@@ -188,7 +217,7 @@ namespace ClienteDuo.Pages
             bool result = false;
             int selectionSum = 0;
 
-            if (_currentTurnLabel.Content.Equals(SessionDetails.Username))
+            if (currentTurnLabel.Content.Equals(SessionDetails.Username))
             {
                 for (int i = 0; i < _selectedCards.Count; i++)
                 {
@@ -201,7 +230,7 @@ namespace ClienteDuo.Pages
                         _matchingColors = -1;
                     }
 
-                    if (_selectedCards[i].Number.Equals("#"))
+                    if (_selectedCards[i].Number.Equals("#") && selectionSum < int.Parse(_tableCards[position].Number))
                     {
                         result = true;
                     }
@@ -222,7 +251,7 @@ namespace ClienteDuo.Pages
 
         private void PlayCard(int position)
         {
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
+            CardManagerClient client = new CardManagerClient();
             DataService.Card playedCard = new DataService.Card();
             playedCard.Number = _selectedCards[0].Number;
             playedCard.Color = _selectedCards[0].Color;
@@ -231,24 +260,25 @@ namespace ClienteDuo.Pages
 
             for (int i = 0; i < _selectedCards.Count; i++)
             {
-                _tableCards[position].Number = "";
                 _cardLabels[position].Content = _selectedCards[i].Number;
                 _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
                     
-                _playerDeck.Children.Remove(_selectedCards[i]);
+                playerDeck.Children.Remove(_selectedCards[i]);
             }
 
             _selectedCards.Clear();
 
-            if (_playerDeck.Children.Count == 0)
+            if (playerDeck.Children.Count == 0)
             {
                 InstanceContext context = new InstanceContext(this);
                 MatchManagerClient matchClient = new MatchManagerClient(context);
 
                 matchClient.EndGame(SessionDetails.PartyCode);
             }
-
-            _endTurnButton.Visibility = Visibility.Visible;
+            else
+            {
+                endTurnButton.Visibility = Visibility.Visible;
+            }
         }
 
         private void PlayCardLeft(object sender, RoutedEventArgs e)
@@ -274,6 +304,10 @@ namespace ClienteDuo.Pages
                 if (_matchingColors >= 1 || _hasDrawnCard)
                 {
                     PlayCard(2);
+
+                    //*Whistling in a non-suspicious manner*
+                    _matchingColors = -9000;
+                    _hasDrawnCard = false;
                 }
             }
             else
@@ -288,12 +322,11 @@ namespace ClienteDuo.Pages
         private void EndTurnButton_Click(object sender, RoutedEventArgs e)
         {
             InstanceContext instanceContext = new InstanceContext(this);
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
-            _endTurnButton.Visibility = Visibility.Collapsed;
+            MatchManagerClient client = new MatchManagerClient(instanceContext);
+            endTurnButton.Visibility = Visibility.Collapsed;
             _matchingColors = 0;
 
-            Card card = new Card();
-            DataService.CardManagerClient cardClient = new DataService.CardManagerClient();
+            CardManagerClient cardClient = new CardManagerClient();
             cardClient.DealCards(SessionDetails.PartyCode);
 
             client.EndTurn(SessionDetails.PartyCode);

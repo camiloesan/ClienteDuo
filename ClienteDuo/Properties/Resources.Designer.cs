@@ -232,6 +232,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Are you sure you want to quit the match? You will not be able to join again.
+        /// </summary>
+        public static string DlgExitMatchConfirmation {
+            get {
+                return ResourceManager.GetString("DlgExitMatchConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect email or password.
         /// </summary>
         public static string DlgFailedLogin {
@@ -322,6 +331,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to cards left.
+        /// </summary>
+        public static string LblCardsLeft {
+            get {
+                return ResourceManager.GetString("LblCardsLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chat.
         /// </summary>
         public static string LblChat {
@@ -354,6 +372,15 @@ namespace ClienteDuo.Properties {
         public static string LblFriends {
             get {
                 return ResourceManager.GetString("LblFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match Over.
+        /// </summary>
+        public static string LblGameOver {
+            get {
+                return ResourceManager.GetString("LblGameOver", resourceCulture);
             }
         }
         
@@ -426,6 +453,15 @@ namespace ClienteDuo.Properties {
         public static string LblUsername {
             get {
                 return ResourceManager.GetString("LblUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winner.
+        /// </summary>
+        public static string LblWinner {
+            get {
+                return ResourceManager.GetString("LblWinner", resourceCulture);
             }
         }
         

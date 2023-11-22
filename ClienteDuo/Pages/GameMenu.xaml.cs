@@ -2,6 +2,7 @@
 using ClienteDuo.Utilities;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -46,6 +47,11 @@ namespace ClienteDuo.Pages
                         playerBar.addFriendButton.Visibility = Visibility.Collapsed;
                     }
 
+                    if (new UsersManagerClient().IsUsernameTaken(playerUsername))
+                    {
+                        playerBar.addFriendButton.Visibility = Visibility.Collapsed;
+                    }
+
                     playerBar.Visibility = Visibility.Visible;
 
                     playerStackPanel.Children.Add(playerBar);
@@ -55,17 +61,20 @@ namespace ClienteDuo.Pages
 
         private void BtnExit(object sender, RoutedEventArgs e)
         {
-            if (SessionDetails.IsGuest)
+            if (MainWindow.ShowConfirmationBox(Properties.Resources.DlgExitMatchConfirmation))
             {
-                Launcher launcher = new Launcher();
+                if (SessionDetails.IsGuest)
+                {
+                    Launcher launcher = new Launcher();
 
-                App.Current.MainWindow.Content = launcher;
-            }
-            else
-            {
-                MainMenu mainMenu = new MainMenu();
+                    App.Current.MainWindow.Content = launcher;
+                }
+                else
+                {
+                    MainMenu mainMenu = new MainMenu();
 
-                App.Current.MainWindow.Content = mainMenu;
+                    App.Current.MainWindow.Content = mainMenu;
+                }
             }
         }
 
