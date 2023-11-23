@@ -112,6 +112,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GameOver.xaml.cs" />
+    <Compile Include="Pages\PlayerBar.xaml.cs" />
+    <Compile Include="Pages\PlayerIcon.xaml.cs" />
     <Compile Include="Pages\Sidebars\PopUpUserDetails.xaml.cs">
       <DependentUpon>PopUpUserDetails.xaml</DependentUpon>
     </Compile>
@@ -138,7 +141,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\Resources.fr.Designer.cs" />
-    <Compile Include="Properties\Resources.jp.Designer.cs" />
     <Compile Include="Utilities\MusicManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
     <Compile Include="Utilities\Sha256Encryptor.cs" />
@@ -150,14 +152,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\FlippedCard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\GameMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\GameOver.xaml" />
     <Page Include="Pages\InviteeLobby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +189,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PlayerBar.xaml" />
+    <Page Include="Pages\PlayerIcon.xaml" />
     <Page Include="Pages\Sidebars\PopUpUserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,9 +230,6 @@
     </Compile>
     <Compile Include="Pages\CardTable.xaml.cs">
       <DependentUpon>CardTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\FlippedCard.xaml.cs">
-      <DependentUpon>FlippedCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\GameMenu.xaml.cs">
       <DependentUpon>GameMenu.xaml</DependentUpon>
@@ -286,25 +284,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
-    <EmbeddedResource Include="Properties\Resources.jp.resx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.Card.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.Card1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendRequest.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendRequest1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.Friendship.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.Friendship1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.User.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.User1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\DataService\item.xsd">
@@ -331,9 +326,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\united-states-of-america.png" />
@@ -363,6 +355,9 @@
     <Content Include="SFX\playerJoinedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DataService\" />

@@ -11,7 +11,7 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="100">
             <Label Content="***IDUSUARIO***"/>
             <TextBox x:Name="TBoxUserReceiver" TextWrapping="Wrap" Width="120"/>
-            <Button Content="***ENVIAR***" Click="Button_Click"/>
+            <Button Content="***ENVIAR***"/>
 
         </StackPanel>
         <Button Content="***CERRAR***" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnClose"/>

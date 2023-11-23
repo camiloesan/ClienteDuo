@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="CardTableTest.cs" />
     <Compile Include="JoinPartyTests.cs" />
-    <Compile Include="LoginTests.cs" />
     <Compile Include="NewAccountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

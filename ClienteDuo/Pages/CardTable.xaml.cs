@@ -55,7 +55,7 @@ namespace ClienteDuo.Pages
             _selectedCards.Remove(unselectedCard);
         }
 
-        public void PlayerLeft(string username)
+        public void PlayerLeftGame(string username)
         {
             foreach(PlayerIcon playerIcon in _playerIcons)
             {

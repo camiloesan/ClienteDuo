@@ -7,49 +7,75 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="" />
+    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/App.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Card.datasource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.FriendRequest.datasource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Friendship.datasource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.User.datasource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.svcmap" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/configuration.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/configuration91.svcinfo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.disco" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item1.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item3.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="backupCamilo" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="vcs://ClienteDuo/Pages/Login.xaml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="vcs://ClienteDuo/Pages/Login.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/PlayerIcon.xaml.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2YSeWBQZwzh1jsIMQdorCYPLM4G" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "4bfde4a0",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mergetry&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
-      "C:\\Users\\Camilo\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Camilo\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ClienteDuo" type="DotNetProject" factoryName=".NET Project" singleton="false">
       <option name="EXE_PATH" value="$PROJECT_DIR$/ClienteDuo/bin/Debug/ClienteDuo.exe" />
@@ -83,12 +109,16 @@
       <workItem from="1700534313879" duration="2559000" />
       <workItem from="1700542624648" duration="380000" />
       <workItem from="1700543439929" duration="163000" />
+      <workItem from="1700583050800" duration="105000" />
+      <workItem from="1700584634702" duration="2097000" />
+      <workItem from="1700593045293" duration="971000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
