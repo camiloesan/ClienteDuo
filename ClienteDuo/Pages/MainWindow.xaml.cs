@@ -10,11 +10,12 @@ namespace ClienteDuo.Pages
     public partial class MainWindow : Window, IUserConnectionHandlerCallback
     {
         private static UserConnectionHandlerClient _userConnectionHandlerClient;
+        private static InstanceContext _instanceContext;
 
         public MainWindow()
         {
             InitializeComponent();
-            _userConnectionHandlerClient = new DataService.UserConnectionHandlerClient(new InstanceContext(this));
+            _instanceContext = new InstanceContext(this);
             var launcher = new Launcher();
             ResizeMode = ResizeMode.NoResize;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -23,6 +24,7 @@ namespace ClienteDuo.Pages
 
         public static void NotifyLogin(User user)
         {
+            _userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
             _userConnectionHandlerClient.NotifyLogIn(user);
         }
 

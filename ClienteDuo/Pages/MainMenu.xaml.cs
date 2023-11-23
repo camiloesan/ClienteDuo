@@ -1,9 +1,5 @@
-﻿using ClienteDuo.DataService;
-using ClienteDuo.Pages.Sidebars;
+﻿using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
-using System;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -74,14 +70,14 @@ namespace ClienteDuo.Pages
                 Height = 200,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Visibility = Visibility.Collapsed,
+                Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_popUpUserDetails);
         }
 
         private void BtnQuitGame(object sender, RoutedEventArgs e)
         {
-            App.Current.MainWindow.Close();
+            Application.Current.MainWindow.Close();
         }
 
         private void BtnNewParty(object sender, RoutedEventArgs e)

@@ -9,23 +9,16 @@
   <component name="ChangeListManager">
     <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/App.config" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Card.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.FriendRequest.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Friendship.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.User.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.svcmap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/configuration.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/configuration91.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.disco" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item1.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item3.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/InviteeLobby.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/InviteeLobby.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UNO_DUO_UnitTests/JoinPartyTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UNO_DUO_UnitTests/JoinPartyTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +105,7 @@
       <workItem from="1700583050800" duration="105000" />
       <workItem from="1700584634702" duration="2097000" />
       <workItem from="1700593045293" duration="971000" />
+      <workItem from="1700760105423" duration="8089000" />
     </task>
     <servers />
   </component>

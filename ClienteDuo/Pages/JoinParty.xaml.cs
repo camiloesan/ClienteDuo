@@ -20,22 +20,21 @@ namespace ClienteDuo.Pages
         private void BtnJoin(object sender, RoutedEventArgs e)
         {
             var partyCodeString = TBoxPartyCode.Text.Trim();
-            if (ArePartyConditionsValid(partyCodeString))
+            if (!ArePartyConditionsValid(partyCodeString)) return;
+            
+            if (SessionDetails.IsGuest)
             {
-                if (SessionDetails.IsGuest)
-                {
-                    GenerateGuestName(partyCodeString);
-                }
-
-                JoinLobby(int.Parse(partyCodeString));
+                GenerateGuestName(partyCodeString);
             }
+
+            JoinLobby(int.Parse(partyCodeString));
         }
 
         public void JoinLobby(int partyCode)
         {
             SessionDetails.PartyCode = partyCode;
-            var inviteeLobby = new InviteeLobby(SessionDetails.Username);
-            Application.Current.MainWindow.Content = inviteeLobby;
+            Lobby lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
+            Application.Current.MainWindow.Content = lobby;
         }
 
         private bool ArePartyConditionsValid(string partyCode)
