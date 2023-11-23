@@ -14,6 +14,7 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
+        private CardTable _cardTable;
         private readonly bool _isWpfRunning = true;
         private readonly PartyManagerClient _partyManagerClient;
         private PopUpUserDetails _popUpUserDetails;
@@ -175,7 +176,14 @@ namespace ClienteDuo.Pages
 
         private void BtnStartGame(object sender, RoutedEventArgs e)
         {
-            _partyManagerClient.NotifyStartGame(SessionDetails.PartyCode);
+            InstanceContext instanceContext = new InstanceContext(this);
+            PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+
+            _cardTable = new CardTable();
+            InstanceContext tableContext = new InstanceContext(_cardTable);
+            MatchManagerClient tableClient = new MatchManagerClient(tableContext);
+            tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+            client.NotifyStartGame(SessionDetails.PartyCode);
         }
 
         public void MessageReceived(string messageSent)
@@ -218,8 +226,9 @@ namespace ClienteDuo.Pages
 
         public void GameStarted()
         {
-            CardTable cardTable = new CardTable();
-            Application.Current.MainWindow.Content = cardTable;
+            _cardTable.LoadPlayers();
+            _cardTable.UpdateTableCards();
+            Application.Current.MainWindow.Content = _cardTable;
         }
 
         public void PlayerKicked()

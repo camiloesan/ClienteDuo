@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ClienteDuo.Pages.Sidebars;
+using System.Threading;
 
 namespace ClienteDuo.Pages
 {
@@ -198,7 +199,15 @@ namespace ClienteDuo.Pages
         public void GameStarted()
         {
             CardTable cardTable = new CardTable();
-            Application.Current.MainWindow.Content = cardTable;
+            InstanceContext instanceContext = new InstanceContext(cardTable);
+            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
+            client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+            
+            Thread.Sleep(5000);
+            
+            cardTable.LoadPlayers();
+            cardTable.UpdateTableCards();
+            App.Current.MainWindow.Content = cardTable;
         }
 
         public void PlayerKicked()
