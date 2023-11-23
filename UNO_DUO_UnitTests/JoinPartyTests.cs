@@ -13,20 +13,20 @@ namespace ClienteDuo.Pages.Tests
     public class JoinPartyTests
     {
         int partyCode;
-        readonly string hostUser = "camilo";
-        Lobby lobby;
+        readonly string hostUsername = "camilo";
+        private Lobby _lobby;
 
         [TestInitialize]
         public void Init()
         {
-            lobby = new Lobby();
-            partyCode = lobby.CreateNewParty(hostUser, lobby);
+            _lobby = new Lobby();
+            partyCode = _lobby.CreateNewParty(hostUsername);
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            lobby.CloseParty(partyCode);
+            _lobby.CloseParty(partyCode);
         }
 
         [TestMethod()]

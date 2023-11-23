@@ -142,6 +142,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kick.
+        /// </summary>
+        public static string BtnKick {
+            get {
+                return ResourceManager.GetString("BtnKick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string BtnLogin {
@@ -169,6 +178,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string BtnProfile {
+            get {
+                return ResourceManager.GetString("BtnProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quit Game.
         /// </summary>
         public static string BtnQuitGame {
@@ -192,6 +210,15 @@ namespace ClienteDuo.Properties {
         public static string BtnStartGame {
             get {
                 return ResourceManager.GetString("BtnStartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unfriend.
+        /// </summary>
+        public static string BtnUnfriend {
+            get {
+                return ResourceManager.GetString("BtnUnfriend", resourceCulture);
             }
         }
         
@@ -250,6 +277,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friend request sent.
+        /// </summary>
+        public static string DlgFriendRequestSent {
+            get {
+                return ResourceManager.GetString("DlgFriendRequestSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The party is already full, try again later.
         /// </summary>
         public static string DlgFullParty {
@@ -273,6 +309,15 @@ namespace ClienteDuo.Properties {
         public static string DlgInvalidPartyCodeFormat {
             get {
                 return ResourceManager.GetString("DlgInvalidPartyCodeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is now active.
+        /// </summary>
+        public static string DlgIsNowActive {
+            get {
+                return ResourceManager.GetString("DlgIsNowActive", resourceCulture);
             }
         }
         
@@ -309,6 +354,15 @@ namespace ClienteDuo.Properties {
         public static string DlgServiceException {
             get {
                 return ResourceManager.GetString("DlgServiceException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are no longer friends.
+        /// </summary>
+        public static string DlgUnfriend {
+            get {
+                return ResourceManager.GetString("DlgUnfriend", resourceCulture);
             }
         }
         

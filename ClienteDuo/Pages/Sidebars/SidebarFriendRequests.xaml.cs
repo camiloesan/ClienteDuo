@@ -1,4 +1,6 @@
-﻿using ClienteDuo.DataService;
+﻿using System;
+using System.Collections.Generic;
+using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,34 +12,35 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class SidebarFriendRequests : UserControl
     {
-        readonly FriendManager friendManager;
+        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
 
         public SidebarFriendRequests()
         {
             InitializeComponent();
-            friendManager = new FriendManager();
             FillFriendRequestsPanel();
         }
 
         private void FillFriendRequestsPanel()
         {
-            var friendRequestsList = friendManager.GetFriendRequestsByUserID(SessionDetails.UserID);
+            panelFriendRequests.Children.Clear();
+            var friendRequestsList = GetFriendRequestsByUserId(SessionDetails.UserId);
             foreach (var friendRequest in friendRequestsList)
             {
-                StackPanel stackPanel = new StackPanel
+                panelFriendRequests.Children.Clear();
+                var stackPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     HorizontalAlignment = HorizontalAlignment.Center
                 };
                 panelFriendRequests.Children.Add(stackPanel);
 
-                Label lblSender = new Label
+                var lblSender = new Label
                 {
                     Content = friendRequest.SenderUsername
                 };
                 stackPanel.Children.Add(lblSender);
 
-                Button btnAccept = new Button
+                var btnAccept = new Button
                 {
                     Content = Properties.Resources.BtnAccept,
                     DataContext = friendRequest,
@@ -45,7 +48,7 @@ namespace ClienteDuo.Pages.Sidebars
                 btnAccept.Click += AcceptFriendRequestEvent;
                 stackPanel.Children.Add(btnAccept);
 
-                Button btnReject = new Button
+                var btnReject = new Button
                 {
                     Content = Properties.Resources.BtnReject,
                     DataContext = friendRequest,
@@ -57,10 +60,11 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void AcceptFriendRequestEvent(object sender, RoutedEventArgs e)
         {
-            DataService.FriendRequest friendRequest = ((FrameworkElement)sender).DataContext as DataService.FriendRequest;
-            if (friendManager.AcceptFriendRequest(friendRequest))
+            var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
+            if (AcceptFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("ahora son amigos");
+                FillFriendRequestsPanel();
             }
             else
             {
@@ -70,10 +74,11 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void DeclineFriendRequestEvent(object sender, RoutedEventArgs e)
         {
-            DataService.FriendRequest friendRequest = ((FrameworkElement)sender).DataContext as DataService.FriendRequest;
-            if (friendManager.DeclineFriendRequest(friendRequest))
+            var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
+            if (DeclineFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox("haz eliminado la solicitud");
+                FillFriendRequestsPanel();
             }
             else
             {
@@ -84,6 +89,41 @@ namespace ClienteDuo.Pages.Sidebars
         private void BtnCancel(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
+        }
+
+        private bool AcceptFriendRequest(FriendRequest friendRequest)
+        {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.AcceptFriendRequest(friendRequest);
+            }
+            catch
+            {
+                result = false;
+            }
+            
+            return result;
+        }
+
+        private bool DeclineFriendRequest(FriendRequest friendRequest)
+        {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.RejectFriendRequest(friendRequest.FriendRequestID);
+            }
+            catch
+            {
+                result = false;
+            }
+
+            return result;
+        }
+        
+        private IEnumerable<FriendRequest> GetFriendRequestsByUserId(int userID)
+        {
+            return _usersManagerClient.GetFriendRequestsList(userID);
         }
     }
 }

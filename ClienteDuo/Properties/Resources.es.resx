@@ -141,6 +141,9 @@
   <data name="BtnJoinParty" xml:space="preserve">
     <value>Entrar a una Partida</value>
   </data>
+  <data name="BtnKick" xml:space="preserve">
+    <value>Expulsar</value>
+  </data>
   <data name="BtnLogin" xml:space="preserve">
     <value>Log In</value>
   </data>
@@ -150,6 +153,9 @@
   <data name="BtnNewParty" xml:space="preserve">
     <value>Nueva Partida</value>
   </data>
+  <data name="BtnProfile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
   <data name="BtnQuitGame" xml:space="preserve">
     <value>Salir del juego</value>
   </data>
@@ -158,6 +164,9 @@
   </data>
   <data name="BtnStartGame" xml:space="preserve">
     <value>Iniciar Partida</value>
+  </data>
+  <data name="BtnUnfriend" xml:space="preserve">
+    <value>Eliminar Amigo</value>
   </data>
   <data name="DlgConnectionError" xml:space="preserve">
     <value>Hubo un error al conectarse con el servicio, inténtelo de nuevo más tarde</value>
@@ -177,6 +186,9 @@
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Correo electrónico o contraseña incorrectos</value>
   </data>
+  <data name="DlgFriendRequestSent" xml:space="preserve">
+    <value>Solicitud de amistad enviada</value>
+  </data>
   <data name="DlgFullParty" xml:space="preserve">
     <value>La partida ya está llena, inténtalo de nuevo más tarde</value>
   </data>
@@ -185,6 +197,9 @@
   </data>
   <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
     <value>El código de partida debe ser un numero con máximo 4 dígitos</value>
+  </data>
+  <data name="DlgIsNowActive" xml:space="preserve">
+    <value>está en línea</value>
   </data>
   <data name="DlgMessageMaxCharacters" xml:space="preserve">
     <value>Un mensaje solo puede contener 250 caracteres</value>
@@ -197,6 +212,9 @@
   </data>
   <data name="DlgServiceException" xml:space="preserve">
     <value>Hubo un error con el servicio, inténtelo de nuevo más tarde</value>
+  </data>
+  <data name="DlgUnfriend" xml:space="preserve">
+    <value>Ya no son amigos</value>
   </data>
   <data name="DlgUsernameMaxCharacters" xml:space="preserve">
     <value>El máximo de caracteres para el nombre de usuario es de 30</value>

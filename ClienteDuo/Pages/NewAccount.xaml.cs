@@ -7,24 +7,24 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using ClienteDuo.DataService;
 
 namespace ClienteDuo
 {
     public partial class NewAccount : Page
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        readonly DataService.UsersManagerClient _usersManagerClient;
+        private readonly UsersManagerClient _usersManagerClient;
 
         public NewAccount()
         {
             InitializeComponent();
-            _usersManagerClient = new DataService.UsersManagerClient();
+            _usersManagerClient = new UsersManagerClient();
         }
 
         private void BtnCancel(object sender, RoutedEventArgs e)
         {
-            Launcher launcher = new Launcher();
-            App.Current.MainWindow.Content = launcher;
+            var launcher = new Launcher();
+            Application.Current.MainWindow.Content = launcher;
         }
 
         private void BtnContinue(object sender, RoutedEventArgs e)
@@ -33,18 +33,17 @@ namespace ClienteDuo
             string email = TBoxEmail.Text.Trim();
             string password = TBoxPassword.Password.Trim();
 
-            if (AreFieldsValid())
+            if (!AreFieldsValid()) return;
+            
+            if (AddUserToDatabase(username, email, password))
             {
-                if (AddUserToDatabase(username, email, password))
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess);
-                    Launcher launcher = new Launcher();
-                    App.Current.MainWindow.Content = launcher;
-                }
-                else
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException);
-                }
+                MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess);
+                var launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException);
             }
         }
 
@@ -55,19 +54,14 @@ namespace ClienteDuo
             string password = TBoxPassword.Password.Trim();
             string confirmedPassword = TBoxConfirmPassword.Password.Trim();
 
-            if (!AreFieldsEmpty()
-                && AreFieldsLengthValid(username, email)
-                && IsPasswordMatch(password, confirmedPassword)
-                && IsPasswordSecure(password)
-                && IsUsernameAvailable(username)
-                && IsEmailAvailable(email)
-                && !UsernameContainsGuestKeyword(username)
-                && IsEmailValid(email))
-            {
-                return true;
-            }
-
-            return false;
+            return !AreFieldsEmpty()
+                   && AreFieldsLengthValid(username, email)
+                   && IsPasswordMatch(password, confirmedPassword)
+                   && IsPasswordSecure(password)
+                   && IsUsernameAvailable(username)
+                   && IsEmailAvailable(email)
+                   && !UsernameContainsGuestKeyword(username)
+                   && IsEmailValid(email);
         }
 
         public bool IsUsernameAvailable(String username)
@@ -78,9 +72,8 @@ namespace ClienteDuo
                 isTaken = _usersManagerClient.IsUsernameTaken(username);
 
             }
-            catch (Exception ex)
+            catch
             {
-                log.Error(ex);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
             }
 
@@ -99,9 +92,8 @@ namespace ClienteDuo
             {
                 isTaken = _usersManagerClient.IsEmailTaken(email);
             }
-            catch (Exception ex)
+            catch
             {
-                log.Error(ex);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
             }
 
@@ -138,7 +130,8 @@ namespace ClienteDuo
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameMaxCharacters);
                 return false;
             }
-            else if (email.Length > 30)
+
+            if (email.Length > 30)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailMaxCharacters);
                 return false;
@@ -148,16 +141,14 @@ namespace ClienteDuo
 
         public bool IsPasswordSecure(string password)
         {
-            Regex regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,}$");
+            var regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,}$");
             if (regex.IsMatch(password))
             {
                 return true;
             }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword);
-                return false;
-            }
+
+            MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword);
+            return false;
         }
 
         public bool UsernameContainsGuestKeyword(string username)
@@ -172,34 +163,31 @@ namespace ClienteDuo
             string passwordField = TBoxPassword.Password;
             string confirmPasswordField = TBoxConfirmPassword.Password;
 
-            if (string.IsNullOrEmpty(usernameField)
-                || string.IsNullOrEmpty(emailField)
-                || string.IsNullOrEmpty(passwordField)
-                || string.IsNullOrEmpty(confirmPasswordField))
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields);
-                return true;
-            }
-            return false;
+            if (!string.IsNullOrEmpty(usernameField)
+                && !string.IsNullOrEmpty(emailField)
+                && !string.IsNullOrEmpty(passwordField)
+                && !string.IsNullOrEmpty(confirmPasswordField)) return false;
+            MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields);
+            return true;
         }
 
         public bool AddUserToDatabase(string username, string email, string password)
         {
-            DataService.User databaseUser = new DataService.User
+            User databaseUser = new User
             {
                 UserName = username,
                 Email = email,
                 Password = Sha256Encryptor.SHA256_hash(password),
             };
 
-            bool result = false;
+            bool result;
             try
             {
                 result = _usersManagerClient.AddUserToDatabase(databaseUser);
             }
-            catch (Exception ex)
+            catch
             {
-                log.Error(ex);
+                result = false;
             }
 
             return result;
@@ -207,14 +195,14 @@ namespace ClienteDuo
 
         public bool DeleteUserFromDatabaseByUsername(string username)
         {
-            bool result = false;
+            bool result;
             try
             {
                 result = _usersManagerClient.DeleteUserFromDatabaseByUsername(username);
             }
-            catch (Exception ex)
+            catch
             {
-                log.Error(ex);
+                result = false;
             }
 
             return result;
