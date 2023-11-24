@@ -21,19 +21,19 @@
                     <RowDefinition Height="33*"/>
                     <RowDefinition Height="32*"/>
                 </Grid.RowDefinitions>
-                <Button Content="{x:Static p:Resources.BtnNewParty}" Margin="5,5,5,5" Click="BtnNewParty" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
-                <Button Content="{x:Static p:Resources.BtnJoinParty}" Margin="5,5,5,5" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="BtnJoinParty" Width="155" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
-                <Button Content="{x:Static p:Resources.BtnQuitGame}" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnQuitGame" Width="336" Grid.Row="1" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
+                <Button Content="{x:Static p:Resources.BtnNewParty}" Margin="5,5,5,5" Click="BtnNewPartyEvent" Width="155" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
+                <Button Content="{x:Static p:Resources.BtnJoinParty}" Margin="5,5,5,5" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="BtnJoinPartyEvent" Width="155" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
+                <Button Content="{x:Static p:Resources.BtnQuitGame}" Margin="5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnQuitGameEvent" Width="336" Grid.Row="1" FontSize="14" Height="33" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Cursor="Hand"/>
             </Grid>
-            <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,0,0,0" Height="52" Width="52" Grid.Row="0" Click="BtnMyProfileSidebar">
+            <Button VerticalAlignment="Center" HorizontalAlignment="Left" Margin="16,0,0,0" Height="52" Width="52" Grid.Row="0" Click="BtnMyProfileSidebarEvent">
                 <Image Source="/Images/profile-user.png" OpacityMask="Black"/>
             </Button>
 
-            <Button x:Name="ToggleFriends" Width="52" Height="52" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,16,0" Click="BtnFriendsSidebar">
+            <Button Width="52" Height="52" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,16,0" Click="BtnFriendsSidebarEvent">
                 <Image Source="/Images/friends.png"/>
             </Button>
 
-            <Button Margin="0,0,16,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="52" Height="52" Grid.Row="2" Background="#FFDDDDDD" Click="BtnLeaderboard">
+            <Button Margin="0,0,16,0" VerticalAlignment="Center" HorizontalAlignment="Right" Width="52" Height="52" Grid.Row="2" Background="#FFDDDDDD" Click="BtnLeaderboardEvent">
                 <Image Source="/Images/trophy.png"/>
             </Button>
 

@@ -17,6 +17,6 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             
         </StackPanel>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
+        <Button Grid.Row="0" Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
     </Grid>
 </UserControl>

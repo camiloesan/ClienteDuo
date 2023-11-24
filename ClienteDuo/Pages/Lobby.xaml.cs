@@ -102,7 +102,7 @@ namespace ClienteDuo.Pages
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Visibility = Visibility.Collapsed
             };
-            masterGrid.Children.Add(_popUpUserDetails);
+            MasterGrid.Children.Add(_popUpUserDetails);
         }
 
         private void OnEnterSendMessage(object sender, KeyEventArgs e)
@@ -124,7 +124,7 @@ namespace ClienteDuo.Pages
             _partyManagerClient.NotifySendMessage(partyCode, message);
         }
 
-        private void BtnExitLobby(object sender, RoutedEventArgs e)
+        private void BtnExitLobbyEvent(object sender, RoutedEventArgs e)
         {
             _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
             if (SessionDetails.IsHost)
@@ -152,7 +152,7 @@ namespace ClienteDuo.Pages
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
         {
-            playersPanel.Children.Clear();
+            PanelPlayers.Children.Clear();
             foreach (var player in playersInLobby)
             {
                 CreatePlayerPanel(player.Key);
@@ -174,7 +174,7 @@ namespace ClienteDuo.Pages
                 Width = 200,
                 Height = 40,
             };
-            playersPanel.Children.Add(stackPanel);
+            PanelPlayers.Children.Add(stackPanel);
 
             var usernameName = new Label
             {
@@ -251,8 +251,8 @@ namespace ClienteDuo.Pages
                 Content = messageSent
             };
 
-            chatPanel.Children.Add(labelMessageReceived);
-            chatScrollViewer.ScrollToEnd();
+            PanelChat.Children.Add(labelMessageReceived);
+            ScrollViewerChat.ScrollToEnd();
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)

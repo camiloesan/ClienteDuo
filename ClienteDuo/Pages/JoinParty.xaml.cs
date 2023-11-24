@@ -17,7 +17,7 @@ namespace ClienteDuo.Pages
             _partyValidatorClient = new PartyValidatorClient();
         }
 
-        private void BtnJoin(object sender, RoutedEventArgs e)
+        private void BtnJoinEvent(object sender, RoutedEventArgs e)
         {
             var partyCodeString = TBoxPartyCode.Text.Trim();
             if (!ArePartyConditionsValid(partyCodeString)) return;
@@ -86,7 +86,7 @@ namespace ClienteDuo.Pages
             return _partyValidatorClient.IsSpaceAvailable(partyCode);
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             if (SessionDetails.IsGuest)
             {

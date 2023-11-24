@@ -22,17 +22,17 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void FillFriendRequestsPanel()
         {
-            panelFriendRequests.Children.Clear();
+            PanelFriendRequests.Children.Clear();
             var friendRequestsList = GetFriendRequestsByUserId(SessionDetails.UserId);
             foreach (var friendRequest in friendRequestsList)
             {
-                panelFriendRequests.Children.Clear();
+                PanelFriendRequests.Children.Clear();
                 var stackPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     HorizontalAlignment = HorizontalAlignment.Center
                 };
-                panelFriendRequests.Children.Add(stackPanel);
+                PanelFriendRequests.Children.Add(stackPanel);
 
                 var lblSender = new Label
                 {

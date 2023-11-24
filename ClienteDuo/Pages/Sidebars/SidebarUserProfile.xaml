@@ -16,7 +16,7 @@
         <Label Content="{x:Static p:Resources.LblMyProfile}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1"/>
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Width="200" Grid.Row="1">
             <Label Content="PlayerID" Foreground="White" FontSize="14"/>
-            <Label x:Name="LblPlayerID" Foreground="White" FontSize="14"/>
+            <Label x:Name="LblPlayerId" Foreground="White" FontSize="14"/>
             <Label Content="{x:Static p:Resources.LblUsername}" Foreground="White" FontSize="14"/>
             <Label x:Name="LblUsername" Foreground="White" FontSize="14"/>
             <Label Content="{x:Static p:Resources.LblEmail}" Foreground="White" FontSize="14"/>
