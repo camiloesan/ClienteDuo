@@ -4,6 +4,7 @@ using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +18,6 @@ namespace ClienteDuo.Pages
         private readonly bool _isWpfRunning = true;
         private readonly PartyManagerClient _partyManagerClient;
         private readonly PartyValidatorClient _partyValidatorClient = new PartyValidatorClient();
-        private CardTable _cardTable;
         private PopUpUserDetails _popUpUserDetails;
 
         public Lobby(string username)
@@ -234,10 +234,6 @@ namespace ClienteDuo.Pages
             var instanceContext = new InstanceContext(this);
             var client = new PartyManagerClient(instanceContext);
 
-            _cardTable = new CardTable();
-            var tableContext = new InstanceContext(_cardTable);
-            var tableClient = new MatchManagerClient(tableContext);
-            tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
             client.NotifyStartGame(SessionDetails.PartyCode);
         }
 
@@ -279,11 +275,17 @@ namespace ClienteDuo.Pages
             }
         }
 
-        public void GameStarted()
+        public async void GameStarted()
         {
-            _cardTable.LoadPlayers();
-            _cardTable.UpdateTableCards();
-            Application.Current.MainWindow.Content = _cardTable;
+            CardTable cardTable = new CardTable();
+            InstanceContext tableContext = new InstanceContext(cardTable);
+            MatchManagerClient tableClient = new MatchManagerClient(tableContext);
+            tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+
+            await Task.Delay(5000);
+            cardTable.LoadPlayers();
+            cardTable.UpdateTableCards();
+            Application.Current.MainWindow.Content = cardTable;
         }
 
         public void PlayerKicked()
