@@ -14,12 +14,12 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void FillLabels()
         {
-            LblPlayerID.Content = SessionDetails.UserId;
+            LblPlayerId.Content = SessionDetails.UserId;
             LblUsername.Content = SessionDetails.Username;
             LblEmail.Content = SessionDetails.Email;
         }
 
-        private void BtnCloseBar(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }

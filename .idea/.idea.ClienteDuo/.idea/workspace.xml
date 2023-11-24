@@ -7,26 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/App.config" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/App.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Card.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.FriendRequest.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Friendship.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.User.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.svcmap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/configuration.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/configuration91.svcinfo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.disco" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item1.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item3.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" afterDir="false" />
-    </list>
+    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +93,17 @@
       <workItem from="1700583050800" duration="105000" />
       <workItem from="1700584634702" duration="2097000" />
       <workItem from="1700593045293" duration="971000" />
+      <workItem from="1700760105423" duration="8629000" />
     </task>
+    <task id="LOCAL-00001" summary="just one lobby">
+      <option name="closed" value="true" />
+      <created>1700781442131</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700781442131</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,5 +135,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="just one lobby" />
+    <option name="LAST_COMMIT_MESSAGE" value="just one lobby" />
   </component>
 </project>

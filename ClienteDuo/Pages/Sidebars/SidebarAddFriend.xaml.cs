@@ -14,12 +14,12 @@ namespace ClienteDuo.Pages.Sidebars
             InitializeComponent();
         }
 
-        private void BtnClose(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }
 
-        private void BtnSendFriendRequest(object sender, RoutedEventArgs e)
+        private void BtnSendFriendRequestEvent(object sender, RoutedEventArgs e)
         {
             string usernameSender = SessionDetails.Username;
             string usernameReceiver = TBoxUserReceiver.Text.Trim();

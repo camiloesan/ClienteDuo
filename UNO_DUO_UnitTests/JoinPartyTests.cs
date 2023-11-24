@@ -73,13 +73,13 @@ namespace ClienteDuo.Pages.Tests
             string player2 = "jorgejuan22";
             string player3 = "towngameplay";
 
-            InviteeLobby inviteeLobby = new InviteeLobby();
+            var inviteeLobby = new Lobby(player1, partyCode);
             inviteeLobby.JoinGame(partyCode, player1);
 
-            InviteeLobby inviteeLobby2 = new InviteeLobby();
+            var inviteeLobby2 = new Lobby(player2, partyCode);
             inviteeLobby2.JoinGame(partyCode, player2);
 
-            InviteeLobby inviteeLobby3 = new InviteeLobby();
+            var inviteeLobby3 = new Lobby(player3, partyCode);
             inviteeLobby3.JoinGame(partyCode, player3);
 
             Assert.IsFalse(joinParty.IsSpaceAvailable(partyCode));

@@ -17,25 +17,24 @@ namespace ClienteDuo.Pages
             _partyValidatorClient = new PartyValidatorClient();
         }
 
-        private void BtnJoin(object sender, RoutedEventArgs e)
+        private void BtnJoinEvent(object sender, RoutedEventArgs e)
         {
             var partyCodeString = TBoxPartyCode.Text.Trim();
-            if (ArePartyConditionsValid(partyCodeString))
+            if (!ArePartyConditionsValid(partyCodeString)) return;
+            
+            if (SessionDetails.IsGuest)
             {
-                if (SessionDetails.IsGuest)
-                {
-                    GenerateGuestName(partyCodeString);
-                }
-
-                JoinLobby(int.Parse(partyCodeString));
+                GenerateGuestName(partyCodeString);
             }
+
+            JoinLobby(int.Parse(partyCodeString));
         }
 
         public void JoinLobby(int partyCode)
         {
             SessionDetails.PartyCode = partyCode;
-            var inviteeLobby = new InviteeLobby(SessionDetails.Username);
-            Application.Current.MainWindow.Content = inviteeLobby;
+            var lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
+            Application.Current.MainWindow.Content = lobby;
         }
 
         private bool ArePartyConditionsValid(string partyCode)
@@ -87,7 +86,7 @@ namespace ClienteDuo.Pages
             return _partyValidatorClient.IsSpaceAvailable(partyCode);
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             if (SessionDetails.IsGuest)
             {

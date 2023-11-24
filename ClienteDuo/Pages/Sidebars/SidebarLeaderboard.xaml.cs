@@ -13,7 +13,7 @@ namespace ClienteDuo.Pages.Sidebars
             InitializeComponent();
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }

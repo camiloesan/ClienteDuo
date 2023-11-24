@@ -1,9 +1,6 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
-using System;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,11 +8,11 @@ namespace ClienteDuo.Pages
 {
     public partial class MainMenu : Page
     {
+        private static PopUpUserDetails _popUpUserDetails;
+        private static PopUpUserLogged _popUpUserLogged;
         private SidebarUserProfile _sidebarUserProfile;
         private SidebarFriends _sidebarFriends;
         private SidebarLeaderboard _sidebarLeaderboard;
-        private static PopUpUserDetails _popUpUserDetails;
-        private static PopUpUserLogged _popUpUserLogged;
 
         public MainMenu()
         {
@@ -39,21 +36,30 @@ namespace ClienteDuo.Pages
         {
             _sidebarUserProfile = new SidebarUserProfile
             {
-                Margin = new Thickness(0, 0, 700, 0),
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
                 Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_sidebarUserProfile);
 
             _sidebarFriends = new SidebarFriends
             {
-                Margin = new Thickness(700, 0, 0, 0),
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
                 Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_sidebarFriends);
 
             _sidebarLeaderboard = new SidebarLeaderboard
             {
-                Margin = new Thickness(700, 0, 0, 0),
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
                 Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_sidebarLeaderboard);
@@ -74,39 +80,39 @@ namespace ClienteDuo.Pages
                 Height = 200,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Visibility = Visibility.Collapsed,
+                Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_popUpUserDetails);
         }
 
-        private void BtnQuitGame(object sender, RoutedEventArgs e)
+        private void BtnQuitGameEvent(object sender, RoutedEventArgs e)
         {
-            App.Current.MainWindow.Close();
+            Application.Current.MainWindow.Close();
         }
 
-        private void BtnNewParty(object sender, RoutedEventArgs e)
+        private void BtnNewPartyEvent(object sender, RoutedEventArgs e)
         {
             var lobby = new Lobby(SessionDetails.Username);
             Application.Current.MainWindow.Content = lobby;
         }
 
-        private void BtnJoinParty(object sender, RoutedEventArgs e)
+        private void BtnJoinPartyEvent(object sender, RoutedEventArgs e)
         {
             var joinParty = new JoinParty();
             Application.Current.MainWindow.Content = joinParty;
         }
 
-        private void BtnMyProfileSidebar(object sender, RoutedEventArgs e)
+        private void BtnMyProfileSidebarEvent(object sender, RoutedEventArgs e)
         {
             _sidebarUserProfile.Visibility = Visibility.Visible;
         }
 
-        private void BtnFriendsSidebar(object sender, RoutedEventArgs e)
+        private void BtnFriendsSidebarEvent(object sender, RoutedEventArgs e)
         {
             _sidebarFriends.Visibility = Visibility.Visible;
         }
 
-        private void BtnLeaderboard(object sender, RoutedEventArgs e)
+        private void BtnLeaderboardEvent(object sender, RoutedEventArgs e)
         {
             _sidebarLeaderboard.Visibility = Visibility.Visible;
         }

@@ -14,21 +14,37 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        private CardTable _cardTable;
         private readonly bool _isWpfRunning = true;
         private readonly PartyManagerClient _partyManagerClient;
+        private readonly PartyValidatorClient _partyValidatorClient = new PartyValidatorClient();
+        private CardTable _cardTable;
         private PopUpUserDetails _popUpUserDetails;
 
         public Lobby(string username)
         {
             InitializeComponent();
+            SessionDetails.IsHost = true;
             var instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
+            
             CreateNewParty(username);
-            LoadNewPartyCreatedComponents();
+            LoadVisualComponents();
+            MusicManager.PlayPlayerJoinedSound();
         }
 
-        public Lobby()
+        public Lobby(string username, int partyCode)
+        {
+            InitializeComponent();
+            SessionDetails.IsHost = false;
+            var instanceContext = new InstanceContext(this);
+            _partyManagerClient = new PartyManagerClient(instanceContext);
+            
+            JoinGame(partyCode, username);
+            LoadVisualComponents();
+            MusicManager.PlayPlayerJoinedSound();
+        }
+
+        public Lobby() //test-only constructor
         {
             var instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
@@ -44,18 +60,40 @@ namespace ClienteDuo.Pages
 
         public int CreateNewParty(string hostUsername)
         {
-            var randomCode = new Random();
-            SessionDetails.PartyCode = randomCode.Next(0, 10000); // validate collision
+            SessionDetails.PartyCode = GenerateNewPartyCode();
             SessionDetails.Username = hostUsername;
+            
             _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
 
             return SessionDetails.PartyCode;
         }
 
-        private void LoadNewPartyCreatedComponents()
+        private int GenerateNewPartyCode()
+        {
+            var random = new Random();
+            var randomCode = random.Next(1000, 10000);
+            if (_partyValidatorClient.IsPartyExistent(randomCode))
+            {
+                GenerateNewPartyCode();
+            }
+
+            return randomCode;
+        }
+
+        public void JoinGame(int partyCode, string username)
+        {
+            _partyManagerClient.NotifyJoinParty(partyCode, username);
+        }
+        
+        private void LoadVisualComponents()
         {
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + SessionDetails.PartyCode;
-            MusicManager.PlayPlayerJoinedSound();
+
+            if (!SessionDetails.IsHost)
+            {
+                BtnStartGame.Visibility = Visibility.Collapsed;
+            }
+            
             _popUpUserDetails = new PopUpUserDetails
             {
                 Width = 350,
@@ -64,7 +102,7 @@ namespace ClienteDuo.Pages
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Visibility = Visibility.Collapsed
             };
-            masterGrid.Children.Add(_popUpUserDetails);
+            MasterGrid.Children.Add(_popUpUserDetails);
         }
 
         private void OnEnterSendMessage(object sender, KeyEventArgs e)
@@ -86,12 +124,25 @@ namespace ClienteDuo.Pages
             _partyManagerClient.NotifySendMessage(partyCode, message);
         }
 
-        private void BtnExitLobby(object sender, RoutedEventArgs e)
+        private void BtnExitLobbyEvent(object sender, RoutedEventArgs e)
         {
+            _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
+            if (SessionDetails.IsHost)
+            {
+                CloseParty(SessionDetails.PartyCode);
+            }
+            
+            if (SessionDetails.IsGuest)
+            {
+                var launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+            }
+            else
+            {
+                var mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
+            }
             MusicManager.PlayPlayerLeftSound();
-            CloseParty(SessionDetails.PartyCode);
-            var mainMenu = new MainMenu();
-            Application.Current.MainWindow.Content = mainMenu;
         }
 
         public void CloseParty(int partyCode)
@@ -101,16 +152,16 @@ namespace ClienteDuo.Pages
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
         {
-            playersPanel.Children.Clear();
+            PanelPlayers.Children.Clear();
             foreach (var player in playersInLobby)
             {
                 CreatePlayerPanel(player.Key);
             }
         }
 
-        private void CreatePlayerPanel(string username)
+        private void CreatePlayerPanel(string playerUsername)
         {
-            var backgroundColor = username == SessionDetails.Username
+            var backgroundColor = playerUsername == SessionDetails.Username
                 ? new SolidColorBrush(Colors.Gold) 
                 : new SolidColorBrush(Colors.DimGray);
 
@@ -123,39 +174,43 @@ namespace ClienteDuo.Pages
                 Width = 200,
                 Height = 40,
             };
-            playersPanel.Children.Add(stackPanel);
+            PanelPlayers.Children.Add(stackPanel);
 
-            Label usernameName = new Label
+            var usernameName = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
-                Content = username,
+                Content = playerUsername,
                 Margin = new Thickness(10, 0, 5, 0),
                 VerticalAlignment = VerticalAlignment.Center
             };
             stackPanel.Children.Add(usernameName);
 
-            if (username == SessionDetails.Username) return;
+            if (playerUsername == SessionDetails.Username) return;
             
             var btnKick = new Button
             {
                 Content = Properties.Resources.BtnKick,
                 Margin = new Thickness(5, 0, 0, 0),
                 VerticalAlignment = VerticalAlignment.Center,
-                DataContext = username
+                DataContext = playerUsername
             };
             btnKick.Click += KickPlayerEvent;
-            stackPanel.Children.Add(btnKick);
 
             var btnViewProfile = new Button
             {
                 Content = Properties.Resources.BtnProfile,
                 Margin = new Thickness(5, 0, 0, 0),
                 VerticalAlignment = VerticalAlignment.Center,
-                DataContext = username
+                DataContext = playerUsername
             };
             btnViewProfile.Click += ViewProfileEvent;
 
-            if (!username.Contains("guest"))
+            if (SessionDetails.IsHost)
+            {
+                stackPanel.Children.Add(btnKick);
+            }
+            
+            if (!playerUsername.Contains("guest"))
             {
                 stackPanel.Children.Add(btnViewProfile);
             }
@@ -174,14 +229,14 @@ namespace ClienteDuo.Pages
             _partyManagerClient.NotifyKickPlayer(SessionDetails.PartyCode, username);
         }
 
-        private void BtnStartGame(object sender, RoutedEventArgs e)
+        private void StartGameEvent(object sender, RoutedEventArgs e)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            PartyManagerClient client = new DataService.PartyManagerClient(instanceContext);
+            var instanceContext = new InstanceContext(this);
+            var client = new PartyManagerClient(instanceContext);
 
             _cardTable = new CardTable();
-            InstanceContext tableContext = new InstanceContext(_cardTable);
-            MatchManagerClient tableClient = new MatchManagerClient(tableContext);
+            var tableContext = new InstanceContext(_cardTable);
+            var tableClient = new MatchManagerClient(tableContext);
             tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
             client.NotifyStartGame(SessionDetails.PartyCode);
         }
@@ -196,8 +251,8 @@ namespace ClienteDuo.Pages
                 Content = messageSent
             };
 
-            chatPanel.Children.Add(labelMessageReceived);
-            chatScrollViewer.ScrollToEnd();
+            PanelChat.Children.Add(labelMessageReceived);
+            ScrollViewerChat.ScrollToEnd();
         }
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
@@ -235,8 +290,16 @@ namespace ClienteDuo.Pages
         {
             if (!_isWpfRunning) return;
             
-            var mainMenu = new MainMenu();
-            Application.Current.MainWindow.Content = mainMenu;
+            if (SessionDetails.IsGuest)
+            {
+                var launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+            }
+            else
+            {
+                var mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
+            }
         }
     }
 }

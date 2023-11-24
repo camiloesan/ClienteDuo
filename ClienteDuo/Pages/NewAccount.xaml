@@ -10,18 +10,28 @@
       Title="NewAccount">
 
     <Grid Background="{DynamicResource Background}">
-        <Label x:Name="LblNewAccountTitle" Content="{x:Static p:Resources.TitleNewAccount}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+
+        <Rectangle HorizontalAlignment="Center" Height="360" Stroke="{DynamicResource HighlightFill}" VerticalAlignment="Center" Width="280" RadiusX="19.5" RadiusY="19.5" Fill="#FFA4A4A4" StrokeThickness="6"/>
+
+        <Label  Content="{x:Static p:Resources.TitleNewAccount}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label x:Name="LblUsername" Content="{x:Static p:Resources.LblUsername}" Foreground="White" FontSize="14"/>
-            <TextBox x:Name="TBoxUsername" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14"/>
-            <Label x:Name="LblEmail" Content="{x:Static p:Resources.LblEmail}" Foreground="White" FontSize="14"/>
-            <TextBox x:Name="TBoxEmail" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14"/>
-            <Label x:Name="LblPassword" Content="{x:Static p:Resources.LblPassword}" Foreground="White" FontSize="14"/>
-            <PasswordBox x:Name="TBoxPassword" Width="174" Margin="0,5,0,5" Height="20" FontSize="14"/>
-            <Label x:Name="LblConfirmPassword" Content="{x:Static p:Resources.LblConfirmPassword}" Foreground="White" Margin="0,5,0,5" FontSize="14"/>
-            <PasswordBox x:Name="TBoxConfirmPassword" Width="174" Height="20" FontSize="14"/>
+            <Label Content="{x:Static p:Resources.LblUsername}" FontSize="14"/>
+            <TextBox x:Name="TBoxUsername" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <Label Content="{x:Static p:Resources.LblEmail}" FontSize="14"/>
+            <TextBox x:Name="TBoxEmail" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <Label Content="{x:Static p:Resources.LblPassword}" FontSize="14"/>
+            <PasswordBox x:Name="TBoxPassword" Width="174" Margin="0,5,0,5" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <Label Content="{x:Static p:Resources.LblConfirmPassword}" Margin="0,5,0,5" FontSize="14"/>
+            <PasswordBox x:Name="TBoxConfirmPassword" Width="174" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <Grid Margin="0,35,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="88*"/>
+                    <ColumnDefinition Width="88*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="{x:Static p:Resources.BtnCancel}" Grid.Column="1" Click="BtnCancelEvent" Height="30" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Margin="5,0,0,0"/>
+                <Button Content="{x:Static p:Resources.BtnContinue}" Grid.Column="0" Click="BtnContinueEvent" Height="30" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Margin="0,0,5,0"/>
+            </Grid>
         </StackPanel>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="520,445,0,0" VerticalAlignment="Top" Click="BtnCancel" Width="70" Height="25" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
-        <Button Content="{x:Static p:Resources.BtnContinue}" HorizontalAlignment="Left" Margin="430,445,0,0" VerticalAlignment="Top" Width="70" Click="BtnContinue" Height="25" FontSize="14" Padding="1,1,1,1" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
+
     </Grid>
 </Page>

@@ -21,12 +21,12 @@ namespace ClienteDuo.Pages
             _usersManagerClient = new UsersManagerClient();
         }
 
-        private void BtnLogin(object sender, RoutedEventArgs e)
+        private void BtnLoginEvent(object sender, RoutedEventArgs e)
         {
             CreateSession();
         }
 
-        private void EnterKey(object sender, KeyEventArgs e)
+        private void EnterKeyEvent(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
@@ -78,10 +78,15 @@ namespace ClienteDuo.Pages
             return userCredentials;
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             var launcher = new Launcher();
             Application.Current.MainWindow.Content = launcher;
+        }
+
+        private void ResetPasswordEvent(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

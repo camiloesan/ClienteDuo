@@ -21,13 +21,13 @@ namespace ClienteDuo
             _usersManagerClient = new UsersManagerClient();
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             var launcher = new Launcher();
             Application.Current.MainWindow.Content = launcher;
         }
 
-        private void BtnContinue(object sender, RoutedEventArgs e)
+        private void BtnContinueEvent(object sender, RoutedEventArgs e)
         {
             string username = TBoxUsername.Text.Trim();
             string email = TBoxEmail.Text.Trim();

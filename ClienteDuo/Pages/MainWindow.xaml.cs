@@ -1,5 +1,7 @@
 ﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.ServiceModel;
@@ -10,19 +12,23 @@ namespace ClienteDuo.Pages
     public partial class MainWindow : Window, IUserConnectionHandlerCallback
     {
         private static UserConnectionHandlerClient _userConnectionHandlerClient;
+        public static InstanceContext _instanceContext;
 
         public MainWindow()
         {
             InitializeComponent();
-            _userConnectionHandlerClient = new DataService.UserConnectionHandlerClient(new InstanceContext(this));
-            var launcher = new Launcher();
             ResizeMode = ResizeMode.NoResize;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            Closing += OnWindowClosing;
+
+            _instanceContext = new InstanceContext(this);
+            var launcher = new Launcher();
             Content = launcher;
         }
 
         public static void NotifyLogin(User user)
         {
+            _userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
             _userConnectionHandlerClient.NotifyLogIn(user);
         }
 
@@ -43,6 +49,16 @@ namespace ClienteDuo.Pages
         public void UserLoggedOut(string username)
         {
             throw new NotImplementedException();
+        }
+
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
+            var user = new User
+            {
+                ID = SessionDetails.UserId,
+            };
+            userConnectionHandlerClient.NotifyLogOut(user);
         }
 
         public static bool ShowConfirmationBox(string message)

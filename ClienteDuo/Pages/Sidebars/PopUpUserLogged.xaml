@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="200">
 
-    <Grid Background="Black" Name="content">
+    <Grid Background="Black" Name="PopUpGrid">
         <Label x:Name="LblMessage" Content="username is active now" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
         <Grid.Triggers>
             <EventTrigger RoutedEvent="Grid.Loaded">
                 <BeginStoryboard>
                     <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="content" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:4" AutoReverse="False" />
+                        <DoubleAnimation Storyboard.TargetName="PopUpGrid" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:4" AutoReverse="False" />
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>

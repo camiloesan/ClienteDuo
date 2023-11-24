@@ -37,7 +37,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void FillFriendsPanel()
         {
-            panelFriends.Children.Clear();
+            PanelFriends.Children.Clear();
             var friendsList = GetFriendsListByUserId(SessionDetails.UserId);
             foreach (var friend in friendsList)
             {
@@ -57,12 +57,13 @@ namespace ClienteDuo.Pages.Sidebars
             var stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0,7,0,0),
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Background = new SolidColorBrush(Colors.DimGray),
                 Width = 200,
                 Height = 40
             };
-            panelFriends.Children.Add(stackPanel);
+            PanelFriends.Children.Add(stackPanel);
 
             var activeStatus = new Label
             {
@@ -115,17 +116,17 @@ namespace ClienteDuo.Pages.Sidebars
             FillFriendsPanel();
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }
 
-        private void BtnFriendRequests(object sender, RoutedEventArgs e)
+        private void BtnFriendRequestsEvent(object sender, RoutedEventArgs e)
         {
             _sidebarFriendRequests.Visibility = Visibility.Visible;
         }
 
-        private void BtnAddFriend(object sender, RoutedEventArgs e)
+        private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
         {
             _sidebarAddFriend.Visibility = Visibility.Visible;
         }
