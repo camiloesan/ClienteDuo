@@ -135,6 +135,9 @@
   <data name="BtnFriendRequests" xml:space="preserve">
     <value>Friend Requests</value>
   </data>
+  <data name="BtnGoToLobby" xml:space="preserve">
+    <value>Return to lobby</value>
+  </data>
   <data name="BtnJoin" xml:space="preserve">
     <value>Join</value>
   </data>
@@ -183,6 +186,9 @@
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>All fields must be completed</value>
   </data>
+  <data name="DlgExitConfirmation" xml:space="preserve">
+    <value>Are you sure you want to exit the match? You will not be able to join again until it is over</value>
+  </data>
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Incorrect email or password</value>
   </data>
@@ -222,6 +228,9 @@
   <data name="DlgUsernameTaken" xml:space="preserve">
     <value>Username is already taken</value>
   </data>
+  <data name="LblCalculatingResults" xml:space="preserve">
+    <value>Calculating results...</value>
+  </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>
   </data>
@@ -243,6 +252,9 @@
   <data name="LblLeaderboard" xml:space="preserve">
     <value>Leaderboard</value>
   </data>
+  <data name="LblMatchEnd" xml:space="preserve">
+    <value>Match Over</value>
+  </data>
   <data name="LblMyProfile" xml:space="preserve">
     <value>My Profile</value>
   </data>
@@ -257,6 +269,9 @@
   </data>
   <data name="LblUsername" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="LblWinner" xml:space="preserve">
+    <value>Winner</value>
   </data>
   <data name="TitleAlert" xml:space="preserve">
     <value>Alert</value>

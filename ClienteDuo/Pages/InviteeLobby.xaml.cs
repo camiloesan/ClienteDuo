@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using ClienteDuo.Pages.Sidebars;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace ClienteDuo.Pages
 {
@@ -196,14 +197,14 @@ namespace ClienteDuo.Pages
             UpdatePlayerList(playersInLobby);
         }
 
-        public void GameStarted()
+        public async void GameStarted()
         {
             CardTable cardTable = new CardTable();
             InstanceContext instanceContext = new InstanceContext(cardTable);
             DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
             client.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
-            
-            Thread.Sleep(5000);
+
+            await Task.Delay(5000);
             
             cardTable.LoadPlayers();
             cardTable.UpdateTableCards();

@@ -29,6 +29,24 @@ namespace ClienteDuo.Utilities
             }
         }
 
+        public static void PlayCardFlippedSound()
+        {
+            var audioFileReader = new AudioFileReader("SFX\\cardFlippedSound.wav");
+            var waveOut = new WaveOutEvent();
+            waveOut.Init(audioFileReader);
+            waveOut.Volume = 0.5f;
+            waveOut.Play();
+        }
+
+        public static void PlayMatchFinishedSound()
+        {
+            var audioFileReader = new AudioFileReader("SFX\\matchFinishedSound.wav");
+            var waveOut = new WaveOutEvent();
+            waveOut.Init(audioFileReader);
+            waveOut.Volume = 0.5f;
+            waveOut.Play();
+        }
+
         public static void PlayPlayerJoinedSound()
         {
             var audioFileReader = new AudioFileReader("SFX\\playerJoinedSound.wav");

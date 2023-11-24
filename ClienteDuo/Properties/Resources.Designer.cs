@@ -115,6 +115,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Return to lobby.
+        /// </summary>
+        public static string BtnGoToLobby {
+            get {
+                return ResourceManager.GetString("BtnGoToLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Join.
         /// </summary>
         public static string BtnJoin {
@@ -259,6 +268,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to exit the match? You will not be able to join again until it is over.
+        /// </summary>
+        public static string DlgExitConfirmation {
+            get {
+                return ResourceManager.GetString("DlgExitConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect email or password.
         /// </summary>
         public static string DlgFailedLogin {
@@ -376,6 +394,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calculating results....
+        /// </summary>
+        public static string LblCalculatingResults {
+            get {
+                return ResourceManager.GetString("LblCalculatingResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chat.
         /// </summary>
         public static string LblChat {
@@ -439,6 +466,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Match Over.
+        /// </summary>
+        public static string LblMatchEnd {
+            get {
+                return ResourceManager.GetString("LblMatchEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My Profile.
         /// </summary>
         public static string LblMyProfile {
@@ -480,6 +516,15 @@ namespace ClienteDuo.Properties {
         public static string LblUsername {
             get {
                 return ResourceManager.GetString("LblUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winner.
+        /// </summary>
+        public static string LblWinner {
+            get {
+                return ResourceManager.GetString("LblWinner", resourceCulture);
             }
         }
         

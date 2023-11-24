@@ -119,6 +119,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Pages\GameOver.xaml.cs" />
+    <Compile Include="Pages\MatchOverLabel.xaml.cs">
+      <DependentUpon>MatchOverLabel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PlayerBar.xaml.cs" />
     <Compile Include="Pages\PlayerIcon.xaml.cs" />
     <Compile Include="Pages\Sidebars\PopUpUserDetails.xaml.cs">
@@ -146,7 +149,11 @@
       <DependentUpon>SidebarUserProfile.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Properties\Resources.fr.Designer.cs" />
+    <Compile Include="Properties\Resources.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.fr.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\MusicManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
     <Compile Include="Utilities\Sha256Encryptor.cs" />
@@ -188,6 +195,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MatchOverLabel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,7 +300,10 @@
       <LastGenOutput>Resources.es.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.fr.resx" />
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -324,6 +338,7 @@
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Resource Include="Fonts\MPHudson.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -356,6 +371,12 @@
     <Resource Include="DuoLogo.ico" />
     <Resource Include="Images\XIcon.png" />
     <Resource Include="Images\AddFriendIcon.png" />
+    <Content Include="SFX\cardFlippedSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SFX\matchFinishedSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

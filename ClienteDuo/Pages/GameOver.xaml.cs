@@ -25,28 +25,24 @@ namespace ClienteDuo.Pages
             InitializeComponent();
         }
 
-        public void LoadPlayers()
+        public void LoadPlayers(Dictionary<string, int> playerScores)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            MatchManagerClient client = new MatchManagerClient(instanceContext);
-            Dictionary<string, int> playerScores = client.GetMatchResults(SessionDetails.PartyCode); 
-
             foreach (KeyValuePair<string, int> playerScore in playerScores)
             {
                 PlayerBar playerBar = new PlayerBar();
 
                 if (playerScore.Value == 0) 
                 {
-                    playerBar.Username = playerScore.Key + "( " + "WINNER" + ")"; //TODO Replace "Winner" with translation
+                    playerBar.Username = playerScore.Key + "( " + Properties.Resources.LblWinner + ")"; //TODO Replace "Winner" with translation
                 }
                 else
                 {
-                    playerBar.Username = playerScore.Key + "(" + playerScore.Value.ToString() + " " + "cards" + ")"; //TODO Replace "cards left" with its translation
+                    playerBar.Username = playerScore.Key + "(" + playerScore.Value.ToString() + " " + "Properties.Resources.LblCardsLeft" + ")"; //TODO Replace "cards left" with its translation
                 }
 
                 if (playerScore.Key.Equals(SessionDetails.Username))
                 {
-                    playerBar.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(Colors.Gold));
+                    playerBar.Background = new SolidColorBrush(Colors.Gold);
                 }
 
                 playerBar.Visibility = Visibility.Visible;

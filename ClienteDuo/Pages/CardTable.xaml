@@ -73,7 +73,6 @@
 
         <local:PlayerIcon x:Name="_topPlayerIcon" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152" Visibility="Collapsed"/>
         <local:PlayerIcon x:Name="_leftPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Visibility="Collapsed"/>
-        <local:PlayerIcon x:Name="_rightPlayerIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="152" Margin="848,0,0,0" Visibility="Collapsed"/>
-
+        <local:PlayerIcon x:Name="_rightPlayerIcon" HorizontalAlignment="Right" VerticalAlignment="Center" Width="152" Visibility="Collapsed"/>
     </Grid>
 </Page>

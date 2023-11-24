@@ -3,10 +3,12 @@ using ClienteDuo.Utilities;
 using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
@@ -29,7 +31,7 @@ namespace ClienteDuo.Pages
             InitializeAttributes();
             LoadSettingsMenu();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 DealPlayerCard();
             }
@@ -146,19 +148,34 @@ namespace ClienteDuo.Pages
             UpdateTableCards();
         }
 
-        public void GameOver()
+        public async void GameOver()
         {
-            GameOver gameOverScreen = new GameOver();
+            _endTurnButton.Visibility = Visibility.Collapsed;
 
-            gameOverScreen.LoadPlayers();
+            GameOver gameOverScreen = new GameOver();
+            InstanceContext instanceContext = new InstanceContext(this);
+            MatchManagerClient client = new MatchManagerClient(instanceContext);
+            client.SetGameScore(SessionDetails.PartyCode, SessionDetails.Username, _playerDeck.Children.Count);
+
+            MatchOverLabel matchOverLabel = new MatchOverLabel();
+            matchOverLabel.Visibility = Visibility.Visible;
+            
+            _background.Children.Add(matchOverLabel);
+            MusicManager.PlayMatchFinishedSound();
+
+            await Task.Delay(5000);
+
+            Dictionary<string, int> playerScores = client.GetMatchResults(SessionDetails.PartyCode);
+            gameOverScreen.LoadPlayers(playerScores);
 
             gameOverScreen.Visibility = Visibility.Visible;
+            _background.Children.Add(gameOverScreen);
         }
 
         private void DealPlayerCard()
         {
             Card card = new Card();
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
+            CardManagerClient client = new CardManagerClient();
             DataService.Card dealtCard = client.DrawCard();
             _hasDrawnCard = true;
 
@@ -201,7 +218,7 @@ namespace ClienteDuo.Pages
                         _matchingColors = -1;
                     }
 
-                    if (_selectedCards[i].Number.Equals("#"))
+                    if (_selectedCards[i].Number.Equals("#") && !_tableCards[position].Number.Equals(""))
                     {
                         result = true;
                     }
@@ -228,10 +245,11 @@ namespace ClienteDuo.Pages
             playedCard.Color = _selectedCards[0].Color;
 
             client.PlayCard(SessionDetails.PartyCode, position, playedCard);
+            MusicManager.PlayCardFlippedSound();
 
             for (int i = 0; i < _selectedCards.Count; i++)
             {
-                _tableCards[position].Number = "";
+                _tableCards[position].Number = "PLAYED CARD";
                 _cardLabels[position].Content = _selectedCards[i].Number;
                 _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
                     
@@ -247,8 +265,12 @@ namespace ClienteDuo.Pages
 
                 matchClient.EndGame(SessionDetails.PartyCode);
             }
+            else
+            {
+                _endTurnButton.Visibility = Visibility.Visible;
+            }
 
-            _endTurnButton.Visibility = Visibility.Visible;
+            
         }
 
         private void PlayCardLeft(object sender, RoutedEventArgs e)

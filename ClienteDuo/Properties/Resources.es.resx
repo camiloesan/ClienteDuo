@@ -132,6 +132,9 @@
   <data name="BtnExitLobby" xml:space="preserve">
     <value>Salir de la Sala</value>
   </data>
+  <data name="BtnGoToLobby" xml:space="preserve">
+    <value>Volver al lobby</value>
+  </data>
   <data name="BtnJoin" xml:space="preserve">
     <value>Unirse</value>
   </data>
@@ -180,6 +183,9 @@
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>Todos los campos deben estar llenos antes de continuar</value>
   </data>
+  <data name="DlgExitConfirmation" xml:space="preserve">
+    <value>¿Está seguro de que desea abandonar la partida? No podrá unirse hasta que esta termine</value>
+  </data>
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Correo electrónico o contraseña incorrectos</value>
   </data>
@@ -219,6 +225,9 @@
   <data name="DlgUsernameTaken" xml:space="preserve">
     <value>Ya existe ese nombre de usuario</value>
   </data>
+  <data name="LblCalculatingResults" xml:space="preserve">
+    <value>Calculando resultados...</value>
+  </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>
   </data>
@@ -234,6 +243,9 @@
   <data name="LblInGameUsername" xml:space="preserve">
     <value>Nombre de Usuario Temporal</value>
   </data>
+  <data name="LblMatchEnd" xml:space="preserve">
+    <value>Fin de partida</value>
+  </data>
   <data name="LblPartyCode" xml:space="preserve">
     <value>Código de Partida</value>
   </data>
@@ -245,6 +257,9 @@
   </data>
   <data name="LblUsername" xml:space="preserve">
     <value>Nombre de Usuario</value>
+  </data>
+  <data name="LblWinner" xml:space="preserve">
+    <value>Ganador</value>
   </data>
   <data name="TitleAlert" xml:space="preserve">
     <value>Alerta</value>
