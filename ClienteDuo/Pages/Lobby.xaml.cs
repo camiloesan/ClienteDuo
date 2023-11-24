@@ -14,9 +14,10 @@ namespace ClienteDuo.Pages
     public partial class Lobby : Page, IPartyManagerCallback
     {
         const int MESSAGE_MAX_LENGTH = 250;
-        private CardTable _cardTable;
         private readonly bool _isWpfRunning = true;
         private readonly PartyManagerClient _partyManagerClient;
+        private readonly PartyValidatorClient _partyValidatorClient = new PartyValidatorClient();
+        private CardTable _cardTable;
         private PopUpUserDetails _popUpUserDetails;
 
         public Lobby(string username)
@@ -25,6 +26,7 @@ namespace ClienteDuo.Pages
             SessionDetails.IsHost = true;
             var instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
+            
             CreateNewParty(username);
             LoadVisualComponents();
             MusicManager.PlayPlayerJoinedSound();
@@ -36,6 +38,7 @@ namespace ClienteDuo.Pages
             SessionDetails.IsHost = false;
             var instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
+            
             JoinGame(partyCode, username);
             LoadVisualComponents();
             MusicManager.PlayPlayerJoinedSound();
@@ -57,12 +60,24 @@ namespace ClienteDuo.Pages
 
         public int CreateNewParty(string hostUsername)
         {
-            var randomCode = new Random();
-            SessionDetails.PartyCode = randomCode.Next(0, 10000); // validate collision ispartycodeavailable
+            SessionDetails.PartyCode = GenerateNewPartyCode();
             SessionDetails.Username = hostUsername;
+            
             _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
 
             return SessionDetails.PartyCode;
+        }
+
+        private int GenerateNewPartyCode()
+        {
+            var random = new Random();
+            var randomCode = random.Next(1000, 10000);
+            if (_partyValidatorClient.IsPartyExistent(randomCode))
+            {
+                GenerateNewPartyCode();
+            }
+
+            return randomCode;
         }
 
         public void JoinGame(int partyCode, string username)

@@ -33,7 +33,7 @@ namespace ClienteDuo.Pages
         public void JoinLobby(int partyCode)
         {
             SessionDetails.PartyCode = partyCode;
-            Lobby lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
+            var lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
             Application.Current.MainWindow.Content = lobby;
         }
 
