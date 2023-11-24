@@ -1,4 +1,5 @@
-﻿using ClienteDuo.Pages.Sidebars;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,21 +36,30 @@ namespace ClienteDuo.Pages
         {
             _sidebarUserProfile = new SidebarUserProfile
             {
-                Margin = new Thickness(0, 0, 700, 0),
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
                 Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_sidebarUserProfile);
 
             _sidebarFriends = new SidebarFriends
             {
-                Margin = new Thickness(700, 0, 0, 0),
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
                 Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_sidebarFriends);
 
             _sidebarLeaderboard = new SidebarLeaderboard
             {
-                Margin = new Thickness(700, 0, 0, 0),
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
                 Visibility = Visibility.Collapsed
             };
             MainGrid.Children.Add(_sidebarLeaderboard);
@@ -77,6 +87,12 @@ namespace ClienteDuo.Pages
 
         private void BtnQuitGame(object sender, RoutedEventArgs e)
         {
+            var userConnectionHandlerClient = new UserConnectionHandlerClient(MainWindow._instanceContext);
+            var user = new User
+            {
+                ID = SessionDetails.UserId,
+            };
+            userConnectionHandlerClient.NotifyLogOut(user);
             Application.Current.MainWindow.Close();
         }
 

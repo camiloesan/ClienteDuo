@@ -10,7 +10,7 @@ namespace ClienteDuo.Pages
     public partial class MainWindow : Window, IUserConnectionHandlerCallback
     {
         private static UserConnectionHandlerClient _userConnectionHandlerClient;
-        private static InstanceContext _instanceContext;
+        public static InstanceContext _instanceContext;
 
         public MainWindow()
         {

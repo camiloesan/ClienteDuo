@@ -57,6 +57,7 @@ namespace ClienteDuo.Pages.Sidebars
             var stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0,7,0,0),
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Background = new SolidColorBrush(Colors.DimGray),
                 Width = 200,
@@ -115,7 +116,7 @@ namespace ClienteDuo.Pages.Sidebars
             FillFriendsPanel();
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }

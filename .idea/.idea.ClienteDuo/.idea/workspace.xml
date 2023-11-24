@@ -7,19 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/InviteeLobby.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/InviteeLobby.xaml.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UNO_DUO_UnitTests/JoinPartyTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UNO_DUO_UnitTests/JoinPartyTests.cs" afterDir="false" />
-    </list>
+    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,8 +93,17 @@
       <workItem from="1700583050800" duration="105000" />
       <workItem from="1700584634702" duration="2097000" />
       <workItem from="1700593045293" duration="971000" />
-      <workItem from="1700760105423" duration="8089000" />
+      <workItem from="1700760105423" duration="8629000" />
     </task>
+    <task id="LOCAL-00001" summary="just one lobby">
+      <option name="closed" value="true" />
+      <created>1700781442131</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700781442131</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,5 +135,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="just one lobby" />
+    <option name="LAST_COMMIT_MESSAGE" value="just one lobby" />
   </component>
 </project>

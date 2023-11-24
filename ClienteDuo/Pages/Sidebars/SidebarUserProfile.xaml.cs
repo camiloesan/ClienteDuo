@@ -19,7 +19,7 @@ namespace ClienteDuo.Pages.Sidebars
             LblEmail.Content = SessionDetails.Email;
         }
 
-        private void BtnCloseBar(object sender, RoutedEventArgs e)
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }

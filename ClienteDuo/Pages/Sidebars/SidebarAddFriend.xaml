@@ -8,12 +8,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="250">
     <Grid Background="{DynamicResource BtnBackground}">
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" Height="100">
-            <Label Content="***IDUSUARIO***"/>
-            <TextBox x:Name="TBoxUserReceiver" TextWrapping="Wrap" Width="120"/>
-            <Button Content="***ENVIAR***"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="105*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
+        <Label Content="{x:Static p:Resources.BtnAddFriend}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Height="34" Grid.Row="1"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="174" Grid.Row="1">
+            <Label Content="{x:Static p:Resources.LblUsername}" FontSize="14" Foreground="White"/>
+            <TextBox x:Name="TBoxUserReceiver" TextWrapping="Wrap" Margin="0,7,0,0" Height="20"/>
+            <Button Content="{x:Static p:Resources.BtnContinue}" Click="BtnSendFriendRequestEvent" Margin="0,21,0,0" Height="30" Background="#FF97785F" Foreground="White" BorderBrush="#FF6B552B"/>
         </StackPanel>
-        <Button Content="***CERRAR***" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnClose"/>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
     </Grid>
 </UserControl>

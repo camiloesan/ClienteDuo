@@ -7,11 +7,22 @@
              xmlns:p="clr-namespace:ClienteDuo.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="250">
-    <Grid x:Name="FriendsBar" Background="#FF6B472B">
-        <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
-        <StackPanel x:Name="panelFriends" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="350"/>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
-        <Button Content="{x:Static p:Resources.BtnAddFriend}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,60" FontSize="14" Width="120" Click="BtnAddFriend" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
-        <Button Content="{x:Static p:Resources.BtnFriendRequests}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,60" FontSize="14" Click="BtnFriendRequests" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B"/>
+    <Grid x:Name="FriendsBar">
+        <Grid Background="#FF6B472B">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16*"/>
+                <RowDefinition Height="105*"/>
+                <RowDefinition Height="29*"/>
+            </Grid.RowDefinitions>
+            <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Height="34" Width="68"  Grid.Row="1"/>
+            <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="panelFriends" Height="300" Width="200"/>
+            </ScrollViewer>
+            <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
+            <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="2" Width="174" Height="72">
+                <Button Content="{x:Static p:Resources.BtnAddFriend}" FontSize="14" Click="BtnAddFriend" Background="#FF97785F" Foreground="White" Height="32" BorderBrush="#FF6B552B"/>
+                <Button Content="{x:Static p:Resources.BtnFriendRequests}" FontSize="14" Click="BtnFriendRequests" Background="#FF97785F" Foreground="White" Height="32" BorderBrush="#FF6B552B" Margin="0,7,0,0"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

@@ -8,10 +8,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="250">
     <Grid Background="{DynamicResource BtnBackground}">
-        <Label Content="{x:Static p:Resources.LblLeaderboard}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="105*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
+        <Label Content="{x:Static p:Resources.LblLeaderboard}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             
         </StackPanel>
-        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="BtnCancel"/>
+        <Button Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
     </Grid>
 </UserControl>
