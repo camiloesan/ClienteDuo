@@ -87,12 +87,6 @@ namespace ClienteDuo.Pages
 
         private void BtnQuitGame(object sender, RoutedEventArgs e)
         {
-            var userConnectionHandlerClient = new UserConnectionHandlerClient(MainWindow._instanceContext);
-            var user = new User
-            {
-                ID = SessionDetails.UserId,
-            };
-            userConnectionHandlerClient.NotifyLogOut(user);
             Application.Current.MainWindow.Close();
         }
 
