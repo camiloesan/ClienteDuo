@@ -83,5 +83,10 @@ namespace ClienteDuo.Pages
             var launcher = new Launcher();
             Application.Current.MainWindow.Content = launcher;
         }
+
+        private void ResetPasswordEvent(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

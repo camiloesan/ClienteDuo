@@ -10,7 +10,14 @@
       Title="Launcher">
 
     <Grid Background="{DynamicResource Background}">
-        <Border HorizontalAlignment="Center" Height="69" Margin="0,0,0,0" VerticalAlignment="Center" Width="260">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="103*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <Rectangle HorizontalAlignment="Center" Height="160" Grid.Row="1" Stroke="{DynamicResource HighlightFill}" VerticalAlignment="Center" Width="550" RadiusX="19.5" RadiusY="19.5" StrokeThickness="6"/>
+
+        <Border HorizontalAlignment="Center" Height="68" VerticalAlignment="Center" Width="260" Grid.Row="1">
             <Grid Margin="-92,-14,-92,-14">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="34*"/>
@@ -21,9 +28,11 @@
                 <Button Content="{x:Static p:Resources.BtnJoinAsGuest}" Margin="0,7,0,0" VerticalAlignment="Top" Height="33" HorizontalAlignment="Center" Width="378" Click="BtnJoinAsGuestEvent" FontSize="14" Grid.Row="1" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" />
             </Grid>
         </Border>
-        <Button Content="en_US" HorizontalAlignment="Left" Margin="30,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationEnUSEvent" Width="60"/>
-        <Button Content="es_MX" HorizontalAlignment="Left" Margin="112,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationEsMXEvent" Width="60"/>
-        <Button Content="ja_JP" HorizontalAlignment="Left" Margin="195,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationJaJPEvent" Width="60"/>
-        <Button Content="fr_FR" HorizontalAlignment="Left" Margin="278,527,0,0" VerticalAlignment="Top" Click="BtnLocalizationFrFREvent" Width="60"/>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center">
+            <Button Content="en_US" Click="BtnLocalizationEnUSEvent" Width="60" Margin="15,0,0,0"/>
+            <Button Content="es_MX" Click="BtnLocalizationEsMXEvent" Width="60" Margin="15,0,0,0"/>
+            <Button Content="ja_JP" Click="BtnLocalizationJaJPEvent" Width="60" Margin="15,0,0,0"/>
+            <Button Content="fr_FR" Click="BtnLocalizationFrFREvent" Width="60" Margin="15,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Page>
