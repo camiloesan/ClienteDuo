@@ -312,4 +312,7 @@
   <data name="DlgUsernameInvalid" xml:space="preserve">
     <value>El nombre de usuario debe contener solo caracteres alfanuméricos, al menos 3 caracteres, un máximo de 14 y no contener la palabra "guest"</value>
   </data>
+  <data name="BtnBlockedUsers" xml:space="preserve">
+    <value>Usuraios Bloqueados</value>
+  </data>
 </root>
