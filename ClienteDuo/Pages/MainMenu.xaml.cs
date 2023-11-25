@@ -28,7 +28,7 @@ namespace ClienteDuo.Pages
 
         public static void ShowPopUpUserDetails(string username)
         {
-            _popUpUserDetails.SetDataContext(username, true);
+            _popUpUserDetails.InitializeUserInfo(username, true);
             _popUpUserDetails.Visibility = Visibility.Visible;
         }
 

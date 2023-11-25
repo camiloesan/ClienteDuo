@@ -40,7 +40,15 @@ namespace ClienteDuo.Pages
             string password = TBoxPassword.Password;
             User loggedUser = AreCredentialsValid(username, password);
 
-            if (loggedUser != null && !_usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
+            if (loggedUser == null)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
+            }
+            else if (_usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn);
+            }
+            else
             {
                 SessionDetails.UserId = loggedUser.ID;
                 SessionDetails.Username = loggedUser.UserName;
@@ -56,10 +64,6 @@ namespace ClienteDuo.Pages
                 var mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
                 MainWindow.NotifyLogin(user);
-            }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
             }
         }
 

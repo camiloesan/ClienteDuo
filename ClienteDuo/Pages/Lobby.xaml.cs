@@ -219,7 +219,7 @@ namespace ClienteDuo.Pages
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
         {
             string username = ((FrameworkElement)sender).DataContext as string;
-            _popUpUserDetails.SetDataContext(username, false);
+            _popUpUserDetails.InitializeUserInfo(username, false);
             _popUpUserDetails.Visibility = Visibility.Visible;
         }
 

@@ -24,13 +24,13 @@ namespace ClienteDuo.Pages.Sidebars
         {
             _sidebarAddFriend = new SidebarAddFriend
             {
-                Visibility = Visibility.Collapsed,
+                Visibility = Visibility.Collapsed
             };
             FriendsBar.Children.Add(_sidebarAddFriend);
 
             _sidebarFriendRequests = new SidebarFriendRequests
             {
-                Visibility = Visibility.Collapsed,
+                Visibility = Visibility.Collapsed
             };
             FriendsBar.Children.Add(_sidebarFriendRequests);
         }
@@ -52,7 +52,7 @@ namespace ClienteDuo.Pages.Sidebars
             }
         }
 
-        private void CreateFriendPanel(string username, int friendshipID)
+        private void CreateFriendPanel(string username, int friendshipId)
         {
             var stackPanel = new StackPanel
             {
@@ -86,7 +86,7 @@ namespace ClienteDuo.Pages.Sidebars
             var btnViewProfile = new Button
             {
                 Content = Properties.Resources.BtnProfile,
-                DataContext = username,
+                DataContext = username
             };
             btnViewProfile.Click += ViewProfileEvent;
             stackPanel.Children.Add(btnViewProfile);
@@ -94,7 +94,7 @@ namespace ClienteDuo.Pages.Sidebars
             var btnUnfriend = new Button
             {
                 Content = Properties.Resources.BtnUnfriend,
-                DataContext = friendshipID,
+                DataContext = friendshipId
             };
             btnUnfriend.Click += UnfriendEvent;
             stackPanel.Children.Add(btnUnfriend);

@@ -4,6 +4,7 @@ using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -43,7 +44,7 @@ namespace ClienteDuo.Pages.Sidebars
                 var btnAccept = new Button
                 {
                     Content = Properties.Resources.BtnAccept,
-                    DataContext = friendRequest,
+                    DataContext = friendRequest
                 };
                 btnAccept.Click += AcceptFriendRequestEvent;
                 stackPanel.Children.Add(btnAccept);
@@ -51,7 +52,7 @@ namespace ClienteDuo.Pages.Sidebars
                 var btnReject = new Button
                 {
                     Content = Properties.Resources.BtnReject,
-                    DataContext = friendRequest,
+                    DataContext = friendRequest
                 };
                 btnReject.Click += DeclineFriendRequestEvent;
                 stackPanel.Children.Add(btnReject);
@@ -63,7 +64,7 @@ namespace ClienteDuo.Pages.Sidebars
             var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
             if (AcceptFriendRequest(friendRequest))
             {
-                MainWindow.ShowMessageBox("ahora son amigos");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgNowFriends);
                 FillFriendRequestsPanel();
             }
             else
@@ -77,7 +78,7 @@ namespace ClienteDuo.Pages.Sidebars
             var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
             if (DeclineFriendRequest(friendRequest))
             {
-                MainWindow.ShowMessageBox("haz eliminado la solicitud");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestDeleted);
                 FillFriendRequestsPanel();
             }
             else
@@ -121,9 +122,9 @@ namespace ClienteDuo.Pages.Sidebars
             return result;
         }
         
-        private IEnumerable<FriendRequest> GetFriendRequestsByUserId(int userID)
+        private IEnumerable<FriendRequest> GetFriendRequestsByUserId(int userId)
         {
-            return _usersManagerClient.GetFriendRequestsList(userID);
+            return _usersManagerClient.GetFriendRequestsList(userId);
         }
     }
 }

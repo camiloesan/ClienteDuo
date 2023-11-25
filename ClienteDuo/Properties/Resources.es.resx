@@ -273,4 +273,34 @@
   <data name="TitleNewAccount" xml:space="preserve">
     <value>Crear Cuenta</value>
   </data>
+  <data name="LblPasswordForgotten" xml:space="preserve">
+    <value>Olvidé mi contraseña</value>
+  </data>
+  <data name="DlgUserAlreadyLoggedIn" xml:space="preserve">
+    <value>Una sesión ya está activa</value>
+  </data>
+  <data name="LblAddNewFriend" xml:space="preserve">
+    <value>Añadir amigo</value>
+  </data>
+  <data name="LblReady" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="LblTrophies" xml:space="preserve">
+    <value>Trofeos</value>
+  </data>
+  <data name="DlgFriendRequestAlreadySent" xml:space="preserve">
+    <value>Una solicitud de amistad ya se ha enviado anteriormente</value>
+  </data>
+  <data name="DlgAlreadyFriends" xml:space="preserve">
+    <value>Ya eres amigo del este usuario</value>
+  </data>
+  <data name="DlgUsernameDoesNotExist" xml:space="preserve">
+    <value>El nombre de usuario no existe</value>
+  </data>
+  <data name="DlgNowFriends" xml:space="preserve">
+    <value>¡Ahora son amigos!</value>
+  </data>
+  <data name="DlgFriendRequestDeleted" xml:space="preserve">
+    <value>Haz eliminado la solicitud</value>
+  </data>
 </root>

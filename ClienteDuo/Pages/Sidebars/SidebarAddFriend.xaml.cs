@@ -25,11 +25,11 @@ namespace ClienteDuo.Pages.Sidebars
             string usernameReceiver = TBoxUserReceiver.Text.Trim();
             if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox("a friend request has already been sent");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent);
             } 
             else if (IsAlreadyFriend(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox("this user is your friend already");
+                MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends);
             }
             else
             {
@@ -40,7 +40,7 @@ namespace ClienteDuo.Pages.Sidebars
                 }
                 else
                 {
-                    MainWindow.ShowMessageBox("username does not exist or service is unavailable***");
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist);
                 }
             }
         }

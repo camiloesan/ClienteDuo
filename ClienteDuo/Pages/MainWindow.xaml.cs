@@ -12,7 +12,7 @@ namespace ClienteDuo.Pages
     public partial class MainWindow : Window, IUserConnectionHandlerCallback
     {
         private static UserConnectionHandlerClient _userConnectionHandlerClient;
-        public static InstanceContext _instanceContext;
+        private static InstanceContext _instanceContext;
 
         public MainWindow()
         {
@@ -56,7 +56,7 @@ namespace ClienteDuo.Pages
             var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
             var user = new User
             {
-                ID = SessionDetails.UserId,
+                ID = SessionDetails.UserId
             };
             userConnectionHandlerClient.NotifyLogOut(user);
         }

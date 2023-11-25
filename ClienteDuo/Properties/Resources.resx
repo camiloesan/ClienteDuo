@@ -276,13 +276,43 @@
   <data name="TitleAlert" xml:space="preserve">
     <value>Alert</value>
   </data>
-  <data name="TItleLauncher" xml:space="preserve">
-    <value>Launcher</value>
-  </data>
   <data name="TitleLogin" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="TitleNewAccount" xml:space="preserve">
     <value>New Account</value>
+  </data>
+  <data name="LblPasswordForgotten" xml:space="preserve">
+    <value>I forgot my password</value>
+  </data>
+  <data name="DlgUserAlreadyLoggedIn" xml:space="preserve">
+    <value>A session is already active</value>
+  </data>
+  <data name="LblAddNewFriend" xml:space="preserve">
+    <value>Add friend</value>
+  </data>
+  <data name="TitleLauncher" xml:space="preserve">
+    <value>Launcher</value>
+  </data>
+  <data name="LblReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="LblTrophies" xml:space="preserve">
+    <value>Trophies</value>
+  </data>
+  <data name="DlgFriendRequestAlreadySent" xml:space="preserve">
+    <value>A friend request has already been sent</value>
+  </data>
+  <data name="DlgAlreadyFriends" xml:space="preserve">
+    <value>This user is your friend already</value>
+  </data>
+  <data name="DlgUsernameDoesNotExist" xml:space="preserve">
+    <value>Username does not exist</value>
+  </data>
+  <data name="DlgNowFriends" xml:space="preserve">
+    <value>You are now friends!</value>
+  </data>
+  <data name="DlgFriendRequestDeleted" xml:space="preserve">
+    <value>You have rejected this request</value>
   </data>
 </root>
