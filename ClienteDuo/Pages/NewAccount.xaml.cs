@@ -8,12 +8,14 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using ClienteDuo.DataService;
+using System.Windows.Media;
 
 namespace ClienteDuo
 {
     public partial class NewAccount : Page
     {
         private readonly UsersManagerClient _usersManagerClient;
+        private const int MAX_LENGTH_EMAIL = 30;
 
         public NewAccount()
         {
@@ -37,13 +39,13 @@ namespace ClienteDuo
             
             if (AddUserToDatabase(username, email, password))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess, MessageBoxImage.Information);
                 var launcher = new Launcher();
                 Application.Current.MainWindow.Content = launcher;
             }
             else
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
         }
 
@@ -54,35 +56,71 @@ namespace ClienteDuo
             string password = TBoxPassword.Password.Trim();
             string confirmedPassword = TBoxConfirmPassword.Password.Trim();
 
-            return !AreFieldsEmpty()
-                   && AreFieldsLengthValid(username, email)
-                   && IsPasswordMatch(password, confirmedPassword)
-                   && IsPasswordSecure(password)
-                   && IsUsernameAvailable(username)
-                   && IsEmailAvailable(email)
-                   && !UsernameContainsGuestKeyword(username)
-                   && IsEmailValid(email);
+            if (AreFieldsEmpty())
+            {
+                TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
+                TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (!IsUsernameValid(username))
+            {
+                TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameInvalid, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (!IsPasswordSecure(password))
+            {
+                TBoxPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (!IsPasswordMatch(password, confirmedPassword))
+            {
+                TBoxPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+                TBoxConfirmPassword.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgPasswordDoesNotMatch, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (IsUsernameTaken(username))
+            {
+                TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (!IsEmailValid(email))
+            {
+                TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailInvalid, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (!IsEmailAvailable(email))
+            {
+                TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailTaken, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
         }
 
-        public bool IsUsernameAvailable(String username)
+        public bool IsUsernameValid(string username)
         {
-            bool isTaken = false;
+            var regex = new Regex("^[a-zA-Z0-9]{3,14}$");
+            return regex.IsMatch(username) && !username.Contains("guest");
+        }
+
+        public bool IsUsernameTaken(string username)
+        {
             try
             {
-                isTaken = _usersManagerClient.IsUsernameTaken(username);
-
+                return _usersManagerClient.IsUsernameTaken(username);
             }
             catch
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                return false;
             }
-
-            if (isTaken)
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken);
-            }
-
-            return !isTaken;
         }
 
         public bool IsEmailAvailable(string email)
@@ -94,12 +132,12 @@ namespace ClienteDuo
             }
             catch
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
 
             if (isTaken)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailTaken);
+                
             }
 
             return !isTaken;
@@ -107,15 +145,8 @@ namespace ClienteDuo
 
         public bool IsEmailValid(string email)
         {
-            try
-            {
-                _ = new MailAddress(email);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
+            var regex = new Regex("^[a-zA-Z0-9]{3,16}@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+            return regex.IsMatch(email) && email.Length <= MAX_LENGTH_EMAIL;
         }
 
         public bool IsPasswordMatch(string password, string confirmedPassword)
@@ -123,37 +154,10 @@ namespace ClienteDuo
             return password.Equals(confirmedPassword);
         }
 
-        public bool AreFieldsLengthValid(string username, string email)
-        {
-            if (username.Length > 30)
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameMaxCharacters);
-                return false;
-            }
-
-            if (email.Length > 30)
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailMaxCharacters);
-                return false;
-            }
-            return true;
-        }
-
         public bool IsPasswordSecure(string password)
         {
-            var regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,}$");
-            if (regex.IsMatch(password))
-            {
-                return true;
-            }
-
-            MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword);
-            return false;
-        }
-
-        public bool UsernameContainsGuestKeyword(string username)
-        {
-            return username.Contains("guest");
+            var regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,16}$");
+            return regex.IsMatch(password);
         }
 
         private bool AreFieldsEmpty()
@@ -166,8 +170,11 @@ namespace ClienteDuo
             if (!string.IsNullOrEmpty(usernameField)
                 && !string.IsNullOrEmpty(emailField)
                 && !string.IsNullOrEmpty(passwordField)
-                && !string.IsNullOrEmpty(confirmPasswordField)) return false;
-            MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields);
+                && !string.IsNullOrEmpty(confirmPasswordField))
+            {
+                return false;
+            }
+                
             return true;
         }
 
@@ -193,7 +200,7 @@ namespace ClienteDuo
             return result;
         }
 
-        public bool DeleteUserFromDatabaseByUsername(string username)
+        public bool DeleteUserFromDatabaseByUsername(string username) //test-only method
         {
             bool result;
             try

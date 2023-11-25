@@ -364,6 +364,8 @@
     <Resource Include="DuoLogo.ico" />
     <Resource Include="Images\XIcon.png" />
     <Resource Include="Images\AddFriendIcon.png" />
+    <Resource Include="Images\mexico.png" />
+    <Resource Include="Images\france.png" />
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

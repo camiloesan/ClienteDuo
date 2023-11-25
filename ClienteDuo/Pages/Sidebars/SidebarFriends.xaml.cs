@@ -112,7 +112,7 @@ namespace ClienteDuo.Pages.Sidebars
 
             if (!DeleteFriendshipById(friendshipId)) return;
             
-            MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend);
+            MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend, MessageBoxImage.Information);
             FillFriendsPanel();
         }
 

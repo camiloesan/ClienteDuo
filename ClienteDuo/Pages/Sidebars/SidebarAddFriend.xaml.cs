@@ -25,22 +25,22 @@ namespace ClienteDuo.Pages.Sidebars
             string usernameReceiver = TBoxUserReceiver.Text.Trim();
             if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, MessageBoxImage.Information);
             } 
             else if (IsAlreadyFriend(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends, MessageBoxImage.Information);
             }
             else
             {
                 if (SendFriendRequest(usernameSender, usernameReceiver))
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent);
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
                 }
                 else
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist);
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, MessageBoxImage.Warning); //crear metodo exclusivo para validar si existe
                 }
             }
         }

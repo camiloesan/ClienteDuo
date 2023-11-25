@@ -174,8 +174,8 @@
   <data name="DlgConnectionError" xml:space="preserve">
     <value>Hubo un error al conectarse con el servicio, inténtelo de nuevo más tarde</value>
   </data>
-  <data name="DlgEmailMaxCharacters" xml:space="preserve">
-    <value>El máximo de caracteres para el nombre de correo electrónico es de 30</value>
+  <data name="DlgEmailInvalid" xml:space="preserve">
+    <value>El correo electrónico debe tener menos de 30 caracteres y un formato valido (----@dominio.com)</value>
   </data>
   <data name="DlgEmailTaken" xml:space="preserve">
     <value>Una cuenta con ese correo electrónico ya se encuentra registrada</value>
@@ -196,7 +196,7 @@
     <value>La partida ya está llena, inténtalo de nuevo más tarde</value>
   </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
-    <value>La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula</value>
+    <value>La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula, y un máximo de 16 caracteres</value>
   </data>
   <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
     <value>El código de partida debe ser un numero con máximo 4 dígitos</value>
@@ -302,5 +302,11 @@
   </data>
   <data name="DlgFriendRequestDeleted" xml:space="preserve">
     <value>Haz eliminado la solicitud</value>
+  </data>
+  <data name="DlgPasswordDoesNotMatch" xml:space="preserve">
+    <value>La contraseña y confirmación de contraseña deben coincidir</value>
+  </data>
+  <data name="DlgUsernameInvalid" xml:space="preserve">
+    <value>El nombre de usuario debe contener solo caracteres alfanuméricos, al menos 3 caracteres, un máximo de 14 y no contener la palabra "guest"</value>
   </data>
 </root>

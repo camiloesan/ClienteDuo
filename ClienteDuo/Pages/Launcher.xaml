@@ -29,9 +29,15 @@
             </Grid>
         </Border>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center">
-            <Button Content="en_US" Cursor="Hand" Click="BtnLocalizationEnUSEvent" Width="60" Margin="15,0,0,0"/>
-            <Button Content="es_MX" Cursor="Hand" Click="BtnLocalizationEsMXEvent" Width="60" Margin="15,0,0,0"/>
-            <Button Content="fr_FR" Cursor="Hand" Click="BtnLocalizationFrFREvent" Width="60" Margin="15,0,0,0"/>
+            <Button Cursor="Hand" Click="BtnLocalizationEnUSEvent" Width="60" Margin="25,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Image Source="/Images/united-states-of-america.png"/>
+            </Button>
+            <Button Cursor="Hand" Click="BtnLocalizationEsMXEvent" Width="60" Margin="25,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Image Source="/Images/mexico.png"/>
+            </Button>
+            <Button Cursor="Hand" Click="BtnLocalizationFrFREvent" Width="60" Margin="25,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Image Source="/Images/france.png"/>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

@@ -64,12 +64,12 @@ namespace ClienteDuo.Pages.Sidebars
             var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
             if (AcceptFriendRequest(friendRequest))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgNowFriends);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgNowFriends, MessageBoxImage.Information);
                 FillFriendRequestsPanel();
             }
             else
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
         }
 
@@ -78,12 +78,12 @@ namespace ClienteDuo.Pages.Sidebars
             var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
             if (DeclineFriendRequest(friendRequest))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestDeleted);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestDeleted, MessageBoxImage.Information);
                 FillFriendRequestsPanel();
             }
             else
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
         }
 

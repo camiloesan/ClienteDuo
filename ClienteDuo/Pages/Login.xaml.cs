@@ -42,11 +42,11 @@ namespace ClienteDuo.Pages
 
             if (loggedUser == null)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
             }
             else if (_usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
             }
             else
             {
@@ -76,7 +76,7 @@ namespace ClienteDuo.Pages
             }
             catch
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
 
             return userCredentials;

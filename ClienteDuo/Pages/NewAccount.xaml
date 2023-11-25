@@ -16,13 +16,13 @@
         <Label  Content="{x:Static p:Resources.TitleNewAccount}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="{x:Static p:Resources.LblUsername}" FontSize="14"/>
-            <TextBox x:Name="TBoxUsername" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <TextBox x:Name="TBoxUsername" TextWrapping="Wrap" MaxLength="14" Width="174" Margin="0,5,0,5" Height="26" FontSize="14" BorderBrush="{DynamicResource BtnBorder}" BorderThickness="3,3,3,3"/>
             <Label Content="{x:Static p:Resources.LblEmail}" FontSize="14"/>
-            <TextBox x:Name="TBoxEmail" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <TextBox x:Name="TBoxEmail" MaxLength="30" TextWrapping="Wrap" Width="174" Margin="0,5,0,5" Height="26" FontSize="14" BorderBrush="{DynamicResource BtnBorder}" BorderThickness="3,3,3,3"/>
             <Label Content="{x:Static p:Resources.LblPassword}" FontSize="14"/>
-            <PasswordBox x:Name="TBoxPassword" Width="174" Margin="0,5,0,5" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <PasswordBox x:Name="TBoxPassword" MaxLength="16" Width="174" Margin="0,5,0,5" Height="26" FontSize="14" BorderBrush="{DynamicResource BtnBorder}" BorderThickness="3,3,3,3"/>
             <Label Content="{x:Static p:Resources.LblConfirmPassword}" Margin="0,5,0,5" FontSize="14"/>
-            <PasswordBox x:Name="TBoxConfirmPassword" Width="174" Height="20" FontSize="14" BorderBrush="{DynamicResource BtnBorder}"/>
+            <PasswordBox x:Name="TBoxConfirmPassword" MaxLength="16" Width="174" Height="26" FontSize="14" BorderBrush="{DynamicResource BtnBorder}" BorderThickness="3,3,3,3"/>
             <Grid Margin="0,35,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="88*"/>

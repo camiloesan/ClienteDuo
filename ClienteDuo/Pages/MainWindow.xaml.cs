@@ -32,13 +32,12 @@ namespace ClienteDuo.Pages
             _userConnectionHandlerClient.NotifyLogIn(user);
         }
 
-        public static void ShowMessageBox(string message)
+        public static void ShowMessageBox(string message, MessageBoxImage messageBoxImage)
         {
             string caption = Properties.Resources.TitleAlert;
 
             const MessageBoxButton okButton = MessageBoxButton.OK;
-            const MessageBoxImage warningIcon = MessageBoxImage.Warning;
-            MessageBox.Show(message, caption, okButton, warningIcon);
+            MessageBox.Show(message, caption, okButton, messageBoxImage);
         }
 
         public void UserLogged(string username)
@@ -53,6 +52,8 @@ namespace ClienteDuo.Pages
 
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
+            if (SessionDetails.IsGuest) return;
+
             var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
             var user = new User
             {

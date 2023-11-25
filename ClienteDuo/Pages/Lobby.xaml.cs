@@ -14,7 +14,7 @@ namespace ClienteDuo.Pages
 {
     public partial class Lobby : Page, IPartyManagerCallback
     {
-        const int MESSAGE_MAX_LENGTH = 250;
+        const int MESSAGE_MAX_LENGTH = 64;
         private readonly bool _isWpfRunning = true;
         private readonly PartyManagerClient _partyManagerClient;
         private readonly PartyValidatorClient _partyValidatorClient = new PartyValidatorClient();
@@ -115,7 +115,7 @@ namespace ClienteDuo.Pages
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters, MessageBoxImage.Warning);
             }
         }
 

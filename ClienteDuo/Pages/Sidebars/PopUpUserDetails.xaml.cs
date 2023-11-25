@@ -47,18 +47,18 @@ namespace ClienteDuo.Pages.Sidebars
             string usernameReceiver = DataContext as string;
             if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, MessageBoxImage.Information);
             } 
             else
             {
                 if (SendFriendRequest(usernameSender, usernameReceiver))
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent);
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
                 }
                 else
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
                 }
             }
         }

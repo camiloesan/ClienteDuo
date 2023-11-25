@@ -177,8 +177,8 @@
   <data name="DlgConnectionError" xml:space="preserve">
     <value>There was an error connecting with the service, try again later</value>
   </data>
-  <data name="DlgEmailMaxCharacters" xml:space="preserve">
-    <value>Max characters for email is 30</value>
+  <data name="DlgEmailInvalid" xml:space="preserve">
+    <value>Email must have less than 30 characters and a valid format (----@domain.com)</value>
   </data>
   <data name="DlgEmailTaken" xml:space="preserve">
     <value>An account with that email is already registered</value>
@@ -199,7 +199,7 @@
     <value>The party is already full, try again later</value>
   </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
-    <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter</value>
+    <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter, and a maximum of 16 characters</value>
   </data>
   <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
     <value>Party code needs to be a number with a max of 4 digits</value>
@@ -314,5 +314,11 @@
   </data>
   <data name="DlgFriendRequestDeleted" xml:space="preserve">
     <value>You have rejected this request</value>
+  </data>
+  <data name="DlgPasswordDoesNotMatch" xml:space="preserve">
+    <value>Password and and confirm password must match</value>
+  </data>
+  <data name="DlgUsernameInvalid" xml:space="preserve">
+    <value>Username must contain alphanumeric values, at least 3 characters, a maximum of 14 and not contain "guest" word</value>
   </data>
 </root>
