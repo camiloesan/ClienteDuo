@@ -135,9 +135,6 @@
   <data name="BtnFriendRequests" xml:space="preserve">
     <value>Friend Requests</value>
   </data>
-  <data name="BtnGoToLobby" xml:space="preserve">
-    <value>Return to lobby</value>
-  </data>
   <data name="BtnJoin" xml:space="preserve">
     <value>Join</value>
   </data>
@@ -189,6 +186,9 @@
   <data name="DlgExitConfirmation" xml:space="preserve">
     <value>Are you sure you want to exit the match? You will not be able to join again until it is over</value>
   </data>
+  <data name="DlgExitMatchConfirmation" xml:space="preserve">
+    <value>¿Are you sure you want to quit this match? You will not be able to return until it's over</value>
+  </data>
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Incorrect email or password</value>
   </data>
@@ -230,6 +230,9 @@
   </data>
   <data name="LblCalculatingResults" xml:space="preserve">
     <value>Calculating results...</value>
+  </data>
+  <data name="LblCardsLeft" xml:space="preserve">
+    <value>Cards left</value>
   </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>

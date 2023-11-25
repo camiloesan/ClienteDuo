@@ -115,15 +115,6 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to lobby.
-        /// </summary>
-        public static string BtnGoToLobby {
-            get {
-                return ResourceManager.GetString("BtnGoToLobby", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Join.
         /// </summary>
         public static string BtnJoin {
@@ -277,6 +268,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Are you sure you want to quit this match? You will not be able to return until it&apos;s over.
+        /// </summary>
+        public static string DlgExitMatchConfirmation {
+            get {
+                return ResourceManager.GetString("DlgExitMatchConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incorrect email or password.
         /// </summary>
         public static string DlgFailedLogin {
@@ -399,6 +399,15 @@ namespace ClienteDuo.Properties {
         public static string LblCalculatingResults {
             get {
                 return ResourceManager.GetString("LblCalculatingResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cards left.
+        /// </summary>
+        public static string LblCardsLeft {
+            get {
+                return ResourceManager.GetString("LblCardsLeft", resourceCulture);
             }
         }
         

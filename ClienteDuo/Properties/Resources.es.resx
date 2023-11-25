@@ -132,9 +132,6 @@
   <data name="BtnExitLobby" xml:space="preserve">
     <value>Salir de la Sala</value>
   </data>
-  <data name="BtnGoToLobby" xml:space="preserve">
-    <value>Volver al lobby</value>
-  </data>
   <data name="BtnJoin" xml:space="preserve">
     <value>Unirse</value>
   </data>
@@ -186,6 +183,9 @@
   <data name="DlgExitConfirmation" xml:space="preserve">
     <value>¿Está seguro de que desea abandonar la partida? No podrá unirse hasta que esta termine</value>
   </data>
+  <data name="DlgExitMatchConfirmation" xml:space="preserve">
+    <value>¿Está seguro de que desea abandonar la partida? No podrá volver a unirse</value>
+  </data>
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Correo electrónico o contraseña incorrectos</value>
   </data>
@@ -227,6 +227,9 @@
   </data>
   <data name="LblCalculatingResults" xml:space="preserve">
     <value>Calculando resultados...</value>
+  </data>
+  <data name="LblCardsLeft" xml:space="preserve">
+    <value>Cartas restantes</value>
   </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>

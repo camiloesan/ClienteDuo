@@ -8,13 +8,13 @@
              d:DesignHeight="50" d:DesignWidth="300" Background="White">
 
     <Grid>
-        <Button x:Name="kickButton" Content="" HorizontalAlignment="Right" Margin="0,0,50,0" VerticalAlignment="Center" Width="40" Height="40" Visibility="Collapsed">
+        <Button x:Name="BtnKick" Content="" HorizontalAlignment="Right" Margin="0,0,50,0" VerticalAlignment="Center" Width="40" Height="40" Visibility="Collapsed" Click="BtnKickEvent">
             <Button.Background>
                 <ImageBrush ImageSource="../Images/XIcon.png"/>
             </Button.Background>
         </Button>
 
-        <Button x:Name="addFriendButton" Content="" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Width="40" Height="40" >
+        <Button x:Name="BtnAddFriend" Content="" HorizontalAlignment="Right" Margin="0,0,5,0" VerticalAlignment="Center" Width="40" Height="40" Click="BtnAddFriendEvent" >
             <Button.Background>
                 <ImageBrush ImageSource="../Images/AddFriendIcon.png"/>
             </Button.Background>
@@ -25,7 +25,7 @@
                 <ImageBrush ImageSource="../Images/profile-user.png"/>
             </Label.Background>
         </Label>
-        <Label x:Name="usernameLabel" Content="Username" HorizontalAlignment="Left" Margin="62,0,0,0" VerticalAlignment="Center" Width="143"/>
+        <Label x:Name="LblUsername" Content="Username" HorizontalAlignment="Left" Margin="62,0,0,0" VerticalAlignment="Center" Width="143"/>
     </Grid>
 
 </UserControl>

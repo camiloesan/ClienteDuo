@@ -27,17 +27,19 @@ namespace ClienteDuo.Pages
 
         public void LoadPlayers(Dictionary<string, int> playerScores)
         {
+            string winner = playerScores.OrderBy(x => x.Value).First().Key;
+
             foreach (KeyValuePair<string, int> playerScore in playerScores)
             {
                 PlayerBar playerBar = new PlayerBar();
 
-                if (playerScore.Value == 0) 
+                if (playerScore.Key.Equals(winner))
                 {
-                    playerBar.Username = playerScore.Key + "( " + Properties.Resources.LblWinner + ")"; //TODO Replace "Winner" with translation
+                    playerBar.Username = playerScore.Key + "( " + Properties.Resources.LblWinner + ")";
                 }
                 else
                 {
-                    playerBar.Username = playerScore.Key + "(" + playerScore.Value.ToString() + " " + "Properties.Resources.LblCardsLeft" + ")"; //TODO Replace "cards left" with its translation
+                    playerBar.Username = playerScore.Key + "(" + playerScore.Value.ToString() + " " + Properties.Resources.LblCardsLeft + ")";
                 }
 
                 if (playerScore.Key.Equals(SessionDetails.Username))
@@ -45,15 +47,25 @@ namespace ClienteDuo.Pages
                     playerBar.Background = new SolidColorBrush(Colors.Gold);
                 }
 
+                playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
                 playerBar.Visibility = Visibility.Visible;
 
                 resultStackPanel.Children.Add(playerBar);
             }
         }
 
-        private void BtnGoToLobby(object sender, RoutedEventArgs e)
-        {   
-
+        private void BtnExitLobbyEvent(object sender, RoutedEventArgs e)
+        {
+            if (SessionDetails.IsGuest)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+            }
+            else
+            {
+                MainMenu mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
+            }
         }
     }
 }

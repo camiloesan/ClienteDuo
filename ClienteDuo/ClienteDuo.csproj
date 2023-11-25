@@ -342,16 +342,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\united-states-of-america.png" />
+    <Resource Include="Images\united-states-of-america.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\profile-user.png" />
+    <Resource Include="Images\profile-user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\trophy.png" />
+    <Resource Include="Images\trophy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\friends.png" />
+    <Resource Include="Images\friends.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\DataService\item.disco" />
@@ -362,8 +370,15 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Resource Include="DuoLogo.ico" />
-    <Resource Include="Images\XIcon.png" />
-    <Resource Include="Images\AddFriendIcon.png" />
+    <Resource Include="Images\XIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AddFriendIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DUOLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -373,8 +388,12 @@
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\ExpandMenuIcon.png" />
-    <Resource Include="Images\ExitButtonIcon.png" />
+    <Resource Include="Images\ExpandMenuIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ExitButtonIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="SFX\playerJoinedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

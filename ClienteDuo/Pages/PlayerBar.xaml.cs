@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +23,7 @@ namespace ClienteDuo.Pages
     public partial class PlayerBar : UserControl
     {
         private string _username;
+        private MatchManagerClient _client;
 
         public PlayerBar()
         {
@@ -35,13 +38,23 @@ namespace ClienteDuo.Pages
             set
             {
                 _username = value;
-                usernameLabel.Content = _username;
+                LblUsername.Content = _username;
             }
         }
 
-        private void BtnAddFriend(object sender, RoutedEventArgs e)
+        public void SetClient(MatchManagerClient client)
         {
+            _client = client;
+        }
 
+        private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
+        {
+            //TODO
+        }
+
+        private void BtnKickEvent(object sender, RoutedEventArgs e)
+        {
+            _client.KickPlayerFromGame(SessionDetails.PartyCode, _username);
         }
     }
 }

@@ -19,15 +19,15 @@ namespace ClienteDuo.Pages
 
             PlayerBar yourBar = new PlayerBar();
             yourBar.Username = SessionDetails.Username;
-            yourBar.addFriendButton.Visibility = Visibility.Collapsed;
-            yourBar.kickButton.Visibility = Visibility.Collapsed;
+            yourBar.BtnAddFriend.Visibility = Visibility.Collapsed;
+            yourBar.BtnKick.Visibility = Visibility.Collapsed;
             yourBar.Background = new SolidColorBrush(Colors.Gold);
             yourBar.Visibility = Visibility.Visible;
 
             playerStackPanel.Children.Add(yourBar);
         }
 
-        public void LoadPlayers(List<string> playerList)
+        public void LoadPlayers(List<string> playerList, MatchManagerClient client)
         {
             foreach (string playerUsername in playerList)
             {
@@ -35,15 +35,16 @@ namespace ClienteDuo.Pages
                 {
                     PlayerBar playerBar = new PlayerBar();
                     playerBar.Username = playerUsername;
+                    playerBar.SetClient(client);
 
                     if (SessionDetails.IsHost)
                     {
-                        playerBar.kickButton.Visibility = Visibility.Visible;
+                        playerBar.BtnKick.Visibility = Visibility.Visible;
                     }
 
                     if (SessionDetails.IsGuest)
                     {
-                        playerBar.addFriendButton.Visibility = Visibility.Collapsed;
+                        playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
                     }
 
                     playerBar.Visibility = Visibility.Visible;
@@ -55,17 +56,20 @@ namespace ClienteDuo.Pages
 
         private void BtnExit(object sender, RoutedEventArgs e)
         {
-            if (SessionDetails.IsGuest)
+            if (MainWindow.ShowConfirmationBox(Properties.Resources.DlgExitMatchConfirmation))
             {
-                Launcher launcher = new Launcher();
+                if (SessionDetails.IsGuest)
+                {
+                    Launcher launcher = new Launcher();
 
-                App.Current.MainWindow.Content = launcher;
-            }
-            else
-            {
-                MainMenu mainMenu = new MainMenu();
+                    App.Current.MainWindow.Content = launcher;
+                }
+                else
+                {
+                    MainMenu mainMenu = new MainMenu();
 
-                App.Current.MainWindow.Content = mainMenu;
+                    App.Current.MainWindow.Content = mainMenu;
+                }
             }
         }
 
