@@ -41,15 +41,15 @@ namespace ClienteDuo.Pages
         {
             if (!IsInputInteger(partyCode))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat, MessageBoxImage.Warning);
             }
             else if (!IsPartyCodeExistent(int.Parse(partyCode)))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound, MessageBoxImage.Warning);
             }
             else if (!IsSpaceAvailable(int.Parse(partyCode)))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty, MessageBoxImage.Warning);
             }
             else
             {

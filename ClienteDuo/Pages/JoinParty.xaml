@@ -11,20 +11,20 @@
 
     <Grid Background="{DynamicResource Background}">
 
-        <Label Content="{x:Static p:Resources.BtnJoinParty}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <Label Content="{x:Static p:Resources.BtnJoinParty}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold"/>
 
         <Rectangle HorizontalAlignment="Center" Height="200" Stroke="{DynamicResource HighlightFill}" VerticalAlignment="Center" Width="280" RadiusX="19.5" RadiusY="19.5" Fill="#FFA4A4A4" StrokeThickness="6"/>
 
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center">
             <Label Content="{x:Static p:Resources.LblPartyCode}" FontSize="14" Width="200"/>
-            <TextBox x:Name="TBoxPartyCode" TextWrapping="Wrap" Width="200" Margin="0,5,0,5" FontSize="14" HorizontalContentAlignment="Center" BorderBrush="{DynamicResource BtnBorder}"/>
+            <TextBox x:Name="TBoxPartyCode" MaxLength="4" Height="26" TextWrapping="Wrap" Width="100" Margin="0,5,0,5" FontSize="14" HorizontalContentAlignment="Center" BorderBrush="{DynamicResource BtnBorder}"/>
             <Grid VerticalAlignment="Center" Margin="0,25,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Content="{x:Static p:Resources.BtnJoin}" Margin="0,0,5,0" Height="30" VerticalAlignment="Center" Click="BtnJoinEvent" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Grid.Column="0"/>
-                <Button Content="{x:Static p:Resources.BtnCancel}" Margin="5,0,0,0" Height="30" VerticalAlignment="Center" Click="BtnCancelEvent" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Grid.Column="1"/>
+                <Button Content="{x:Static p:Resources.BtnJoin}" Cursor="Hand" Margin="0,0,5,0" Height="30" VerticalAlignment="Center" Click="BtnJoinEvent" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Grid.Column="0"/>
+                <Button Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" Margin="5,0,0,0" Height="30" VerticalAlignment="Center" Click="BtnCancelEvent" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" Grid.Column="1"/>
             </Grid>
         </StackPanel>
 

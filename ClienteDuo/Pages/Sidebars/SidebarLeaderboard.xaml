@@ -13,10 +13,10 @@
             <RowDefinition Height="105*"/>
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
-        <Label Content="{x:Static p:Resources.LblLeaderboard}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1"/>
+        <Label Content="{x:Static p:Resources.LblLeaderboard}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1" FontWeight="Bold"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             
         </StackPanel>
-        <Button Grid.Row="0" Content="{x:Static p:Resources.BtnCancel}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
+        <Button Grid.Row="0" Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
     </Grid>
 </UserControl>

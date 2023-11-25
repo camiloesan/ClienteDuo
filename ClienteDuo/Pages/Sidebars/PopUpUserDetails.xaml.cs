@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -20,15 +22,18 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class PopUpUserDetails : UserControl
     {
+        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
+
         public PopUpUserDetails()
         {
             InitializeComponent();
         }
 
-        public void SetDataContext(string username, bool isFriend)
+        public void InitializeUserInfo(string username, bool isFriend)
         {
             DataContext = username;
-            LblUsername.Content = username;
+            LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
+            LblTrophies.Content = Properties.Resources.LblTrophies + ": ";
 
             if (isFriend)
             {
@@ -38,12 +43,57 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
         {
-
+            string usernameSender = SessionDetails.Username;
+            string usernameReceiver = DataContext as string;
+            if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, MessageBoxImage.Information);
+            } 
+            else
+            {
+                if (SendFriendRequest(usernameSender, usernameReceiver))
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, MessageBoxImage.Information);
+                    Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
+        }
+        
+        private bool SendFriendRequest(string usernameSender, string usernameReceiver)
+        {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.SendFriendRequest(usernameSender, usernameReceiver);
+            }
+            catch
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        private bool IsFriendRequestAlreadySent(string usernameSender, string usernameReceiver)
+        {
+            bool result;
+            try
+            {
+                result = _usersManagerClient.IsFriendRequestAlreadyExistent(usernameSender, usernameReceiver);
+            }
+            catch
+            {
+                result = false;
+            }
+            return result;
         }
     }
 }

@@ -174,8 +174,8 @@
   <data name="DlgConnectionError" xml:space="preserve">
     <value>There was an error connecting with the service, try again later</value>
   </data>
-  <data name="DlgEmailMaxCharacters" xml:space="preserve">
-    <value>Max characters for email is 30</value>
+  <data name="DlgEmailInvalid" xml:space="preserve">
+    <value>Email must have less than 30 characters and a valid format (----@domain.com)</value>
   </data>
   <data name="DlgEmailTaken" xml:space="preserve">
     <value>An account with that email is already registered</value>
@@ -199,7 +199,7 @@
     <value>The party is already full, try again later</value>
   </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
-    <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter</value>
+    <value>Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter, and a maximum of 16 characters</value>
   </data>
   <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
     <value>Party code needs to be a number with a max of 4 digits</value>
@@ -279,13 +279,49 @@
   <data name="TitleAlert" xml:space="preserve">
     <value>Alert</value>
   </data>
-  <data name="TItleLauncher" xml:space="preserve">
-    <value>Launcher</value>
-  </data>
   <data name="TitleLogin" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="TitleNewAccount" xml:space="preserve">
     <value>New Account</value>
+  </data>
+  <data name="LblPasswordForgotten" xml:space="preserve">
+    <value>I forgot my password</value>
+  </data>
+  <data name="DlgUserAlreadyLoggedIn" xml:space="preserve">
+    <value>A session is already active</value>
+  </data>
+  <data name="LblAddNewFriend" xml:space="preserve">
+    <value>Add friend</value>
+  </data>
+  <data name="TitleLauncher" xml:space="preserve">
+    <value>Launcher</value>
+  </data>
+  <data name="LblReady" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="LblTrophies" xml:space="preserve">
+    <value>Trophies</value>
+  </data>
+  <data name="DlgFriendRequestAlreadySent" xml:space="preserve">
+    <value>A friend request has already been sent</value>
+  </data>
+  <data name="DlgAlreadyFriends" xml:space="preserve">
+    <value>This user is your friend already</value>
+  </data>
+  <data name="DlgUsernameDoesNotExist" xml:space="preserve">
+    <value>Username does not exist</value>
+  </data>
+  <data name="DlgNowFriends" xml:space="preserve">
+    <value>You are now friends!</value>
+  </data>
+  <data name="DlgFriendRequestDeleted" xml:space="preserve">
+    <value>You have rejected this request</value>
+  </data>
+  <data name="DlgPasswordDoesNotMatch" xml:space="preserve">
+    <value>Password and and confirm password must match</value>
+  </data>
+  <data name="DlgUsernameInvalid" xml:space="preserve">
+    <value>Username must contain alphanumeric values, at least 3 characters, a maximum of 14 and not contain "guest" word</value>
   </data>
 </root>

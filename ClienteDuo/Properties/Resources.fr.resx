@@ -261,4 +261,7 @@
   <data name="TitleNewAccount" xml:space="preserve">
     <value>Nouvelle compte</value>
   </data>
+  <data name="LblInGameUsername" xml:space="preserve">
+    <value>Nom temporel</value>
+  </data>
 </root>

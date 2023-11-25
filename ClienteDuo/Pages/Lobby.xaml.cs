@@ -14,7 +14,7 @@ namespace ClienteDuo.Pages
 {
     public partial class Lobby : Page, IPartyManagerCallback
     {
-        const int MESSAGE_MAX_LENGTH = 250;
+        const int MESSAGE_MAX_LENGTH = 64;
         private readonly bool _isWpfRunning = true;
         private readonly PartyManagerClient _partyManagerClient;
         private readonly PartyValidatorClient _partyValidatorClient = new PartyValidatorClient();
@@ -115,7 +115,7 @@ namespace ClienteDuo.Pages
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters, MessageBoxImage.Warning);
             }
         }
 
@@ -219,7 +219,7 @@ namespace ClienteDuo.Pages
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
         {
             string username = ((FrameworkElement)sender).DataContext as string;
-            _popUpUserDetails.SetDataContext(username, false);
+            _popUpUserDetails.InitializeUserInfo(username, false);
             _popUpUserDetails.Visibility = Visibility.Visible;
         }
 
@@ -239,15 +239,18 @@ namespace ClienteDuo.Pages
 
         public void MessageReceived(string messageSent)
         {
-            var labelMessageReceived = new Label
+            var textBlock = new TextBlock
             {
+                Text = messageSent,
+                Margin = new Thickness(0,4,0,0),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 Foreground = new SolidColorBrush(Colors.White),
+                Width = 248,
                 FontSize = 14,
-                Content = messageSent
+                TextWrapping = TextWrapping.Wrap,
             };
 
-            PanelChat.Children.Add(labelMessageReceived);
+            PanelChat.Children.Add(textBlock);
             ScrollViewerChat.ScrollToEnd();
         }
 

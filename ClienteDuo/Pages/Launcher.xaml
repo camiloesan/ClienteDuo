@@ -25,14 +25,19 @@
                 </Grid.RowDefinitions>
                 <Button Content="{x:Static p:Resources.BtnNewAccount}" Margin="33,0,227,0" VerticalAlignment="Center" Cursor="Hand" Height="33" Click="BtnNewAccountEvent" FontSize="14" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
                 <Button Content="{x:Static p:Resources.BtnLogin}" Margin="227,0,33,0" VerticalAlignment="Center" Height="33" Click="BtnLoginEvent" FontSize="14" Cursor="Hand" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
-                <Button Content="{x:Static p:Resources.BtnJoinAsGuest}" Margin="0,7,0,0" VerticalAlignment="Top" Height="33" HorizontalAlignment="Center" Width="378" Click="BtnJoinAsGuestEvent" FontSize="14" Grid.Row="1" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" />
+                <Button Content="{x:Static p:Resources.BtnJoinAsGuest}" Cursor="Hand" Margin="0,7,0,0" VerticalAlignment="Top" Height="33" HorizontalAlignment="Center" Width="378" Click="BtnJoinAsGuestEvent" FontSize="14" Grid.Row="1" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White" />
             </Grid>
         </Border>
         <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center">
-            <Button Content="en_US" Click="BtnLocalizationEnUSEvent" Width="60" Margin="15,0,0,0"/>
-            <Button Content="es_MX" Click="BtnLocalizationEsMXEvent" Width="60" Margin="15,0,0,0"/>
-            <Button Content="ja_JP" Click="BtnLocalizationJaJPEvent" Width="60" Margin="15,0,0,0"/>
-            <Button Content="fr_FR" Click="BtnLocalizationFrFREvent" Width="60" Margin="15,0,0,0"/>
+            <Button Cursor="Hand" Click="BtnLocalizationEnUSEvent" Width="60" Margin="25,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Image Source="/Images/united-states-of-america.png"/>
+            </Button>
+            <Button Cursor="Hand" Click="BtnLocalizationEsMXEvent" Width="60" Margin="25,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Image Source="/Images/mexico.png"/>
+            </Button>
+            <Button Cursor="Hand" Click="BtnLocalizationFrFREvent" Width="60" Margin="25,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Image Source="/Images/france.png"/>
+            </Button>
         </StackPanel>
         <Label HorizontalAlignment="Center" Height="147" Grid.RowSpan="2" VerticalAlignment="Top" Width="340" Margin="0,37,0,0">
             <Label.Background>

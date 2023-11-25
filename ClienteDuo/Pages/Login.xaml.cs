@@ -40,7 +40,15 @@ namespace ClienteDuo.Pages
             string password = TBoxPassword.Password;
             User loggedUser = AreCredentialsValid(username, password);
 
-            if (loggedUser != null && !_usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
+            if (loggedUser == null)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
+            }
+            else if (_usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
+            }
+            else
             {
                 SessionDetails.UserId = loggedUser.ID;
                 SessionDetails.Username = loggedUser.UserName;
@@ -57,10 +65,6 @@ namespace ClienteDuo.Pages
                 Application.Current.MainWindow.Content = mainMenu;
                 MainWindow.NotifyLogin(user);
             }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
-            }
         }
 
         public User AreCredentialsValid(string username, string password)
@@ -72,7 +76,7 @@ namespace ClienteDuo.Pages
             }
             catch
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
 
             return userCredentials;
