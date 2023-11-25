@@ -141,7 +141,7 @@ namespace ClienteDuo.Pages.Sidebars
             bool result;
             try
             {
-                result = _usersManagerClient.DeleteFriendshipByID(friendshipId);
+                result = _usersManagerClient.DeleteFriendshipById(friendshipId);
             }
             catch
             {
