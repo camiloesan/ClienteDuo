@@ -14,7 +14,7 @@
                 <RowDefinition Height="105*"/>
                 <RowDefinition Height="29*"/>
             </Grid.RowDefinitions>
-            <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Height="34" Width="68"  Grid.Row="1" FontWeight="Bold"/>
+            <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Height="34" Grid.Row="1" FontWeight="Bold"/>
             <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
                 <StackPanel x:Name="PanelFriends" Height="300" Width="200"/>
             </ScrollViewer>

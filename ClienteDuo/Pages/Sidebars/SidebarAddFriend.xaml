@@ -13,7 +13,7 @@
             <RowDefinition Height="105*"/>
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
-        <Label Content="{x:Static p:Resources.BtnAddFriend}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Height="34" Grid.Row="1"/>
+        <Label Content="{x:Static p:Resources.BtnAddFriend}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Height="34" Grid.Row="1" FontWeight="Bold"/>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="174" Grid.Row="1">
             <Label Content="{x:Static p:Resources.LblUsername}" FontSize="14" Foreground="White"/>
             <TextBox x:Name="TBoxUserReceiver" MaxLength="14" TextWrapping="Wrap" Margin="0,7,0,0" Height="26"/>

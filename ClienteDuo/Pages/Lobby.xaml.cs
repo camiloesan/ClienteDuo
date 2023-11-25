@@ -239,15 +239,18 @@ namespace ClienteDuo.Pages
 
         public void MessageReceived(string messageSent)
         {
-            var labelMessageReceived = new Label
+            var textBlock = new TextBlock
             {
+                Text = messageSent,
+                Margin = new Thickness(0,4,0,0),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 Foreground = new SolidColorBrush(Colors.White),
+                Width = 248,
                 FontSize = 14,
-                Content = messageSent
+                TextWrapping = TextWrapping.Wrap,
             };
 
-            PanelChat.Children.Add(labelMessageReceived);
+            PanelChat.Children.Add(textBlock);
             ScrollViewerChat.ScrollToEnd();
         }
 
