@@ -4,21 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClienteDuo.Pages"
+             xmlns:p="clr-namespace:ClienteDuo.Properties"
              mc:Ignorable="d" 
              d:DesignHeight="585" d:DesignWidth="450">
-    <Grid x:Name="_gameMenu" Background="White" Height="585">
-        <Button x:Name="hideMenuButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60" Width="60" Margin="10,10,0,0" Click="BtnHideMenu">
+    <Grid Background="White" Height="585">
+        <Button x:Name="BtnHideMenu" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60" Width="60" Margin="10,10,0,0" Click="BtnHideMenuEvent">
             <Button.Background>
                 <ImageBrush ImageSource="/Images/ExpandMenuIcon.png"/>
             </Button.Background>
         </Button>
-        <Button x:Name="exitButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60" Width="60" Margin="379,10,0,0" Click="BtnExit">
+        <Button x:Name="exitButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Height="60" Width="60" Margin="379,10,0,0" Click="BtnExitEvent">
             <Button.Background>
                 <ImageBrush ImageSource="/Images/ExitButtonIcon.png"/>
             </Button.Background>
         </Button>
 
-        <Label x:Name="titleLabel" Content="Party settings" HorizontalAlignment="Left" Margin="111,10,0,0" VerticalAlignment="Top" Width="234" Height="80" FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+        <Label x:Name="titleLabel" Content="{x:Static p:Resources.LblGameSettings}" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="286" Height="80" FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center"/>
 
         <StackPanel x:Name="playerStackPanel" Margin="0,90,0,0">
             <StackPanel.Background>

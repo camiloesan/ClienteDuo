@@ -39,51 +39,6 @@ namespace ClienteDuo.Pages
             _hasDrawnCard = false;
         }
 
-        public bool SelectCard(Card selectedCard)
-        {
-            bool result = false;
-
-            if (_selectedCards.Count < 2)
-            {
-                _selectedCards.Add(selectedCard);
-                result = true;
-            }
-
-            return result;
-        }
-
-        public void UnselectCard(Card unselectedCard)
-        {
-            _selectedCards.Remove(unselectedCard);
-        }
-
-        public void PlayerLeftGame(string username)
-        {
-            if (username.Equals(SessionDetails.Username))
-            {
-                if (SessionDetails.IsGuest)
-                {
-                    Launcher launcher = new Launcher();
-                    Application.Current.MainWindow.Content = launcher;
-                }
-                else
-                {
-                    MainMenu mainMenu = new MainMenu();
-                    Application.Current.MainWindow.Content = mainMenu;
-                }
-            }
-            else
-            {
-                foreach (PlayerIcon playerIcon in _playerIcons)
-                {
-                    if (playerIcon.Username.Equals(username))
-                    {
-                        playerIcon.Visibility = Visibility.Collapsed;
-                    }
-                }
-            }
-        }
-
         private void InitializeAttributes()
         {
             _cardLabels[0] = LblLeftCard;
@@ -134,7 +89,54 @@ namespace ClienteDuo.Pages
                 _playerIcons[i].Visibility = Visibility.Visible;
             }
 
-            _gameMenu.LoadPlayers(otherPlayers,client);
+            _gameMenu.LoadPlayers(otherPlayers, client);
+        }
+
+        public bool SelectCard(Card selectedCard)
+        {
+            bool result = false;
+
+            if (_selectedCards.Count < 2)
+            {
+                _selectedCards.Add(selectedCard);
+                result = true;
+            }
+
+            return result;
+        }
+
+        public void UnselectCard(Card unselectedCard)
+        {
+            _selectedCards.Remove(unselectedCard);
+        }
+
+        public void PlayerLeftGame(string username)
+        {
+            if (username.Equals(SessionDetails.Username))
+            {
+                if (SessionDetails.IsGuest)
+                {
+                    Launcher launcher = new Launcher();
+                    Application.Current.MainWindow.Content = launcher;
+                }
+                else
+                {
+                    MainMenu mainMenu = new MainMenu();
+                    Application.Current.MainWindow.Content = mainMenu;
+                }
+            }
+            else
+            {
+                _gameMenu.RemovePlayer(username);
+
+                foreach (PlayerIcon playerIcon in _playerIcons)
+                {
+                    if (playerIcon.Username.Equals(username))
+                    {
+                        playerIcon.Visibility = Visibility.Collapsed;
+                    }
+                }
+            }
         }
 
         public void UpdateTableCards()

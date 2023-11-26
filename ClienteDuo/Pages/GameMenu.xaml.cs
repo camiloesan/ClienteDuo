@@ -13,6 +13,8 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class GameMenu : UserControl
     {
+        private List<string> matchPlayers = new List<string>();
+
         public GameMenu()
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace ClienteDuo.Pages
 
         public void LoadPlayers(List<string> playerList, MatchManagerClient client)
         {
+            matchPlayers = playerList;
+
             foreach (string playerUsername in playerList)
             {
                 if (!playerUsername.Equals(SessionDetails.Username))
@@ -48,13 +52,29 @@ namespace ClienteDuo.Pages
                     }
 
                     playerBar.Visibility = Visibility.Visible;
+                    playerBar.Name = playerUsername;
 
                     playerStackPanel.Children.Add(playerBar);
                 }
             }
         }
 
-        private void BtnExit(object sender, RoutedEventArgs e)
+        public void RemovePlayer(string username)
+        {
+            PlayerBar kickedPlayer = new PlayerBar();
+
+            foreach (PlayerBar playerBar in playerStackPanel.Children)
+            {
+                if (playerBar.Username.Equals(username))
+                {
+                    kickedPlayer = playerBar;
+                }
+            }
+
+            playerStackPanel.Children.Remove(kickedPlayer);
+        }
+
+        private void BtnExitEvent(object sender, RoutedEventArgs e)
         {
             if (MainWindow.ShowConfirmationBox(Properties.Resources.DlgExitMatchConfirmation))
             {
@@ -73,7 +93,7 @@ namespace ClienteDuo.Pages
             }
         }
 
-        private void BtnHideMenu(object sender, RoutedEventArgs e)
+        private void BtnHideMenuEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }

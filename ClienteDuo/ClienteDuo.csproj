@@ -370,22 +370,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Resource Include="DuoLogo.ico" />
-<<<<<<< HEAD
-    <Resource Include="Images\XIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\AddFriendIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\DUOLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-=======
+    <Resource Include="Images\DUOLogo.png" />
     <Resource Include="Images\XIcon.png" />
     <Resource Include="Images\AddFriendIcon.png" />
     <Resource Include="Images\mexico.png" />
     <Resource Include="Images\france.png" />
->>>>>>> a70e1d187eddaa93eb99c8066cc5311f2c822663
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

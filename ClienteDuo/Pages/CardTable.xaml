@@ -8,7 +8,7 @@
         Title="CardTable" Height="600" Width="1000">
     <Grid x:Name="TableBackground" Background="#FF2CAB00">
         <ScrollViewer Margin="15,455,0,0" Height="130" Width="840" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="#FF003E01" HorizontalAlignment="Left" VerticalAlignment="Top" >
-            <StackPanel x:Name="PlayerDeck" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel x:Name="PlayerDeck" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Visible" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True">
                 <StackPanel.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
