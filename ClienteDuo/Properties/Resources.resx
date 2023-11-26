@@ -324,4 +324,7 @@
   <data name="DlgUsernameInvalid" xml:space="preserve">
     <value>Username must contain alphanumeric values, at least 3 characters, a maximum of 14 and not contain "guest" word</value>
   </data>
+  <data name="BtnBlockedUsers" xml:space="preserve">
+    <value>Blocked Users</value>
+  </data>
 </root>

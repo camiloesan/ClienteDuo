@@ -454,22 +454,22 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task<bool> AcceptFriendRequestAsync(ClienteDuo.DataService.FriendRequest friendRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/RejectFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/RejectFriendRequestResponse")]
-        bool RejectFriendRequest(int friendRequestID);
+        bool RejectFriendRequest(int friendRequestId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/RejectFriendRequest", ReplyAction="http://tempuri.org/IUsersManager/RejectFriendRequestResponse")]
-        System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(int friendRequestID);
+        System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(int friendRequestId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetFriendRequestsList", ReplyAction="http://tempuri.org/IUsersManager/GetFriendRequestsListResponse")]
-        ClienteDuo.DataService.FriendRequest[] GetFriendRequestsList(int userID);
+        ClienteDuo.DataService.FriendRequest[] GetFriendRequestsList(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetFriendRequestsList", ReplyAction="http://tempuri.org/IUsersManager/GetFriendRequestsListResponse")]
-        System.Threading.Tasks.Task<ClienteDuo.DataService.FriendRequest[]> GetFriendRequestsListAsync(int userID);
+        System.Threading.Tasks.Task<ClienteDuo.DataService.FriendRequest[]> GetFriendRequestsListAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetFriendsList", ReplyAction="http://tempuri.org/IUsersManager/GetFriendsListResponse")]
-        ClienteDuo.DataService.Friendship[] GetFriendsList(int userID);
+        ClienteDuo.DataService.Friendship[] GetFriendsList(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetFriendsList", ReplyAction="http://tempuri.org/IUsersManager/GetFriendsListResponse")]
-        System.Threading.Tasks.Task<ClienteDuo.DataService.Friendship[]> GetFriendsListAsync(int userID);
+        System.Threading.Tasks.Task<ClienteDuo.DataService.Friendship[]> GetFriendsListAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
         string[] GetOnlineFriends(string username);
@@ -477,11 +477,11 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
         System.Threading.Tasks.Task<string[]> GetOnlineFriendsAsync(string username);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse")]
-        bool DeleteFriendshipByID(int friendshipID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipById", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIdResponse")]
+        bool DeleteFriendshipById(int friendshipId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse")]
-        System.Threading.Tasks.Task<bool> DeleteFriendshipByIDAsync(int friendshipID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipById", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIdResponse")]
+        System.Threading.Tasks.Task<bool> DeleteFriendshipByIdAsync(int friendshipId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/IsAlreadyFriend", ReplyAction="http://tempuri.org/IUsersManager/IsAlreadyFriendResponse")]
         bool IsAlreadyFriend(string senderUsername, string receiverUsername);
@@ -587,28 +587,28 @@ namespace ClienteDuo.DataService {
             return base.Channel.AcceptFriendRequestAsync(friendRequest);
         }
         
-        public bool RejectFriendRequest(int friendRequestID) {
-            return base.Channel.RejectFriendRequest(friendRequestID);
+        public bool RejectFriendRequest(int friendRequestId) {
+            return base.Channel.RejectFriendRequest(friendRequestId);
         }
         
-        public System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(int friendRequestID) {
-            return base.Channel.RejectFriendRequestAsync(friendRequestID);
+        public System.Threading.Tasks.Task<bool> RejectFriendRequestAsync(int friendRequestId) {
+            return base.Channel.RejectFriendRequestAsync(friendRequestId);
         }
         
-        public ClienteDuo.DataService.FriendRequest[] GetFriendRequestsList(int userID) {
-            return base.Channel.GetFriendRequestsList(userID);
+        public ClienteDuo.DataService.FriendRequest[] GetFriendRequestsList(int userId) {
+            return base.Channel.GetFriendRequestsList(userId);
         }
         
-        public System.Threading.Tasks.Task<ClienteDuo.DataService.FriendRequest[]> GetFriendRequestsListAsync(int userID) {
-            return base.Channel.GetFriendRequestsListAsync(userID);
+        public System.Threading.Tasks.Task<ClienteDuo.DataService.FriendRequest[]> GetFriendRequestsListAsync(int userId) {
+            return base.Channel.GetFriendRequestsListAsync(userId);
         }
         
-        public ClienteDuo.DataService.Friendship[] GetFriendsList(int userID) {
-            return base.Channel.GetFriendsList(userID);
+        public ClienteDuo.DataService.Friendship[] GetFriendsList(int userId) {
+            return base.Channel.GetFriendsList(userId);
         }
         
-        public System.Threading.Tasks.Task<ClienteDuo.DataService.Friendship[]> GetFriendsListAsync(int userID) {
-            return base.Channel.GetFriendsListAsync(userID);
+        public System.Threading.Tasks.Task<ClienteDuo.DataService.Friendship[]> GetFriendsListAsync(int userId) {
+            return base.Channel.GetFriendsListAsync(userId);
         }
         
         public string[] GetOnlineFriends(string username) {
@@ -619,12 +619,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.GetOnlineFriendsAsync(username);
         }
         
-        public bool DeleteFriendshipByID(int friendshipID) {
-            return base.Channel.DeleteFriendshipByID(friendshipID);
+        public bool DeleteFriendshipById(int friendshipId) {
+            return base.Channel.DeleteFriendshipById(friendshipId);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteFriendshipByIDAsync(int friendshipID) {
-            return base.Channel.DeleteFriendshipByIDAsync(friendshipID);
+        public System.Threading.Tasks.Task<bool> DeleteFriendshipByIdAsync(int friendshipId) {
+            return base.Channel.DeleteFriendshipByIdAsync(friendshipId);
         }
         
         public bool IsAlreadyFriend(string senderUsername, string receiverUsername) {
