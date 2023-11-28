@@ -120,7 +120,7 @@
   <xs:element name="RejectFriendRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="friendRequestId" type="xs:int" />
+        <xs:element minOccurs="0" name="friendRequestID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -134,7 +134,7 @@
   <xs:element name="GetFriendRequestsList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="userID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -148,7 +148,7 @@
   <xs:element name="GetFriendsList">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="userId" type="xs:int" />
+        <xs:element minOccurs="0" name="userID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -173,17 +173,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteFriendshipById">
+  <xs:element name="DeleteFriendshipByID">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="friendshipId" type="xs:int" />
+        <xs:element minOccurs="0" name="friendshipID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteFriendshipByIdResponse">
+  <xs:element name="DeleteFriendshipByIDResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteFriendshipByIdResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="DeleteFriendshipByIDResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

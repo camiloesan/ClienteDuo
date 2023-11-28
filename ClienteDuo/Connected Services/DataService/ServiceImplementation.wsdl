@@ -152,11 +152,11 @@
   <wsdl:message name="IUsersManager_GetOnlineFriends_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOnlineFriendsResponse" />
   </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteFriendshipById_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteFriendshipById" />
+  <wsdl:message name="IUsersManager_DeleteFriendshipByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendshipByID" />
   </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteFriendshipById_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteFriendshipByIdResponse" />
+  <wsdl:message name="IUsersManager_DeleteFriendshipByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendshipByIDResponse" />
   </wsdl:message>
   <wsdl:message name="IUsersManager_IsAlreadyFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:IsAlreadyFriend" />
@@ -399,9 +399,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriends" message="tns:IUsersManager_GetOnlineFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse" message="tns:IUsersManager_GetOnlineFriends_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteFriendshipById">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipById" message="tns:IUsersManager_DeleteFriendshipById_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByIdResponse" message="tns:IUsersManager_DeleteFriendshipById_OutputMessage" />
+    <wsdl:operation name="DeleteFriendshipByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID" message="tns:IUsersManager_DeleteFriendshipByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse" message="tns:IUsersManager_DeleteFriendshipByID_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsAlreadyFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsAlreadyFriend" message="tns:IUsersManager_IsAlreadyFriend_InputMessage" />
@@ -665,8 +665,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteFriendshipById">
-      <soap12:operation soapAction="http://tempuri.org/IUsersManager/DeleteFriendshipById" style="document" />
+    <wsdl:operation name="DeleteFriendshipByID">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/DeleteFriendshipByID" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
