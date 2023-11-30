@@ -152,11 +152,11 @@
   <wsdl:message name="IUsersManager_GetOnlineFriends_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetOnlineFriendsResponse" />
   </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteFriendshipByID_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteFriendshipByID" />
+  <wsdl:message name="IUsersManager_DeleteFriendshipById_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendshipById" />
   </wsdl:message>
-  <wsdl:message name="IUsersManager_DeleteFriendshipByID_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteFriendshipByIDResponse" />
+  <wsdl:message name="IUsersManager_DeleteFriendshipById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFriendshipByIdResponse" />
   </wsdl:message>
   <wsdl:message name="IUsersManager_IsAlreadyFriend_InputMessage">
     <wsdl:part name="parameters" element="tns:IsAlreadyFriend" />
@@ -299,6 +299,9 @@
   <wsdl:message name="IMatchManager_SetGameScore_InputMessage">
     <wsdl:part name="parameters" element="tns:SetGameScore" />
   </wsdl:message>
+  <wsdl:message name="IMatchManager_ExitMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExitMatch" />
+  </wsdl:message>
   <wsdl:message name="IMatchManager_KickPlayerFromGame_InputMessage">
     <wsdl:part name="parameters" element="tns:KickPlayerFromGame" />
   </wsdl:message>
@@ -399,9 +402,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriends" message="tns:IUsersManager_GetOnlineFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse" message="tns:IUsersManager_GetOnlineFriends_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteFriendshipByID">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByID" message="tns:IUsersManager_DeleteFriendshipByID_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByIDResponse" message="tns:IUsersManager_DeleteFriendshipByID_OutputMessage" />
+    <wsdl:operation name="DeleteFriendshipById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipById" message="tns:IUsersManager_DeleteFriendshipById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/DeleteFriendshipByIdResponse" message="tns:IUsersManager_DeleteFriendshipById_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="IsAlreadyFriend">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsAlreadyFriend" message="tns:IUsersManager_IsAlreadyFriend_InputMessage" />
@@ -515,6 +518,9 @@
     </wsdl:operation>
     <wsdl:operation name="SetGameScore">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/SetGameScore" message="tns:IMatchManager_SetGameScore_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExitMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/ExitMatch" message="tns:IMatchManager_ExitMatch_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="KickPlayerFromGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/KickPlayerFromGame" message="tns:IMatchManager_KickPlayerFromGame_InputMessage" />
@@ -665,8 +671,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteFriendshipByID">
-      <soap12:operation soapAction="http://tempuri.org/IUsersManager/DeleteFriendshipByID" style="document" />
+    <wsdl:operation name="DeleteFriendshipById">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/DeleteFriendshipById" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -915,6 +921,12 @@
     </wsdl:operation>
     <wsdl:operation name="SetGameScore">
       <soap12:operation soapAction="http://tempuri.org/IMatchManager/SetGameScore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ExitMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/ExitMatch" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

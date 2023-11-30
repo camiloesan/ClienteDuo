@@ -264,4 +264,31 @@
   <data name="LblInGameUsername" xml:space="preserve">
     <value>Nom temporel</value>
   </data>
+  <data name="LblSelectReason" xml:space="preserve">
+    <value>Choisissez une raison (Optional)</value>
+  </data>
+  <data name="RsnCheating" xml:space="preserve">
+    <value>Tricherie</value>
+  </data>
+  <data name="RsnInappropriateBehaviour" xml:space="preserve">
+    <value>Comportment inapproprié</value>
+  </data>
+  <data name="RsnSpam" xml:space="preserve">
+    <value>Spam</value>
+  </data>
+  <data name="TitleKickPlayer" xml:space="preserve">
+    <value>Expulser joueur</value>
+  </data>
+  <data name="DlgKickedPlayer" xml:space="preserve">
+    <value>Vous avez été expulsé du jeu. </value>
+  </data>
+  <data name="DlgKickingReason" xml:space="preserve">
+    <value>La raison de votre expulsion est: </value>
+  </data>
+  <data name="DlgEmptyKickingReason" xml:space="preserve">
+    <value>L'expulsion du joueur n'était pas possible, definez une raison d'expulsion s'il vous plait</value>
+  </data>
+  <data name="DlgFriendRequestError" xml:space="preserve">
+    <value>Il y avait un echec en envoyant de la demande d'ami</value>
+  </data>
 </root>

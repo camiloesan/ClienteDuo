@@ -60,10 +60,14 @@ namespace ClienteDuo.Pages
 
         private void LoadSettingsMenu()
         {
+            InstanceContext instanceContext = new InstanceContext(this);
+            MatchManagerClient client = new MatchManagerClient(instanceContext);
+            
             _gameMenu = new GameMenu();
-
+            _gameMenu.setClient(client);
             _gameMenu.Margin = new Thickness(550, 0, 0, 0);
             _gameMenu.Visibility = Visibility.Collapsed;
+
             TableBackground.Children.Add(_gameMenu);
         }
 
@@ -110,8 +114,10 @@ namespace ClienteDuo.Pages
             _selectedCards.Remove(unselectedCard);
         }
 
-        public void PlayerLeftGame(string username)
+        public void PlayerLeftGame(string username, string reason)
         {
+            MusicManager.PlayPlayerLeftSound();
+
             if (username.Equals(SessionDetails.Username))
             {
                 if (SessionDetails.IsGuest)
@@ -124,6 +130,9 @@ namespace ClienteDuo.Pages
                     MainMenu mainMenu = new MainMenu();
                     Application.Current.MainWindow.Content = mainMenu;
                 }
+
+                string message = Properties.Resources.DlgKickedPlayer + Properties.Resources.DlgKickingReason + reason;
+                MainWindow.ShowMessageBox(message, MessageBoxImage.Exclamation);
             }
             else
             {

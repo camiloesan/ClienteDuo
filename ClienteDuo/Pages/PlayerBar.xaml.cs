@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for PlayerBar.xaml
-    /// </summary>
     public partial class PlayerBar : UserControl
     {
         private string _username;
@@ -49,12 +47,23 @@ namespace ClienteDuo.Pages
 
         private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
         {
-            //TODO
+            UsersManagerClient client = new UsersManagerClient();
+            if (client.SendFriendRequest(SessionDetails.Username, _username))
+            {
+                BtnAddFriend.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MainWindow.ShowMessageBox("There was an error sending friend request to this user", MessageBoxImage.Error);
+            }
         }
 
         private void BtnKickEvent(object sender, RoutedEventArgs e)
         {
-            _client.KickPlayerFromGame(SessionDetails.PartyCode, _username);
+            PopUpKickPlayer popUpKickPlayer = new PopUpKickPlayer();
+            popUpKickPlayer.KickedUsername = _username;
+            popUpKickPlayer.SetClient(_client);
+            popUpKickPlayer.Show();
         }
     }
 }

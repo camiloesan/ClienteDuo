@@ -8,12 +8,9 @@ using System.Windows.Media;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for GameMenu.xaml
-    /// </summary>
     public partial class GameMenu : UserControl
     {
-        private List<string> matchPlayers = new List<string>();
+        private MatchManagerClient _client;
 
         public GameMenu()
         {
@@ -30,9 +27,7 @@ namespace ClienteDuo.Pages
         }
 
         public void LoadPlayers(List<string> playerList, MatchManagerClient client)
-        {
-            matchPlayers = playerList;
-
+        {   
             foreach (string playerUsername in playerList)
             {
                 if (!playerUsername.Equals(SessionDetails.Username))
@@ -49,6 +44,16 @@ namespace ClienteDuo.Pages
                     if (SessionDetails.IsGuest)
                     {
                         playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        UsersManagerClient userClient = new UsersManagerClient();
+
+                        if (userClient.IsAlreadyFriend(SessionDetails.Username, playerBar.Username) || 
+                            userClient.IsFriendRequestAlreadyExistent(SessionDetails.Username, playerUsername))
+                        {
+                            playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
+                        }
                     }
 
                     playerBar.Visibility = Visibility.Visible;
@@ -74,10 +79,17 @@ namespace ClienteDuo.Pages
             playerStackPanel.Children.Remove(kickedPlayer);
         }
 
+        public void setClient(MatchManagerClient client)
+        {
+            _client = client;
+        }
+
         private void BtnExitEvent(object sender, RoutedEventArgs e)
         {
             if (MainWindow.ShowConfirmationBox(Properties.Resources.DlgExitMatchConfirmation))
             {
+                _client.ExitMatch(SessionDetails.PartyCode, SessionDetails.Username);
+
                 if (SessionDetails.IsGuest)
                 {
                     Launcher launcher = new Launcher();
