@@ -120,19 +120,20 @@ namespace ClienteDuo.Pages.Sidebars
             var friendshipId = (int)((FrameworkElement)sender).DataContext;
 
             bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgUnfriendConfirmation);
-            if (!confirmation) return;
 
-            bool result = DeleteFriendshipById(friendshipId);
-            if (result)
+            if (confirmation)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend, MessageBoxImage.Information);
+                bool result = DeleteFriendshipById(friendshipId);
+                if (result)
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Information);
+                }
+                FillFriendsPanel();
             }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Information);
-            }
-
-            FillFriendsPanel();
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

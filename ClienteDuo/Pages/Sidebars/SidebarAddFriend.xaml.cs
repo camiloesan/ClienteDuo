@@ -39,7 +39,12 @@ namespace ClienteDuo.Pages.Sidebars
             string usernameSender = SessionDetails.Username;
             string usernameReceiver = TBoxUserReceiver.Text.Trim();
 
-            if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
+            if (usernameReceiver == SessionDetails.Username)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendYourself,
+                    MessageBoxImage.Information);
+            } 
+            else if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, 
                     MessageBoxImage.Information);

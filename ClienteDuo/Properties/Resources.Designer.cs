@@ -394,6 +394,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot send a friend request to yourself.
+        /// </summary>
+        public static string DlgFriendYourself {
+            get {
+                return ResourceManager.GetString("DlgFriendYourself", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The party is already full, try again later.
         /// </summary>
         public static string DlgFullParty {
@@ -763,20 +772,20 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total Wins.
-        /// </summary>
-        public static string LblTotalWins {
-            get {
-                return ResourceManager.GetString("LblTotalWins", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Select a reason (Optional).
         /// </summary>
         public static string LblSelectReason {
             get {
                 return ResourceManager.GetString("LblSelectReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Wins.
+        /// </summary>
+        public static string LblTotalWins {
+            get {
+                return ResourceManager.GetString("LblTotalWins", resourceCulture);
             }
         }
         
