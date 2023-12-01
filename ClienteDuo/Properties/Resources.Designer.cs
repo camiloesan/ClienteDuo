@@ -322,6 +322,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t KickPlayer, please define a reason to kick him.
+        /// </summary>
+        public static string DlgEmptyKickingReason {
+            get {
+                return ResourceManager.GetString("DlgEmptyKickingReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to exit the match? You will not be able to join again until it is over.
         /// </summary>
         public static string DlgExitConfirmation {
@@ -367,6 +376,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was an error sending friend request to this user.
+        /// </summary>
+        public static string DlgFriendRequestError {
+            get {
+                return ResourceManager.GetString("DlgFriendRequestError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Friend request sent.
         /// </summary>
         public static string DlgFriendRequestSent {
@@ -408,6 +426,24 @@ namespace ClienteDuo.Properties {
         public static string DlgIsNowActive {
             get {
                 return ResourceManager.GetString("DlgIsNowActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have been kicked from the game. .
+        /// </summary>
+        public static string DlgKickedPlayer {
+            get {
+                return ResourceManager.GetString("DlgKickedPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reason of the kicking is: .
+        /// </summary>
+        public static string DlgKickingReason {
+            get {
+                return ResourceManager.GetString("DlgKickingReason", resourceCulture);
             }
         }
         
@@ -736,6 +772,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a reason (Optional).
+        /// </summary>
+        public static string LblSelectReason {
+            get {
+                return ResourceManager.GetString("LblSelectReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trophies.
         /// </summary>
         public static string LblTrophies {
@@ -763,11 +808,47 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cheating.
+        /// </summary>
+        public static string RsnCheating {
+            get {
+                return ResourceManager.GetString("RsnCheating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inappropriate Behaviour.
+        /// </summary>
+        public static string RsnInappropriateBehaviour {
+            get {
+                return ResourceManager.GetString("RsnInappropriateBehaviour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spam.
+        /// </summary>
+        public static string RsnSpam {
+            get {
+                return ResourceManager.GetString("RsnSpam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alert.
         /// </summary>
         public static string TitleAlert {
             get {
                 return ResourceManager.GetString("TitleAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kick player.
+        /// </summary>
+        public static string TitleKickPlayer {
+            get {
+                return ResourceManager.GetString("TitleKickPlayer", resourceCulture);
             }
         }
         

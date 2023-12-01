@@ -83,12 +83,6 @@
     <None Include="Properties\DataSources\ClienteDuo.DataService.User.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClienteDuo\ClienteDuo.csproj">
-      <Project>{BBD33E8B-D17E-463D-A81A-83A7B02019B9}</Project>
-      <Name>ClienteDuo</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

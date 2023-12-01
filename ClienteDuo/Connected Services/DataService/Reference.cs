@@ -1255,11 +1255,17 @@ namespace ClienteDuo.DataService {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/SetGameScore")]
         System.Threading.Tasks.Task SetGameScoreAsync(int partyCode, string username, int cardCount);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/KickPlayerFromGame")]
-        void KickPlayerFromGame(int partyCode, string username);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/ExitMatch")]
+        void ExitMatch(int partyCode, string username);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/ExitMatch")]
+        System.Threading.Tasks.Task ExitMatchAsync(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/KickPlayerFromGame")]
-        System.Threading.Tasks.Task KickPlayerFromGameAsync(int partyCode, string username);
+        void KickPlayerFromGame(int partyCode, string username, string reason);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/KickPlayerFromGame")]
+        System.Threading.Tasks.Task KickPlayerFromGameAsync(int partyCode, string username, string reason);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchManager/EndGame")]
         void EndGame(int partyCode);
@@ -1299,7 +1305,7 @@ namespace ClienteDuo.DataService {
         void UpdateTableCards();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/PlayerLeftGame", ReplyAction="http://tempuri.org/IMatchManager/PlayerLeftGameResponse")]
-        void PlayerLeftGame(string username);
+        void PlayerLeftGame(string username, string reason);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchManager/TurnFinished", ReplyAction="http://tempuri.org/IMatchManager/TurnFinishedResponse")]
         void TurnFinished(string currentTurn);
@@ -1352,12 +1358,20 @@ namespace ClienteDuo.DataService {
             return base.Channel.SetGameScoreAsync(partyCode, username, cardCount);
         }
         
-        public void KickPlayerFromGame(int partyCode, string username) {
-            base.Channel.KickPlayerFromGame(partyCode, username);
+        public void ExitMatch(int partyCode, string username) {
+            base.Channel.ExitMatch(partyCode, username);
         }
         
-        public System.Threading.Tasks.Task KickPlayerFromGameAsync(int partyCode, string username) {
-            return base.Channel.KickPlayerFromGameAsync(partyCode, username);
+        public System.Threading.Tasks.Task ExitMatchAsync(int partyCode, string username) {
+            return base.Channel.ExitMatchAsync(partyCode, username);
+        }
+        
+        public void KickPlayerFromGame(int partyCode, string username, string reason) {
+            base.Channel.KickPlayerFromGame(partyCode, username, reason);
+        }
+        
+        public System.Threading.Tasks.Task KickPlayerFromGameAsync(int partyCode, string username, string reason) {
+            return base.Channel.KickPlayerFromGameAsync(partyCode, username, reason);
         }
         
         public void EndGame(int partyCode) {

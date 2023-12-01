@@ -327,6 +327,34 @@
   <data name="BtnBlockedUsers" xml:space="preserve">
     <value>Blocked Users</value>
   </data>
+  <data name="LblSelectReason" xml:space="preserve">
+    <value>Select a reason (Optional)</value>
+  </data>
+  <data name="RsnCheating" xml:space="preserve">
+    <value>Cheating</value>
+  </data>
+  <data name="RsnInappropriateBehaviour" xml:space="preserve">
+    <value>Inappropriate Behaviour</value>
+  </data>
+  <data name="RsnSpam" xml:space="preserve">
+    <value>Spam</value>
+  </data>
+  <data name="TitleKickPlayer" xml:space="preserve">
+    <value>Kick player</value>
+  </data>
+  <data name="DlgKickedPlayer" xml:space="preserve">
+    <value>You have been kicked from the game. </value>
+  </data>
+  <data name="DlgKickingReason" xml:space="preserve">
+    <value>The reason of the kicking is: </value>
+  </data>
+  <data name="DlgEmptyKickingReason" xml:space="preserve">
+    <value>Couldn't KickPlayer, please define a reason to kick him</value>
+  </data>
+  <data name="DlgFriendRequestError" xml:space="preserve">
+    <value>There was an error sending friend request to this user</value>
+    <comment>This could be caused by many things, lack of connection, or sending too many requests because the user is very impatient</comment>
+  </data>
   <data name="TitlePasswordReset" xml:space="preserve">
     <value>Password Reset</value>
   </data>

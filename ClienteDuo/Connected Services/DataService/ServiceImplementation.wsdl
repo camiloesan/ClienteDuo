@@ -347,6 +347,9 @@
   <wsdl:message name="IMatchManager_SetGameScore_InputMessage">
     <wsdl:part name="parameters" element="tns:SetGameScore" />
   </wsdl:message>
+  <wsdl:message name="IMatchManager_ExitMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExitMatch" />
+  </wsdl:message>
   <wsdl:message name="IMatchManager_KickPlayerFromGame_InputMessage">
     <wsdl:part name="parameters" element="tns:KickPlayerFromGame" />
   </wsdl:message>
@@ -595,6 +598,9 @@
     </wsdl:operation>
     <wsdl:operation name="SetGameScore">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/SetGameScore" message="tns:IMatchManager_SetGameScore_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExitMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/ExitMatch" message="tns:IMatchManager_ExitMatch_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="KickPlayerFromGame">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchManager/KickPlayerFromGame" message="tns:IMatchManager_KickPlayerFromGame_InputMessage" />
@@ -1067,6 +1073,12 @@
     </wsdl:operation>
     <wsdl:operation name="SetGameScore">
       <soap12:operation soapAction="http://tempuri.org/IMatchManager/SetGameScore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ExitMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchManager/ExitMatch" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

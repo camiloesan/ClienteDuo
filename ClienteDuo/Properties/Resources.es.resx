@@ -315,6 +315,33 @@
   <data name="BtnBlockedUsers" xml:space="preserve">
     <value>Usuraios Bloqueados</value>
   </data>
+  <data name="LblSelectReason" xml:space="preserve">
+    <value>Elija un motivo (Opcional)</value>
+  </data>
+  <data name="RsnCheating" xml:space="preserve">
+    <value>Trampa</value>
+  </data>
+  <data name="RsnInappropriateBehaviour" xml:space="preserve">
+    <value>Comportamiento inadecuado</value>
+  </data>
+  <data name="RsnSpam" xml:space="preserve">
+    <value>Spam</value>
+  </data>
+  <data name="TitleKickPlayer" xml:space="preserve">
+    <value>Expulsar jugador</value>
+  </data>
+  <data name="DlgKickedPlayer" xml:space="preserve">
+    <value>Ha sido expulsado de la partida. </value>
+  </data>
+  <data name="DlgKickingReason" xml:space="preserve">
+    <value>El motivo de su expulsión es: </value>
+  </data>
+  <data name="DlgEmptyKickingReason" xml:space="preserve">
+    <value>No se pudo expulsar este usuario, por favor defina una razón de expulsión</value>
+  </data>
+  <data name="DlgFriendRequestError" xml:space="preserve">
+    <value>Hubo un error al enviar la solicitud de amistar a este usuario</value>
+  </data>
   <data name="TitlePasswordReset" xml:space="preserve">
     <value>Reestablecer Contraseña</value>
   </data>

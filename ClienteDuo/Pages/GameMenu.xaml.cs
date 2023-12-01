@@ -8,11 +8,10 @@ using System.Windows.Media;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for GameMenu.xaml
-    /// </summary>
     public partial class GameMenu : UserControl
     {
+        private MatchManagerClient _client;
+
         public GameMenu()
         {
             InitializeComponent();
@@ -28,7 +27,7 @@ namespace ClienteDuo.Pages
         }
 
         public void LoadPlayers(List<string> playerList, MatchManagerClient client)
-        {
+        {   
             foreach (string playerUsername in playerList)
             {
                 if (!playerUsername.Equals(SessionDetails.Username))
@@ -46,18 +45,51 @@ namespace ClienteDuo.Pages
                     {
                         playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
                     }
+                    else
+                    {
+                        UsersManagerClient userClient = new UsersManagerClient();
+
+                        if (userClient.IsAlreadyFriend(SessionDetails.Username, playerBar.Username) || 
+                            userClient.IsFriendRequestAlreadyExistent(SessionDetails.Username, playerUsername))
+                        {
+                            playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
+                        }
+                    }
 
                     playerBar.Visibility = Visibility.Visible;
+                    playerBar.Name = playerUsername;
 
                     playerStackPanel.Children.Add(playerBar);
                 }
             }
         }
 
-        private void BtnExit(object sender, RoutedEventArgs e)
+        public void RemovePlayer(string username)
+        {
+            PlayerBar kickedPlayer = new PlayerBar();
+
+            foreach (PlayerBar playerBar in playerStackPanel.Children)
+            {
+                if (playerBar.Username.Equals(username))
+                {
+                    kickedPlayer = playerBar;
+                }
+            }
+
+            playerStackPanel.Children.Remove(kickedPlayer);
+        }
+
+        public void setClient(MatchManagerClient client)
+        {
+            _client = client;
+        }
+
+        private void BtnExitEvent(object sender, RoutedEventArgs e)
         {
             if (MainWindow.ShowConfirmationBox(Properties.Resources.DlgExitMatchConfirmation))
             {
+                _client.ExitMatch(SessionDetails.PartyCode, SessionDetails.Username);
+
                 if (SessionDetails.IsGuest)
                 {
                     Launcher launcher = new Launcher();
@@ -73,7 +105,7 @@ namespace ClienteDuo.Pages
             }
         }
 
-        private void BtnHideMenu(object sender, RoutedEventArgs e)
+        private void BtnHideMenuEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }

@@ -124,6 +124,9 @@
     </Compile>
     <Compile Include="Pages\PlayerBar.xaml.cs" />
     <Compile Include="Pages\PlayerIcon.xaml.cs" />
+    <Compile Include="Pages\Sidebars\PopUpKickPlayer.xaml.cs">
+      <DependentUpon>PopUpKickPlayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Sidebars\EmailCodeVerification.xaml.cs">
       <DependentUpon>EmailCodeVerification.xaml</DependentUpon>
     </Compile>
@@ -225,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Sidebars\PasswordReset.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\PopUpKickPlayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -362,7 +369,9 @@
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Resource Include="Fonts\MPHudson.ttf" />
+    <Resource Include="Fonts\MPHudson.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -401,15 +410,21 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Resource Include="DuoLogo.ico" />
-    <Resource Include="Images\XIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\DUOLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\AddFriendIcon.png" />
-    <Resource Include="Images\mexico.png" />
-    <Resource Include="Images\france.png" />
+    <Resource Include="Images\XIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AddFriendIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mexico.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\france.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
