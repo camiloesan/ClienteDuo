@@ -5,7 +5,7 @@
   <xs:element name="AddUserToDatabase">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q1:User" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q1:UserDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -41,7 +41,7 @@
   <xs:element name="IsLoginValidResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="IsLoginValidResult" nillable="true" type="q2:User" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="IsLoginValidResult" nillable="true" type="q2:UserDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -106,7 +106,7 @@
   <xs:element name="AcceptFriendRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="friendRequest" nillable="true" type="q3:FriendRequest" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="friendRequest" nillable="true" type="q3:FriendRequestDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -141,7 +141,7 @@
   <xs:element name="GetFriendRequestsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q4:ArrayOfFriendRequest" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetFriendRequestsListResult" nillable="true" type="q4:ArrayOfFriendRequestDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -155,7 +155,7 @@
   <xs:element name="GetFriendsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetFriendsListResult" nillable="true" type="q5:ArrayOfFriendship" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetFriendsListResult" nillable="true" type="q5:ArrayOfFriendshipDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -216,10 +216,109 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendConfirmationCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendConfirmationCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendConfirmationCodeResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyPasswordByEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="newPassword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ModifyPasswordByEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ModifyPasswordByEmailResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BlockUserByUsername">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="blockerUsername" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="blockedUsername" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BlockUserByUsernameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BlockUserByUsernameResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnblockUserByBlockId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="blockId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnblockUserByBlockIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UnblockUserByBlockIdResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsUserBlockedByUsername">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="usernameBlocker" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="usernameBlocked" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsUserBlockedByUsernameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsUserBlockedByUsernameResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBlockedUsersListByUserId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBlockedUsersListByUserIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetBlockedUsersListByUserIdResult" nillable="true" type="q7:ArrayOfUserBlockedDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTopTenWinners">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTopTenWinnersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetTopTenWinnersResult" nillable="true" type="q8:ArrayOfUserDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="NotifyLogIn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q7:User" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q9:UserDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -231,7 +330,7 @@
   <xs:element name="NotifyLogOut">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q8:User" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="user" nillable="true" type="q10:UserDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -321,7 +420,7 @@
   <xs:element name="PartyCreated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q9:ArrayOfKeyValueOfstringanyType" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q11:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -333,7 +432,7 @@
   <xs:element name="PlayerJoined">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q10:ArrayOfKeyValueOfstringanyType" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q12:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -357,7 +456,7 @@
   <xs:element name="PlayerLeft">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q11:ArrayOfKeyValueOfstringanyType" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="playersInLobby" nillable="true" type="q13:ArrayOfKeyValueOfstringanyType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -429,6 +528,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPlayersInParty">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="partyCode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPlayersInPartyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayersInPartyResult" nillable="true" type="q14:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DrawCard">
     <xs:complexType>
       <xs:sequence />
@@ -437,7 +550,7 @@
   <xs:element name="DrawCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q12:Card" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="DrawCardResult" nillable="true" type="q15:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -451,7 +564,7 @@
   <xs:element name="GetCardsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetCardsResult" nillable="true" type="q13:ArrayOfCard" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetCardsResult" nillable="true" type="q16:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -472,7 +585,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="partyCode" type="xs:int" />
         <xs:element minOccurs="0" name="position" type="xs:int" />
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="card" nillable="true" type="q14:Card" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="card" nillable="true" type="q17:Card" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -544,7 +657,7 @@
   <xs:element name="GetPlayerListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayerListResult" nillable="true" type="q15:ArrayOfstring" />
+        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPlayerListResult" nillable="true" type="q18:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -558,7 +671,7 @@
   <xs:element name="GetMatchResultsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetMatchResultsResult" nillable="true" type="q16:ArrayOfKeyValueOfstringint" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetMatchResultsResult" nillable="true" type="q19:ArrayOfKeyValueOfstringint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

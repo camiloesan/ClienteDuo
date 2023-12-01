@@ -53,14 +53,14 @@ namespace ClienteDuo.Tests
         public void EmailIsNotAvailableTest()
         {
             NewAccount newAccount = new NewAccount();
-            Assert.IsFalse(newAccount.IsEmailAvailable(initializedEmail));
+            Assert.IsFalse(newAccount.IsEmailTaken(initializedEmail));
         }
 
         [TestMethod()]
         public void EmailIsAvailableTest()
         {
             NewAccount newAccount = new NewAccount();
-            Assert.IsTrue(newAccount.IsEmailAvailable("roland@gmail.com"));
+            Assert.IsTrue(newAccount.IsEmailTaken("roland@gmail.com"));
         }
 
         [TestMethod()]

@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System;
 using System.Security.Cryptography;
@@ -13,12 +14,9 @@ namespace ClienteDuo.Pages
 {
     public partial class Login : Page
     {
-        private readonly UsersManagerClient _usersManagerClient;
-
         public Login()
         {
             InitializeComponent();
-            _usersManagerClient = new UsersManagerClient();
         }
 
         private void BtnLoginEvent(object sender, RoutedEventArgs e)
@@ -36,15 +34,26 @@ namespace ClienteDuo.Pages
 
         private void CreateSession()
         {
+            var usersManagerClient = new UsersManagerClient();
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
-            User loggedUser = AreCredentialsValid(username, password);
+            
+            UserDTO loggedUser;
+            try
+            {
+                loggedUser = AreCredentialsValid(username, password);
+            }
+            catch
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                return;
+            }
 
             if (loggedUser == null)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
             }
-            else if (_usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
+            else if (usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
             }
@@ -53,9 +62,10 @@ namespace ClienteDuo.Pages
                 SessionDetails.UserId = loggedUser.ID;
                 SessionDetails.Username = loggedUser.UserName;
                 SessionDetails.Email = loggedUser.Email;
+                SessionDetails.TotalWins = loggedUser.TotalWins;
                 SessionDetails.IsGuest = false;
 
-                var user = new User
+                var user = new UserDTO
                 {
                     UserName = SessionDetails.Username,
                     ID = SessionDetails.UserId
@@ -67,19 +77,10 @@ namespace ClienteDuo.Pages
             }
         }
 
-        public User AreCredentialsValid(string username, string password)
+        public UserDTO AreCredentialsValid(string username, string password)
         {
-            User userCredentials = null;
-            try
-            {
-                userCredentials = _usersManagerClient.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
-            }
-            catch
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-            }
-
-            return userCredentials;
+            var usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
@@ -88,9 +89,10 @@ namespace ClienteDuo.Pages
             Application.Current.MainWindow.Content = launcher;
         }
 
-        private void ResetPasswordEvent(object sender, MouseEventArgs e)
+        private void LblResetPasswordEvent(object sender, MouseEventArgs e)
         {
-
+            var emailConfirmation = new EmailConfirmation();
+            Application.Current.MainWindow.Content = emailConfirmation;
         }
     }
 }

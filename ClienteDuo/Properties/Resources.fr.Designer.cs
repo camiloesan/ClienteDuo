@@ -87,15 +87,6 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retourner au lobby.
-        /// </summary>
-        public static string BtnGoToLobby {
-            get {
-                return ResourceManager.GetString("BtnGoToLobby", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Rejoindre.
         /// </summary>
         public static string BtnJoin {
@@ -177,15 +168,6 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Les nombre de caractéres dans un courriel est 30 comme maximum.
-        /// </summary>
-        public static string DlgEmailMaxCharacters {
-            get {
-                return ResourceManager.GetString("DlgEmailMaxCharacters", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to An account with that email is already registered.
         /// </summary>
         public static string DlgEmailTaken {
@@ -209,6 +191,15 @@ namespace ClienteDuo.Properties {
         public static string DlgExitConfirmation {
             get {
                 return ResourceManager.GetString("DlgExitConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿Etes vous sur de sortir du jeu? Vous ne pourrez rentrer autres fois.
+        /// </summary>
+        public static string DlgExitMatchConfirmation {
+            get {
+                return ResourceManager.GetString("DlgExitMatchConfirmation", resourceCulture);
             }
         }
         
@@ -321,6 +312,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cartes restantes.
+        /// </summary>
+        public static string LblCardsLeft {
+            get {
+                return ResourceManager.GetString("LblCardsLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chat.
         /// </summary>
         public static string LblChat {
@@ -353,15 +353,6 @@ namespace ClienteDuo.Properties {
         public static string LblGameSettings {
             get {
                 return ResourceManager.GetString("LblGameSettings", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nom temporel.
-        /// </summary>
-        public static string LblGameUsername {
-            get {
-                return ResourceManager.GetString("LblGameUsername", resourceCulture);
             }
         }
         

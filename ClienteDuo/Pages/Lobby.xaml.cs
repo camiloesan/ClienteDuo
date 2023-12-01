@@ -126,14 +126,18 @@ namespace ClienteDuo.Pages
 
         private void BtnExitLobbyEvent(object sender, RoutedEventArgs e)
         {
+            
             _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
             if (SessionDetails.IsHost)
             {
                 CloseParty(SessionDetails.PartyCode);
+                SessionDetails.IsHost = false;
+                SessionDetails.PartyCode = 0;
             }
             
             if (SessionDetails.IsGuest)
             {
+                SessionDetails.PartyCode = 0;
                 var launcher = new Launcher();
                 Application.Current.MainWindow.Content = launcher;
             }
@@ -142,6 +146,7 @@ namespace ClienteDuo.Pages
                 var mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
+
             MusicManager.PlayPlayerLeftSound();
         }
 
@@ -231,10 +236,8 @@ namespace ClienteDuo.Pages
 
         private void StartGameEvent(object sender, RoutedEventArgs e)
         {
-            var instanceContext = new InstanceContext(this);
-            var client = new PartyManagerClient(instanceContext);
-
-            client.NotifyStartGame(SessionDetails.PartyCode);
+            var partyManagerClient = new PartyManagerClient(new InstanceContext(this));
+            partyManagerClient.NotifyStartGame(SessionDetails.PartyCode);
         }
 
         public void MessageReceived(string messageSent)
@@ -247,7 +250,7 @@ namespace ClienteDuo.Pages
                 Foreground = new SolidColorBrush(Colors.White),
                 Width = 248,
                 FontSize = 14,
-                TextWrapping = TextWrapping.Wrap,
+                TextWrapping = TextWrapping.Wrap
             };
 
             PanelChat.Children.Add(textBlock);
@@ -257,7 +260,6 @@ namespace ClienteDuo.Pages
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
             if (!_isWpfRunning) return;
-            
             MusicManager.PlayPlayerJoinedSound();
             UpdatePlayerList(playersInLobby);
         }
@@ -265,7 +267,6 @@ namespace ClienteDuo.Pages
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
             if (!_isWpfRunning) return;
-            
             MusicManager.PlayPlayerLeftSound();
             UpdatePlayerList(playersInLobby);
         }

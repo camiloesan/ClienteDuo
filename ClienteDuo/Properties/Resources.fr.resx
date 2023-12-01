@@ -153,9 +153,6 @@
   <data name="DlgConnectionError" xml:space="preserve">
     <value>Il y avait un échec de connection avec le service, essayer autre fois à plus tard</value>
   </data>
-  <data name="DlgEmailMaxCharacters" xml:space="preserve">
-    <value>Les nombre de caractéres dans un courriel est 30 comme maximum</value>
-  </data>
   <data name="DlgEmailTaken" xml:space="preserve">
     <value>An account with that email is already registered</value>
   </data>
@@ -218,9 +215,6 @@
   </data>
   <data name="LblGameSettings" xml:space="preserve">
     <value>Configuration de jeu</value>
-  </data>
-  <data name="LblGameUsername" xml:space="preserve">
-    <value>Nom temporel</value>
   </data>
   <data name="LblLeaderboard" xml:space="preserve">
     <value>Leaderboard</value>

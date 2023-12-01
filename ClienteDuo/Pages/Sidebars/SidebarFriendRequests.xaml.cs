@@ -13,11 +13,12 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class SidebarFriendRequests : UserControl
     {
-        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
+        private readonly UsersManagerClient _usersManagerClient;
 
         public SidebarFriendRequests()
         {
             InitializeComponent();
+            _usersManagerClient = new UsersManagerClient();
             FillFriendRequestsPanel();
         }
 
@@ -61,11 +62,13 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void AcceptFriendRequestEvent(object sender, RoutedEventArgs e)
         {
-            var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
+            var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequestDTO;
             if (AcceptFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgNowFriends, MessageBoxImage.Information);
                 FillFriendRequestsPanel();
+                var mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
             }
             else
             {
@@ -75,7 +78,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void DeclineFriendRequestEvent(object sender, RoutedEventArgs e)
         {
-            var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequest;
+            var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequestDTO;
             if (DeclineFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestDeleted, MessageBoxImage.Information);
@@ -92,7 +95,7 @@ namespace ClienteDuo.Pages.Sidebars
             Visibility = Visibility.Collapsed;
         }
 
-        private bool AcceptFriendRequest(FriendRequest friendRequest)
+        private bool AcceptFriendRequest(FriendRequestDTO friendRequest)
         {
             bool result;
             try
@@ -107,7 +110,7 @@ namespace ClienteDuo.Pages.Sidebars
             return result;
         }
 
-        private bool DeclineFriendRequest(FriendRequest friendRequest)
+        private bool DeclineFriendRequest(FriendRequestDTO friendRequest)
         {
             bool result;
             try
@@ -122,7 +125,7 @@ namespace ClienteDuo.Pages.Sidebars
             return result;
         }
         
-        private IEnumerable<FriendRequest> GetFriendRequestsByUserId(int userId)
+        private IEnumerable<FriendRequestDTO> GetFriendRequestsByUserId(int userId)
         {
             return _usersManagerClient.GetFriendRequestsList(userId);
         }

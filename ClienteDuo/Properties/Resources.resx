@@ -327,4 +327,43 @@
   <data name="BtnBlockedUsers" xml:space="preserve">
     <value>Blocked Users</value>
   </data>
+  <data name="TitlePasswordReset" xml:space="preserve">
+    <value>Password Reset</value>
+  </data>
+  <data name="LblCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="LblConfirmNewPassword" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="LblNewPassword" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="DlgEmailNonExistent" xml:space="preserve">
+    <value>Email provided is not associated with any account</value>
+  </data>
+  <data name="DlgUnblockSuccess" xml:space="preserve">
+    <value>User succesfully unblocked</value>
+  </data>
+  <data name="BtnBlockUser" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="BtnUnblockUser" xml:space="preserve">
+    <value>Unblock</value>
+  </data>
+  <data name="DlgBlockedUser" xml:space="preserve">
+    <value>This user has been blocked</value>
+  </data>
+  <data name="DlgUserBlockedInParty" xml:space="preserve">
+    <value>You cannot join this party, a user you have blocked or has you blocked is in party</value>
+  </data>
+  <data name="DlgBlockConfirmation" xml:space="preserve">
+    <value>Are you sure you want to block this user? you won't be able to join any party where this player is in, he won't be able to add you as a friend, and he won't be able to join your game in the future</value>
+  </data>
+  <data name="DlgUnfriendConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete this user from your friends?</value>
+  </data>
+  <data name="LblTotalWins" xml:space="preserve">
+    <value>Total Wins</value>
+  </data>
 </root>

@@ -31,21 +31,48 @@ namespace ClienteDuo
 
         private void BtnContinueEvent(object sender, RoutedEventArgs e)
         {
+            LogIn();
+        }
+
+        private void LogIn()
+        {
             string username = TBoxUsername.Text.Trim();
             string email = TBoxEmail.Text.Trim();
             string password = TBoxPassword.Password.Trim();
 
-            if (!AreFieldsValid()) return;
-            
-            if (AddUserToDatabase(username, email, password))
+            bool areFieldsValid = false;
+            try
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess, MessageBoxImage.Information);
-                var launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
+                areFieldsValid = AreFieldsValid();
             }
-            else
+            catch
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+
+            }
+            
+            if (areFieldsValid)
+            {
+                bool result = false;
+                try
+                {
+                    result = AddUserToDatabase(username, email, password);
+                }
+                catch
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                }
+
+                if (result)
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess, MessageBoxImage.Information);
+                    var launcher = new Launcher();
+                    Application.Current.MainWindow.Content = launcher;
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                }
             }
         }
 
@@ -63,38 +90,44 @@ namespace ClienteDuo
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields, MessageBoxImage.Warning);
                 return false;
             }
-            else if (!IsUsernameValid(username))
+
+            if (!IsUsernameValid(username))
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameInvalid, MessageBoxImage.Warning);
                 return false;
             }
-            else if (!IsPasswordSecure(password))
+
+            if (!IsPasswordSecure(password))
             {
                 TBoxPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword, MessageBoxImage.Warning);
                 return false;
             }
-            else if (!IsPasswordMatch(password, confirmedPassword))
+
+            if (!IsPasswordMatch(password, confirmedPassword))
             {
                 TBoxPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                 TBoxConfirmPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgPasswordDoesNotMatch, MessageBoxImage.Warning);
                 return false;
             }
-            else if (IsUsernameTaken(username))
+
+            if (IsUsernameTaken(username))
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken, MessageBoxImage.Warning);
                 return false;
             }
-            else if (!IsEmailValid(email))
+
+            if (!IsEmailValid(email))
             {
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailInvalid, MessageBoxImage.Warning);
                 return false;
             }
-            else if (!IsEmailAvailable(email))
+
+            if (IsEmailTaken(email))
             {
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailTaken, MessageBoxImage.Warning);
@@ -112,35 +145,24 @@ namespace ClienteDuo
 
         public bool IsUsernameTaken(string username)
         {
-            try
-            {
-                return _usersManagerClient.IsUsernameTaken(username);
-            }
-            catch
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-                return false;
-            }
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsUsernameTaken(username);
         }
 
-        public bool IsEmailAvailable(string email)
+        public bool IsEmailTaken(string email)
         {
-            bool isTaken = false;
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            bool result;
             try
             {
-                isTaken = _usersManagerClient.IsEmailTaken(email);
+                result = usersManagerClient.IsEmailTaken(email);
             }
             catch
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                result = false;
             }
-
-            if (isTaken)
-            {
-                
-            }
-
-            return !isTaken;
+            return result;
         }
 
         public bool IsEmailValid(string email)
@@ -167,37 +189,23 @@ namespace ClienteDuo
             string passwordField = TBoxPassword.Password;
             string confirmPasswordField = TBoxConfirmPassword.Password;
 
-            if (!string.IsNullOrEmpty(usernameField)
-                && !string.IsNullOrEmpty(emailField)
-                && !string.IsNullOrEmpty(passwordField)
-                && !string.IsNullOrEmpty(confirmPasswordField))
-            {
-                return false;
-            }
-                
-            return true;
+            return string.IsNullOrEmpty(usernameField)
+                   || string.IsNullOrEmpty(emailField)
+                   || string.IsNullOrEmpty(passwordField)
+                   || string.IsNullOrEmpty(confirmPasswordField);
         }
 
         public bool AddUserToDatabase(string username, string email, string password)
         {
-            User databaseUser = new User
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            UserDTO databaseUser = new UserDTO
             {
                 UserName = username,
                 Email = email,
-                Password = Sha256Encryptor.SHA256_hash(password),
+                Password = Sha256Encryptor.SHA256_hash(password)
             };
 
-            bool result;
-            try
-            {
-                result = _usersManagerClient.AddUserToDatabase(databaseUser);
-            }
-            catch
-            {
-                result = false;
-            }
-
-            return result;
+            return usersManagerClient.AddUserToDatabase(databaseUser);
         }
 
         public bool DeleteUserFromDatabaseByUsername(string username) //test-only method

@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ClienteDuo.DataService;
-using ClienteDuo.Utilities;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -23,6 +11,7 @@ namespace ClienteDuo.Pages.Sidebars
     public partial class PopUpUserDetails : UserControl
     {
         private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
+        private string _userSelectedName;
 
         public PopUpUserDetails()
         {
@@ -31,7 +20,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         public void InitializeUserInfo(string username, bool isFriend)
         {
-            DataContext = username;
+            _userSelectedName = username;
             LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
             LblTrophies.Content = Properties.Resources.LblTrophies + ": ";
 
@@ -40,6 +29,16 @@ namespace ClienteDuo.Pages.Sidebars
                 BtnAddFriend.Visibility = Visibility.Collapsed;
             }
         }
+
+        public void InitializeUserInfo(int friendshipId, string username)
+        {
+            DataContext = friendshipId;
+            _userSelectedName = username;
+            LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
+            LblTrophies.Content = Properties.Resources.LblTrophies + ": ";
+            BtnAddFriend.Visibility = Visibility.Collapsed;
+        }
+
 
         private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
         {
@@ -94,6 +93,31 @@ namespace ClienteDuo.Pages.Sidebars
                 result = false;
             }
             return result;
+        }
+
+        private void BtnBlockEvent(object sender, RoutedEventArgs e)
+        {
+            bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgBlockConfirmation);
+            if (!confirmation) return;
+            
+            if (_usersManagerClient.IsAlreadyFriend(SessionDetails.Username, _userSelectedName))
+            {
+                var friendshipId = (int)DataContext;
+                _usersManagerClient.DeleteFriendshipById(friendshipId);
+            }
+
+            if (_usersManagerClient.BlockUserByUsername(SessionDetails.Username, _userSelectedName))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgBlockedUser, MessageBoxImage.Exclamation);
+
+                if (SessionDetails.PartyCode != 0) return;
+                var mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
+            } 
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+            }
         }
     }
 }

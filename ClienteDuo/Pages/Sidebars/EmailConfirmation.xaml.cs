@@ -1,0 +1,72 @@
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace ClienteDuo.Pages.Sidebars
+{
+    /// <summary>
+    /// Interaction logic for EmailConfirmation.xaml
+    /// </summary>
+    public partial class EmailConfirmation : Page
+    {
+        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
+
+        public EmailConfirmation()
+        {
+            InitializeComponent();
+        }
+
+        private void BtnContinueEvent(object sender, RoutedEventArgs e)
+        {
+            RequestCode(TBoxEmail.Text.Trim());
+        }
+
+        private void RequestCode(string email)
+        {
+            int confirmationCode = 0;
+            if (!_usersManagerClient.IsEmailTaken(email)){
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmailNonExistent, MessageBoxImage.Information);
+            }
+            else
+            {
+                confirmationCode = _usersManagerClient.SendConfirmationCode(email);
+            }
+
+            if (confirmationCode == -1)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+            }
+
+
+            EmailCodeVerification emailCodeVerification = new EmailCodeVerification(email, confirmationCode);
+            Application.Current.MainWindow.Content = emailCodeVerification;
+        }
+
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
+        {
+            if (SessionDetails.IsGuest)
+            {
+                var login = new Login();
+                Application.Current.MainWindow.Content = login;
+            }
+            else
+            {
+                var mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
+            }
+        }
+    }
+}

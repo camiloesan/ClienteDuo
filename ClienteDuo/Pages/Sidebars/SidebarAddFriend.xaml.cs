@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using ClienteDuo.DataService;
+using System.Diagnostics.Eventing.Reader;
+using System.Windows.Input;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -18,31 +20,66 @@ namespace ClienteDuo.Pages.Sidebars
         {
             Visibility = Visibility.Collapsed;
         }
+        
+        private void EnterKeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                SendRequest();
+            }
+        }
 
         private void BtnSendFriendRequestEvent(object sender, RoutedEventArgs e)
         {
+            SendRequest();
+        }
+
+        private void SendRequest()
+        {
             string usernameSender = SessionDetails.Username;
             string usernameReceiver = TBoxUserReceiver.Text.Trim();
+
             if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, MessageBoxImage.Information);
-            } 
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, 
+                    MessageBoxImage.Information);
+            }
+            else if (!_usersManagerClient.IsUsernameTaken(usernameReceiver))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, 
+                    MessageBoxImage.Information);
+            }
             else if (IsAlreadyFriend(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends, MessageBoxImage.Information);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends, 
+                    MessageBoxImage.Information);
+            }
+            else if (IsUserBlocked(SessionDetails.Username, usernameReceiver) 
+                     || IsUserBlocked(usernameReceiver, SessionDetails.Username))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError,
+                    MessageBoxImage.Information);
             }
             else
             {
-                if (SendFriendRequest(usernameSender, usernameReceiver))
+                bool result = SendFriendRequest(usernameSender, usernameReceiver);
+                if (result)
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, MessageBoxImage.Information);
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, 
+                        MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
                 }
                 else
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, MessageBoxImage.Warning); //crear metodo exclusivo para validar si existe
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, 
+                        MessageBoxImage.Error);
                 }
             }
+        }
+
+        private bool IsUserBlocked(string usernameBlocker, string usernameBlocked)
+        {
+            return _usersManagerClient.IsUserBlockedByUsername(usernameBlocker, usernameBlocked);
         }
 
         private bool SendFriendRequest(string usernameSender, string usernameReceiver)

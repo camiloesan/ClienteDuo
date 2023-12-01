@@ -21,6 +21,8 @@
             <Label x:Name="LblUsername" Foreground="White" FontSize="14"/>
             <Label Content="{x:Static p:Resources.LblEmail}" Foreground="White" FontSize="14"/>
             <Label x:Name="LblEmail" Foreground="White" FontSize="14"/>
+            <Label Content="{x:Static p:Resources.LblTotalWins}" Foreground="White" FontSize="14"/>
+            <Label x:Name="LblTotalWins" Foreground="White" FontSize="14"/>
             <Button Height="30" Margin="0,15,0,0" Cursor="Hand" Background="#FF97785F" Foreground="White" BorderBrush="#FF6B552B"/>
         </StackPanel>
         <Button Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Click="BtnCancelEvent" Grid.Row="0"/>

@@ -145,7 +145,7 @@
     <value>Expulsar</value>
   </data>
   <data name="BtnLogin" xml:space="preserve">
-    <value>Log In</value>
+    <value>Iniciar Sesión</value>
   </data>
   <data name="BtnNewAccount" xml:space="preserve">
     <value>Crear Cuenta</value>
@@ -314,5 +314,56 @@
   </data>
   <data name="BtnBlockedUsers" xml:space="preserve">
     <value>Usuraios Bloqueados</value>
+  </data>
+  <data name="TitlePasswordReset" xml:space="preserve">
+    <value>Reestablecer Contraseña</value>
+  </data>
+  <data name="LblNewPassword" xml:space="preserve">
+    <value>Nueva Contraseña</value>
+  </data>
+  <data name="LblMyProfile" xml:space="preserve">
+    <value>Mi Perfil</value>
+  </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Puntuaciones</value>
+  </data>
+  <data name="LblCode" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="LblConfirmNewPassword" xml:space="preserve">
+    <value>Confirmar Nueva Contraseña</value>
+  </data>
+  <data name="DlgUserBlockedInParty" xml:space="preserve">
+    <value>No puedes entrar a esta partida, un usuario que has bloqueado o te tiene bloqueado esta en la partida</value>
+  </data>
+  <data name="DlgUnfriendConfirmation" xml:space="preserve">
+    <value>¿Estás seguro que deseas eliminar a este usuario de tus amigos?</value>
+  </data>
+  <data name="DlgUnblockSuccess" xml:space="preserve">
+    <value>Usuario desbloqueado satisfactoriamente</value>
+  </data>
+  <data name="DlgEmailNonExistent" xml:space="preserve">
+    <value>El email ingresado no está asociado a ninguna cuenta</value>
+  </data>
+  <data name="DlgBlockedUser" xml:space="preserve">
+    <value>El usuario ha sido bloqueado</value>
+  </data>
+  <data name="DlgBlockConfirmation" xml:space="preserve">
+    <value>¿Estás seguro de que deseas bloqueas a este usuario? No podrás ingresar a ninguna partida donde este este jugador ni el podrá ingresar a la tuya, tampoco lo podrás agregar como amigo, ni el a ti.</value>
+  </data>
+  <data name="BtnUnblockUser" xml:space="preserve">
+    <value>Desbloquear</value>
+  </data>
+  <data name="BtnFriendRequests" xml:space="preserve">
+    <value>Solicitudes de Amistad</value>
+  </data>
+  <data name="BtnBlockUser" xml:space="preserve">
+    <value>Bloquear</value>
+  </data>
+  <data name="LblFriends" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
+  <data name="LblTotalWins" xml:space="preserve">
+    <value>Juegos Ganados</value>
   </data>
 </root>

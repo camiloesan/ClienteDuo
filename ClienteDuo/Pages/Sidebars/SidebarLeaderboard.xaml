@@ -9,14 +9,13 @@
              d:DesignHeight="600" d:DesignWidth="250">
     <Grid Background="{DynamicResource BtnBackground}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="16*"/>
-            <RowDefinition Height="105*"/>
-            <RowDefinition Height="29*"/>
+            <RowDefinition/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <Label Content="{x:Static p:Resources.LblLeaderboard}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1" FontWeight="Bold"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            
-        </StackPanel>
-        <Button Grid.Row="0" Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
+        <Label Content="{x:Static p:Resources.LblLeaderboard}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1" FontWeight="Bold" Height="34" Width="116"/>
+        <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="420" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <StackPanel x:Name="PanelLeaderboard" Height="420" Width="200"/>
+        </ScrollViewer>
+        <Button Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
     </Grid>
 </UserControl>

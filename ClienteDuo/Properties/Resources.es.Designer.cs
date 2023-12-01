@@ -87,6 +87,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bloquear.
+        /// </summary>
+        public static string BtnBlockUser {
+            get {
+                return ResourceManager.GetString("BtnBlockUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancelar.
         /// </summary>
         public static string BtnCancel {
@@ -110,6 +119,15 @@ namespace ClienteDuo.Properties {
         public static string BtnExitLobby {
             get {
                 return ResourceManager.GetString("BtnExitLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solicitudes de Amistad.
+        /// </summary>
+        public static string BtnFriendRequests {
+            get {
+                return ResourceManager.GetString("BtnFriendRequests", resourceCulture);
             }
         }
         
@@ -150,7 +168,7 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Log In.
+        ///   Looks up a localized string similar to Iniciar Sesión.
         /// </summary>
         public static string BtnLogin {
             get {
@@ -213,6 +231,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Desbloquear.
+        /// </summary>
+        public static string BtnUnblockUser {
+            get {
+                return ResourceManager.GetString("BtnUnblockUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eliminar Amigo.
         /// </summary>
         public static string BtnUnfriend {
@@ -231,6 +258,24 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Estás seguro de que deseas bloqueas a este usuario? No podrás ingresar a ninguna partida donde este este jugador ni el podrá ingresar a la tuya, tampoco lo podrás agregar como amigo, ni el a ti..
+        /// </summary>
+        public static string DlgBlockConfirmation {
+            get {
+                return ResourceManager.GetString("DlgBlockConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El usuario ha sido bloqueado.
+        /// </summary>
+        public static string DlgBlockedUser {
+            get {
+                return ResourceManager.GetString("DlgBlockedUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hubo un error al conectarse con el servicio, inténtelo de nuevo más tarde.
         /// </summary>
         public static string DlgConnectionError {
@@ -245,6 +290,15 @@ namespace ClienteDuo.Properties {
         public static string DlgEmailInvalid {
             get {
                 return ResourceManager.GetString("DlgEmailInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El email ingresado no está asociado a ninguna cuenta.
+        /// </summary>
+        public static string DlgEmailNonExistent {
+            get {
+                return ResourceManager.GetString("DlgEmailNonExistent", resourceCulture);
             }
         }
         
@@ -411,6 +465,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuario desbloqueado satisfactoriamente.
+        /// </summary>
+        public static string DlgUnblockSuccess {
+            get {
+                return ResourceManager.GetString("DlgUnblockSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ya no son amigos.
         /// </summary>
         public static string DlgUnfriend {
@@ -420,11 +483,29 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Estás seguro que deseas eliminar a este usuario de tus amigos?.
+        /// </summary>
+        public static string DlgUnfriendConfirmation {
+            get {
+                return ResourceManager.GetString("DlgUnfriendConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Una sesión ya está activa.
         /// </summary>
         public static string DlgUserAlreadyLoggedIn {
             get {
                 return ResourceManager.GetString("DlgUserAlreadyLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No puedes entrar a esta partida, un usuario que has bloqueado o te tiene bloqueado esta en la partida.
+        /// </summary>
+        public static string DlgUserBlockedInParty {
+            get {
+                return ResourceManager.GetString("DlgUserBlockedInParty", resourceCulture);
             }
         }
         
@@ -501,6 +582,24 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Código.
+        /// </summary>
+        public static string LblCode {
+            get {
+                return ResourceManager.GetString("LblCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmar Nueva Contraseña.
+        /// </summary>
+        public static string LblConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("LblConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirmar Contraseña.
         /// </summary>
         public static string LblConfirmPassword {
@@ -515,6 +614,15 @@ namespace ClienteDuo.Properties {
         public static string LblEmail {
             get {
                 return ResourceManager.GetString("LblEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amigos.
+        /// </summary>
+        public static string LblFriends {
+            get {
+                return ResourceManager.GetString("LblFriends", resourceCulture);
             }
         }
         
@@ -537,11 +645,38 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Puntuaciones.
+        /// </summary>
+        public static string LblLeaderboard {
+            get {
+                return ResourceManager.GetString("LblLeaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fin de partida.
         /// </summary>
         public static string LblMatchEnd {
             get {
                 return ResourceManager.GetString("LblMatchEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mi Perfil.
+        /// </summary>
+        public static string LblMyProfile {
+            get {
+                return ResourceManager.GetString("LblMyProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nueva Contraseña.
+        /// </summary>
+        public static string LblNewPassword {
+            get {
+                return ResourceManager.GetString("LblNewPassword", resourceCulture);
             }
         }
         
@@ -587,6 +722,15 @@ namespace ClienteDuo.Properties {
         public static string LblReady {
             get {
                 return ResourceManager.GetString("LblReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Juegos Ganados.
+        /// </summary>
+        public static string LblTotalWins {
+            get {
+                return ResourceManager.GetString("LblTotalWins", resourceCulture);
             }
         }
         
@@ -650,6 +794,15 @@ namespace ClienteDuo.Properties {
         public static string TitleNewAccount {
             get {
                 return ResourceManager.GetString("TitleNewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reestablecer Contraseña.
+        /// </summary>
+        public static string TitlePasswordReset {
+            get {
+                return ResourceManager.GetString("TitlePasswordReset", resourceCulture);
             }
         }
     }

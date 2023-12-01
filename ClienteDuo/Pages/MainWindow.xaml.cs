@@ -26,7 +26,7 @@ namespace ClienteDuo.Pages
             Content = launcher;
         }
 
-        public static void NotifyLogin(User user)
+        public static void NotifyLogin(UserDTO user)
         {
             _userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
             _userConnectionHandlerClient.NotifyLogIn(user);
@@ -50,12 +50,12 @@ namespace ClienteDuo.Pages
             throw new NotImplementedException();
         }
 
-        public void OnWindowClosing(object sender, CancelEventArgs e)
+        private void OnWindowClosing(object sender, CancelEventArgs e)
         {
             if (SessionDetails.IsGuest) return;
 
             var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
-            var user = new User
+            var user = new UserDTO
             {
                 ID = SessionDetails.UserId
             };
@@ -73,6 +73,5 @@ namespace ClienteDuo.Pages
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, buttons, icon);
             return result == MessageBoxResult.Yes;
         }
-
     }
 }

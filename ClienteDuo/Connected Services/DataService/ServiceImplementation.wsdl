@@ -170,6 +170,48 @@
   <wsdl:message name="IUsersManager_IsUserAlreadyLoggedIn_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsUserAlreadyLoggedInResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersManager_SendConfirmationCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendConfirmationCode" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_SendConfirmationCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendConfirmationCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_ModifyPasswordByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyPasswordByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_ModifyPasswordByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyPasswordByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_BlockUserByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:BlockUserByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_BlockUserByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BlockUserByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_UnblockUserByBlockId_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnblockUserByBlockId" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_UnblockUserByBlockId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnblockUserByBlockIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_IsUserBlockedByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserBlockedByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_IsUserBlockedByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserBlockedByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_GetBlockedUsersListByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlockedUsersListByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_GetBlockedUsersListByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlockedUsersListByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_GetTopTenWinners_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopTenWinners" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_GetTopTenWinners_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTopTenWinnersResponse" />
+  </wsdl:message>
   <wsdl:message name="IUserConnectionHandler_NotifyLogIn_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyLogIn" />
   </wsdl:message>
@@ -268,6 +310,12 @@
   </wsdl:message>
   <wsdl:message name="IPartyValidator_IsUsernameInParty_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsUsernameInPartyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPartyValidator_GetPlayersInParty_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersInParty" />
+  </wsdl:message>
+  <wsdl:message name="IPartyValidator_GetPlayersInParty_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersInPartyResponse" />
   </wsdl:message>
   <wsdl:message name="ICardManager_DrawCard_InputMessage">
     <wsdl:part name="parameters" element="tns:DrawCard" />
@@ -411,6 +459,34 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsUserAlreadyLoggedIn" message="tns:IUsersManager_IsUserAlreadyLoggedIn_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsUserAlreadyLoggedInResponse" message="tns:IUsersManager_IsUserAlreadyLoggedIn_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SendConfirmationCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/SendConfirmationCode" message="tns:IUsersManager_SendConfirmationCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/SendConfirmationCodeResponse" message="tns:IUsersManager_SendConfirmationCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPasswordByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/ModifyPasswordByEmail" message="tns:IUsersManager_ModifyPasswordByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/ModifyPasswordByEmailResponse" message="tns:IUsersManager_ModifyPasswordByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BlockUserByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/BlockUserByUsername" message="tns:IUsersManager_BlockUserByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/BlockUserByUsernameResponse" message="tns:IUsersManager_BlockUserByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnblockUserByBlockId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/UnblockUserByBlockId" message="tns:IUsersManager_UnblockUserByBlockId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/UnblockUserByBlockIdResponse" message="tns:IUsersManager_UnblockUserByBlockId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserBlockedByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/IsUserBlockedByUsername" message="tns:IUsersManager_IsUserBlockedByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/IsUserBlockedByUsernameResponse" message="tns:IUsersManager_IsUserBlockedByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBlockedUsersListByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetBlockedUsersListByUserId" message="tns:IUsersManager_GetBlockedUsersListByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetBlockedUsersListByUserIdResponse" message="tns:IUsersManager_GetBlockedUsersListByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTopTenWinners">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetTopTenWinners" message="tns:IUsersManager_GetTopTenWinners_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetTopTenWinnersResponse" message="tns:IUsersManager_GetTopTenWinners_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IUserConnectionHandler">
     <wsdl:operation name="NotifyLogIn">
@@ -489,6 +565,10 @@
     <wsdl:operation name="IsUsernameInParty">
       <wsdl:input wsaw:Action="http://tempuri.org/IPartyValidator/IsUsernameInParty" message="tns:IPartyValidator_IsUsernameInParty_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPartyValidator/IsUsernameInPartyResponse" message="tns:IPartyValidator_IsUsernameInParty_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersInParty">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPartyValidator/GetPlayersInParty" message="tns:IPartyValidator_GetPlayersInParty_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPartyValidator/GetPlayersInPartyResponse" message="tns:IPartyValidator_GetPlayersInParty_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="ICardManager">
@@ -692,6 +772,69 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SendConfirmationCode">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/SendConfirmationCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModifyPasswordByEmail">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/ModifyPasswordByEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockUserByUsername">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/BlockUserByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnblockUserByBlockId">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/UnblockUserByBlockId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUserBlockedByUsername">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/IsUserBlockedByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBlockedUsersListByUserId">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/GetBlockedUsersListByUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTopTenWinners">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/GetTopTenWinners" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="NetTcpBinding_IUserConnectionHandler" type="tns:IUserConnectionHandler">
     <wsp:PolicyReference URI="#NetTcpBinding_IUserConnectionHandler_policy" />
@@ -856,6 +999,15 @@
     </wsdl:operation>
     <wsdl:operation name="IsUsernameInParty">
       <soap12:operation soapAction="http://tempuri.org/IPartyValidator/IsUsernameInParty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayersInParty">
+      <soap12:operation soapAction="http://tempuri.org/IPartyValidator/GetPlayersInParty" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

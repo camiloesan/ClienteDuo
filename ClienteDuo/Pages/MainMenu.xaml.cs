@@ -26,9 +26,9 @@ namespace ClienteDuo.Pages
             _popUpUserLogged.Visibility = Visibility.Visible;
         }
 
-        public static void ShowPopUpUserDetails(string username)
+        public static void ShowPopUpUserDetails(int friendshipId, string username)
         {
-            _popUpUserDetails.InitializeUserInfo(username, true);
+            _popUpUserDetails.InitializeUserInfo(friendshipId, username);
             _popUpUserDetails.Visibility = Visibility.Visible;
         }
 

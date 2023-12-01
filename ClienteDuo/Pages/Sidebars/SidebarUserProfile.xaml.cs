@@ -17,6 +17,7 @@ namespace ClienteDuo.Pages.Sidebars
             LblPlayerId.Content = SessionDetails.UserId;
             LblUsername.Content = SessionDetails.Username;
             LblEmail.Content = SessionDetails.Email;
+            LblTotalWins.Content = SessionDetails.TotalWins;
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

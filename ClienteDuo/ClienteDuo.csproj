@@ -124,6 +124,15 @@
     </Compile>
     <Compile Include="Pages\PlayerBar.xaml.cs" />
     <Compile Include="Pages\PlayerIcon.xaml.cs" />
+    <Compile Include="Pages\Sidebars\EmailCodeVerification.xaml.cs">
+      <DependentUpon>EmailCodeVerification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\EmailConfirmation.xaml.cs">
+      <DependentUpon>EmailConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\PasswordReset.xaml.cs">
+      <DependentUpon>PasswordReset.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Sidebars\PopUpUserDetails.xaml.cs">
       <DependentUpon>PopUpUserDetails.xaml</DependentUpon>
     </Compile>
@@ -132,6 +141,9 @@
     </Compile>
     <Compile Include="Pages\Sidebars\SidebarAddFriend.xaml.cs">
       <DependentUpon>SidebarAddFriend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\SidebarBlockedUsers.xaml.cs">
+      <DependentUpon>SidebarBlockedUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Sidebars\SidebarFriendRequests.xaml.cs">
       <DependentUpon>SidebarFriendRequests.xaml</DependentUpon>
@@ -204,6 +216,18 @@
     </Page>
     <Page Include="Pages\PlayerBar.xaml" />
     <Page Include="Pages\PlayerIcon.xaml" />
+    <Page Include="Pages\Sidebars\EmailCodeVerification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\EmailConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\PasswordReset.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Sidebars\PopUpUserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -213,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Sidebars\SidebarAddFriend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\SidebarBlockedUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,13 +334,16 @@
     <None Include="Connected Services\DataService\ClienteDuo.DataService.Card1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendRequest1.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendRequestDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.Friendship1.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendshipDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.User1.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.UserBlockedDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.UserDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\DataService\item.xsd">

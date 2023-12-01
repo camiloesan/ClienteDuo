@@ -7,7 +7,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="" />
+    <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.FriendRequest1.datasource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Friendship1.datasource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.User1.datasource" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/NewAccount.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/NewAccount.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriendRequests.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriendRequests.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UNO_DUO_UnitTests/NewAccountTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UNO_DUO_UnitTests/NewAccountTests.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,11 +59,51 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;camiloesan&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="7486723d-cdfa-41d2-95e8-d77f2ba8ae90" />
+        <option name="url" value="https://github.com/camiloesan/ClienteDuo.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4851c5ec0d494e7b8445a531d9f91b4c605220/8e/09266450/CommandHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4851c5ec0d494e7b8445a531d9f91b4c605220/cb/c4e181d5/Button.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4851c5ec0d494e7b8445a531d9f91b4c605220/cd/fcde75fa/ButtonBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/07/cdd1d2b3/HwndSubclass.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/0f/eebf77b5/HwndWrapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/42/8b5e21b2/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/56/f7049e7a/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/aa/c49c09b0/ComponentDispatcherThread.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/19/90318a8a/InputProviderSite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/49/30250474/HwndMouseInputProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/82/a673cb56/RoutedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/8e/ede82897/UIElement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/9b/be77beff/HwndSource.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/cc/362a6312/InputManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/d4/a5e16280/HwndKeyboardInputProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cec10302d67045b29962bc7d4102b6dd38f3c0/f8/5b876667/EventRoute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/Launcher.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/NewAccount.xaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/PlayerIcon.xaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -41,6 +118,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.3340206&quot;,
     &quot;git-widget-placeholder&quot;: &quot;mergetry&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -94,6 +172,16 @@
       <workItem from="1700584634702" duration="2097000" />
       <workItem from="1700593045293" duration="971000" />
       <workItem from="1700760105423" duration="8629000" />
+      <workItem from="1700798856183" duration="3244000" />
+      <workItem from="1700846623222" duration="662000" />
+      <workItem from="1700849208097" duration="6154000" />
+      <workItem from="1700938289671" duration="767000" />
+      <workItem from="1700939176294" duration="686000" />
+      <workItem from="1701013693272" duration="731000" />
+      <workItem from="1701044035453" duration="313000" />
+      <workItem from="1701149339064" duration="1225000" />
+      <workItem from="1701231226428" duration="9243000" />
+      <workItem from="1701307613844" duration="8703000" />
     </task>
     <task id="LOCAL-00001" summary="just one lobby">
       <option name="closed" value="true" />
@@ -103,7 +191,39 @@
       <option name="project" value="LOCAL" />
       <updated>1700781442131</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="party code collision validation">
+      <option name="closed" value="true" />
+      <created>1700799675889</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700799675890</updated>
+    </task>
+    <task id="LOCAL-00003" summary="standard compliance">
+      <option name="closed" value="true" />
+      <created>1700801455880</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700801455880</updated>
+    </task>
+    <task id="LOCAL-00004" summary="gui update">
+      <option name="closed" value="true" />
+      <created>1700807738199</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700807738199</updated>
+    </task>
+    <task id="LOCAL-00005" summary="internationalization update and small gui improv">
+      <option name="closed" value="true" />
+      <created>1700888990494</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1700888990494</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +256,10 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="just one lobby" />
-    <option name="LAST_COMMIT_MESSAGE" value="just one lobby" />
+    <MESSAGE value="party code collision validation" />
+    <MESSAGE value="standard compliance" />
+    <MESSAGE value="gui update" />
+    <MESSAGE value="internationalization update and small gui improv" />
+    <option name="LAST_COMMIT_MESSAGE" value="internationalization update and small gui improv" />
   </component>
 </project>

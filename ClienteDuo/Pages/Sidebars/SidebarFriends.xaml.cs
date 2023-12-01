@@ -1,5 +1,6 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,6 +12,7 @@ namespace ClienteDuo.Pages.Sidebars
     {
         private SidebarAddFriend _sidebarAddFriend;
         private SidebarFriendRequests _sidebarFriendRequests;
+        private SidebarBlockedUsers _sidebarBlockedUsers;
         private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
 
         public SidebarFriends()
@@ -33,6 +35,12 @@ namespace ClienteDuo.Pages.Sidebars
                 Visibility = Visibility.Collapsed
             };
             FriendsBar.Children.Add(_sidebarFriendRequests);
+
+            _sidebarBlockedUsers = new SidebarBlockedUsers
+            {
+                Visibility = Visibility.Collapsed
+            };
+            FriendsBar.Children.Add(_sidebarBlockedUsers);
         }
 
         private void FillFriendsPanel()
@@ -83,10 +91,11 @@ namespace ClienteDuo.Pages.Sidebars
             };
             stackPanel.Children.Add(usernameName);
 
+            var friendshipUsernameTuple = Tuple.Create(friendshipId, username);
             var btnViewProfile = new Button
             {
                 Content = Properties.Resources.BtnProfile,
-                DataContext = username
+                DataContext = friendshipUsernameTuple
             };
             btnViewProfile.Click += ViewProfileEvent;
             stackPanel.Children.Add(btnViewProfile);
@@ -102,17 +111,27 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
         {
-            var username = ((FrameworkElement)sender).DataContext as string;
-            MainMenu.ShowPopUpUserDetails(username);
+            var friendshipUsernameTuple = ((FrameworkElement)sender).DataContext as Tuple<int, string>;
+            MainMenu.ShowPopUpUserDetails(friendshipUsernameTuple.Item1, friendshipUsernameTuple.Item2);
         }
 
         private void UnfriendEvent(object sender, RoutedEventArgs e)
         {
             var friendshipId = (int)((FrameworkElement)sender).DataContext;
 
-            if (!DeleteFriendshipById(friendshipId)) return;
-            
-            MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend, MessageBoxImage.Information);
+            bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgUnfriendConfirmation);
+            if (!confirmation) return;
+
+            bool result = DeleteFriendshipById(friendshipId);
+            if (result)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend, MessageBoxImage.Information);
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Information);
+            }
+
             FillFriendsPanel();
         }
 
@@ -131,7 +150,7 @@ namespace ClienteDuo.Pages.Sidebars
             _sidebarAddFriend.Visibility = Visibility.Visible;
         }
         
-        private IEnumerable<Friendship> GetFriendsListByUserId(int userId)
+        private IEnumerable<FriendshipDTO> GetFriendsListByUserId(int userId)
         {
             return _usersManagerClient.GetFriendsList(userId);
         }
@@ -149,6 +168,11 @@ namespace ClienteDuo.Pages.Sidebars
             }
 
             return result;
+        }
+
+        private void BtnBlockedUsersEvent(object sender, RoutedEventArgs e)
+        {
+            _sidebarBlockedUsers.Visibility = Visibility.Visible;
         }
     }
 }
