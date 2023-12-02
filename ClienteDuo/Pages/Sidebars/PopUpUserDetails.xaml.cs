@@ -98,25 +98,28 @@ namespace ClienteDuo.Pages.Sidebars
         private void BtnBlockEvent(object sender, RoutedEventArgs e)
         {
             bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgBlockConfirmation);
-            if (!confirmation) return;
-            
-            if (_usersManagerClient.IsAlreadyFriend(SessionDetails.Username, _userSelectedName))
+            if (confirmation)
             {
-                var friendshipId = (int)DataContext;
-                _usersManagerClient.DeleteFriendshipById(friendshipId);
-            }
+                if (_usersManagerClient.IsAlreadyFriend(SessionDetails.Username, _userSelectedName))
+                {
+                    int friendshipId = (int)DataContext;
+                    _usersManagerClient.DeleteFriendshipById(friendshipId);
+                }
 
-            if (_usersManagerClient.BlockUserByUsername(SessionDetails.Username, _userSelectedName))
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgBlockedUser, MessageBoxImage.Exclamation);
+                if (_usersManagerClient.BlockUserByUsername(SessionDetails.Username, _userSelectedName))
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgBlockedUser, MessageBoxImage.Exclamation);
 
-                if (SessionDetails.PartyCode != 0) return;
-                var mainMenu = new MainMenu();
-                Application.Current.MainWindow.Content = mainMenu;
-            } 
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                    if (SessionDetails.PartyCode == 0)
+                    {
+                        var mainMenu = new MainMenu();
+                        Application.Current.MainWindow.Content = mainMenu;
+                    } 
+                }
+                else
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                }
             }
         }
     }

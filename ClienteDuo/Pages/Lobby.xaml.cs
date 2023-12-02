@@ -24,7 +24,7 @@ namespace ClienteDuo.Pages
         {
             InitializeComponent();
             SessionDetails.IsHost = true;
-            var instanceContext = new InstanceContext(this);
+            InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
             
             CreateNewParty(username);
@@ -36,7 +36,7 @@ namespace ClienteDuo.Pages
         {
             InitializeComponent();
             SessionDetails.IsHost = false;
-            var instanceContext = new InstanceContext(this);
+            InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
             
             JoinGame(partyCode, username);
@@ -46,7 +46,7 @@ namespace ClienteDuo.Pages
 
         public Lobby() //test-only constructor
         {
-            var instanceContext = new InstanceContext(this);
+            InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
             try
             {
@@ -70,8 +70,8 @@ namespace ClienteDuo.Pages
 
         private int GenerateNewPartyCode()
         {
-            var random = new Random();
-            var randomCode = random.Next(1000, 10000);
+            Random random = new Random();
+            int randomCode = random.Next(1000, 10000);
             if (_partyValidatorClient.IsPartyExistent(randomCode))
             {
                 GenerateNewPartyCode();
@@ -138,12 +138,12 @@ namespace ClienteDuo.Pages
             if (SessionDetails.IsGuest)
             {
                 SessionDetails.PartyCode = 0;
-                var launcher = new Launcher();
+                Launcher launcher = new Launcher();
                 Application.Current.MainWindow.Content = launcher;
             }
             else
             {
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
 
@@ -166,11 +166,12 @@ namespace ClienteDuo.Pages
 
         private void CreatePlayerPanel(string playerUsername)
         {
-            var backgroundColor = playerUsername == SessionDetails.Username
+            SolidColorBrush backgroundColor = 
+                playerUsername == SessionDetails.Username
                 ? new SolidColorBrush(Colors.Gold) 
                 : new SolidColorBrush(Colors.DimGray);
 
-            var stackPanel = new StackPanel
+            StackPanel stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -181,7 +182,7 @@ namespace ClienteDuo.Pages
             };
             PanelPlayers.Children.Add(stackPanel);
 
-            var usernameName = new Label
+            Label usernameName = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
                 Content = playerUsername,
@@ -190,34 +191,35 @@ namespace ClienteDuo.Pages
             };
             stackPanel.Children.Add(usernameName);
 
-            if (playerUsername == SessionDetails.Username) return;
-            
-            var btnKick = new Button
+            if (playerUsername != SessionDetails.Username)
             {
-                Content = Properties.Resources.BtnKick,
-                Margin = new Thickness(5, 0, 0, 0),
-                VerticalAlignment = VerticalAlignment.Center,
-                DataContext = playerUsername
-            };
-            btnKick.Click += KickPlayerEvent;
+                Button btnKick = new Button
+                {
+                    Content = Properties.Resources.BtnKick,
+                    Margin = new Thickness(5, 0, 0, 0),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    DataContext = playerUsername
+                };
+                btnKick.Click += KickPlayerEvent;
 
-            var btnViewProfile = new Button
-            {
-                Content = Properties.Resources.BtnProfile,
-                Margin = new Thickness(5, 0, 0, 0),
-                VerticalAlignment = VerticalAlignment.Center,
-                DataContext = playerUsername
-            };
-            btnViewProfile.Click += ViewProfileEvent;
+                Button btnViewProfile = new Button
+                {
+                    Content = Properties.Resources.BtnProfile,
+                    Margin = new Thickness(5, 0, 0, 0),
+                    VerticalAlignment = VerticalAlignment.Center,
+                    DataContext = playerUsername
+                };
+                btnViewProfile.Click += ViewProfileEvent;
 
-            if (SessionDetails.IsHost)
-            {
-                stackPanel.Children.Add(btnKick);
-            }
-            
-            if (!playerUsername.Contains("guest"))
-            {
-                stackPanel.Children.Add(btnViewProfile);
+                if (SessionDetails.IsHost)
+                {
+                    stackPanel.Children.Add(btnKick);
+                }
+
+                if (!playerUsername.Contains("guest"))
+                {
+                    stackPanel.Children.Add(btnViewProfile);
+                }
             }
         }
 
@@ -236,13 +238,13 @@ namespace ClienteDuo.Pages
 
         private void StartGameEvent(object sender, RoutedEventArgs e)
         {
-            var partyManagerClient = new PartyManagerClient(new InstanceContext(this));
+            PartyManagerClient partyManagerClient = new PartyManagerClient(new InstanceContext(this));
             partyManagerClient.NotifyStartGame(SessionDetails.PartyCode);
         }
 
         public void MessageReceived(string messageSent)
         {
-            var textBlock = new TextBlock
+            TextBlock textBlock = new TextBlock
             {
                 Text = messageSent,
                 Margin = new Thickness(0,4,0,0),
@@ -298,12 +300,12 @@ namespace ClienteDuo.Pages
             
             if (SessionDetails.IsGuest)
             {
-                var launcher = new Launcher();
+                Launcher launcher = new Launcher();
                 Application.Current.MainWindow.Content = launcher;
             }
             else
             {
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
         }

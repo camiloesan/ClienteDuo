@@ -92,13 +92,13 @@ namespace ClienteDuo.Pages
 
         private void BtnNewPartyEvent(object sender, RoutedEventArgs e)
         {
-            var lobby = new Lobby(SessionDetails.Username);
+            Lobby lobby = new Lobby(SessionDetails.Username);
             Application.Current.MainWindow.Content = lobby;
         }
 
         private void BtnJoinPartyEvent(object sender, RoutedEventArgs e)
         {
-            var joinParty = new JoinParty();
+            JoinParty joinParty = new JoinParty();
             Application.Current.MainWindow.Content = joinParty;
         }
 

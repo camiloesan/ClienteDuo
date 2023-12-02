@@ -589,10 +589,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task<bool> IsUserAlreadyLoggedInAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/SendConfirmationCode", ReplyAction="http://tempuri.org/IUsersManager/SendConfirmationCodeResponse")]
-        int SendConfirmationCode(string email);
+        int SendConfirmationCode(string email, string lang);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/SendConfirmationCode", ReplyAction="http://tempuri.org/IUsersManager/SendConfirmationCodeResponse")]
-        System.Threading.Tasks.Task<int> SendConfirmationCodeAsync(string email);
+        System.Threading.Tasks.Task<int> SendConfirmationCodeAsync(string email, string lang);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/ModifyPasswordByEmail", ReplyAction="http://tempuri.org/IUsersManager/ModifyPasswordByEmailResponse")]
         bool ModifyPasswordByEmail(string email, string newPassword);
@@ -778,12 +778,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.IsUserAlreadyLoggedInAsync(userId);
         }
         
-        public int SendConfirmationCode(string email) {
-            return base.Channel.SendConfirmationCode(email);
+        public int SendConfirmationCode(string email, string lang) {
+            return base.Channel.SendConfirmationCode(email, lang);
         }
         
-        public System.Threading.Tasks.Task<int> SendConfirmationCodeAsync(string email) {
-            return base.Channel.SendConfirmationCodeAsync(email);
+        public System.Threading.Tasks.Task<int> SendConfirmationCodeAsync(string email, string lang) {
+            return base.Channel.SendConfirmationCodeAsync(email, lang);
         }
         
         public bool ModifyPasswordByEmail(string email, string newPassword) {

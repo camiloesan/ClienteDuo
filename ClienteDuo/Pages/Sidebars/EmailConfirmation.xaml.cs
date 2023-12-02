@@ -2,6 +2,7 @@
 using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,40 +32,47 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void BtnContinueEvent(object sender, RoutedEventArgs e)
         {
-            RequestCode(TBoxEmail.Text.Trim());
+            string email = TBoxEmail.Text.Trim();
+            string language = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+            RequestCode(email, language);
         }
 
-        private void RequestCode(string email)
+        private void RequestCode(string email, string lang)
         {
-            int confirmationCode = 0;
-            if (!_usersManagerClient.IsEmailTaken(email)){
+            if (!_usersManagerClient.IsEmailTaken(email))
+            {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailNonExistent, MessageBoxImage.Information);
             }
             else
             {
-                confirmationCode = _usersManagerClient.SendConfirmationCode(email);
+                int confirmationCode = 0;
+                try
+                {
+                    confirmationCode = _usersManagerClient.SendConfirmationCode(email, lang);
+                }
+                catch
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                }
+
+                if (confirmationCode != -1)
+                {
+                    EmailCodeVerification emailCodeVerification = new EmailCodeVerification(email, confirmationCode);
+                    Application.Current.MainWindow.Content = emailCodeVerification;
+                }
             }
-
-            if (confirmationCode == -1)
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-            }
-
-
-            EmailCodeVerification emailCodeVerification = new EmailCodeVerification(email, confirmationCode);
-            Application.Current.MainWindow.Content = emailCodeVerification;
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             if (SessionDetails.IsGuest)
             {
-                var login = new Login();
+                Login login = new Login();
                 Application.Current.MainWindow.Content = login;
             }
             else
             {
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
         }

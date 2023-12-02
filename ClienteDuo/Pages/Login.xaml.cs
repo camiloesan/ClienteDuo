@@ -34,7 +34,7 @@ namespace ClienteDuo.Pages
 
         private void CreateSession()
         {
-            var usersManagerClient = new UsersManagerClient();
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
             
@@ -49,7 +49,7 @@ namespace ClienteDuo.Pages
                 return;
             }
 
-            if (loggedUser == null)
+            if (loggedUser == null) //todo cambiar
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
             }
@@ -65,13 +65,13 @@ namespace ClienteDuo.Pages
                 SessionDetails.TotalWins = loggedUser.TotalWins;
                 SessionDetails.IsGuest = false;
 
-                var user = new UserDTO
+                UserDTO user = new UserDTO
                 {
                     UserName = SessionDetails.Username,
                     ID = SessionDetails.UserId
                 };
 
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
                 MainWindow.NotifyLogin(user);
             }
@@ -79,19 +79,19 @@ namespace ClienteDuo.Pages
 
         public UserDTO AreCredentialsValid(string username, string password)
         {
-            var usersManagerClient = new UsersManagerClient();
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
-            var launcher = new Launcher();
+            Launcher launcher = new Launcher();
             Application.Current.MainWindow.Content = launcher;
         }
 
         private void LblResetPasswordEvent(object sender, MouseEventArgs e)
         {
-            var emailConfirmation = new EmailConfirmation();
+            EmailConfirmation emailConfirmation = new EmailConfirmation();
             Application.Current.MainWindow.Content = emailConfirmation;
         }
     }

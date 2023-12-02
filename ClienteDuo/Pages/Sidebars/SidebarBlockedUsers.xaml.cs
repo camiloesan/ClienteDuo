@@ -22,24 +22,24 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillBlockedUsersPanel()
         {
             PanelBlockedUsers.Children.Clear();
-            var blockedUsersList = GetBlockedUsersListByUserId(SessionDetails.UserId);
-            foreach (var blockedUser in blockedUsersList)
+            IEnumerable<UserBlockedDTO> blockedUsersList = GetBlockedUsersListByUserId(SessionDetails.UserId);
+            foreach (UserBlockedDTO blockedUser in blockedUsersList)
             {
                 PanelBlockedUsers.Children.Clear();
-                var stackPanel = new StackPanel
+                StackPanel stackPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     HorizontalAlignment = HorizontalAlignment.Center
                 };
                 PanelBlockedUsers.Children.Add(stackPanel);
 
-                var lblSender = new Label
+                Label lblSender = new Label
                 {
                     Content = blockedUser.BlockedUsername
                 };
                 stackPanel.Children.Add(lblSender);
 
-                var btnUnblock = new Button
+                Button btnUnblock = new Button
                 {
                     Content = Properties.Resources.BtnUnblockUser,
                     DataContext = blockedUser
@@ -51,12 +51,11 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void UnblockUserEvent(object sender, RoutedEventArgs e)
         {
-            var blockedUser = ((FrameworkElement)sender).DataContext as UserBlockedDTO;
+            UserBlockedDTO blockedUser = ((FrameworkElement)sender).DataContext as UserBlockedDTO;
             if (UnblockUserByBlockId(blockedUser.BlockID))
             {
-                //todo unfriend
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUnblockSuccess, MessageBoxImage.Information);
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
             else

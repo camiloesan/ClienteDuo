@@ -21,12 +21,12 @@ namespace ClienteDuo.Pages.Sidebars
             if (SessionDetails.IsGuest)
             {
                 SessionDetails.CleanSessionDetails();
-                var login = new Login();
+                Login login = new Login();
                 Application.Current.MainWindow.Content = login;
             }
             else
             {
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
         }

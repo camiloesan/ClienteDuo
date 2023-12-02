@@ -16,7 +16,7 @@
         <Rectangle HorizontalAlignment="Center" Height="250" Stroke="{DynamicResource HighlightFill}" VerticalAlignment="Center" Width="280" RadiusX="19.5" RadiusY="19.5" Fill="#FFA4A4A4" StrokeThickness="6"/>
 
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center">
-            <TextBlock TextWrapping="Wrap" Text="We will send you an email to reset your password" FontSize="14" Width="200" FontWeight="Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="{x:Static p:Resources.LblInfoResetPassword}" FontSize="14" Width="200" FontWeight="Bold"/>
             <Label Content="{x:Static p:Resources.LblEmail}" Margin="0,15,0,0" FontSize="14" Width="200"/>
             <TextBox x:Name="TBoxEmail" MaxLength="30" Height="26" TextWrapping="Wrap" Margin="0,5,0,5" FontSize="14" HorizontalContentAlignment="Center" BorderBrush="{DynamicResource BtnBorder}"/>
             <Grid VerticalAlignment="Center" Margin="0,25,0,0">

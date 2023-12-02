@@ -83,6 +83,7 @@ namespace ClienteDuo
             string password = TBoxPassword.Password.Trim();
             string confirmedPassword = TBoxConfirmPassword.Password.Trim();
 
+            bool result = true;
             if (AreFieldsEmpty())
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
@@ -208,7 +209,7 @@ namespace ClienteDuo
             return usersManagerClient.AddUserToDatabase(databaseUser);
         }
 
-        public bool DeleteUserFromDatabaseByUsername(string username) //test-only method
+        public bool DeleteUserFromDatabaseByUsername(string username) //todo redo
         {
             bool result;
             try

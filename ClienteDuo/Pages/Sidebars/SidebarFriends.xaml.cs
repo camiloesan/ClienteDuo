@@ -46,8 +46,8 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendsPanel()
         {
             PanelFriends.Children.Clear();
-            var friendsList = GetFriendsListByUserId(SessionDetails.UserId);
-            foreach (var friend in friendsList)
+            IEnumerable<FriendshipDTO> friendsList = GetFriendsListByUserId(SessionDetails.UserId);
+            foreach (FriendshipDTO friend in friendsList)
             {
                 if (friend.Friend1ID != SessionDetails.UserId)
                 {
@@ -62,7 +62,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void CreateFriendPanel(string username, int friendshipId)
         {
-            var stackPanel = new StackPanel
+            StackPanel stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
                 Margin = new Thickness(0,7,0,0),
@@ -73,7 +73,7 @@ namespace ClienteDuo.Pages.Sidebars
             };
             PanelFriends.Children.Add(stackPanel);
 
-            var activeStatus = new Label
+            Label activeStatus = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
                 Content = "●",
@@ -82,7 +82,7 @@ namespace ClienteDuo.Pages.Sidebars
             };
             stackPanel.Children.Add(activeStatus);
 
-            var usernameName = new Label
+            Label usernameName = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
                 Content = username,
@@ -91,7 +91,7 @@ namespace ClienteDuo.Pages.Sidebars
             };
             stackPanel.Children.Add(usernameName);
 
-            var friendshipUsernameTuple = Tuple.Create(friendshipId, username);
+            Tuple<int, string> friendshipUsernameTuple = Tuple.Create(friendshipId, username);
             var btnViewProfile = new Button
             {
                 Content = Properties.Resources.BtnProfile,
@@ -100,7 +100,7 @@ namespace ClienteDuo.Pages.Sidebars
             btnViewProfile.Click += ViewProfileEvent;
             stackPanel.Children.Add(btnViewProfile);
 
-            var btnUnfriend = new Button
+            Button btnUnfriend = new Button
             {
                 Content = Properties.Resources.BtnUnfriend,
                 DataContext = friendshipId
@@ -111,14 +111,14 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
         {
-            var friendshipUsernameTuple = ((FrameworkElement)sender).DataContext as Tuple<int, string>;
+            Tuple<int, string> friendshipUsernameTuple
+                = ((FrameworkElement)sender).DataContext as Tuple<int, string>;
             MainMenu.ShowPopUpUserDetails(friendshipUsernameTuple.Item1, friendshipUsernameTuple.Item2);
         }
 
         private void UnfriendEvent(object sender, RoutedEventArgs e)
         {
-            var friendshipId = (int)((FrameworkElement)sender).DataContext;
-
+            int friendshipId = (int)((FrameworkElement)sender).DataContext;
             bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgUnfriendConfirmation);
 
             if (confirmation)

@@ -16,18 +16,6 @@ namespace ClienteDuo.Pages.Sidebars
         public PasswordReset()
         {
             InitializeComponent();
-            ToggleBtnShowHide.Checked += ShowPassword;
-            ToggleBtnShowHide.Unchecked += HidePassword;
-        }
-
-        private void ShowPassword(object sender, RoutedEventArgs e)
-        {
-            //todo
-        }
-
-        private void HidePassword(object sender, RoutedEventArgs e)
-        {
-            //todo
         }
 
         private bool IsInputValid()
@@ -48,13 +36,22 @@ namespace ClienteDuo.Pages.Sidebars
 
         private bool IsPasswordSecure(string newPassword)
         {
-            var regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,16}$");
+            Regex regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,16}$");
             return regex.IsMatch(newPassword);
         }
 
         private void ModifyPassword(string email, string newPassword)
         {
-            bool result = _usersManagerClient.ModifyPasswordByEmail(email, newPassword);
+            bool result = false;
+            try
+            {
+                result = _usersManagerClient.ModifyPasswordByEmail(email, newPassword);
+            }
+            catch
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+            }
+            
 
             if (result)
             {
@@ -77,12 +74,12 @@ namespace ClienteDuo.Pages.Sidebars
             if (SessionDetails.IsGuest)
             {
                 SessionDetails.CleanSessionDetails();
-                var login = new Launcher();
-                Application.Current.MainWindow.Content = login;
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
             }
             else
             {
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
         }

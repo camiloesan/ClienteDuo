@@ -682,6 +682,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We will send you an email to reset your password.
+        /// </summary>
+        public static string LblInfoResetPassword {
+            get {
+                return ResourceManager.GetString("LblInfoResetPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Temporary Username.
         /// </summary>
         public static string LblInGameUsername {

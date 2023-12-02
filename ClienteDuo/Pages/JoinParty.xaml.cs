@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ClienteDuo.DataService;
+using System.Collections;
 
 namespace ClienteDuo.Pages
 {
@@ -34,7 +35,7 @@ namespace ClienteDuo.Pages
 
         public void JoinLobby()
         {
-            var partyCodeString = TBoxPartyCode.Text.Trim();
+            string partyCodeString = TBoxPartyCode.Text.Trim();
             if (!ArePartyConditionsValid(partyCodeString)) return;
             
             if (SessionDetails.IsGuest)
@@ -43,7 +44,7 @@ namespace ClienteDuo.Pages
             }
             
             SessionDetails.PartyCode = int.Parse(partyCodeString);
-            var lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
+            Lobby lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
             Application.Current.MainWindow.Content = lobby;
         }
 
@@ -75,8 +76,8 @@ namespace ClienteDuo.Pages
 
         private void GenerateGuestName(string partyCodeString)
         {
-            var randomId = new Random();
-            var id = randomId.Next(0,1000);
+            Random randomId = new Random();
+            int id = randomId.Next(0,1000);
             string randomUsername = "guest" + id;
             if (_partyValidatorClient.IsUsernameInParty(int.Parse(partyCodeString), randomUsername))
             {
@@ -118,12 +119,12 @@ namespace ClienteDuo.Pages
         {
             if (SessionDetails.IsGuest)
             {
-                var launcher = new Launcher();
+                Launcher launcher = new Launcher();
                 Application.Current.MainWindow.Content = launcher;
             }
             else
             {
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
         }

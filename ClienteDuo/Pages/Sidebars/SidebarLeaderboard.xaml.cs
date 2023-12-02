@@ -26,8 +26,18 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendsPanel()
         {
             PanelLeaderboard.Children.Clear();
-            var userList = GetLeaderboard();
-            foreach (var user in userList)
+
+            IEnumerable userList = new List<UserDTO>();
+            try
+            {
+                userList = GetLeaderboard();
+            }
+            catch
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+            }
+
+            foreach (UserDTO user in userList)
             {
                 CreateUserPanel(user);
             }
@@ -35,7 +45,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void CreateUserPanel(UserDTO user)
         {
-            var stackPanel = new StackPanel
+            StackPanel stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
                 Margin = new Thickness(0, 7, 0, 0),
@@ -46,7 +56,7 @@ namespace ClienteDuo.Pages.Sidebars
             };
             PanelLeaderboard.Children.Add(stackPanel);
 
-            var labelUsername = new Label
+            Label labelUsername = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
                 Content = user.UserName,
@@ -55,7 +65,7 @@ namespace ClienteDuo.Pages.Sidebars
             };
             stackPanel.Children.Add(labelUsername);
 
-            var labelTotalWins = new Label
+            Label labelTotalWins = new Label
             {
                 Foreground = new SolidColorBrush(Colors.Black),
                 Content = user.TotalWins,
@@ -67,17 +77,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private IEnumerable<UserDTO> GetLeaderboard()
         {
-            IEnumerable<UserDTO> resultList;
-            try
-            {
-                resultList = _usersManagerClient.GetTopTenWinners();
-            }
-            catch // es necesario notificar al usuario de que algo salio mal en este caso ?
-            {
-                resultList = new List<UserDTO>();
-            }
-
-            return resultList;
+            return _usersManagerClient.GetTopTenWinners();
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

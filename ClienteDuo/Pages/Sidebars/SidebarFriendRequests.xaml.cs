@@ -25,24 +25,24 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendRequestsPanel()
         {
             PanelFriendRequests.Children.Clear();
-            var friendRequestsList = GetFriendRequestsByUserId(SessionDetails.UserId);
-            foreach (var friendRequest in friendRequestsList)
+            IEnumerable<FriendRequestDTO> friendRequestsList = GetFriendRequestsByUserId(SessionDetails.UserId);
+            foreach (FriendRequestDTO friendRequest in friendRequestsList)
             {
                 PanelFriendRequests.Children.Clear();
-                var stackPanel = new StackPanel
+                StackPanel stackPanel = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     HorizontalAlignment = HorizontalAlignment.Center
                 };
                 PanelFriendRequests.Children.Add(stackPanel);
 
-                var lblSender = new Label
+                Label lblSender = new Label
                 {
                     Content = friendRequest.SenderUsername
                 };
                 stackPanel.Children.Add(lblSender);
 
-                var btnAccept = new Button
+                Button btnAccept = new Button
                 {
                     Content = Properties.Resources.BtnAccept,
                     DataContext = friendRequest
@@ -50,7 +50,7 @@ namespace ClienteDuo.Pages.Sidebars
                 btnAccept.Click += AcceptFriendRequestEvent;
                 stackPanel.Children.Add(btnAccept);
 
-                var btnReject = new Button
+                Button btnReject = new Button
                 {
                     Content = Properties.Resources.BtnReject,
                     DataContext = friendRequest
@@ -67,7 +67,7 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgNowFriends, MessageBoxImage.Information);
                 FillFriendRequestsPanel();
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
             else
@@ -78,7 +78,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void DeclineFriendRequestEvent(object sender, RoutedEventArgs e)
         {
-            var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequestDTO;
+            FriendRequestDTO friendRequest = ((FrameworkElement)sender).DataContext as FriendRequestDTO;
             if (DeclineFriendRequest(friendRequest))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestDeleted, MessageBoxImage.Information);
