@@ -9,18 +9,17 @@ using System.Windows;
 using System.Windows.Controls;
 using ClienteDuo.DataService;
 using System.Windows.Media;
+using System.ServiceModel;
 
 namespace ClienteDuo
 {
     public partial class NewAccount : Page
     {
-        private readonly UsersManagerClient _usersManagerClient;
         private const int MAX_LENGTH_EMAIL = 30;
 
         public NewAccount()
         {
             InitializeComponent();
-            _usersManagerClient = new UsersManagerClient();
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
@@ -45,10 +44,9 @@ namespace ClienteDuo
             {
                 areFieldsValid = AreFieldsValid();
             }
-            catch
+            catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
-
             }
             
             if (areFieldsValid)
@@ -58,7 +56,7 @@ namespace ClienteDuo
                 {
                     result = AddUserToDatabase(username, email, password);
                 }
-                catch
+                catch (CommunicationException)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
                 }
@@ -68,10 +66,6 @@ namespace ClienteDuo
                     MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess, MessageBoxImage.Information);
                     var launcher = new Launcher();
                     Application.Current.MainWindow.Content = launcher;
-                }
-                else
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
                 }
             }
         }
@@ -144,28 +138,6 @@ namespace ClienteDuo
             return regex.IsMatch(username) && !username.Contains("guest");
         }
 
-        public bool IsUsernameTaken(string username)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsUsernameTaken(username);
-        }
-
-        public bool IsEmailTaken(string email)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            bool result;
-            try
-            {
-                result = usersManagerClient.IsEmailTaken(email);
-            }
-            catch
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-                result = false;
-            }
-            return result;
-        }
-
         public bool IsEmailValid(string email)
         {
             var regex = new Regex("^[a-zA-Z0-9]{3,16}@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
@@ -196,6 +168,18 @@ namespace ClienteDuo
                    || string.IsNullOrEmpty(confirmPasswordField);
         }
 
+        public bool IsUsernameTaken(string username)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsUsernameTaken(username);
+        }
+
+        public bool IsEmailTaken(string email)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsEmailTaken(email);
+        }
+
         public bool AddUserToDatabase(string username, string email, string password)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
@@ -207,21 +191,6 @@ namespace ClienteDuo
             };
 
             return usersManagerClient.AddUserToDatabase(databaseUser);
-        }
-
-        public bool DeleteUserFromDatabaseByUsername(string username) //todo redo
-        {
-            bool result;
-            try
-            {
-                result = _usersManagerClient.DeleteUserFromDatabaseByUsername(username);
-            }
-            catch
-            {
-                result = false;
-            }
-
-            return result;
         }
     }
 }

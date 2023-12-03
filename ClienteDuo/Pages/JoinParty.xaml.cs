@@ -6,18 +6,15 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using ClienteDuo.DataService;
 using System.Collections;
+using System.ServiceModel;
 
 namespace ClienteDuo.Pages
 {
     public partial class JoinParty : Page
     {
-        private readonly PartyValidatorClient _partyValidatorClient;
-        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
-
         public JoinParty()
         {
             InitializeComponent();
-            _partyValidatorClient = new PartyValidatorClient();
         }
         
         private void EnterKeyEvent(object sender, KeyEventArgs e)
@@ -36,11 +33,23 @@ namespace ClienteDuo.Pages
         public void JoinLobby()
         {
             string partyCodeString = TBoxPartyCode.Text.Trim();
-            if (!ArePartyConditionsValid(partyCodeString)) return;
-            
-            if (SessionDetails.IsGuest)
+
+            bool isPartyValid = false;
+            try
             {
-                GenerateGuestName(partyCodeString);
+                isPartyValid = ArePartyConditionsValid(partyCodeString);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
+            if (isPartyValid)
+            {
+                if (SessionDetails.IsGuest)
+                {
+                    GenerateGuestName(partyCodeString);
+                }
             }
             
             SessionDetails.PartyCode = int.Parse(partyCodeString);
@@ -76,10 +85,11 @@ namespace ClienteDuo.Pages
 
         private void GenerateGuestName(string partyCodeString)
         {
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
             Random randomId = new Random();
             int id = randomId.Next(0,1000);
             string randomUsername = "guest" + id;
-            if (_partyValidatorClient.IsUsernameInParty(int.Parse(partyCodeString), randomUsername))
+            if (partyValidatorClient.IsUsernameInParty(int.Parse(partyCodeString), randomUsername))
             {
                 GenerateGuestName(randomUsername);
             }
@@ -93,21 +103,25 @@ namespace ClienteDuo.Pages
 
         public bool IsPartyCodeExistent(int partyCode)
         {
-            return _partyValidatorClient.IsPartyExistent(partyCode);
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+            return partyValidatorClient.IsPartyExistent(partyCode);
         }
 
         public bool IsSpaceAvailable(int partyCode)
         {
-            return _partyValidatorClient.IsSpaceAvailable(partyCode);
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+            return partyValidatorClient.IsSpaceAvailable(partyCode);
         }
 
         public bool IsUserInPartyBlocked(int partyCode)
         {
-            var playersInPartyList = _partyValidatorClient.GetPlayersInParty(partyCode);
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+            var playersInPartyList = partyValidatorClient.GetPlayersInParty(partyCode);
             foreach (var player in playersInPartyList)
             {
-                if (_usersManagerClient.IsUserBlockedByUsername(SessionDetails.Username ,player)
-                    || _usersManagerClient.IsUserBlockedByUsername(player, SessionDetails.Username))
+                if (usersManagerClient.IsUserBlockedByUsername(SessionDetails.Username ,player)
+                    || usersManagerClient.IsUserBlockedByUsername(player, SessionDetails.Username))
                 {
                     return true;
                 }

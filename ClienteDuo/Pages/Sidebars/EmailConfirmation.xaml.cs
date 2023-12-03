@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,7 +35,14 @@ namespace ClienteDuo.Pages.Sidebars
         {
             string email = TBoxEmail.Text.Trim();
             string language = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
-            RequestCode(email, language);
+            try
+            {
+                RequestCode(email, language);
+            } 
+            catch(CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
         }
 
         private void RequestCode(string email, string lang)
@@ -45,15 +53,7 @@ namespace ClienteDuo.Pages.Sidebars
             }
             else
             {
-                int confirmationCode = 0;
-                try
-                {
-                    confirmationCode = _usersManagerClient.SendConfirmationCode(email, lang);
-                }
-                catch
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-                }
+                int confirmationCode = _usersManagerClient.SendConfirmationCode(email, lang);
 
                 if (confirmationCode != -1)
                 {

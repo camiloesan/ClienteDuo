@@ -1,6 +1,7 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 namespace ClienteDuo.Pages.Sidebars
@@ -10,19 +11,25 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class SidebarBlockedUsers : UserControl
     {
-        private readonly UsersManagerClient _usersManagerClient;
-
         public SidebarBlockedUsers()
         {
             InitializeComponent();
-            _usersManagerClient = new UsersManagerClient();
             FillBlockedUsersPanel();
         }
 
         private void FillBlockedUsersPanel()
         {
             PanelBlockedUsers.Children.Clear();
-            IEnumerable<UserBlockedDTO> blockedUsersList = GetBlockedUsersListByUserId(SessionDetails.UserId);
+            IEnumerable<UserBlockedDTO> blockedUsersList = new List<UserBlockedDTO>();
+            try
+            {
+                GetBlockedUsersListByUserId(SessionDetails.UserId);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
             foreach (UserBlockedDTO blockedUser in blockedUsersList)
             {
                 PanelBlockedUsers.Children.Clear();
@@ -52,26 +59,35 @@ namespace ClienteDuo.Pages.Sidebars
         private void UnblockUserEvent(object sender, RoutedEventArgs e)
         {
             UserBlockedDTO blockedUser = ((FrameworkElement)sender).DataContext as UserBlockedDTO;
-            if (UnblockUserByBlockId(blockedUser.BlockID))
+
+            bool result = false;
+            try
+            {
+                result = UnblockUserByBlockId(blockedUser.BlockID);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
+            if (result)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUnblockSuccess, MessageBoxImage.Information);
                 MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-            }
         }
 
         private bool UnblockUserByBlockId(int blockId)
         {
-            return _usersManagerClient.UnblockUserByBlockId(blockId);
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.UnblockUserByBlockId(blockId);
         }
 
         private IEnumerable<UserBlockedDTO> GetBlockedUsersListByUserId(int userId)
         {
-            return _usersManagerClient.GetBlockedUsersListByUserId(userId);
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.GetBlockedUsersListByUserId(userId);
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

@@ -11,8 +11,6 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class PasswordReset : Page
     {
-        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
-
         public PasswordReset()
         {
             InitializeComponent();
@@ -42,10 +40,11 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void ModifyPassword(string email, string newPassword)
         {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
             bool result = false;
             try
             {
-                result = _usersManagerClient.ModifyPasswordByEmail(email, newPassword);
+                result = usersManagerClient.ModifyPasswordByEmail(email, newPassword);
             }
             catch
             {
@@ -57,10 +56,6 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 MainWindow.ShowMessageBox("password modified succesfully", MessageBoxImage.Information);
                 ReturnToPage();
-            }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Information);
             }
         }
 

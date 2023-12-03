@@ -38,22 +38,21 @@ namespace ClienteDuo.Pages
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
             
-            UserDTO loggedUser;
+            UserDTO loggedUser = null;
             try
             {
                 loggedUser = AreCredentialsValid(username, password);
             }
-            catch
+            catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-                return;
             }
 
-            if (loggedUser == null) //todo cambiar
+            if (loggedUser == null)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
             }
-            else if (usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
+            else if (IsUserLoggedIn(loggedUser.ID))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
             }
@@ -75,6 +74,12 @@ namespace ClienteDuo.Pages
                 Application.Current.MainWindow.Content = mainMenu;
                 MainWindow.NotifyLogin(user);
             }
+        }
+
+        private bool IsUserLoggedIn(int userId)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsUserAlreadyLoggedIn(userId);
         }
 
         public UserDTO AreCredentialsValid(string username, string password)

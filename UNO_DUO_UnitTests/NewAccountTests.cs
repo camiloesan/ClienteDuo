@@ -31,8 +31,8 @@ namespace ClienteDuo.Tests
         [TestCleanup]
         public void Cleanup()
         {
-            NewAccount newAccount = new NewAccount();
-            newAccount.DeleteUserFromDatabaseByUsername(initializedUsername);
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            usersManagerClient.DeleteUserFromDatabaseByUsername(initializedUsername);
         }
 
         [TestMethod()]

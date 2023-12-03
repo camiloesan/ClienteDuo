@@ -63,7 +63,13 @@ namespace ClienteDuo.Pages
             SessionDetails.PartyCode = GenerateNewPartyCode();
             SessionDetails.Username = hostUsername;
             
-            _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
+            try
+            {
+                _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
+            } catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
 
             return SessionDetails.PartyCode;
         }
@@ -72,7 +78,18 @@ namespace ClienteDuo.Pages
         {
             Random random = new Random();
             int randomCode = random.Next(1000, 10000);
-            if (_partyValidatorClient.IsPartyExistent(randomCode))
+            
+            bool IsPartyExistent = false;
+            try
+            {
+                IsPartyExistent = _partyValidatorClient.IsPartyExistent(randomCode);
+            } 
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
+            if (IsPartyExistent)
             {
                 GenerateNewPartyCode();
             }
@@ -82,7 +99,14 @@ namespace ClienteDuo.Pages
 
         public void JoinGame(int partyCode, string username)
         {
-            _partyManagerClient.NotifyJoinParty(partyCode, username);
+            try
+            {
+                _partyManagerClient.NotifyJoinParty(partyCode, username);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
         }
         
         private void LoadVisualComponents()
@@ -110,7 +134,16 @@ namespace ClienteDuo.Pages
             if (e.Key == Key.Return && TBoxMessage.Text.Trim().Length > 0)
             {
                 string message = SessionDetails.Username + ": " + TBoxMessage.Text;
-                SendMessage(SessionDetails.PartyCode, message);
+
+                try
+                {
+                    SendMessage(SessionDetails.PartyCode, message);
+                }
+                catch (CommunicationException)
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                }
+
                 TBoxMessage.Text = "";
             }
             else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
@@ -121,13 +154,27 @@ namespace ClienteDuo.Pages
 
         public void SendMessage(int partyCode, string message)
         {
-            _partyManagerClient.NotifySendMessage(partyCode, message);
+            try
+            {
+                _partyManagerClient.NotifySendMessage(partyCode, message);
+            }
+            catch (CommunicationException) 
+            { 
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error); 
+            }
         }
 
         private void BtnExitLobbyEvent(object sender, RoutedEventArgs e)
         {
-            
-            _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
+            try
+            {
+                _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
+            }
+            catch
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
             if (SessionDetails.IsHost)
             {
                 CloseParty(SessionDetails.PartyCode);
@@ -152,7 +199,14 @@ namespace ClienteDuo.Pages
 
         public void CloseParty(int partyCode)
         {
-            _partyManagerClient.NotifyCloseParty(partyCode);
+            try
+            {
+                _partyManagerClient.NotifyCloseParty(partyCode);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
         }
 
         private void UpdatePlayerList(Dictionary<string, object> playersInLobby)
@@ -233,13 +287,27 @@ namespace ClienteDuo.Pages
         private void KickPlayerEvent(object sender, RoutedEventArgs e)
         {
             string username = ((FrameworkElement)sender).DataContext as string;
-            _partyManagerClient.NotifyKickPlayer(SessionDetails.PartyCode, username);
+            try
+            {
+                _partyManagerClient.NotifyKickPlayer(SessionDetails.PartyCode, username);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
         }
 
         private void StartGameEvent(object sender, RoutedEventArgs e)
         {
             PartyManagerClient partyManagerClient = new PartyManagerClient(new InstanceContext(this));
-            partyManagerClient.NotifyStartGame(SessionDetails.PartyCode);
+            try
+            {
+                partyManagerClient.NotifyStartGame(SessionDetails.PartyCode);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
         }
 
         public void MessageReceived(string messageSent)

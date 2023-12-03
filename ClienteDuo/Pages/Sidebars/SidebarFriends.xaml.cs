@@ -2,6 +2,7 @@
 using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -13,7 +14,6 @@ namespace ClienteDuo.Pages.Sidebars
         private SidebarAddFriend _sidebarAddFriend;
         private SidebarFriendRequests _sidebarFriendRequests;
         private SidebarBlockedUsers _sidebarBlockedUsers;
-        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
 
         public SidebarFriends()
         {
@@ -46,7 +46,16 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendsPanel()
         {
             PanelFriends.Children.Clear();
-            IEnumerable<FriendshipDTO> friendsList = GetFriendsListByUserId(SessionDetails.UserId);
+            IEnumerable<FriendshipDTO> friendsList = new List<FriendshipDTO>();
+            try
+            {
+                GetFriendsListByUserId(SessionDetails.UserId);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+            
             foreach (FriendshipDTO friend in friendsList)
             {
                 if (friend.Friend1ID != SessionDetails.UserId)
@@ -123,14 +132,19 @@ namespace ClienteDuo.Pages.Sidebars
 
             if (confirmation)
             {
-                bool result = DeleteFriendshipById(friendshipId);
+                bool result = false;
+                try
+                {
+                    result = DeleteFriendshipById(friendshipId);
+                }
+                catch (CommunicationException)
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                }
+               
                 if (result)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Information);
                 }
                 FillFriendsPanel();
             }
@@ -153,22 +167,14 @@ namespace ClienteDuo.Pages.Sidebars
         
         private IEnumerable<FriendshipDTO> GetFriendsListByUserId(int userId)
         {
-            return _usersManagerClient.GetFriendsList(userId);
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.GetFriendsList(userId);
         }
 
         private bool DeleteFriendshipById(int friendshipId)
         {
-            bool result;
-            try
-            {
-                result = _usersManagerClient.DeleteFriendshipById(friendshipId);
-            }
-            catch
-            {
-                result = false;
-            }
-
-            return result;
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.DeleteFriendshipById(friendshipId);
         }
 
         private void BtnBlockedUsersEvent(object sender, RoutedEventArgs e)

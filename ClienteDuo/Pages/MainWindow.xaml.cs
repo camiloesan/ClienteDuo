@@ -47,7 +47,7 @@ namespace ClienteDuo.Pages
 
         public void UserLoggedOut(string username)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); //TODO
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)

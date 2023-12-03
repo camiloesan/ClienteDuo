@@ -5,6 +5,7 @@ using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.ServiceModel;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -25,7 +26,16 @@ namespace ClienteDuo.Pages.Sidebars
         private void FillFriendRequestsPanel()
         {
             PanelFriendRequests.Children.Clear();
-            IEnumerable<FriendRequestDTO> friendRequestsList = GetFriendRequestsByUserId(SessionDetails.UserId);
+            IEnumerable<FriendRequestDTO> friendRequestsList = new List<FriendRequestDTO>();
+            try
+            {
+                friendRequestsList = GetFriendRequestsByUserId(SessionDetails.UserId);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+                
             foreach (FriendRequestDTO friendRequest in friendRequestsList)
             {
                 PanelFriendRequests.Children.Clear();
@@ -63,30 +73,44 @@ namespace ClienteDuo.Pages.Sidebars
         private void AcceptFriendRequestEvent(object sender, RoutedEventArgs e)
         {
             var friendRequest = ((FrameworkElement)sender).DataContext as FriendRequestDTO;
-            if (AcceptFriendRequest(friendRequest))
+
+            bool result = false;
+            try
+            {
+                result = AcceptFriendRequest(friendRequest);
+            } 
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
+            if (result)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgNowFriends, MessageBoxImage.Information);
                 FillFriendRequestsPanel();
                 MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
-            }
         }
 
         private void DeclineFriendRequestEvent(object sender, RoutedEventArgs e)
         {
             FriendRequestDTO friendRequest = ((FrameworkElement)sender).DataContext as FriendRequestDTO;
-            if (DeclineFriendRequest(friendRequest))
+
+            bool result = false;
+            try
+            {
+                DeclineFriendRequest(friendRequest);
+            } 
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
+            if (result)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestDeleted, MessageBoxImage.Information);
                 FillFriendRequestsPanel();
-            }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
         }
 
@@ -97,32 +121,14 @@ namespace ClienteDuo.Pages.Sidebars
 
         private bool AcceptFriendRequest(FriendRequestDTO friendRequest)
         {
-            bool result;
-            try
-            {
-                result = _usersManagerClient.AcceptFriendRequest(friendRequest);
-            }
-            catch
-            {
-                result = false;
-            }
-            
-            return result;
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.AcceptFriendRequest(friendRequest);
         }
 
         private bool DeclineFriendRequest(FriendRequestDTO friendRequest)
         {
-            bool result;
-            try
-            {
-                result = _usersManagerClient.RejectFriendRequest(friendRequest.FriendRequestID);
-            }
-            catch
-            {
-                result = false;
-            }
-
-            return result;
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.RejectFriendRequest(friendRequest.FriendRequestID);
         }
         
         private IEnumerable<FriendRequestDTO> GetFriendRequestsByUserId(int userId)

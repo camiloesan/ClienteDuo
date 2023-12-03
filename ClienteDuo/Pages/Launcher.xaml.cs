@@ -16,20 +16,6 @@ namespace ClienteDuo.Pages
             Application.Current.MainWindow.Content = newAccount;
         }
 
-        private void BtnLocalizationEnUSEvent(object sender, RoutedEventArgs e)
-        {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-            var launcher = new Launcher();
-            Application.Current.MainWindow.Content = launcher;
-        }
-
-        private void BtnLocalizationEsMXEvent(object sender, RoutedEventArgs e)
-        {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
-            var launcher = new Launcher();
-            Application.Current.MainWindow.Content = launcher;
-        }
-
         private void BtnLoginEvent(object sender, RoutedEventArgs e)
         {
             var login = new Login();
@@ -42,9 +28,16 @@ namespace ClienteDuo.Pages
             Application.Current.MainWindow.Content = joinParty;
         }
 
-        private void BtnLocalizationJaJPEvent(object sender, RoutedEventArgs e)
+        private void BtnLocalizationEnUSEvent(object sender, RoutedEventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("jp");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
+            var launcher = new Launcher();
+            Application.Current.MainWindow.Content = launcher;
+        }
+
+        private void BtnLocalizationEsMXEvent(object sender, RoutedEventArgs e)
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es");
             var launcher = new Launcher();
             Application.Current.MainWindow.Content = launcher;
         }

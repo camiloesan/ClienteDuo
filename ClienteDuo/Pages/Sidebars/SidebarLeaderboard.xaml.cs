@@ -4,6 +4,7 @@ using ClienteDuo.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -15,8 +16,6 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class SidebarLeaderboard : UserControl
     {
-        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
-
         public SidebarLeaderboard()
         {
             InitializeComponent();
@@ -32,7 +31,7 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 userList = GetLeaderboard();
             }
-            catch
+            catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
@@ -77,7 +76,8 @@ namespace ClienteDuo.Pages.Sidebars
 
         private IEnumerable<UserDTO> GetLeaderboard()
         {
-            return _usersManagerClient.GetTopTenWinners();
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.GetTopTenWinners();
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
