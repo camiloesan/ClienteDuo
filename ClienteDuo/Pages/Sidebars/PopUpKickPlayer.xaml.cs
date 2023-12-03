@@ -20,6 +20,7 @@ namespace ClienteDuo.Pages.Sidebars
     public partial class PopUpKickPlayer : Window
     {
         MatchManagerClient _client;
+        PartyManagerClient _partyManager;
 
         public PopUpKickPlayer()
         {
@@ -40,11 +41,23 @@ namespace ClienteDuo.Pages.Sidebars
             _client = client;
         }
 
+        public void SetClient(PartyManagerClient client)
+        {
+            _partyManager = client;
+        }
+
         private void BtnKickEvent(object sender, RoutedEventArgs e)
         {
             if (!KickReasonComboBox.Text.Equals(""))
             {
-                _client.KickPlayerFromGame(SessionDetails.PartyCode, KickedUsername, KickReasonComboBox.Text);
+                if (_client != null)
+                {
+                    _client.KickPlayerFromGame(SessionDetails.PartyCode, KickedUsername, KickReasonComboBox.Text);
+                } 
+                else
+                {
+                    _partyManager.NotifyKickPlayer(SessionDetails.PartyCode, KickedUsername, KickReasonComboBox.Text);
+                }
                 Close();
             }
             else

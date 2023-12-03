@@ -393,4 +393,7 @@
   <data name="LblTotalWins" xml:space="preserve">
     <value>Juegos Ganados</value>
   </data>
+  <data name="DlgHostHasClosedTheParty" xml:space="preserve">
+    <value>El host a abandonado la partida</value>
+  </data>
 </root>

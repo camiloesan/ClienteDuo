@@ -936,10 +936,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task NotifyLeavePartyAsync(int partyCode, string username);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NotifyCloseParty")]
-        void NotifyCloseParty(int partyCode);
+        void NotifyCloseParty(int partyCode, string reason);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NotifyCloseParty")]
-        System.Threading.Tasks.Task NotifyClosePartyAsync(int partyCode);
+        System.Threading.Tasks.Task NotifyClosePartyAsync(int partyCode, string reason);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NotifyStartGame")]
         void NotifyStartGame(int partyCode);
@@ -948,10 +948,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task NotifyStartGameAsync(int partyCode);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NotifyKickPlayer")]
-        void NotifyKickPlayer(int partyCode, string username);
+        void NotifyKickPlayer(int partyCode, string username, string reason);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPartyManager/NotifyKickPlayer")]
-        System.Threading.Tasks.Task NotifyKickPlayerAsync(int partyCode, string username);
+        System.Threading.Tasks.Task NotifyKickPlayerAsync(int partyCode, string username, string reason);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -970,7 +970,7 @@ namespace ClienteDuo.DataService {
         void PlayerLeft(System.Collections.Generic.Dictionary<string, object> playersInLobby);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/PlayerKicked", ReplyAction="http://tempuri.org/IPartyManager/PlayerKickedResponse")]
-        void PlayerKicked();
+        void PlayerKicked(string reason);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPartyManager/GameStarted", ReplyAction="http://tempuri.org/IPartyManager/GameStartedResponse")]
         void GameStarted();
@@ -1036,12 +1036,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.NotifyLeavePartyAsync(partyCode, username);
         }
         
-        public void NotifyCloseParty(int partyCode) {
-            base.Channel.NotifyCloseParty(partyCode);
+        public void NotifyCloseParty(int partyCode, string reason) {
+            base.Channel.NotifyCloseParty(partyCode, reason);
         }
         
-        public System.Threading.Tasks.Task NotifyClosePartyAsync(int partyCode) {
-            return base.Channel.NotifyClosePartyAsync(partyCode);
+        public System.Threading.Tasks.Task NotifyClosePartyAsync(int partyCode, string reason) {
+            return base.Channel.NotifyClosePartyAsync(partyCode, reason);
         }
         
         public void NotifyStartGame(int partyCode) {
@@ -1052,12 +1052,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.NotifyStartGameAsync(partyCode);
         }
         
-        public void NotifyKickPlayer(int partyCode, string username) {
-            base.Channel.NotifyKickPlayer(partyCode, username);
+        public void NotifyKickPlayer(int partyCode, string username, string reason) {
+            base.Channel.NotifyKickPlayer(partyCode, username, reason);
         }
         
-        public System.Threading.Tasks.Task NotifyKickPlayerAsync(int partyCode, string username) {
-            return base.Channel.NotifyKickPlayerAsync(partyCode, username);
+        public System.Threading.Tasks.Task NotifyKickPlayerAsync(int partyCode, string username, string reason) {
+            return base.Channel.NotifyKickPlayerAsync(partyCode, username, reason);
         }
     }
     

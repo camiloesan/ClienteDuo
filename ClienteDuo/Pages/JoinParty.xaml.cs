@@ -50,11 +50,11 @@ namespace ClienteDuo.Pages
                 {
                     GenerateGuestName(partyCodeString);
                 }
+                
+                SessionDetails.PartyCode = int.Parse(partyCodeString);
+                Lobby lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
+                Application.Current.MainWindow.Content = lobby;
             }
-            
-            SessionDetails.PartyCode = int.Parse(partyCodeString);
-            Lobby lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
-            Application.Current.MainWindow.Content = lobby;
         }
 
         private bool ArePartyConditionsValid(string partyCode)
@@ -71,7 +71,7 @@ namespace ClienteDuo.Pages
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty, MessageBoxImage.Information);
             }
-            else if (IsUserInPartyBlocked(int.Parse(partyCode)))
+            else if (SessionDetails.IsGuest == false && IsUserInPartyBlocked(int.Parse(partyCode)))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUserBlockedInParty, MessageBoxImage.Information);
             }

@@ -9,41 +9,15 @@
   <component name="ChangeListManager">
     <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.FriendRequest1.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.Friendship1.datasource" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ClienteDuo.DataService.User1.datasource" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/NewAccount.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/NewAccount.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriendRequests.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriendRequests.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarFriends.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarLeaderboard.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpKickPlayer.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpKickPlayer.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.fr.resx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Utilities/SessionDetails.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UNO_DUO_UnitTests/NewAccountTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/UNO_DUO_UnitTests/NewAccountTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +51,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4851c5ec0d494e7b8445a531d9f91b4c605220/8e/09266450/CommandHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4851c5ec0d494e7b8445a531d9f91b4c605220/cb/c4e181d5/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4851c5ec0d494e7b8445a531d9f91b4c605220/cd/fcde75fa/ButtonBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/632b73d687664a0fbc7e29dafd60b826616b68/e8/3ac1b1b7/ClientBase`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8e5509fdd5784e7e931313cdeac8ad64574bc0/4f/4afc533c/ChannelServices.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8e5509fdd5784e7e931313cdeac8ad64574bc0/75/80aa5f30/RealProxy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8e5509fdd5784e7e931313cdeac8ad64574bc0/79/44e2547f/Int32.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8e5509fdd5784e7e931313cdeac8ad64574bc0/e3/163c45a4/AppDomain.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/07/cdd1d2b3/HwndSubclass.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/0f/eebf77b5/HwndWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/942c62b1047d4da7aea7da484188113413ddc0/42/8b5e21b2/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
@@ -113,28 +92,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.3340206&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;mergetry&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.3340206",
+    "git-widget-placeholder": "mergetry",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\Camilo\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
+      "C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
+      "C:\\Users\\Camilo\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ClienteDuo" type="DotNetProject" factoryName=".NET Project" singleton="false">
       <option name="EXE_PATH" value="$PROJECT_DIR$/ClienteDuo/bin/Debug/ClienteDuo.exe" />
@@ -182,6 +162,7 @@
       <workItem from="1701149339064" duration="1225000" />
       <workItem from="1701231226428" duration="9243000" />
       <workItem from="1701307613844" duration="8703000" />
+      <workItem from="1701643323942" duration="1315000" />
     </task>
     <task id="LOCAL-00001" summary="just one lobby">
       <option name="closed" value="true" />

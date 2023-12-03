@@ -3,6 +3,7 @@ using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -201,7 +202,7 @@ namespace ClienteDuo.Pages
         {
             try
             {
-                _partyManagerClient.NotifyCloseParty(partyCode);
+                _partyManagerClient.NotifyCloseParty(partyCode, Properties.Resources.DlgHostHasClosedTheParty);
             }
             catch (CommunicationException)
             {
@@ -287,14 +288,10 @@ namespace ClienteDuo.Pages
         private void KickPlayerEvent(object sender, RoutedEventArgs e)
         {
             string username = ((FrameworkElement)sender).DataContext as string;
-            try
-            {
-                _partyManagerClient.NotifyKickPlayer(SessionDetails.PartyCode, username);
-            }
-            catch (CommunicationException)
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
-            }
+            PopUpKickPlayer popUpKickPlayer = new PopUpKickPlayer();
+            popUpKickPlayer.KickedUsername = username;
+            popUpKickPlayer.SetClient(_partyManagerClient);
+            popUpKickPlayer.Show();
         }
 
         private void StartGameEvent(object sender, RoutedEventArgs e)
@@ -329,16 +326,20 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            if (!_isWpfRunning) return;
-            MusicManager.PlayPlayerJoinedSound();
-            UpdatePlayerList(playersInLobby);
+            if (_isWpfRunning)
+            {
+                MusicManager.PlayPlayerJoinedSound();
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
-            if (!_isWpfRunning) return;
-            MusicManager.PlayPlayerLeftSound();
-            UpdatePlayerList(playersInLobby);
+            if (_isWpfRunning)
+            {
+                MusicManager.PlayPlayerLeftSound();
+                UpdatePlayerList(playersInLobby);
+            }
         }
 
         public void PartyCreated(Dictionary<string, object> playersInLobby)
@@ -362,19 +363,22 @@ namespace ClienteDuo.Pages
             Application.Current.MainWindow.Content = cardTable;
         }
 
-        public void PlayerKicked()
+        public void PlayerKicked(string reason)
         {
-            if (!_isWpfRunning) return;
-            
-            if (SessionDetails.IsGuest)
+            if (_isWpfRunning)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-            }
-            else
-            {
-                MainMenu mainMenu = new MainMenu();
-                Application.Current.MainWindow.Content = mainMenu;
+                if (SessionDetails.IsGuest)
+                {
+                    Launcher launcher = new Launcher();
+                    Application.Current.MainWindow.Content = launcher;
+                }
+                else
+                {
+                    MainMenu mainMenu = new MainMenu();
+                    Application.Current.MainWindow.Content = mainMenu;
+                }
+                string message = Properties.Resources.DlgKickedPlayer + Properties.Resources.DlgKickingReason + reason;
+                MainWindow.ShowMessageBox(message, MessageBoxImage.Exclamation);
             }
         }
     }

@@ -412,6 +412,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Host has left the party.
+        /// </summary>
+        public static string DlgHostHasClosedTheParty {
+            get {
+                return ResourceManager.GetString("DlgHostHasClosedTheParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter, and a maximum of 16 characters.
         /// </summary>
         public static string DlgInsecurePassword {

@@ -400,4 +400,7 @@
   <data name="LblInfoResetPassword" xml:space="preserve">
     <value>We will send you an email to reset your password</value>
   </data>
+  <data name="DlgHostHasClosedTheParty" xml:space="preserve">
+    <value>Host has left the party</value>
+  </data>
 </root>
