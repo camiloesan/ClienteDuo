@@ -356,6 +356,7 @@ namespace ClienteDuo.Pages
             InstanceContext tableContext = new InstanceContext(cardTable);
             MatchManagerClient tableClient = new MatchManagerClient(tableContext);
             tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+            LblLoading.Visibility = Visibility.Visible;
 
             await Task.Delay(5000);
             cardTable.LoadPlayers();

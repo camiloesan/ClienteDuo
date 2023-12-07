@@ -5,6 +5,7 @@ using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ClienteDuo.Pages
 {
@@ -47,10 +48,17 @@ namespace ClienteDuo.Pages
                     }
                     else
                     {
-                        UsersManagerClient userClient = new UsersManagerClient();
+                        if (playerUsername.Contains("guest"))
+                        {
+                            UsersManagerClient userClient = new UsersManagerClient();
 
-                        if (userClient.IsAlreadyFriend(SessionDetails.Username, playerBar.Username) || 
-                            userClient.IsFriendRequestAlreadyExistent(SessionDetails.Username, playerUsername))
+                            if (userClient.IsAlreadyFriend(SessionDetails.Username, playerBar.Username) ||
+                                userClient.IsFriendRequestAlreadyExistent(SessionDetails.Username, playerUsername))
+                            {
+                                playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
+                            }
+                        }
+                        else
                         {
                             playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
                         }
