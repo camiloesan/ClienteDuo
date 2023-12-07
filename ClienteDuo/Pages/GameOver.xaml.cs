@@ -29,6 +29,11 @@ namespace ClienteDuo.Pages
         {
             string winner = playerScores.OrderBy(x => x.Value).First().Key;
 
+            if (SessionDetails.Username.Equals(winner))
+            {
+                SessionDetails.TotalWins++;
+            }
+
             foreach (KeyValuePair<string, int> playerScore in playerScores)
             {
                 PlayerBar playerBar = new PlayerBar();
