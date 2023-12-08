@@ -34,36 +34,6 @@ namespace ClienteDuo.Pages
 
         private void InitializeAddOns()
         {
-            _sidebarUserProfile = new SidebarUserProfile
-            {
-                Width = 250,
-                Height = 565,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                Visibility = Visibility.Collapsed
-            };
-            MainGrid.Children.Add(_sidebarUserProfile);
-
-            _sidebarFriends = new SidebarFriends
-            {
-                Width = 250,
-                Height = 565,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                Visibility = Visibility.Collapsed
-            };
-            MainGrid.Children.Add(_sidebarFriends);
-
-            _sidebarLeaderboard = new SidebarLeaderboard
-            {
-                Width = 250,
-                Height = 565,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Right,
-                Visibility = Visibility.Collapsed
-            };
-            MainGrid.Children.Add(_sidebarLeaderboard);
-
             _popUpUserLogged = new PopUpUserLogged
             {
                 Width = 200,
@@ -104,16 +74,43 @@ namespace ClienteDuo.Pages
 
         private void BtnMyProfileSidebarEvent(object sender, RoutedEventArgs e)
         {
+            _sidebarUserProfile = new SidebarUserProfile
+            {
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                Visibility = Visibility.Collapsed
+            };
+            MainGrid.Children.Add(_sidebarUserProfile);
             _sidebarUserProfile.Visibility = Visibility.Visible;
         }
 
         private void BtnFriendsSidebarEvent(object sender, RoutedEventArgs e)
         {
+            _sidebarFriends = new SidebarFriends
+            {
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Visibility = Visibility.Collapsed
+            };
+            MainGrid.Children.Add(_sidebarFriends);
             _sidebarFriends.Visibility = Visibility.Visible;
         }
 
         private void BtnLeaderboardEvent(object sender, RoutedEventArgs e)
         {
+            _sidebarLeaderboard = new SidebarLeaderboard
+            {
+                Width = 250,
+                Height = 565,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                Visibility = Visibility.Collapsed
+            };
+            MainGrid.Children.Add(_sidebarLeaderboard);
             _sidebarLeaderboard.Visibility = Visibility.Visible;
         }
     }

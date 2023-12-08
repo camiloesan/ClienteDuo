@@ -49,7 +49,7 @@ namespace ClienteDuo.Pages.Sidebars
             IEnumerable<FriendshipDTO> friendsList = new List<FriendshipDTO>();
             try
             {
-                GetFriendsListByUserId(SessionDetails.UserId);
+                friendsList = GetFriendsListByUserId(SessionDetails.UserId);
             }
             catch (CommunicationException)
             {
