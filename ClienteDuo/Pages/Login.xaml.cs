@@ -62,6 +62,7 @@ namespace ClienteDuo.Pages
                 SessionDetails.Username = loggedUser.UserName;
                 SessionDetails.Email = loggedUser.Email;
                 SessionDetails.TotalWins = loggedUser.TotalWins;
+                SessionDetails.PictureID = loggedUser.PictureID;
                 SessionDetails.IsGuest = false;
 
                 UserDTO user = new UserDTO

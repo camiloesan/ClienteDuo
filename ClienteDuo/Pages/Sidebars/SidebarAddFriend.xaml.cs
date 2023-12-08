@@ -54,6 +54,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private bool SendRequest(string usernameSender, string usernameReceiver)
         {
+            bool result = false;
             if (usernameReceiver == SessionDetails.Username)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendYourself,
@@ -64,14 +65,14 @@ namespace ClienteDuo.Pages.Sidebars
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, 
                     MessageBoxImage.Information);
             }
-            else if (!IsUsernameTaken(usernameReceiver))
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, 
-                    MessageBoxImage.Information);
-            }
             else if (IsAlreadyFriend(usernameSender, usernameReceiver))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends, 
+                    MessageBoxImage.Information);
+            }
+            else if (!IsUsernameTaken(usernameReceiver))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, 
                     MessageBoxImage.Information);
             }
             else if (IsUserBlocked(SessionDetails.Username, usernameReceiver) 
@@ -82,16 +83,15 @@ namespace ClienteDuo.Pages.Sidebars
             }
             else
             {
-                bool result = SendFriendRequest(usernameSender, usernameReceiver);
+                result = SendFriendRequest(usernameSender, usernameReceiver);
                 if (result)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, 
                         MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
-                    return true;
                 }
             }
-            return false;
+            return result;
         }
 
         private bool IsUsernameTaken(string username)

@@ -32,6 +32,9 @@ namespace ClienteDuo.DataService {
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PictureIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TotalWinsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -82,6 +85,19 @@ namespace ClienteDuo.DataService {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PictureID {
+            get {
+                return this.PictureIDField;
+            }
+            set {
+                if ((this.PictureIDField.Equals(value) != true)) {
+                    this.PictureIDField = value;
+                    this.RaisePropertyChanged("PictureID");
                 }
             }
         }
@@ -498,6 +514,12 @@ namespace ClienteDuo.DataService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IUsersManager")]
     public interface IUsersManager {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetUserInfoByUsername", ReplyAction="http://tempuri.org/IUsersManager/GetUserInfoByUsernameResponse")]
+        ClienteDuo.DataService.UserDTO GetUserInfoByUsername(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetUserInfoByUsername", ReplyAction="http://tempuri.org/IUsersManager/GetUserInfoByUsernameResponse")]
+        System.Threading.Tasks.Task<ClienteDuo.DataService.UserDTO> GetUserInfoByUsernameAsync(string username);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
         bool AddUserToDatabase(ClienteDuo.DataService.UserDTO user);
         
@@ -656,6 +678,14 @@ namespace ClienteDuo.DataService {
         
         public UsersManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public ClienteDuo.DataService.UserDTO GetUserInfoByUsername(string username) {
+            return base.Channel.GetUserInfoByUsername(username);
+        }
+        
+        public System.Threading.Tasks.Task<ClienteDuo.DataService.UserDTO> GetUserInfoByUsernameAsync(string username) {
+            return base.Channel.GetUserInfoByUsernameAsync(username);
         }
         
         public bool AddUserToDatabase(ClienteDuo.DataService.UserDTO user) {

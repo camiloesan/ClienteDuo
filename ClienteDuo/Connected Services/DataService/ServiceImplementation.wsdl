@@ -80,6 +80,12 @@
       <xsd:import schemaLocation="http://localhost:8082/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IUsersManager_GetUserInfoByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUsername" />
+  </wsdl:message>
+  <wsdl:message name="IUsersManager_GetUserInfoByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByUsernameResponse" />
+  </wsdl:message>
   <wsdl:message name="IUsersManager_AddUserToDatabase_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUserToDatabase" />
   </wsdl:message>
@@ -402,6 +408,10 @@
     <wsdl:part name="parameters" element="tns:GameOverResponse" />
   </wsdl:message>
   <wsdl:portType name="IUsersManager">
+    <wsdl:operation name="GetUserInfoByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/GetUserInfoByUsername" message="tns:IUsersManager_GetUserInfoByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/GetUserInfoByUsernameResponse" message="tns:IUsersManager_GetUserInfoByUsername_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddUserToDatabase">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabase" message="tns:IUsersManager_AddUserToDatabase_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse" message="tns:IUsersManager_AddUserToDatabase_OutputMessage" />
@@ -643,6 +653,15 @@
   <wsdl:binding name="NetTcpBinding_IUsersManager" type="tns:IUsersManager">
     <wsp:PolicyReference URI="#NetTcpBinding_IUsersManager_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetUserInfoByUsername">
+      <soap12:operation soapAction="http://tempuri.org/IUsersManager/GetUserInfoByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddUserToDatabase">
       <soap12:operation soapAction="http://tempuri.org/IUsersManager/AddUserToDatabase" style="document" />
       <wsdl:input>

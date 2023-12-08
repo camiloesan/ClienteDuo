@@ -3,6 +3,8 @@ using ClienteDuo.Utilities;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -20,11 +22,14 @@ namespace ClienteDuo.Pages.Sidebars
 
         public void InitializeUserInfo(string username, bool isFriend)
         {
+            UserDTO userInfo = GetUserInfoByUsername(username);
             _userSelectedName = username;
-            LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
-            LblTrophies.Content = Properties.Resources.LblTrophies + ": ";
 
-            if (isFriend)
+            SetProfilePicture(userInfo.PictureID);
+            LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
+            LblTrophies.Content = Properties.Resources.LblTotalWins + ": " + userInfo.TotalWins;
+
+            if (IsFriend(SessionDetails.Username, username))
             {
                 BtnAddFriend.Visibility = Visibility.Collapsed;
             }
@@ -32,11 +37,42 @@ namespace ClienteDuo.Pages.Sidebars
 
         public void InitializeUserInfo(int friendshipId, string username)
         {
+            UserDTO userInfo = GetUserInfoByUsername(username);
             DataContext = friendshipId;
             _userSelectedName = username;
+
+            SetProfilePicture(userInfo.PictureID);
             LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
-            LblTrophies.Content = Properties.Resources.LblTrophies + ": ";
+            LblTrophies.Content = Properties.Resources.LblTotalWins + ": " + userInfo.TotalWins;
             BtnAddFriend.Visibility = Visibility.Collapsed;
+        }
+
+        private void SetProfilePicture(int pictureId)
+        {
+            BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
+            switch (pictureId)
+            {
+                case 0:
+                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
+                    break;
+                case 1:
+                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp1.jpg"));
+                    break;
+                case 2:
+                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp2.jpg"));
+                    break;
+                case 3:
+                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp3.jpg"));
+                    break;
+            }
+            ImageProfilePicture.Source = bitmapImage;
+            ImageProfilePicture.Stretch = Stretch.UniformToFill;
+        }
+
+        private UserDTO GetUserInfoByUsername(string username)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.GetUserInfoByUsername(username);
         }
 
         private void BtnAddFriendEvent(object sender, RoutedEventArgs e)

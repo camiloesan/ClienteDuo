@@ -122,6 +122,9 @@
     <Compile Include="Pages\MatchOverLabel.xaml.cs">
       <DependentUpon>MatchOverLabel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ModifyProfile.xaml.cs">
+      <DependentUpon>ModifyProfile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PlayerBar.xaml.cs" />
     <Compile Include="Pages\PlayerIcon.xaml.cs" />
     <Compile Include="Pages\Sidebars\PopUpKickPlayer.xaml.cs">
@@ -210,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MatchOverLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ModifyProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

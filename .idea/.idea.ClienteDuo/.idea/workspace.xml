@@ -9,15 +9,19 @@
   <component name="ChangeListManager">
     <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/ClienteDuo.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/Reference.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/ServiceImplementation.wsdl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/JoinParty.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Connected Services/DataService/item2.xsd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpKickPlayer.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpKickPlayer.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.es.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.resx" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Properties/Resources.resx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Login.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/MainMenu.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/PopUpUserDetails.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarAddFriend.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Sidebars/SidebarUserProfile.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,29 +96,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "XThreadsFramesViewSplitterKey": "0.3340206",
-    "git-widget-placeholder": "mergetry",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.3340206&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;mergetry&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
-      "C:\\Users\\Camilo\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Camilo\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Camilo\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ClienteDuo" type="DotNetProject" factoryName=".NET Project" singleton="false">
       <option name="EXE_PATH" value="$PROJECT_DIR$/ClienteDuo/bin/Debug/ClienteDuo.exe" />
@@ -163,6 +167,10 @@
       <workItem from="1701231226428" duration="9243000" />
       <workItem from="1701307613844" duration="8703000" />
       <workItem from="1701643323942" duration="1315000" />
+      <workItem from="1702051946279" duration="573000" />
+      <workItem from="1702054007895" duration="1918000" />
+      <workItem from="1702058854564" duration="86000" />
+      <workItem from="1702065552747" duration="73000" />
     </task>
     <task id="LOCAL-00001" summary="just one lobby">
       <option name="closed" value="true" />

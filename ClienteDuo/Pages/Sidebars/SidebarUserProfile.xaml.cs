@@ -49,5 +49,11 @@ namespace ClienteDuo.Pages.Sidebars
         {
             Visibility = Visibility.Collapsed;
         }
+
+        private void BtnModifyProfileEvent(object sender, RoutedEventArgs e)
+        {
+            ModifyProfile modifyProfile = new ModifyProfile();
+            Application.Current.MainWindow.Content = modifyProfile;
+        }
     }
 }

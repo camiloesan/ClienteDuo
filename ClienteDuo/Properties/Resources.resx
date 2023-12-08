@@ -403,4 +403,10 @@
   <data name="DlgHostHasClosedTheParty" xml:space="preserve">
     <value>Host has left the party</value>
   </data>
+  <data name="BtnModifyProfile" xml:space="preserve">
+    <value>Modify Profile</value>
+  </data>
+  <data name="BtnChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
 </root>

@@ -106,6 +106,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string BtnChangePassword {
+            get {
+                return ResourceManager.GetString("BtnChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue.
         /// </summary>
         public static string BtnContinue {
@@ -174,6 +183,15 @@ namespace ClienteDuo.Properties {
         public static string BtnLogin {
             get {
                 return ResourceManager.GetString("BtnLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modify Profile.
+        /// </summary>
+        public static string BtnModifyProfile {
+            get {
+                return ResourceManager.GetString("BtnModifyProfile", resourceCulture);
             }
         }
         
