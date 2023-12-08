@@ -425,6 +425,10 @@
     <Resource Include="Images\france.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\pfp1.jpg" />
+    <Resource Include="Images\pfp2.jpg" />
+    <Resource Include="Images\pfp3.jpg" />
+    <Resource Include="Images\pfp0.png" />
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

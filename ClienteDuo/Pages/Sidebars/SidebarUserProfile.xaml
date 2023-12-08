@@ -14,7 +14,10 @@
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
         <Label Content="{x:Static p:Resources.LblMyProfile}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1" FontWeight="Bold"/>
-        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Width="200" Grid.Row="1">
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="1" Margin="0,60,0,0">
+            <Grid Width="100" Height="100" Margin="0,50,0,0">
+                <Image x:Name="ImageProfilePicture" Stretch="Uniform"/>
+            </Grid>
             <Label Content="PlayerID" Foreground="White" FontSize="14"/>
             <Label x:Name="LblPlayerId" Foreground="White" FontSize="14"/>
             <Label Content="{x:Static p:Resources.LblUsername}" Foreground="White" FontSize="14"/>
@@ -26,5 +29,6 @@
             <Button Height="30" Margin="0,15,0,0" Cursor="Hand" Background="#FF97785F" Foreground="White" BorderBrush="#FF6B552B"/>
         </StackPanel>
         <Button Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70" HorizontalAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Center" Click="BtnCancelEvent" Grid.Row="0"/>
+
     </Grid>
 </UserControl>
