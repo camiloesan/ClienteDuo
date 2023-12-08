@@ -429,6 +429,11 @@
     <Resource Include="Images\pfp2.jpg" />
     <Resource Include="Images\pfp3.jpg" />
     <Resource Include="Images\pfp0.png" />
+    <Resource Include="Images\loadingGIF.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DuoCardPFP.png" />
+    <Resource Include="Images\DuoPFP.png" />
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

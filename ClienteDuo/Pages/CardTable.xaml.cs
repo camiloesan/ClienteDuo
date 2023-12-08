@@ -191,7 +191,7 @@ namespace ClienteDuo.Pages
 
             TableBackground.Children.Add(matchOverLabel);
             MusicManager.PlayMatchFinishedSound();
-
+            
             await Task.Delay(5000);
 
             Dictionary<string, int> playerScores = client.GetMatchResults(SessionDetails.PartyCode);

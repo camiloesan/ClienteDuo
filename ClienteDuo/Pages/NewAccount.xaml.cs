@@ -140,7 +140,7 @@ namespace ClienteDuo
 
         public bool IsEmailValid(string email)
         {
-            var regex = new Regex("^[a-zA-Z0-9]{3,16}@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+            var regex = new Regex("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
             return regex.IsMatch(email) && email.Length <= MAX_LENGTH_EMAIL;
         }
 
