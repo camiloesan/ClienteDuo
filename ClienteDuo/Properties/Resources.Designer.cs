@@ -529,6 +529,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile picture has been updated.
+        /// </summary>
+        public static string DlgProfilePictureUpdated {
+            get {
+                return ResourceManager.GetString("DlgProfilePictureUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was an error connecting with the service, try again later.
         /// </summary>
         public static string DlgServiceException {

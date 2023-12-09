@@ -1,7 +1,10 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
+using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +24,8 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class ModifyProfile : Page
     {
+        int _selectedPictureId = 0;
+
         public ModifyProfile()
         {
             InitializeComponent();
@@ -30,13 +35,14 @@ namespace ClienteDuo.Pages
 
         private void InitializeCurrentProfilePicture()
         {
-            SetCurrentProfilePicture();
+            SetCurrentProfilePicturePreview(SessionDetails.PictureID);
         }
 
-        private void SetCurrentProfilePicture()
+        private void SetCurrentProfilePicturePreview(int pictureId)
         {
+            _selectedPictureId = pictureId;
             BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
-            switch (SessionDetails.PictureID)
+            switch (pictureId)
             {
                 case 0:
                     bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
@@ -63,10 +69,62 @@ namespace ClienteDuo.Pages
             ImagePfp3.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp3.jpg"));
         }
 
+        private void BtnContinueEvent(object sender, RoutedEventArgs e)
+        {
+            bool result = false;
+            try
+            {
+                result = UpdateProfilePicture(_selectedPictureId);
+            } 
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
+            if (result)
+            {
+                SessionDetails.PictureID = _selectedPictureId;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgProfilePictureUpdated, MessageBoxImage.Information);
+                MainMenu mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
+            }
+        }
+
+        private bool UpdateProfilePicture(int pictureId)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.UpdateProfilePictureByUserId(SessionDetails.UserId, pictureId);
+        }
+
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             MainMenu mainMenu = new MainMenu();
             Application.Current.MainWindow.Content = mainMenu;
+        }
+
+        private void BtnChangePasswordEvent(object sender, RoutedEventArgs e)
+        {
+            EmailConfirmation emailConfirmation = new EmailConfirmation();
+            Application.Current.MainWindow.Content = emailConfirmation;
+        }
+
+        private void BtnPfp0Event(object sender, RoutedEventArgs e)
+        {
+            SetCurrentProfilePicturePreview(0);
+        }
+        private void BtnPfp1Event(object sender, RoutedEventArgs e)
+        {
+            SetCurrentProfilePicturePreview(1);
+        }
+
+        private void BtnPfp2Event(object sender, RoutedEventArgs e)
+        {
+            SetCurrentProfilePicturePreview(2);
+        }
+
+        private void BtnPfp3Event(object sender, RoutedEventArgs e)
+        {
+            SetCurrentProfilePicturePreview(3);
         }
     }
 }

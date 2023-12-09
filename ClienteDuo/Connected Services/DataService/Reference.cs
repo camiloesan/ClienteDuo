@@ -514,6 +514,12 @@ namespace ClienteDuo.DataService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IUsersManager")]
     public interface IUsersManager {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/UpdateProfilePictureByUserId", ReplyAction="http://tempuri.org/IUsersManager/UpdateProfilePictureByUserIdResponse")]
+        bool UpdateProfilePictureByUserId(int userId, int pictureId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/UpdateProfilePictureByUserId", ReplyAction="http://tempuri.org/IUsersManager/UpdateProfilePictureByUserIdResponse")]
+        System.Threading.Tasks.Task<bool> UpdateProfilePictureByUserIdAsync(int userId, int pictureId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetUserInfoByUsername", ReplyAction="http://tempuri.org/IUsersManager/GetUserInfoByUsernameResponse")]
         ClienteDuo.DataService.UserDTO GetUserInfoByUsername(string username);
         
@@ -678,6 +684,14 @@ namespace ClienteDuo.DataService {
         
         public UsersManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public bool UpdateProfilePictureByUserId(int userId, int pictureId) {
+            return base.Channel.UpdateProfilePictureByUserId(userId, pictureId);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateProfilePictureByUserIdAsync(int userId, int pictureId) {
+            return base.Channel.UpdateProfilePictureByUserIdAsync(userId, pictureId);
         }
         
         public ClienteDuo.DataService.UserDTO GetUserInfoByUsername(string username) {

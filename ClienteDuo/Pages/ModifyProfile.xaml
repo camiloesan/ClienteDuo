@@ -24,26 +24,25 @@
                 <Image x:Name="ImageCurrentProfilePicture" Width="140" Height="140" Stretch="Uniform"/>
             </Grid>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Cursor="Hand" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Button Cursor="Hand" Click="BtnPfp0Event" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
                     <Image x:Name="ImagePfp0" Stretch="Uniform" Width="140" Height="140" Margin="15"/>
                 </Button>
-                <Button Cursor="Hand" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Button Cursor="Hand" Click="BtnPfp1Event" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
                     <Image x:Name="ImagePfp1" Stretch="Uniform" Width="140" Height="140" Margin="15"/>
                 </Button>
-                <Button Cursor="Hand" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Button Cursor="Hand" Click="BtnPfp2Event" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
                     <Image x:Name="ImagePfp2" Stretch="Uniform" Width="140" Height="140" Margin="15"/>
                 </Button>
-                <Button Cursor="Hand" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
+                <Button Cursor="Hand" Click="BtnPfp3Event" Margin="0,0,0,0" Background="#00DDDDDD" BorderBrush="#00707070">
                     <Image x:Name="ImagePfp3" Stretch="Uniform" Width="140" Height="140" Margin="15"/>
                 </Button>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Content="{x:Static p:Resources.BtnContinue}" Height="30" Width="85" Margin="0,0,15,0" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
+            <Button Content="{x:Static p:Resources.BtnContinue}" Click="BtnContinueEvent" Height="30" Width="85" Margin="0,0,15,0" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
             <Button Content="{x:Static p:Resources.BtnCancel}" Click="BtnCancelEvent" Height="30" Width="85" Margin="15,0,15,0" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Background="{DynamicResource BtnBackground}" BorderBrush="{DynamicResource BtnBorder}" Foreground="White"/>
-            <Button Content="{x:Static p:Resources.BtnChangePassword}" Click="BtnCancelEvent" Height="30" Width="115" Margin="15,0,0,0" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Background="{DynamicResource BtnBackground}" Foreground="White" BorderBrush="#FF650D0D" BorderThickness="3,3,3,3"/>
-
+            <Button Content="{x:Static p:Resources.BtnChangePassword}" Click="BtnChangePasswordEvent" Height="30" Width="115" Margin="15,0,0,0" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Background="{DynamicResource BtnBackground}" Foreground="White" BorderBrush="#FF650D0D" BorderThickness="3,3,3,3"/>
         </StackPanel>
         <Label Content="{x:Static p:Resources.BtnModifyProfile}" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold"/>
 

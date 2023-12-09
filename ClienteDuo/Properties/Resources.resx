@@ -409,4 +409,7 @@
   <data name="BtnChangePassword" xml:space="preserve">
     <value>Change Password</value>
   </data>
+  <data name="DlgProfilePictureUpdated" xml:space="preserve">
+    <value>Profile picture has been updated</value>
+  </data>
 </root>
