@@ -15,8 +15,8 @@
                 <RowDefinition Height="150*"/>
             </Grid.RowDefinitions>
             <Label Content="{x:Static p:Resources.LblFriends}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Height="34" Grid.Row="1" FontWeight="Bold" Width="72"/>
-            <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                <StackPanel x:Name="PanelFriends" Height="300" Width="200"/>
+            <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="PanelFriends" Width="200"/>
             </ScrollViewer>
             <Button Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70"/>
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Center" Grid.Row="3" Width="174" Height="110">

@@ -38,36 +38,40 @@ namespace ClienteDuo.Pages.Sidebars
                 
             foreach (FriendRequestDTO friendRequest in friendRequestsList)
             {
-                PanelFriendRequests.Children.Clear();
-                StackPanel stackPanel = new StackPanel
-                {
-                    Orientation = Orientation.Horizontal,
-                    HorizontalAlignment = HorizontalAlignment.Center
-                };
-                PanelFriendRequests.Children.Add(stackPanel);
-
-                Label lblSender = new Label
-                {
-                    Content = friendRequest.SenderUsername
-                };
-                stackPanel.Children.Add(lblSender);
-
-                Button btnAccept = new Button
-                {
-                    Content = Properties.Resources.BtnAccept,
-                    DataContext = friendRequest
-                };
-                btnAccept.Click += AcceptFriendRequestEvent;
-                stackPanel.Children.Add(btnAccept);
-
-                Button btnReject = new Button
-                {
-                    Content = Properties.Resources.BtnReject,
-                    DataContext = friendRequest
-                };
-                btnReject.Click += DeclineFriendRequestEvent;
-                stackPanel.Children.Add(btnReject);
+                CreateFriendRequestPanel(friendRequest);
             }
+        }
+
+        private void CreateFriendRequestPanel(FriendRequestDTO friendRequest)
+        {
+            StackPanel stackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            PanelFriendRequests.Children.Add(stackPanel);
+
+            Label lblSender = new Label
+            {
+                Content = friendRequest.SenderUsername
+            };
+            stackPanel.Children.Add(lblSender);
+
+            Button btnAccept = new Button
+            {
+                Content = Properties.Resources.BtnAccept,
+                DataContext = friendRequest
+            };
+            btnAccept.Click += AcceptFriendRequestEvent;
+            stackPanel.Children.Add(btnAccept);
+
+            Button btnReject = new Button
+            {
+                Content = Properties.Resources.BtnReject,
+                DataContext = friendRequest
+            };
+            btnReject.Click += DeclineFriendRequestEvent;
+            stackPanel.Children.Add(btnReject);
         }
 
         private void AcceptFriendRequestEvent(object sender, RoutedEventArgs e)
@@ -100,7 +104,7 @@ namespace ClienteDuo.Pages.Sidebars
             bool result = false;
             try
             {
-                DeclineFriendRequest(friendRequest);
+                result = DeclineFriendRequest(friendRequest);
             } 
             catch (CommunicationException)
             {

@@ -593,10 +593,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task<ClienteDuo.DataService.FriendshipDTO[]> GetFriendsListAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
-        string[] GetOnlineFriends(string username);
+        ClienteDuo.DataService.FriendshipDTO[] GetOnlineFriends(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/GetOnlineFriends", ReplyAction="http://tempuri.org/IUsersManager/GetOnlineFriendsResponse")]
-        System.Threading.Tasks.Task<string[]> GetOnlineFriendsAsync(string username);
+        System.Threading.Tasks.Task<ClienteDuo.DataService.FriendshipDTO[]> GetOnlineFriendsAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteFriendshipById", ReplyAction="http://tempuri.org/IUsersManager/DeleteFriendshipByIdResponse")]
         bool DeleteFriendshipById(int friendshipId);
@@ -790,12 +790,12 @@ namespace ClienteDuo.DataService {
             return base.Channel.GetFriendsListAsync(userId);
         }
         
-        public string[] GetOnlineFriends(string username) {
-            return base.Channel.GetOnlineFriends(username);
+        public ClienteDuo.DataService.FriendshipDTO[] GetOnlineFriends(int userId) {
+            return base.Channel.GetOnlineFriends(userId);
         }
         
-        public System.Threading.Tasks.Task<string[]> GetOnlineFriendsAsync(string username) {
-            return base.Channel.GetOnlineFriendsAsync(username);
+        public System.Threading.Tasks.Task<ClienteDuo.DataService.FriendshipDTO[]> GetOnlineFriendsAsync(int userId) {
+            return base.Channel.GetOnlineFriendsAsync(userId);
         }
         
         public bool DeleteFriendshipById(int friendshipId) {

@@ -23,7 +23,7 @@ namespace ClienteDuo.Pages.Sidebars
             IEnumerable<UserBlockedDTO> blockedUsersList = new List<UserBlockedDTO>();
             try
             {
-                GetBlockedUsersListByUserId(SessionDetails.UserId);
+                blockedUsersList = GetBlockedUsersListByUserId(SessionDetails.UserId);
             }
             catch (CommunicationException)
             {
@@ -32,28 +32,32 @@ namespace ClienteDuo.Pages.Sidebars
 
             foreach (UserBlockedDTO blockedUser in blockedUsersList)
             {
-                PanelBlockedUsers.Children.Clear();
-                StackPanel stackPanel = new StackPanel
-                {
-                    Orientation = Orientation.Horizontal,
-                    HorizontalAlignment = HorizontalAlignment.Center
-                };
-                PanelBlockedUsers.Children.Add(stackPanel);
-
-                Label lblSender = new Label
-                {
-                    Content = blockedUser.BlockedUsername
-                };
-                stackPanel.Children.Add(lblSender);
-
-                Button btnUnblock = new Button
-                {
-                    Content = Properties.Resources.BtnUnblockUser,
-                    DataContext = blockedUser
-                };
-                btnUnblock.Click += UnblockUserEvent;
-                stackPanel.Children.Add(btnUnblock);
+                CreateBlockedUserPanel(blockedUser);
             }
+        }
+
+        private void CreateBlockedUserPanel(UserBlockedDTO blockedUser)
+        {
+            StackPanel stackPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            PanelBlockedUsers.Children.Add(stackPanel);
+
+            Label lblSender = new Label
+            {
+                Content = blockedUser.BlockedUsername
+            };
+            stackPanel.Children.Add(lblSender);
+
+            Button btnUnblock = new Button
+            {
+                Content = Properties.Resources.BtnUnblockUser,
+                DataContext = blockedUser
+            };
+            btnUnblock.Click += UnblockUserEvent;
+            stackPanel.Children.Add(btnUnblock);
         }
 
         private void UnblockUserEvent(object sender, RoutedEventArgs e)

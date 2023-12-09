@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Label Content="{x:Static p:Resources.BtnBlockedUsers}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1" FontWeight="Bold"/>
         <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <StackPanel x:Name="PanelBlockedUsers" Height="300" Width="200"/>
+            <StackPanel x:Name="PanelBlockedUsers" Width="200"/>
         </ScrollViewer>
         <Button Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70" Grid.Row="0"/>
     </Grid>

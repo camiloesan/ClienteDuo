@@ -47,7 +47,7 @@ namespace ClienteDuo.Pages
             _popUpUserDetails = new PopUpUserDetails
             {
                 Width = 350,
-                Height = 270,
+                Height = 240,
                 VerticalAlignment = VerticalAlignment.Center,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Visibility = Visibility.Collapsed

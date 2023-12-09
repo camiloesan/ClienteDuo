@@ -130,7 +130,7 @@ namespace ClienteDuo.Pages.Sidebars
                 bool result = false;
                 try
                 {
-                    BlockUser(SessionDetails.Username, _userSelectedName);
+                    result = BlockUser(SessionDetails.Username, _userSelectedName);
                 }
                 catch (CommunicationException)
                 {

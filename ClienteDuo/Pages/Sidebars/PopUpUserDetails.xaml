@@ -6,27 +6,27 @@
              xmlns:local="clr-namespace:ClienteDuo.Pages.Sidebars"
              xmlns:p="clr-namespace:ClienteDuo.Properties"
              mc:Ignorable="d" 
-             d:DesignHeight="270" d:DesignWidth="350">
+             d:DesignHeight="240" d:DesignWidth="350">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF423A33"/>
-                <GradientStop Color="#FFD48650" Offset="1"/>
+                <GradientStop Color="#FF472B21" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
             <Grid Width="100" Height="100" Margin="0,0,0,0">
                 <Image x:Name="ImageProfilePicture" Stretch="Uniform"/>
             </Grid>
-            <Label x:Name="LblUsername" Content="{x:Static p:Resources.LblUsername}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
-            <Label x:Name="LblTrophies" Content="{x:Static p:Resources.LblTrophies}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Margin="0,15,0,0"/>
+            <Label x:Name="LblUsername" Content="{x:Static p:Resources.LblUsername}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Foreground="White" FontWeight="Bold"/>
+            <Label x:Name="LblTrophies" Content="{x:Static p:Resources.LblTotalWins}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Margin="0,5,0,0" Foreground="White" FontWeight="Bold"/>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,10">
-            <Button x:Name="BtnAddFriend" Content="{x:Static p:Resources.BtnAddFriend}" Click="BtnAddFriendEvent" Cursor="Hand" Margin="0,0,10,0" Width="100" FontSize="14"/>
-            <Button x:Name="BtnBlock" Content="{x:Static p:Resources.BtnBlockUser}" Click="BtnBlockEvent" Margin="0,0,0,0" Cursor="Hand" Width="100" FontSize="14"/>
-            <Button Content="{x:Static p:Resources.BtnCancel}" Click="BtnCancelEvent" Margin="10,0,0,0" Cursor="Hand" Width="100" FontSize="14"/>
+            <Button x:Name="BtnAddFriend" Height="30" Content="{x:Static p:Resources.BtnAddFriend}" BorderBrush="#FF6B552B" Background="#FF97785F" Foreground="White" Click="BtnAddFriendEvent" Cursor="Hand" Margin="0,0,10,0" Width="100" FontSize="14"/>
+            <Button x:Name="BtnBlock" Height="30" Content="{x:Static p:Resources.BtnBlockUser}" BorderBrush="#FF6B552B" Background="#FF97785F" Foreground="White" Click="BtnBlockEvent" Margin="0,0,0,0" Cursor="Hand" Width="100" FontSize="14"/>
+            <Button Content="{x:Static p:Resources.BtnCancel}" Height="30" Click="BtnCancelEvent" BorderBrush="#FF6B552B" Background="#FF97785F" Foreground="White" Margin="10,0,0,0" Cursor="Hand" Width="100" FontSize="14"/>
         </StackPanel>
     </Grid>
 </UserControl>

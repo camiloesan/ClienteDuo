@@ -60,9 +60,9 @@ namespace ClienteDuo.Pages.Sidebars
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendYourself,
                     MessageBoxImage.Information);
             } 
-            else if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
+            else if (!IsUsernameTaken(usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, 
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, 
                     MessageBoxImage.Information);
             }
             else if (IsAlreadyFriend(usernameSender, usernameReceiver))
@@ -70,9 +70,9 @@ namespace ClienteDuo.Pages.Sidebars
                 MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends, 
                     MessageBoxImage.Information);
             }
-            else if (!IsUsernameTaken(usernameReceiver))
+            else if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, 
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, 
                     MessageBoxImage.Information);
             }
             else if (IsUserBlocked(SessionDetails.Username, usernameReceiver) 
@@ -90,6 +90,7 @@ namespace ClienteDuo.Pages.Sidebars
                         MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
                 }
+                TBoxUserReceiver.Clear();
             }
             return result;
         }
@@ -121,7 +122,7 @@ namespace ClienteDuo.Pages.Sidebars
         private bool IsFriendRequestAlreadySent(string usernameSender, string usernameReceiver)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsFriendRequestAlreadyExistent(usernameSender, usernameReceiver); ;
+            return usersManagerClient.IsFriendRequestAlreadyExistent(usernameSender, usernameReceiver);
         }
     }
 }

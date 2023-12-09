@@ -187,7 +187,7 @@
     <value>¿Está seguro de que desea abandonar la partida? No podrá volver a unirse</value>
   </data>
   <data name="DlgFailedLogin" xml:space="preserve">
-    <value>Correo electrónico o contraseña incorrectos</value>
+    <value>Nombre de usuario o contraseña incorrectos</value>
   </data>
   <data name="DlgFriendRequestSent" xml:space="preserve">
     <value>Solicitud de amistad enviada</value>
@@ -313,7 +313,7 @@
     <value>El nombre de usuario debe contener solo caracteres alfanuméricos, al menos 3 caracteres, un máximo de 14 y no contener la palabra "guest"</value>
   </data>
   <data name="BtnBlockedUsers" xml:space="preserve">
-    <value>Usuraios Bloqueados</value>
+    <value>Usuarios Bloqueados</value>
   </data>
   <data name="LblSelectReason" xml:space="preserve">
     <value>Elija un motivo (Opcional)</value>

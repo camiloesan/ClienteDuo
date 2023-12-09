@@ -190,7 +190,7 @@
     <value>¿Are you sure you want to quit this match? You will not be able to return until it's over</value>
   </data>
   <data name="DlgFailedLogin" xml:space="preserve">
-    <value>Incorrect email or password</value>
+    <value>Invalid username or password</value>
   </data>
   <data name="DlgFriendRequestSent" xml:space="preserve">
     <value>Friend request sent</value>

@@ -14,10 +14,12 @@ namespace ClienteDuo.Pages.Sidebars
         private SidebarAddFriend _sidebarAddFriend;
         private SidebarFriendRequests _sidebarFriendRequests;
         private SidebarBlockedUsers _sidebarBlockedUsers;
+        private IEnumerable<FriendshipDTO> _onlineFriends;
 
         public SidebarFriends()
         {
             InitializeComponent();
+            _onlineFriends = GetOnlineFriends(SessionDetails.UserId);
             InitializeBars();
             FillFriendsPanel();
         }
@@ -71,51 +73,87 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void CreateFriendPanel(string username, int friendshipId)
         {
-            StackPanel stackPanel = new StackPanel
+            StackPanel stackPanelContainer = new StackPanel
+            {
+                Orientation = Orientation.Vertical,
+                Margin = new Thickness(0, 7, 0, 0),
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#0D1C30"),
+                Width = 200,
+                Height = 80
+            };
+            PanelFriends.Children.Add(stackPanelContainer);
+
+            StackPanel stackPanelUsername = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0,7,0,0),
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Background = new SolidColorBrush(Colors.DimGray),
-                Width = 200,
                 Height = 40
             };
-            PanelFriends.Children.Add(stackPanel);
+            stackPanelContainer.Children.Add(stackPanelUsername);
 
-            Label activeStatus = new Label
+            StackPanel stackPanelButtons = new StackPanel
             {
-                Foreground = new SolidColorBrush(Colors.Black),
-                Content = "●",
-                Margin = new Thickness(10, 0, 5, 0),
-                VerticalAlignment = VerticalAlignment.Center
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                Height = 40
             };
-            stackPanel.Children.Add(activeStatus);
+            stackPanelContainer.Children.Add(stackPanelButtons);
+
+            foreach (var onlineFriend in _onlineFriends)
+            {
+                if (onlineFriend.FriendshipID == friendshipId)
+                {
+                    Label activeStatus = new Label
+                    {
+                        Foreground = new SolidColorBrush(Colors.White),
+                        Content = "●",
+                        Margin = new Thickness(10, 0, 5, 0),
+                        FontSize = 20,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                    stackPanelUsername.Children.Add(activeStatus);
+                }
+            }
 
             Label usernameName = new Label
             {
-                Foreground = new SolidColorBrush(Colors.Black),
+                Foreground = new SolidColorBrush(Colors.White),
                 Content = username,
                 Margin = new Thickness(5, 0, 10, 0),
+                FontSize = 16,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            stackPanel.Children.Add(usernameName);
+            stackPanelUsername.Children.Add(usernameName);
 
             Tuple<int, string> friendshipUsernameTuple = Tuple.Create(friendshipId, username);
             var btnViewProfile = new Button
             {
                 Content = Properties.Resources.BtnProfile,
+                FontSize = 14,
+                BorderThickness = new Thickness(3, 3, 3, 3),
+                Foreground = new SolidColorBrush(Colors.White),
+                Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6B472B"),
+                BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF452308"),
+                Margin = new Thickness(0,0,5,0),
                 DataContext = friendshipUsernameTuple
             };
             btnViewProfile.Click += ViewProfileEvent;
-            stackPanel.Children.Add(btnViewProfile);
+            stackPanelButtons.Children.Add(btnViewProfile);
 
             Button btnUnfriend = new Button
             {
                 Content = Properties.Resources.BtnUnfriend,
+                FontSize = 14,
+                BorderThickness = new Thickness(3, 3, 3, 3),
+                Foreground = new SolidColorBrush(Colors.White),
+                Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6B472B"),
+                BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF452308"),
+                Margin = new Thickness(5,0,0,0),
                 DataContext = friendshipId
             };
             btnUnfriend.Click += UnfriendEvent;
-            stackPanel.Children.Add(btnUnfriend);
+            stackPanelButtons.Children.Add(btnUnfriend);
         }
 
         private void ViewProfileEvent(object sender, RoutedEventArgs e)
@@ -164,6 +202,13 @@ namespace ClienteDuo.Pages.Sidebars
         {
             _sidebarAddFriend.Visibility = Visibility.Visible;
         }
+
+        private IEnumerable<FriendshipDTO> GetOnlineFriends(int userId)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.GetOnlineFriends(userId);
+        }
+
         
         private IEnumerable<FriendshipDTO> GetFriendsListByUserId(int userId)
         {

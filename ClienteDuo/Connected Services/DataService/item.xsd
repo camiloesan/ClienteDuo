@@ -191,14 +191,14 @@
   <xs:element name="GetOnlineFriends">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetOnlineFriendsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetOnlineFriendsResult" nillable="true" type="q7:ArrayOfstring" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/CommunicationService" minOccurs="0" name="GetOnlineFriendsResult" nillable="true" type="q7:ArrayOfFriendshipDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

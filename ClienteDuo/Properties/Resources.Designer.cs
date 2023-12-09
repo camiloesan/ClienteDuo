@@ -367,7 +367,7 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Incorrect email or password.
+        ///   Looks up a localized string similar to Invalid username or password.
         /// </summary>
         public static string DlgFailedLogin {
             get {

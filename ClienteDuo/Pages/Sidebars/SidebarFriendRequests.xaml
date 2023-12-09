@@ -14,8 +14,8 @@
             <RowDefinition Height="29*"/>
         </Grid.RowDefinitions>
         <Label Content="{x:Static p:Resources.BtnFriendRequests}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="18" Grid.Row="1" FontWeight="Bold"/>
-        <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <StackPanel x:Name="PanelFriendRequests" Height="300" Width="200"/>
+        <ScrollViewer HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="300" Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="PanelFriendRequests" Width="200"/>
         </ScrollViewer>
         <Button Content="{x:Static p:Resources.BtnCancel}" Cursor="Hand" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Click="BtnCancelEvent" Background="#FF97785F" Foreground="White" Height="28" BorderBrush="#FF6B552B" Width="70" Grid.Row="0"/>
     </Grid>
