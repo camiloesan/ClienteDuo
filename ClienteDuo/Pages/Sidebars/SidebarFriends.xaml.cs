@@ -14,7 +14,7 @@ namespace ClienteDuo.Pages.Sidebars
         private SidebarAddFriend _sidebarAddFriend;
         private SidebarFriendRequests _sidebarFriendRequests;
         private SidebarBlockedUsers _sidebarBlockedUsers;
-        private IEnumerable<FriendshipDTO> _onlineFriends;
+        private readonly IEnumerable<FriendshipDTO> _onlineFriends;
 
         public SidebarFriends()
         {
@@ -57,7 +57,7 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
-            
+
             foreach (FriendshipDTO friend in friendsList)
             {
                 if (friend.Friend1ID != SessionDetails.UserId)
@@ -135,7 +135,7 @@ namespace ClienteDuo.Pages.Sidebars
                 Foreground = new SolidColorBrush(Colors.White),
                 Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6B472B"),
                 BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF452308"),
-                Margin = new Thickness(0,0,5,0),
+                Margin = new Thickness(0, 0, 5, 0),
                 DataContext = friendshipUsernameTuple
             };
             btnViewProfile.Click += ViewProfileEvent;
@@ -149,7 +149,7 @@ namespace ClienteDuo.Pages.Sidebars
                 Foreground = new SolidColorBrush(Colors.White),
                 Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF6B472B"),
                 BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF452308"),
-                Margin = new Thickness(5,0,0,0),
+                Margin = new Thickness(5, 0, 0, 0),
                 DataContext = friendshipId
             };
             btnUnfriend.Click += UnfriendEvent;
@@ -179,7 +179,7 @@ namespace ClienteDuo.Pages.Sidebars
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
                 }
-               
+
                 if (result)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgUnfriend, MessageBoxImage.Information);
@@ -209,7 +209,6 @@ namespace ClienteDuo.Pages.Sidebars
             return usersManagerClient.GetOnlineFriends(userId);
         }
 
-        
         private IEnumerable<FriendshipDTO> GetFriendsListByUserId(int userId)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();

@@ -3,8 +3,8 @@ using ClienteDuo.Utilities;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -79,7 +79,7 @@ namespace ClienteDuo.Pages.Sidebars
         {
             string usernameSender = SessionDetails.Username;
             string usernameReceiver = DataContext as string;
-            
+
             try
             {
                 AddFriend(usernameSender, usernameReceiver);
@@ -165,7 +165,7 @@ namespace ClienteDuo.Pages.Sidebars
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
-        {   
+        {
             Visibility = Visibility.Collapsed;
         }
 
@@ -180,7 +180,7 @@ namespace ClienteDuo.Pages.Sidebars
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.IsAlreadyFriend(usernameSender, usernameReceiver);
         }
-        
+
         private bool SendFriendRequest(string usernameSender, string usernameReceiver)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();

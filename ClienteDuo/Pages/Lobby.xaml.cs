@@ -3,7 +3,6 @@ using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +26,7 @@ namespace ClienteDuo.Pages
             SessionDetails.IsHost = true;
             InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
-            
+
             CreateNewParty(username);
             LoadVisualComponents();
             MusicManager.PlayPlayerJoinedSound();
@@ -39,7 +38,7 @@ namespace ClienteDuo.Pages
             SessionDetails.IsHost = false;
             InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
-            
+
             JoinGame(partyCode, username);
             LoadVisualComponents();
             MusicManager.PlayPlayerJoinedSound();
@@ -63,11 +62,12 @@ namespace ClienteDuo.Pages
         {
             SessionDetails.PartyCode = GenerateNewPartyCode();
             SessionDetails.Username = hostUsername;
-            
+
             try
             {
                 _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
-            } catch (CommunicationException)
+            }
+            catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
@@ -79,12 +79,12 @@ namespace ClienteDuo.Pages
         {
             Random random = new Random();
             int randomCode = random.Next(1000, 10000);
-            
+
             bool IsPartyExistent = false;
             try
             {
                 IsPartyExistent = _partyValidatorClient.IsPartyExistent(randomCode);
-            } 
+            }
             catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
@@ -109,7 +109,7 @@ namespace ClienteDuo.Pages
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
         }
-        
+
         private void LoadVisualComponents()
         {
             LblPartyCode.Content = Properties.Resources.LblPartyCode + ": " + SessionDetails.PartyCode;
@@ -118,7 +118,7 @@ namespace ClienteDuo.Pages
             {
                 BtnStartGame.Visibility = Visibility.Collapsed;
             }
-            
+
             _popUpUserDetails = new PopUpUserDetails
             {
                 Width = 350,
@@ -159,9 +159,9 @@ namespace ClienteDuo.Pages
             {
                 _partyManagerClient.NotifySendMessage(partyCode, message);
             }
-            catch (CommunicationException) 
-            { 
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error); 
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
         }
 
@@ -182,7 +182,7 @@ namespace ClienteDuo.Pages
                 SessionDetails.IsHost = false;
                 SessionDetails.PartyCode = 0;
             }
-            
+
             if (SessionDetails.IsGuest)
             {
                 SessionDetails.PartyCode = 0;
@@ -221,9 +221,9 @@ namespace ClienteDuo.Pages
 
         private void CreatePlayerPanel(string playerUsername)
         {
-            SolidColorBrush backgroundColor = 
+            SolidColorBrush backgroundColor =
                 playerUsername == SessionDetails.Username
-                ? new SolidColorBrush(Colors.Gold) 
+                ? new SolidColorBrush(Colors.Gold)
                 : new SolidColorBrush(Colors.DimGray);
 
             StackPanel stackPanel = new StackPanel
@@ -312,7 +312,7 @@ namespace ClienteDuo.Pages
             TextBlock textBlock = new TextBlock
             {
                 Text = messageSent,
-                Margin = new Thickness(0,4,0,0),
+                Margin = new Thickness(0, 4, 0, 0),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 Foreground = new SolidColorBrush(Colors.White),
                 Width = 248,

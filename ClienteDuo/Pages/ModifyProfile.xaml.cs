@@ -1,21 +1,11 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
@@ -31,6 +21,11 @@ namespace ClienteDuo.Pages
             InitializeComponent();
             InitializeCurrentProfilePicture();
             InitializeAvailableProfilePictures();
+        }
+
+        public ModifyProfile(bool test)
+        {
+
         }
 
         private void InitializeCurrentProfilePicture()
@@ -74,8 +69,8 @@ namespace ClienteDuo.Pages
             bool result = false;
             try
             {
-                result = UpdateProfilePicture(_selectedPictureId);
-            } 
+                result = UpdateProfilePicture(SessionDetails.UserId, _selectedPictureId);
+            }
             catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
@@ -90,10 +85,10 @@ namespace ClienteDuo.Pages
             }
         }
 
-        private bool UpdateProfilePicture(int pictureId)
+        public bool UpdateProfilePicture(int userId, int pictureId)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.UpdateProfilePictureByUserId(SessionDetails.UserId, pictureId);
+            return usersManagerClient.UpdateProfilePictureByUserId(userId, pictureId);
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
@@ -112,6 +107,7 @@ namespace ClienteDuo.Pages
         {
             SetCurrentProfilePicturePreview(0);
         }
+
         private void BtnPfp1Event(object sender, RoutedEventArgs e)
         {
             SetCurrentProfilePicturePreview(1);

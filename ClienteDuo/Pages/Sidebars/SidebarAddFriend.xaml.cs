@@ -1,10 +1,9 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-using ClienteDuo.DataService;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows.Input;
-using System.ServiceModel;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -20,7 +19,7 @@ namespace ClienteDuo.Pages.Sidebars
         {
             Visibility = Visibility.Collapsed;
         }
-        
+
         private void EnterKeyEvent(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
@@ -59,23 +58,23 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendYourself,
                     MessageBoxImage.Information);
-            } 
+            }
             else if (!IsUsernameTaken(usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist, 
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameDoesNotExist,
                     MessageBoxImage.Information);
             }
             else if (IsAlreadyFriend(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends, 
+                MainWindow.ShowMessageBox(Properties.Resources.DlgAlreadyFriends,
                     MessageBoxImage.Information);
             }
             else if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, 
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent,
                     MessageBoxImage.Information);
             }
-            else if (IsUserBlocked(SessionDetails.Username, usernameReceiver) 
+            else if (IsUserBlocked(SessionDetails.Username, usernameReceiver)
                      || IsUserBlocked(usernameReceiver, SessionDetails.Username))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError,
@@ -86,7 +85,7 @@ namespace ClienteDuo.Pages.Sidebars
                 result = SendFriendRequest(usernameSender, usernameReceiver);
                 if (result)
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, 
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent,
                         MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
                 }

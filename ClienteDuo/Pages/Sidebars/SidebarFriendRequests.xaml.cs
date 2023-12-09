@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using ClienteDuo.DataService;
+﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
+using System.Collections.Generic;
+using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.ServiceModel;
 
 namespace ClienteDuo.Pages.Sidebars
 {
@@ -35,7 +33,7 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
-                
+
             foreach (FriendRequestDTO friendRequest in friendRequestsList)
             {
                 CreateFriendRequestPanel(friendRequest);
@@ -82,7 +80,7 @@ namespace ClienteDuo.Pages.Sidebars
             try
             {
                 result = AcceptFriendRequest(friendRequest);
-            } 
+            }
             catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
@@ -105,7 +103,7 @@ namespace ClienteDuo.Pages.Sidebars
             try
             {
                 result = DeclineFriendRequest(friendRequest);
-            } 
+            }
             catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
@@ -134,7 +132,7 @@ namespace ClienteDuo.Pages.Sidebars
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.RejectFriendRequest(friendRequest.FriendRequestID);
         }
-        
+
         private IEnumerable<FriendRequestDTO> GetFriendRequestsByUserId(int userId)
         {
             return _usersManagerClient.GetFriendRequestsList(userId);

@@ -1,14 +1,12 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
 using System.Collections.Generic;
-using System.Runtime.Remoting;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
@@ -62,7 +60,7 @@ namespace ClienteDuo.Pages
         {
             InstanceContext instanceContext = new InstanceContext(this);
             MatchManagerClient client = new MatchManagerClient(instanceContext);
-            
+
             _gameMenu = new GameMenu();
             _gameMenu.setClient(client);
             _gameMenu.Margin = new Thickness(550, 0, 0, 0);
@@ -158,12 +156,12 @@ namespace ClienteDuo.Pages
                 if (_tableCards[i].Number != "")
                 {
                     _cardLabels[i].Content = _tableCards[i].Number;
-                    _cardColors[i].Fill = (SolidColorBrush) new BrushConverter().ConvertFrom(_tableCards[i].Color);
+                    _cardColors[i].Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(_tableCards[i].Color);
                 }
                 else
                 {
                     _cardLabels[i].Content = "";
-                    _cardColors[i].Fill = (SolidColorBrush) new BrushConverter().ConvertFrom("#FF969696");
+                    _cardColors[i].Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF969696");
                 }
             }
         }
@@ -191,7 +189,7 @@ namespace ClienteDuo.Pages
 
             TableBackground.Children.Add(matchOverLabel);
             MusicManager.PlayMatchFinishedSound();
-            
+
             await Task.Delay(5000);
 
             Dictionary<string, int> playerScores = client.GetMatchResults(SessionDetails.PartyCode);
@@ -281,7 +279,7 @@ namespace ClienteDuo.Pages
                 _tableCards[position].Number = "PLAYED CARD";
                 _cardLabels[position].Content = _selectedCards[i].Number;
                 _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
-                    
+
                 PlayerDeck.Children.Remove(_selectedCards[i]);
             }
 
@@ -302,7 +300,7 @@ namespace ClienteDuo.Pages
 
         private void PlayCardLeft(object sender, RoutedEventArgs e)
         {
-            if (isValidMove(0)) 
+            if (isValidMove(0))
             {
                 PlayCard(0);
             }

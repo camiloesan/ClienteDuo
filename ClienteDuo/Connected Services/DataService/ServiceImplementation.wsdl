@@ -242,12 +242,6 @@
   <wsdl:message name="IUserConnectionHandler_UserLogged_InputCallbackMessage">
     <wsdl:part name="parameters" element="tns:UserLoggedResponse" />
   </wsdl:message>
-  <wsdl:message name="IUserConnectionHandler_UserLoggedOut_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UserLoggedOut" />
-  </wsdl:message>
-  <wsdl:message name="IUserConnectionHandler_UserLoggedOut_InputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UserLoggedOutResponse" />
-  </wsdl:message>
   <wsdl:message name="IPartyManager_NotifyCreateParty_InputMessage">
     <wsdl:part name="parameters" element="tns:NotifyCreateParty" />
   </wsdl:message>
@@ -523,10 +517,6 @@
     <wsdl:operation name="UserLogged">
       <wsdl:output wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLogged" message="tns:IUserConnectionHandler_UserLogged_OutputCallbackMessage" />
       <wsdl:input wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLoggedResponse" message="tns:IUserConnectionHandler_UserLogged_InputCallbackMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="UserLoggedOut">
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLoggedOut" message="tns:IUserConnectionHandler_UserLoggedOut_OutputCallbackMessage" />
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserConnectionHandler/UserLoggedOutResponse" message="tns:IUserConnectionHandler_UserLoggedOut_InputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="IPartyManager">
@@ -903,15 +893,6 @@
     </wsdl:operation>
     <wsdl:operation name="UserLogged">
       <soap12:operation soapAction="http://tempuri.org/IUserConnectionHandler/UserLogged" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="UserLoggedOut">
-      <soap12:operation soapAction="http://tempuri.org/IUserConnectionHandler/UserLoggedOut" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

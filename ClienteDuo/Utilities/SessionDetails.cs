@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace ClienteDuo.Utilities
+﻿namespace ClienteDuo.Utilities
 {
     public sealed class SessionDetails
     {

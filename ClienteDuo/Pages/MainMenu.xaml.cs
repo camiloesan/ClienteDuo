@@ -1,5 +1,4 @@
-﻿using ClienteDuo.DataService;
-using ClienteDuo.Pages.Sidebars;
+﻿using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;

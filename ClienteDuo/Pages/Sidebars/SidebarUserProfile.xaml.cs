@@ -40,6 +40,9 @@ namespace ClienteDuo.Pages.Sidebars
                 case 3:
                     bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp3.jpg"));
                     break;
+                default:
+                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
+                    break;
             }
             ImageProfilePicture.Source = bitmapImage;
             ImageProfilePicture.Stretch = Stretch.UniformToFill;

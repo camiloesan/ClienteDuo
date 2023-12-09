@@ -1,11 +1,9 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
 using System.Collections.Generic;
-using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ClienteDuo.Pages
 {
@@ -28,7 +26,7 @@ namespace ClienteDuo.Pages
         }
 
         public void LoadPlayers(List<string> playerList, MatchManagerClient client)
-        {   
+        {
             foreach (string playerUsername in playerList)
             {
                 if (!playerUsername.Equals(SessionDetails.Username))

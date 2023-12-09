@@ -44,11 +44,11 @@ namespace ClienteDuo.Pages.Sidebars
                 return;
             }
 
-            if (inputCode == (int)DataContext) 
+            if (inputCode == (int)DataContext)
             {
                 PasswordReset passwordReset = new PasswordReset();
                 Application.Current.MainWindow.Content = passwordReset;
-            } 
+            }
             else
             {
                 MainWindow.ShowMessageBox("wrong code", MessageBoxImage.Warning);

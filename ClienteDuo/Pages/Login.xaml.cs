@@ -1,14 +1,10 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
-using System;
-using System.Security.Cryptography;
 using System.ServiceModel;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ClienteDuo.Pages
 {
@@ -17,6 +13,11 @@ namespace ClienteDuo.Pages
         public Login()
         {
             InitializeComponent();
+        }
+
+        public Login(bool test)
+        {
+
         }
 
         private void BtnLoginEvent(object sender, RoutedEventArgs e)
@@ -37,7 +38,7 @@ namespace ClienteDuo.Pages
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
-            
+
             UserDTO loggedUser = null;
             try
             {
@@ -77,7 +78,7 @@ namespace ClienteDuo.Pages
             }
         }
 
-        private bool IsUserLoggedIn(int userId)
+        public bool IsUserLoggedIn(int userId)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.IsUserAlreadyLoggedIn(userId);

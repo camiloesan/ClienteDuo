@@ -1,9 +1,6 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
-using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.ServiceModel;
 using System.Windows;
 
@@ -26,6 +23,11 @@ namespace ClienteDuo.Pages
             Content = launcher;
         }
 
+        public MainWindow(bool test)
+        {
+            _instanceContext = new InstanceContext(this);
+        }
+
         public static void NotifyLogin(UserDTO user)
         {
             _userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
@@ -45,21 +47,22 @@ namespace ClienteDuo.Pages
             MainMenu.ShowPopUpFriendLogged(username);
         }
 
-        public void UserLoggedOut(string username)
-        {
-            throw new NotImplementedException(); //TODO
-        }
-
         private void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            if (SessionDetails.IsGuest) return;
+            NotifyLogOut(SessionDetails.UserId, SessionDetails.IsGuest);
+        }
 
-            var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
-            var user = new UserDTO
+        public static void NotifyLogOut(int userId, bool isGuest)
+        {
+            if (!isGuest)
             {
-                ID = SessionDetails.UserId
-            };
-            userConnectionHandlerClient.NotifyLogOut(user);
+                var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
+                var user = new UserDTO
+                {
+                    ID = userId
+                };
+                userConnectionHandlerClient.NotifyLogOut(user);
+            }
         }
 
         public static bool ShowConfirmationBox(string message)

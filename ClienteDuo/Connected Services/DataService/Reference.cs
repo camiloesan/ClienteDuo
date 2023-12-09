@@ -901,9 +901,6 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserConnectionHandler/UserLogged", ReplyAction="http://tempuri.org/IUserConnectionHandler/UserLoggedResponse")]
         void UserLogged(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserConnectionHandler/UserLoggedOut", ReplyAction="http://tempuri.org/IUserConnectionHandler/UserLoggedOutResponse")]
-        void UserLoggedOut(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

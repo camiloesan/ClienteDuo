@@ -1,15 +1,11 @@
-﻿using ClienteDuo.Pages;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages;
 using ClienteDuo.Utilities;
-using System;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
+using System.ServiceModel;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using ClienteDuo.DataService;
 using System.Windows.Media;
-using System.ServiceModel;
 
 namespace ClienteDuo
 {
@@ -48,7 +44,7 @@ namespace ClienteDuo
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
-            
+
             if (areFieldsValid)
             {
                 bool result = false;
@@ -77,59 +73,50 @@ namespace ClienteDuo
             string password = TBoxPassword.Password.Trim();
             string confirmedPassword = TBoxConfirmPassword.Password.Trim();
 
-            bool result = true;
+            bool result = false;
             if (AreFieldsEmpty())
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields, MessageBoxImage.Warning);
-                return false;
             }
-
-            if (!IsUsernameValid(username))
+            else if (!IsUsernameValid(username))
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameInvalid, MessageBoxImage.Warning);
-                return false;
+                TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields, MessageBoxImage.Warning);
             }
-
-            if (!IsPasswordSecure(password))
+            else if (!IsPasswordSecure(password))
             {
                 TBoxPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgInsecurePassword, MessageBoxImage.Warning);
-                return false;
             }
-
-            if (!IsPasswordMatch(password, confirmedPassword))
+            else if (!IsPasswordMatch(password, confirmedPassword))
             {
                 TBoxPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                 TBoxConfirmPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgPasswordDoesNotMatch, MessageBoxImage.Warning);
-                return false;
             }
-
-            if (IsUsernameTaken(username))
+            else if (IsUsernameTaken(username))
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken, MessageBoxImage.Warning);
-                return false;
             }
-
-            if (!IsEmailValid(email))
+            else if (!IsEmailValid(email))
             {
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailInvalid, MessageBoxImage.Warning);
-                return false;
             }
-
-            if (IsEmailTaken(email))
+            else if (IsEmailTaken(email))
             {
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailTaken, MessageBoxImage.Warning);
-                return false;
             }
-
-            return true;
+            else
+            {
+                result = true;
+            }
+            return result;
         }
 
         public bool IsUsernameValid(string username)

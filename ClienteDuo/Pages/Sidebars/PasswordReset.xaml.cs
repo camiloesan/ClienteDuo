@@ -50,7 +50,7 @@ namespace ClienteDuo.Pages.Sidebars
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
-            
+
 
             if (result)
             {
