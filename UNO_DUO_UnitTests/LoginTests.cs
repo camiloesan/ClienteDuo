@@ -16,8 +16,7 @@ namespace ClienteDuo.Pages.Tests
         [TestMethod()]
         public void IsUserNotLoggedInTest()
         {
-            Login login = new Login(true);
-            bool result = login.IsUserLoggedIn(1300);
+            bool result = UsersManager.IsUserLoggedIn(1300);
             Assert.IsFalse(result);
         }
 
@@ -45,11 +44,9 @@ namespace ClienteDuo.Pages.Tests
             string email = "dprk@gmail.com";
             string password = "Tokyo2023!";
 
-            NewAccount newAccount = new NewAccount();
-            newAccount.AddUserToDatabase(username, email, password);
+            UsersManager.AddUserToDatabase(username, email, password);
 
-            Login login = new Login(true);
-            UserDTO result = login.AreCredentialsValid(username, password);
+            UserDTO result = UsersManager.AreCredentialsValid(username, password);
 
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             usersManagerClient.DeleteUserFromDatabaseByUsername(username);
@@ -63,8 +60,7 @@ namespace ClienteDuo.Pages.Tests
             string username = "demonslayer77";
             string password = "Tokyo2023!";
 
-            Login login = new Login(true);
-            UserDTO result = login.AreCredentialsValid(username, password);
+            UserDTO result = UsersManager.AreCredentialsValid(username, password);
 
             Assert.IsNull(result);
         }

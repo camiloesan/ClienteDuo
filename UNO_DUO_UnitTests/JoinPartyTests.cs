@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 using ClienteDuo.DataService;
 using System.Security.Principal;
+using ClienteDuo.Utilities;
 
 namespace ClienteDuo.Pages.Tests
 {
@@ -91,11 +92,10 @@ namespace ClienteDuo.Pages.Tests
         public void IsUserBlockedByPlayerInLobbyTrueTest()
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
-            NewAccount newAccount = new NewAccount();
             string player0Username = "pepe0142";
             string player1Username = "pepe1109";
-            newAccount.AddUserToDatabase(player0Username, "host@gmail.com", "Tokyo11!23");
-            newAccount.AddUserToDatabase(player1Username, "player1mail@gmail.com", "Tokyo11!23");
+            UsersManager.AddUserToDatabase(player0Username, "host@gmail.com", "Tokyo11!23");
+            UsersManager.AddUserToDatabase(player1Username, "player1mail@gmail.com", "Tokyo11!23");
 
             Lobby lobby = new Lobby();
             lobby.JoinGame(_partyCode, player0Username);

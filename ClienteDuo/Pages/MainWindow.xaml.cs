@@ -23,11 +23,6 @@ namespace ClienteDuo.Pages
             Content = launcher;
         }
 
-        public MainWindow(bool test)
-        {
-            _instanceContext = new InstanceContext(this);
-        }
-
         public static void NotifyLogin(UserDTO user)
         {
             _userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);

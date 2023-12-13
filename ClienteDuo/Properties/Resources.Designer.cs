@@ -448,6 +448,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid format.
+        /// </summary>
+        public static string DlgInvalidFormat {
+            get {
+                return ResourceManager.GetString("DlgInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Party code needs to be a number with a max of 4 digits.
         /// </summary>
         public static string DlgInvalidPartyCodeFormat {
@@ -624,6 +633,15 @@ namespace ClienteDuo.Properties {
         public static string DlgUsernameTaken {
             get {
                 return ResourceManager.GetString("DlgUsernameTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong code.
+        /// </summary>
+        public static string DlgWrongCode {
+            get {
+                return ResourceManager.GetString("DlgWrongCode", resourceCulture);
             }
         }
         

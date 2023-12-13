@@ -9,11 +9,10 @@ using ClienteDuo.DataService;
 
 using System.Windows.Media.Animation;
 using System.Security.Cryptography.X509Certificates;
+using ClienteDuo.Utilities;
 
 namespace ClienteDuo.Tests
 {
-
-
     [TestClass()]
     public class NewAccountTests
     {
@@ -24,8 +23,7 @@ namespace ClienteDuo.Tests
         [TestInitialize]
         public void Init()
         {
-            NewAccount newAccount = new NewAccount();
-            newAccount.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
+            UsersManager.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
         }
 
         [TestCleanup]
@@ -74,29 +72,25 @@ namespace ClienteDuo.Tests
         [TestMethod()]
         public void UsernameIsNotBeAvailableTest()
         {
-            NewAccount newAccount = new NewAccount();
-            Assert.IsTrue(newAccount.IsUsernameTaken(_initializedUsername));
+            Assert.IsTrue(UsersManager.IsUsernameTaken(_initializedUsername));
         }
 
         [TestMethod()]
         public void UsernameIsAvailableTest()
         {
-            NewAccount newAccount = new NewAccount();
-            Assert.IsFalse(newAccount.IsUsernameTaken("jorgeAntonio23"));
+            Assert.IsFalse(UsersManager.IsUsernameTaken("jorgeAntonio23"));
         }
 
         [TestMethod()]
         public void EmailIsNotAvailableTest()
         {
-            NewAccount newAccount = new NewAccount();
-            Assert.IsTrue(newAccount.IsEmailTaken(_initializedEmail));
+            Assert.IsTrue(UsersManager.IsEmailTaken(_initializedEmail));
         }
 
         [TestMethod()]
         public void EmailIsAvailableTest()
         {
-            NewAccount newAccount = new NewAccount();
-            Assert.IsFalse(newAccount.IsEmailTaken("roland@gmail.com"));
+            Assert.IsFalse(UsersManager.IsEmailTaken("roland@gmail.com"));
         }
 
         [TestMethod()]
@@ -212,8 +206,7 @@ namespace ClienteDuo.Tests
         [TestMethod()]
         public void AddUserAlreadyExistsTest()
         {
-            NewAccount newAccount = new NewAccount();
-            int result = newAccount.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
+            int result = UsersManager.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
             int expected = 0;
             Assert.AreEqual(expected, result);
         }

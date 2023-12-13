@@ -220,10 +220,15 @@ namespace ClienteDuo.Pages
 
         private void CreatePlayerPanel(string playerUsername)
         {
-            SolidColorBrush backgroundColor =
-                playerUsername == SessionDetails.Username
-                ? new SolidColorBrush(Colors.Gold)
-                : new SolidColorBrush(Colors.DimGray);
+            SolidColorBrush backgroundColor;
+            if (playerUsername == SessionDetails.Username)
+            {
+                backgroundColor = new SolidColorBrush(Colors.Gold);
+            }
+            else
+            {
+                backgroundColor = new SolidColorBrush(Colors.DimGray);
+            }
 
             StackPanel stackPanel = new StackPanel
             {

@@ -22,14 +22,14 @@ namespace ClienteDuo.Pages.Sidebars
 
         public void InitializeUserInfo(string username, bool isFriend)
         {
-            UserDTO userInfo = GetUserInfoByUsername(username);
+            UserDTO userInfo = UsersManager.GetUserInfoByUsername(username);
             _userSelectedName = username;
 
             SetProfilePicture(userInfo.PictureID);
             LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
             LblTrophies.Content = Properties.Resources.LblTotalWins + ": " + userInfo.TotalWins;
 
-            if (IsFriend(SessionDetails.Username, username))
+            if (UsersManager.IsAlreadyFriend(SessionDetails.Username, username))
             {
                 BtnAddFriend.Visibility = Visibility.Collapsed;
             }
@@ -37,7 +37,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         public void InitializeUserInfo(int friendshipId, string username)
         {
-            UserDTO userInfo = GetUserInfoByUsername(username);
+            UserDTO userInfo = UsersManager.GetUserInfoByUsername(username);
             DataContext = friendshipId;
             _userSelectedName = username;
 
@@ -69,12 +69,6 @@ namespace ClienteDuo.Pages.Sidebars
             ImageProfilePicture.Stretch = Stretch.UniformToFill;
         }
 
-        private UserDTO GetUserInfoByUsername(string username)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.GetUserInfoByUsername(username);
-        }
-
         private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
         {
             string usernameSender = SessionDetails.Username;
@@ -92,13 +86,13 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void AddFriend(string usernameSender, string usernameReceiver)
         {
-            if (IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
+            if (UsersManager.IsFriendRequestAlreadySent(usernameSender, usernameReceiver))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestAlreadySent, MessageBoxImage.Information);
             }
             else
             {
-                if (SendFriendRequest(usernameSender, usernameReceiver))
+                if (UsersManager.SendFriendRequest(usernameSender, usernameReceiver))
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
@@ -114,7 +108,7 @@ namespace ClienteDuo.Pages.Sidebars
                 bool isFriend = false;
                 try
                 {
-                    isFriend = IsFriend(SessionDetails.Username, _userSelectedName);
+                    isFriend = UsersManager.IsAlreadyFriend(SessionDetails.Username, _userSelectedName);
                 }
                 catch (CommunicationException)
                 {
@@ -124,7 +118,7 @@ namespace ClienteDuo.Pages.Sidebars
                 if (isFriend)
                 {
                     int friendshipId = (int)DataContext;
-                    DeleteFriendship(friendshipId);
+                    UsersManager.DeleteFriendshipById(friendshipId);
                 }
 
                 bool result = false;
@@ -146,7 +140,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private bool BlockUser(string usernameSender, string usernameReceiver)
         {
-            if (BlockUserByUsername(usernameSender, usernameReceiver))
+            if (UsersManager.BlockUserByUsername(usernameSender, usernameReceiver))
             {
                 if (SessionDetails.PartyCode == 0)
                 {
@@ -158,39 +152,12 @@ namespace ClienteDuo.Pages.Sidebars
             return false;
         }
 
-        private bool BlockUserByUsername(string blockerUsername, string blockedUsername)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.BlockUserByUsername(blockerUsername, blockedUsername);
-        }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
         }
-
-        private bool DeleteFriendship(int friendshipId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.DeleteFriendshipById(friendshipId);
-        }
-
-        private bool IsFriend(string usernameSender, string usernameReceiver)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsAlreadyFriend(usernameSender, usernameReceiver);
-        }
-
-        private bool SendFriendRequest(string usernameSender, string usernameReceiver)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.SendFriendRequest(usernameSender, usernameReceiver);
-        }
-
-        private bool IsFriendRequestAlreadySent(string usernameSender, string usernameReceiver)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsFriendRequestAlreadyExistent(usernameSender, usernameReceiver);
-        }
+        
+        
     }
 }

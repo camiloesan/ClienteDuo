@@ -19,7 +19,7 @@ namespace ClienteDuo.Pages.Sidebars
         public SidebarFriends()
         {
             InitializeComponent();
-            _onlineFriends = GetOnlineFriends(SessionDetails.UserId);
+            _onlineFriends = UsersManager.GetOnlineFriends(SessionDetails.UserId);
             InitializeBars();
             FillFriendsPanel();
         }
@@ -51,7 +51,7 @@ namespace ClienteDuo.Pages.Sidebars
             IEnumerable<FriendshipDTO> friendsList = new List<FriendshipDTO>();
             try
             {
-                friendsList = GetFriendsListByUserId(SessionDetails.UserId);
+                friendsList = UsersManager.GetFriendsListByUserId(SessionDetails.UserId);
             }
             catch (CommunicationException)
             {
@@ -173,7 +173,7 @@ namespace ClienteDuo.Pages.Sidebars
                 bool result = false;
                 try
                 {
-                    result = DeleteFriendshipById(friendshipId);
+                    result = UsersManager.DeleteFriendshipById(friendshipId);
                 }
                 catch (CommunicationException)
                 {
@@ -201,24 +201,6 @@ namespace ClienteDuo.Pages.Sidebars
         private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
         {
             _sidebarAddFriend.Visibility = Visibility.Visible;
-        }
-
-        private IEnumerable<FriendshipDTO> GetOnlineFriends(int userId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.GetOnlineFriends(userId);
-        }
-
-        private IEnumerable<FriendshipDTO> GetFriendsListByUserId(int userId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.GetFriendsList(userId);
-        }
-
-        private bool DeleteFriendshipById(int friendshipId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.DeleteFriendshipById(friendshipId);
         }
 
         private void BtnBlockedUsersEvent(object sender, RoutedEventArgs e)

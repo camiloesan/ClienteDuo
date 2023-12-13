@@ -412,4 +412,10 @@
   <data name="DlgProfilePictureUpdated" xml:space="preserve">
     <value>Profile picture has been updated</value>
   </data>
+  <data name="DlgInvalidFormat" xml:space="preserve">
+    <value>Invalid format</value>
+  </data>
+  <data name="DlgWrongCode" xml:space="preserve">
+    <value>Wrong code</value>
+  </data>
 </root>

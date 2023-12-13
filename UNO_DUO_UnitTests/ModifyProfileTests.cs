@@ -20,11 +20,9 @@ namespace ClienteDuo.Pages.Tests
         [TestInitialize]
         public void Init()
         {
-            NewAccount newAccount = new NewAccount();
-            newAccount.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
-            Login login = new Login(true);
+            UsersManager.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
             SessionDetails.IsGuest = false;
-            SessionDetails.UserId = login.AreCredentialsValid(_initializedUsername, _initializedPassword).ID;
+            SessionDetails.UserId = UsersManager.AreCredentialsValid(_initializedUsername, _initializedPassword).ID;
         }
 
         [TestCleanup]
@@ -39,18 +37,16 @@ namespace ClienteDuo.Pages.Tests
         [TestMethod()]
         public void UpdateProfilePictureExistentUserTest()
         {
-            ModifyProfile modifyProfile = new ModifyProfile(true);
             int pictureId = 0;
-            bool result = modifyProfile.UpdateProfilePicture(SessionDetails.UserId, pictureId);
+            bool result = UsersManager.UpdateProfilePicture(SessionDetails.UserId, pictureId);
             Assert.IsTrue(result);
         }
 
         [TestMethod()]
         public void UpdateProfilePictureNonExistentUserTest()
         {
-            ModifyProfile modifyProfile = new ModifyProfile(true);
             int pictureId = 0;
-            bool result = modifyProfile.UpdateProfilePicture(0, pictureId);
+            bool result = UsersManager.UpdateProfilePicture(0, pictureId);
             Assert.IsFalse(result);
         }
     }

@@ -12,12 +12,9 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class SidebarFriendRequests : UserControl
     {
-        private readonly UsersManagerClient _usersManagerClient;
-
         public SidebarFriendRequests()
         {
             InitializeComponent();
-            _usersManagerClient = new UsersManagerClient();
             FillFriendRequestsPanel();
         }
 
@@ -27,7 +24,7 @@ namespace ClienteDuo.Pages.Sidebars
             IEnumerable<FriendRequestDTO> friendRequestsList = new List<FriendRequestDTO>();
             try
             {
-                friendRequestsList = GetFriendRequestsByUserId(SessionDetails.UserId);
+                friendRequestsList = UsersManager.GetFriendRequestsByUserId(SessionDetails.UserId);
             }
             catch (CommunicationException)
             {
@@ -79,7 +76,7 @@ namespace ClienteDuo.Pages.Sidebars
             bool result = false;
             try
             {
-                result = AcceptFriendRequest(friendRequest);
+                result = UsersManager.AcceptFriendRequest(friendRequest);
             }
             catch (CommunicationException)
             {
@@ -102,7 +99,7 @@ namespace ClienteDuo.Pages.Sidebars
             bool result = false;
             try
             {
-                result = DeclineFriendRequest(friendRequest);
+                result = UsersManager.DeclineFriendRequest(friendRequest);
             }
             catch (CommunicationException)
             {
@@ -119,23 +116,6 @@ namespace ClienteDuo.Pages.Sidebars
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             Visibility = Visibility.Collapsed;
-        }
-
-        private bool AcceptFriendRequest(FriendRequestDTO friendRequest)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.AcceptFriendRequest(friendRequest);
-        }
-
-        private bool DeclineFriendRequest(FriendRequestDTO friendRequest)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.RejectFriendRequest(friendRequest.FriendRequestID);
-        }
-
-        private IEnumerable<FriendRequestDTO> GetFriendRequestsByUserId(int userId)
-        {
-            return _usersManagerClient.GetFriendRequestsList(userId);
         }
     }
 }

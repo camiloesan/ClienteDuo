@@ -40,17 +40,15 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void ModifyPassword(string email, string newPassword)
         {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
             bool result = false;
             try
             {
-                result = usersManagerClient.ModifyPasswordByEmail(email, newPassword);
+                result = UsersManager.ModifyPasswordByEmail(email, newPassword);
             }
             catch
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
-
 
             if (result)
             {

@@ -11,8 +11,6 @@ namespace ClienteDuo.Pages.Sidebars
     /// </summary>
     public partial class EmailConfirmation : Page
     {
-        private readonly UsersManagerClient _usersManagerClient = new UsersManagerClient();
-
         public EmailConfirmation()
         {
             InitializeComponent();
@@ -34,13 +32,13 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void RequestCode(string email, string lang)
         {
-            if (!_usersManagerClient.IsEmailTaken(email))
+            if (!UsersManager.IsEmailTaken(email))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailNonExistent, MessageBoxImage.Information);
             }
             else
             {
-                int confirmationCode = _usersManagerClient.SendConfirmationCode(email, lang);
+                int confirmationCode = UsersManager.SendConfirmationCode(email, lang);
 
                 if (confirmationCode != -1)
                 {

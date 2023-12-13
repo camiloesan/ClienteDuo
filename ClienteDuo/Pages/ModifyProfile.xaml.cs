@@ -23,11 +23,6 @@ namespace ClienteDuo.Pages
             InitializeAvailableProfilePictures();
         }
 
-        public ModifyProfile(bool test)
-        {
-
-        }
-
         private void InitializeCurrentProfilePicture()
         {
             SetCurrentProfilePicturePreview(SessionDetails.PictureID);
@@ -69,7 +64,7 @@ namespace ClienteDuo.Pages
             bool result = false;
             try
             {
-                result = UpdateProfilePicture(SessionDetails.UserId, _selectedPictureId);
+                result = UsersManager.UpdateProfilePicture(SessionDetails.UserId, _selectedPictureId);
             }
             catch (CommunicationException)
             {
@@ -83,12 +78,6 @@ namespace ClienteDuo.Pages
                 MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
-        }
-
-        public bool UpdateProfilePicture(int userId, int pictureId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.UpdateProfilePictureByUserId(userId, pictureId);
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

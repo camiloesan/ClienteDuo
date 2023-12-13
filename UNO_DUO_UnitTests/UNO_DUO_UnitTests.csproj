@@ -76,6 +76,7 @@
     <Compile Include="NewAccountTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestClasses\TestPartyManagerTests.cs" />
+    <Compile Include="Utilities\UsersManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

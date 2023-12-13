@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -26,7 +27,7 @@ namespace ClienteDuo.Pages.Sidebars
             IEnumerable userList = new List<UserDTO>();
             try
             {
-                userList = GetLeaderboard();
+                userList = UsersManager.GetLeaderboard();
             }
             catch (CommunicationException)
             {
@@ -71,11 +72,6 @@ namespace ClienteDuo.Pages.Sidebars
             stackPanel.Children.Add(labelTotalWins);
         }
 
-        private IEnumerable<UserDTO> GetLeaderboard()
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.GetTopTenWinners();
-        }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {

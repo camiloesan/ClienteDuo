@@ -14,12 +14,6 @@ namespace ClienteDuo.Pages
         {
             InitializeComponent();
         }
-
-        public Login(bool test)
-        {
-
-        }
-
         private void BtnLoginEvent(object sender, RoutedEventArgs e)
         {
             CreateSession();
@@ -35,14 +29,13 @@ namespace ClienteDuo.Pages
 
         private void CreateSession()
         {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
 
             UserDTO loggedUser = null;
             try
             {
-                loggedUser = AreCredentialsValid(username, password);
+                loggedUser = UsersManager.AreCredentialsValid(username, password);
             }
             catch (CommunicationException)
             {
@@ -53,7 +46,7 @@ namespace ClienteDuo.Pages
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
             }
-            else if (IsUserLoggedIn(loggedUser.ID))
+            else if (UsersManager.IsUserLoggedIn(loggedUser.ID))
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
             }
@@ -76,18 +69,6 @@ namespace ClienteDuo.Pages
                 Application.Current.MainWindow.Content = mainMenu;
                 MainWindow.NotifyLogin(user);
             }
-        }
-
-        public bool IsUserLoggedIn(int userId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsUserAlreadyLoggedIn(userId);
-        }
-
-        public UserDTO AreCredentialsValid(string username, string password)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

@@ -50,7 +50,7 @@ namespace ClienteDuo
                 int result = 0;
                 try
                 {
-                    result = AddUserToDatabase(username, email, password);
+                    result = UsersManager.AddUserToDatabase(username, email, password);
                 }
                 catch (CommunicationException)
                 {
@@ -97,7 +97,7 @@ namespace ClienteDuo
                 TBoxConfirmPassword.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgPasswordDoesNotMatch, MessageBoxImage.Warning);
             }
-            else if (IsUsernameTaken(username))
+            else if (UsersManager.IsUsernameTaken(username))
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameTaken, MessageBoxImage.Warning);
@@ -107,7 +107,7 @@ namespace ClienteDuo
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailInvalid, MessageBoxImage.Warning);
             }
-            else if (IsEmailTaken(email))
+            else if (UsersManager.IsEmailTaken(email))
             {
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 MainWindow.ShowMessageBox(Properties.Resources.DlgEmailTaken, MessageBoxImage.Warning);
@@ -153,31 +153,6 @@ namespace ClienteDuo
                    || string.IsNullOrEmpty(emailField)
                    || string.IsNullOrEmpty(passwordField)
                    || string.IsNullOrEmpty(confirmPasswordField);
-        }
-
-        public bool IsUsernameTaken(string username)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsUsernameTaken(username);
-        }
-
-        public bool IsEmailTaken(string email)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsEmailTaken(email);
-        }
-
-        public int AddUserToDatabase(string username, string email, string password)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            UserDTO databaseUser = new UserDTO
-            {
-                UserName = username,
-                Email = email,
-                Password = Sha256Encryptor.SHA256_hash(password)
-            };
-
-            return usersManagerClient.AddUserToDatabase(databaseUser);
         }
     }
 }

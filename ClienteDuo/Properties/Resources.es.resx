@@ -396,4 +396,25 @@
   <data name="DlgHostHasClosedTheParty" xml:space="preserve">
     <value>El host a abandonado la partida</value>
   </data>
+  <data name="LblInfoResetPassword" xml:space="preserve">
+    <value>Te enviaremos un correo para restablecer tu contraseña</value>
+  </data>
+  <data name="DlgWrongCode" xml:space="preserve">
+    <value>Código incorrecto</value>
+  </data>
+  <data name="DlgProfilePictureUpdated" xml:space="preserve">
+    <value>Tu foto de perfil se ha actualizado</value>
+  </data>
+  <data name="DlgInvalidFormat" xml:space="preserve">
+    <value>Formato inválido</value>
+  </data>
+  <data name="DlgFriendYourself" xml:space="preserve">
+    <value>No puedes mandar una solicitud a ti mismo</value>
+  </data>
+  <data name="BtnModifyProfile" xml:space="preserve">
+    <value>Modificar Perfil</value>
+  </data>
+  <data name="BtnChangePassword" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
 </root>

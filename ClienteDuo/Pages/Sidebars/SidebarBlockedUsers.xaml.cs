@@ -23,7 +23,7 @@ namespace ClienteDuo.Pages.Sidebars
             IEnumerable<UserBlockedDTO> blockedUsersList = new List<UserBlockedDTO>();
             try
             {
-                blockedUsersList = GetBlockedUsersListByUserId(SessionDetails.UserId);
+                blockedUsersList = UsersManager.GetBlockedUsersListByUserId(SessionDetails.UserId);
             }
             catch (CommunicationException)
             {
@@ -67,7 +67,7 @@ namespace ClienteDuo.Pages.Sidebars
             bool result = false;
             try
             {
-                result = UnblockUserByBlockId(blockedUser.BlockID);
+                result = UsersManager.UnblockUserByBlockId(blockedUser.BlockID);
             }
             catch (CommunicationException)
             {
@@ -80,18 +80,6 @@ namespace ClienteDuo.Pages.Sidebars
                 MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
-        }
-
-        private bool UnblockUserByBlockId(int blockId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.UnblockUserByBlockId(blockId);
-        }
-
-        private IEnumerable<UserBlockedDTO> GetBlockedUsersListByUserId(int userId)
-        {
-            UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.GetBlockedUsersListByUserId(userId);
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
