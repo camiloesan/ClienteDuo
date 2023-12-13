@@ -173,7 +173,7 @@ namespace ClienteDuo.Utilities.Tests
         }
 
         [TestMethod()]
-        public void GetUserInfoByIdNotNullTest()
+        public void GetUserInfoByUsernameNotNullTest()
         {
             var result = UsersManager.GetUserInfoByUsername(_user1);
 
@@ -181,7 +181,7 @@ namespace ClienteDuo.Utilities.Tests
         }
 
         [TestMethod()]
-        public void GetUserInfoByIdDoesNotExistTest()
+        public void GetUserInfoByUsernameDoesNotExistTest()
         {
             var result = UsersManager.GetUserInfoByUsername("persianaAmericana");
 
