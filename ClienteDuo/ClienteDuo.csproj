@@ -41,6 +41,12 @@
     <Win32Resource>
     </Win32Resource>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>DuoLogo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
@@ -107,8 +113,31 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pages\PlayerIcon.xaml.cs">
-      <DependentUpon>PlayerIcon.xaml</DependentUpon>
+    <Compile Include="Connected Services\DataService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\GameOver.xaml.cs" />
+    <Compile Include="Pages\MatchOverLabel.xaml.cs">
+      <DependentUpon>MatchOverLabel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ModifyProfile.xaml.cs">
+      <DependentUpon>ModifyProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PlayerBar.xaml.cs" />
+    <Compile Include="Pages\PlayerIcon.xaml.cs" />
+    <Compile Include="Pages\Sidebars\PopUpKickPlayer.xaml.cs">
+      <DependentUpon>PopUpKickPlayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\EmailCodeVerification.xaml.cs">
+      <DependentUpon>EmailCodeVerification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\EmailConfirmation.xaml.cs">
+      <DependentUpon>EmailConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\PasswordReset.xaml.cs">
+      <DependentUpon>PasswordReset.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Sidebars\PopUpUserDetails.xaml.cs">
       <DependentUpon>PopUpUserDetails.xaml</DependentUpon>
@@ -118,6 +147,9 @@
     </Compile>
     <Compile Include="Pages\Sidebars\SidebarAddFriend.xaml.cs">
       <DependentUpon>SidebarAddFriend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Sidebars\SidebarBlockedUsers.xaml.cs">
+      <DependentUpon>SidebarBlockedUsers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Sidebars\SidebarFriendRequests.xaml.cs">
       <DependentUpon>SidebarFriendRequests.xaml</DependentUpon>
@@ -135,15 +167,13 @@
       <DependentUpon>SidebarUserProfile.xaml</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Properties\Resources.fr.Designer.cs" />
-    <Compile Include="Properties\Resources.ja.Designer.cs">
+    <Compile Include="Properties\Resources.fr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ja.resx</DependentUpon>
+      <DependentUpon>Resources.fr.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\FriendManager.cs" />
+    <Compile Include="TestClasses\TestGameTable.cs" />
     <Compile Include="Utilities\MusicManager.cs" />
-    <Compile Include="Utilities\PartyManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
     <Compile Include="Utilities\Sha256Encryptor.cs" />
     <Page Include="Pages\CardTable.xaml">
@@ -158,10 +188,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\InviteeLobby.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Page Include="Pages\GameOver.xaml" />
     <Page Include="Pages\JoinParty.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,23 +213,49 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\MatchOverLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ModifyProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\NewAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\PlayerIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Pages\PlayerBar.xaml" />
+    <Page Include="Pages\PlayerIcon.xaml" />
+    <Page Include="Pages\Sidebars\EmailCodeVerification.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\EmailConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\PasswordReset.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\PopUpKickPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Sidebars\PopUpUserDetails.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Sidebars\PopUpUserLogged.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Sidebars\SidebarAddFriend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\SidebarBlockedUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,11 +281,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\DataService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
@@ -241,9 +289,6 @@
     </Compile>
     <Compile Include="Pages\GameMenu.xaml.cs">
       <DependentUpon>GameMenu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\InviteeLobby.xaml.cs">
-      <DependentUpon>InviteeLobby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\JoinParty.xaml.cs">
       <DependentUpon>JoinParty.xaml</DependentUpon>
@@ -291,10 +336,9 @@
       <LastGenOutput>Resources.es.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.fr.resx" />
-    <EmbeddedResource Include="Properties\Resources.ja.resx">
+    <EmbeddedResource Include="Properties\Resources.fr.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ja.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resources.fr.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -302,16 +346,19 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.Card.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.Card1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendRequest.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendRequestDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.Friendship.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.FriendshipDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\DataService\ClienteDuo.DataService.User.datasource">
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.UserBlockedDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\DataService\ClienteDuo.DataService.UserDTO.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\DataService\item.xsd">
@@ -330,6 +377,9 @@
     <None Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Resource Include="Fonts\MPHudson.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -340,45 +390,89 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
+    <Resource Include="Images\united-states-of-america.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\united-states-of-america.png" />
+    <Resource Include="Images\profile-user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\DataService\" />
+    <Resource Include="Images\trophy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\friends.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DataService\item.disco" />
     <None Include="Connected Services\DataService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\DataService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\DataService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\profile-user.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\trophy.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\friends.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\DataService\item.disco" />
+    <Resource Include="DuoLogo.ico" />
+    <Resource Include="Images\DUOLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\XIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\AddFriendIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\mexico.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\france.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pfp0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\loadingGIF.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pfp4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pfp5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pfp1.png" />
+    <Resource Include="Images\pfp2.png" />
+    <Resource Include="Images\pfp3.png" />
+    <Content Include="SFX\cardFlippedSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SFX\matchFinishedSound.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SFX\playerLeftSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\ExpandMenuIcon.png" />
-    <Resource Include="Images\ExitButtonIcon.png" />
+    <Resource Include="Images\ExpandMenuIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\ExitButtonIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="SFX\playerJoinedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DataService\" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

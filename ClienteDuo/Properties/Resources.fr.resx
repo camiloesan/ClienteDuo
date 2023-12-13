@@ -153,14 +153,17 @@
   <data name="DlgConnectionError" xml:space="preserve">
     <value>Il y avait un échec de connection avec le service, essayer autre fois à plus tard</value>
   </data>
-  <data name="DlgEmailMaxCharacters" xml:space="preserve">
-    <value>Les nombre de caractéres dans un courriel est 30 comme maximum</value>
-  </data>
   <data name="DlgEmailTaken" xml:space="preserve">
     <value>An account with that email is already registered</value>
   </data>
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>Tous les champes doivent être remplis</value>
+  </data>
+  <data name="DlgExitConfirmation" xml:space="preserve">
+    <value>Étes vous sur de sortir du jeu? Vous ne pourrez rentrer jusqu'a il est fini</value>
+  </data>
+  <data name="DlgExitMatchConfirmation" xml:space="preserve">
+    <value>¿Etes vous sur de sortir du jeu? Vous ne pourrez rentrer autres fois</value>
   </data>
   <data name="DlgFailedLogin" xml:space="preserve">
     <value>Nom d'utilisateur ou courriel incorrectes</value>
@@ -195,6 +198,12 @@
   <data name="LblAddNewFriend" xml:space="preserve">
     <value>Ajouter nouvel ami</value>
   </data>
+  <data name="LblCalculatingResults" xml:space="preserve">
+    <value>En calculant des resultats...</value>
+  </data>
+  <data name="LblCardsLeft" xml:space="preserve">
+    <value>Cartes restantes</value>
+  </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>
   </data>
@@ -207,11 +216,11 @@
   <data name="LblGameSettings" xml:space="preserve">
     <value>Configuration de jeu</value>
   </data>
-  <data name="LblGameUsername" xml:space="preserve">
-    <value>Nom temporel</value>
-  </data>
   <data name="LblLeaderboard" xml:space="preserve">
     <value>Leaderboard</value>
+  </data>
+  <data name="LblMatchEnd" xml:space="preserve">
+    <value>Jeu fini</value>
   </data>
   <data name="LblMyProfile" xml:space="preserve">
     <value>My Profile</value>
@@ -231,6 +240,9 @@
   <data name="LblUsername" xml:space="preserve">
     <value>Nom d'utilisateur</value>
   </data>
+  <data name="LblWinner" xml:space="preserve">
+    <value>Vainqueur</value>
+  </data>
   <data name="TitleAlert" xml:space="preserve">
     <value>Alerte</value>
   </data>
@@ -242,5 +254,38 @@
   </data>
   <data name="TitleNewAccount" xml:space="preserve">
     <value>Nouvelle compte</value>
+  </data>
+  <data name="LblInGameUsername" xml:space="preserve">
+    <value>Nom temporel</value>
+  </data>
+  <data name="LblSelectReason" xml:space="preserve">
+    <value>Choisissez une raison (Optional)</value>
+  </data>
+  <data name="RsnCheating" xml:space="preserve">
+    <value>Tricherie</value>
+  </data>
+  <data name="RsnInappropriateBehaviour" xml:space="preserve">
+    <value>Comportment inapproprié</value>
+  </data>
+  <data name="RsnSpam" xml:space="preserve">
+    <value>Spam</value>
+  </data>
+  <data name="TitleKickPlayer" xml:space="preserve">
+    <value>Expulser joueur</value>
+  </data>
+  <data name="DlgKickedPlayer" xml:space="preserve">
+    <value>Vous avez été expulsé du jeu. </value>
+  </data>
+  <data name="DlgKickingReason" xml:space="preserve">
+    <value>La raison de votre expulsion est: </value>
+  </data>
+  <data name="DlgEmptyKickingReason" xml:space="preserve">
+    <value>L'expulsion du joueur n'était pas possible, definez une raison d'expulsion s'il vous plait</value>
+  </data>
+  <data name="DlgFriendRequestError" xml:space="preserve">
+    <value>Il y avait un echec en envoyant de la demande d'ami</value>
+  </data>
+  <data name="DlgNotEnoughPlayers" xml:space="preserve">
+    <value>Échec en commençant, il faut que le Lobby a au moins 2 jeueurs</value>
   </data>
 </root>

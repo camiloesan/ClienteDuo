@@ -145,7 +145,7 @@
     <value>Expulsar</value>
   </data>
   <data name="BtnLogin" xml:space="preserve">
-    <value>Log In</value>
+    <value>Iniciar Sesión</value>
   </data>
   <data name="BtnNewAccount" xml:space="preserve">
     <value>Crear Cuenta</value>
@@ -171,8 +171,8 @@
   <data name="DlgConnectionError" xml:space="preserve">
     <value>Hubo un error al conectarse con el servicio, inténtelo de nuevo más tarde</value>
   </data>
-  <data name="DlgEmailMaxCharacters" xml:space="preserve">
-    <value>El máximo de caracteres para el nombre de correo electrónico es de 30</value>
+  <data name="DlgEmailInvalid" xml:space="preserve">
+    <value>El correo electrónico debe tener menos de 30 caracteres y un formato valido (----@dominio.com)</value>
   </data>
   <data name="DlgEmailTaken" xml:space="preserve">
     <value>Una cuenta con ese correo electrónico ya se encuentra registrada</value>
@@ -180,8 +180,14 @@
   <data name="DlgEmptyFields" xml:space="preserve">
     <value>Todos los campos deben estar llenos antes de continuar</value>
   </data>
+  <data name="DlgExitConfirmation" xml:space="preserve">
+    <value>¿Está seguro de que desea abandonar la partida? No podrá unirse hasta que esta termine</value>
+  </data>
+  <data name="DlgExitMatchConfirmation" xml:space="preserve">
+    <value>¿Está seguro de que desea abandonar la partida? No podrá volver a unirse</value>
+  </data>
   <data name="DlgFailedLogin" xml:space="preserve">
-    <value>Correo electrónico o contraseña incorrectos</value>
+    <value>Nombre de usuario o contraseña incorrectos</value>
   </data>
   <data name="DlgFriendRequestSent" xml:space="preserve">
     <value>Solicitud de amistad enviada</value>
@@ -190,7 +196,7 @@
     <value>La partida ya está llena, inténtalo de nuevo más tarde</value>
   </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
-    <value>La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula</value>
+    <value>La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula, y un máximo de 16 caracteres</value>
   </data>
   <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
     <value>El código de partida debe ser un numero con máximo 4 dígitos</value>
@@ -219,6 +225,12 @@
   <data name="DlgUsernameTaken" xml:space="preserve">
     <value>Ya existe ese nombre de usuario</value>
   </data>
+  <data name="LblCalculatingResults" xml:space="preserve">
+    <value>Calculando resultados...</value>
+  </data>
+  <data name="LblCardsLeft" xml:space="preserve">
+    <value>Cartas restantes</value>
+  </data>
   <data name="LblChat" xml:space="preserve">
     <value>Chat</value>
   </data>
@@ -234,6 +246,9 @@
   <data name="LblInGameUsername" xml:space="preserve">
     <value>Nombre de Usuario Temporal</value>
   </data>
+  <data name="LblMatchEnd" xml:space="preserve">
+    <value>Fin de partida</value>
+  </data>
   <data name="LblPartyCode" xml:space="preserve">
     <value>Código de Partida</value>
   </data>
@@ -246,6 +261,9 @@
   <data name="LblUsername" xml:space="preserve">
     <value>Nombre de Usuario</value>
   </data>
+  <data name="LblWinner" xml:space="preserve">
+    <value>Ganador</value>
+  </data>
   <data name="TitleAlert" xml:space="preserve">
     <value>Alerta</value>
   </data>
@@ -257,5 +275,128 @@
   </data>
   <data name="TitleNewAccount" xml:space="preserve">
     <value>Crear Cuenta</value>
+  </data>
+  <data name="LblPasswordForgotten" xml:space="preserve">
+    <value>Olvidé mi contraseña</value>
+  </data>
+  <data name="DlgUserAlreadyLoggedIn" xml:space="preserve">
+    <value>Una sesión ya está activa</value>
+  </data>
+  <data name="LblAddNewFriend" xml:space="preserve">
+    <value>Añadir amigo</value>
+  </data>
+  <data name="LblReady" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="LblTrophies" xml:space="preserve">
+    <value>Trofeos</value>
+  </data>
+  <data name="DlgFriendRequestAlreadySent" xml:space="preserve">
+    <value>Una solicitud de amistad ya se ha enviado anteriormente</value>
+  </data>
+  <data name="DlgAlreadyFriends" xml:space="preserve">
+    <value>Ya eres amigo del este usuario</value>
+  </data>
+  <data name="DlgUsernameDoesNotExist" xml:space="preserve">
+    <value>El nombre de usuario no existe</value>
+  </data>
+  <data name="DlgNowFriends" xml:space="preserve">
+    <value>¡Ahora son amigos!</value>
+  </data>
+  <data name="DlgFriendRequestDeleted" xml:space="preserve">
+    <value>Haz eliminado la solicitud</value>
+  </data>
+  <data name="DlgPasswordDoesNotMatch" xml:space="preserve">
+    <value>La contraseña y confirmación de contraseña deben coincidir</value>
+  </data>
+  <data name="DlgUsernameInvalid" xml:space="preserve">
+    <value>El nombre de usuario debe contener solo caracteres alfanuméricos, al menos 3 caracteres, un máximo de 14 y no contener la palabra "guest"</value>
+  </data>
+  <data name="BtnBlockedUsers" xml:space="preserve">
+    <value>Usuarios Bloqueados</value>
+  </data>
+  <data name="LblSelectReason" xml:space="preserve">
+    <value>Elija un motivo (Opcional)</value>
+  </data>
+  <data name="RsnCheating" xml:space="preserve">
+    <value>Trampa</value>
+  </data>
+  <data name="RsnInappropriateBehaviour" xml:space="preserve">
+    <value>Comportamiento inadecuado</value>
+  </data>
+  <data name="RsnSpam" xml:space="preserve">
+    <value>Spam</value>
+  </data>
+  <data name="TitleKickPlayer" xml:space="preserve">
+    <value>Expulsar jugador</value>
+  </data>
+  <data name="DlgKickedPlayer" xml:space="preserve">
+    <value>Ha sido expulsado de la partida. </value>
+  </data>
+  <data name="DlgKickingReason" xml:space="preserve">
+    <value>El motivo de su expulsión es: </value>
+  </data>
+  <data name="DlgEmptyKickingReason" xml:space="preserve">
+    <value>No se pudo expulsar este usuario, por favor defina una razón de expulsión</value>
+  </data>
+  <data name="DlgFriendRequestError" xml:space="preserve">
+    <value>Hubo un error al enviar la solicitud de amistar a este usuario</value>
+  </data>
+  <data name="TitlePasswordReset" xml:space="preserve">
+    <value>Reestablecer Contraseña</value>
+  </data>
+  <data name="LblNewPassword" xml:space="preserve">
+    <value>Nueva Contraseña</value>
+  </data>
+  <data name="LblMyProfile" xml:space="preserve">
+    <value>Mi Perfil</value>
+  </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Puntuaciones</value>
+  </data>
+  <data name="LblCode" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="LblConfirmNewPassword" xml:space="preserve">
+    <value>Confirmar Nueva Contraseña</value>
+  </data>
+  <data name="DlgUserBlockedInParty" xml:space="preserve">
+    <value>No puedes entrar a esta partida, un usuario que has bloqueado o te tiene bloqueado esta en la partida</value>
+  </data>
+  <data name="DlgUnfriendConfirmation" xml:space="preserve">
+    <value>¿Estás seguro que deseas eliminar a este usuario de tus amigos?</value>
+  </data>
+  <data name="DlgUnblockSuccess" xml:space="preserve">
+    <value>Usuario desbloqueado satisfactoriamente</value>
+  </data>
+  <data name="DlgEmailNonExistent" xml:space="preserve">
+    <value>El email ingresado no está asociado a ninguna cuenta</value>
+  </data>
+  <data name="DlgBlockedUser" xml:space="preserve">
+    <value>El usuario ha sido bloqueado</value>
+  </data>
+  <data name="DlgBlockConfirmation" xml:space="preserve">
+    <value>¿Estás seguro de que deseas bloqueas a este usuario? No podrás ingresar a ninguna partida donde este este jugador ni el podrá ingresar a la tuya, tampoco lo podrás agregar como amigo, ni el a ti.</value>
+  </data>
+  <data name="BtnUnblockUser" xml:space="preserve">
+    <value>Desbloquear</value>
+  </data>
+  <data name="BtnFriendRequests" xml:space="preserve">
+    <value>Solicitudes de Amistad</value>
+  </data>
+  <data name="BtnBlockUser" xml:space="preserve">
+    <value>Bloquear</value>
+  </data>
+  <data name="LblFriends" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
+  <data name="LblTotalWins" xml:space="preserve">
+    <value>Juegos Ganados</value>
+  </data>
+  <data name="DlgHostHasClosedTheParty" xml:space="preserve">
+    <value>El host a abandonado la partida</value>
+  </data>
+  <data name="DlgNotEnoughPlayers" xml:space="preserve">
+    <value>No se pudo iniciar la partida, el lobby debe tener al menos 2 jugadores</value>
   </data>
 </root>

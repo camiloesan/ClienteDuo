@@ -3,54 +3,77 @@ using System;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using ClienteDuo.DataService;
+using System.Collections;
+using System.ServiceModel;
 
 namespace ClienteDuo.Pages
 {
     public partial class JoinParty : Page
     {
-        private readonly PartyValidatorClient _partyValidatorClient;
-
         public JoinParty()
         {
             InitializeComponent();
-            _partyValidatorClient = new PartyValidatorClient();
+        }
+        
+        private void EnterKeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                JoinLobby();
+            }
         }
 
-        private void BtnJoin(object sender, RoutedEventArgs e)
+        private void BtnJoinEvent(object sender, RoutedEventArgs e)
         {
-            var partyCodeString = TBoxPartyCode.Text.Trim();
-            if (ArePartyConditionsValid(partyCodeString))
+            JoinLobby();
+        }
+
+        public void JoinLobby()
+        {
+            string partyCodeString = TBoxPartyCode.Text.Trim();
+
+            bool isPartyValid = false;
+            try
+            {
+                isPartyValid = ArePartyConditionsValid(partyCodeString);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+
+            if (isPartyValid)
             {
                 if (SessionDetails.IsGuest)
                 {
                     GenerateGuestName(partyCodeString);
                 }
-
-                JoinLobby(int.Parse(partyCodeString));
+                
+                SessionDetails.PartyCode = int.Parse(partyCodeString);
+                Lobby lobby = new Lobby(SessionDetails.Username, SessionDetails.PartyCode);
+                Application.Current.MainWindow.Content = lobby;
             }
-        }
-
-        public void JoinLobby(int partyCode)
-        {
-            SessionDetails.PartyCode = partyCode;
-            var inviteeLobby = new InviteeLobby(SessionDetails.Username);
-            Application.Current.MainWindow.Content = inviteeLobby;
         }
 
         private bool ArePartyConditionsValid(string partyCode)
         {
             if (!IsInputInteger(partyCode))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgInvalidPartyCodeFormat, MessageBoxImage.Information);
             }
             else if (!IsPartyCodeExistent(int.Parse(partyCode)))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgPartyNotFound, MessageBoxImage.Information);
             }
             else if (!IsSpaceAvailable(int.Parse(partyCode)))
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFullParty, MessageBoxImage.Information);
+            }
+            else if (SessionDetails.IsGuest == false && IsUserInPartyBlocked(int.Parse(partyCode)))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUserBlockedInParty, MessageBoxImage.Information);
             }
             else
             {
@@ -62,10 +85,11 @@ namespace ClienteDuo.Pages
 
         private void GenerateGuestName(string partyCodeString)
         {
-            var randomId = new Random();
-            var id = randomId.Next(0,1000);
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+            Random randomId = new Random();
+            int id = randomId.Next(0,1000);
             string randomUsername = "guest" + id;
-            if (_partyValidatorClient.IsUsernameInParty(int.Parse(partyCodeString), randomUsername))
+            if (partyValidatorClient.IsUsernameInParty(int.Parse(partyCodeString), randomUsername))
             {
                 GenerateGuestName(randomUsername);
             }
@@ -79,24 +103,42 @@ namespace ClienteDuo.Pages
 
         public bool IsPartyCodeExistent(int partyCode)
         {
-            return _partyValidatorClient.IsPartyExistent(partyCode);
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+            return partyValidatorClient.IsPartyExistent(partyCode);
         }
 
         public bool IsSpaceAvailable(int partyCode)
         {
-            return _partyValidatorClient.IsSpaceAvailable(partyCode);
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+            return partyValidatorClient.IsSpaceAvailable(partyCode);
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        public bool IsUserInPartyBlocked(int partyCode)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+            var playersInPartyList = partyValidatorClient.GetPlayersInParty(partyCode);
+            foreach (var player in playersInPartyList)
+            {
+                if (usersManagerClient.IsUserBlockedByUsername(SessionDetails.Username ,player)
+                    || usersManagerClient.IsUserBlockedByUsername(player, SessionDetails.Username))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
             if (SessionDetails.IsGuest)
             {
-                var launcher = new Launcher();
+                Launcher launcher = new Launcher();
                 Application.Current.MainWindow.Content = launcher;
             }
             else
             {
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
             }
         }

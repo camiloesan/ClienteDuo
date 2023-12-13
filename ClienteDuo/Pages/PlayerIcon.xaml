@@ -4,16 +4,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ClienteDuo.Pages"
              xmlns:Sidebars="clr-namespace:ClienteDuo.Pages.Sidebars" x:Class="ClienteDuo.Pages.PlayerIcon"
-             mc:Ignorable="d" 
-             d:DesignHeight="180" d:DesignWidth="150">
+             mc:Ignorable="d" d:DesignWidth="150" Height="150">
 
     <Grid x:Name="_background" Background="#FFCECECE">
-        <Label x:Name="_playerIcon" Content="" HorizontalAlignment="Center" Margin="0,10,0,10" VerticalAlignment="Top" Height="100" Width="100">
+        <Label x:Name="ProfilePicture" Content="" HorizontalAlignment="Center" Margin="0,10,0,10" VerticalAlignment="Top" Height="100" Width="100">
             <Label.Background>
                 <ImageBrush ImageSource="../Images/profile-user.png"/>
             </Label.Background>
         </Label>
-        <Label x:Name="_nameLabel" Content="[Username]" HorizontalAlignment="Center" Margin="0,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.28" Height="25"/>
-        <Label x:Name="_scoreLabel" Content="[Points]" HorizontalAlignment="Center" Margin="0,140,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.395,0.28" Height="25" Width="111" HorizontalContentAlignment="Center"/>
+        <Label x:Name="LblUsername" Content="[Username]" HorizontalAlignment="Center" Margin="0,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.28" Height="25"/>
     </Grid>
 </UserControl>

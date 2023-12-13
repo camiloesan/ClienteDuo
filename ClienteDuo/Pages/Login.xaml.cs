@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System;
 using System.Security.Cryptography;
@@ -13,75 +14,91 @@ namespace ClienteDuo.Pages
 {
     public partial class Login : Page
     {
-        private readonly UsersManagerClient _usersManagerClient;
-
         public Login()
         {
             InitializeComponent();
-            _usersManagerClient = new UsersManagerClient();
         }
 
-        private void BtnLogin(object sender, RoutedEventArgs e)
+        private void BtnLoginEvent(object sender, RoutedEventArgs e)
         {
-            AttemptLogin();
+            CreateSession();
         }
 
-        private void EnterKey(object sender, KeyEventArgs e)
+        private void EnterKeyEvent(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)
             {
-                AttemptLogin();
+                CreateSession();
             }
         }
 
-        private void AttemptLogin()
+        private void CreateSession()
         {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
             string username = TBoxUsername.Text;
             string password = TBoxPassword.Password;
-            User loggedUser = AreCredentialsValid(username, password);
+            
+            UserDTO loggedUser = null;
+            try
+            {
+                loggedUser = AreCredentialsValid(username, password);
+            }
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+            }
 
-            if (loggedUser != null && !_usersManagerClient.IsUserAlreadyLoggedIn(loggedUser.ID))
+            if (loggedUser == null)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
+            }
+            else if (IsUserLoggedIn(loggedUser.ID))
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
+            }
+            else
             {
                 SessionDetails.UserId = loggedUser.ID;
                 SessionDetails.Username = loggedUser.UserName;
                 SessionDetails.Email = loggedUser.Email;
+                SessionDetails.TotalWins = loggedUser.TotalWins;
+                SessionDetails.PictureID = loggedUser.PictureID;
                 SessionDetails.IsGuest = false;
 
-                var user = new User
+                UserDTO user = new UserDTO
                 {
                     UserName = SessionDetails.Username,
                     ID = SessionDetails.UserId
                 };
 
-                var mainMenu = new MainMenu();
+                MainMenu mainMenu = new MainMenu();
                 Application.Current.MainWindow.Content = mainMenu;
                 MainWindow.NotifyLogin(user);
             }
-            else
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin);
-            }
         }
 
-        public User AreCredentialsValid(string username, string password)
+        private bool IsUserLoggedIn(int userId)
         {
-            User userCredentials = null;
-            try
-            {
-                userCredentials = _usersManagerClient.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
-            }
-            catch
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError);
-            }
-
-            return userCredentials;
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsUserAlreadyLoggedIn(userId);
         }
 
-        private void BtnCancel(object sender, RoutedEventArgs e)
+        public UserDTO AreCredentialsValid(string username, string password)
         {
-            var launcher = new Launcher();
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsLoginValid(username, Sha256Encryptor.SHA256_hash(password));
+        }
+
+        private void BtnCancelEvent(object sender, RoutedEventArgs e)
+        {
+            Launcher launcher = new Launcher();
             Application.Current.MainWindow.Content = launcher;
+        }
+
+        private void LblResetPasswordEvent(object sender, MouseEventArgs e)
+        {
+            EmailConfirmation emailConfirmation = new EmailConfirmation();
+            Application.Current.MainWindow.Content = emailConfirmation;
         }
     }
 }

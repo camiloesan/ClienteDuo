@@ -1,25 +1,28 @@
-﻿using ClienteDuo.Utilities;
+﻿using ClienteDuo.DataService;
+using ClienteDuo.Utilities;
 using System.Collections.Generic;
 using System.Runtime.Remoting;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 using Label = System.Windows.Controls.Label;
 
 namespace ClienteDuo.Pages
 {
     public partial class CardTable : Page, DataService.IMatchManagerCallback
     {
-        bool _hasDrawnCard;
-        DataService.Card[] _tableCards = new DataService.Card[3];
-        GameMenu _gameMenu;
-        PlayerIcon[] _playerIcons = new PlayerIcon[3];
-        List<Card> _selectedCards = new List<Card>();
-        Label[] _cardLabels = new Label[3];
-        Rectangle[] _cardColors = new Rectangle[3];
-        int _matchingColors;
+        private bool _hasDrawnCard;
+        private DataService.Card[] _tableCards = new DataService.Card[3];
+        private GameMenu _gameMenu;
+        private PlayerIcon[] _playerIcons = new PlayerIcon[3];
+        private List<Card> _selectedCards = new List<Card>();
+        private Label[] _cardLabels = new Label[3];
+        private Rectangle[] _cardColors = new Rectangle[3];
+        private int _matchingColors;
 
         public CardTable()
         {
@@ -34,6 +37,87 @@ namespace ClienteDuo.Pages
             }
 
             _hasDrawnCard = false;
+        }
+
+        private void InitializeAttributes()
+        {
+            _cardLabels[0] = LblLeftCard;
+            _cardLabels[1] = LblMiddleCard;
+            _cardLabels[2] = LblRightCard;
+
+            _cardColors[0] = LeftCardColor;
+            _cardColors[1] = MiddleCardColor;
+            _cardColors[2] = RightCardColor;
+
+            _tableCards[0] = new DataService.Card();
+            _tableCards[1] = new DataService.Card();
+            _tableCards[2] = new DataService.Card();
+
+            _playerIcons[0] = TopPlayerIcon;
+            _playerIcons[1] = LeftPlayerIcon;
+            _playerIcons[2] = RightPlayerIcon;
+        }
+
+        private void LoadSettingsMenu()
+        {
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                MatchManagerClient client = new MatchManagerClient(instanceContext);
+
+                _gameMenu = new GameMenu();
+                _gameMenu.setClient(client);
+                _gameMenu.Margin = new Thickness(550, 0, 0, 0);
+                _gameMenu.Visibility = Visibility.Collapsed;
+
+                TableBackground.Children.Add(_gameMenu);
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
+        }
+
+        public void LoadPlayers()
+        {
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                MatchManagerClient client = new MatchManagerClient(instanceContext);
+                List<string> matchPlayers = new List<string>(client.GetPlayerList(SessionDetails.PartyCode));
+                LblCurrentTurn.Content = client.GetCurrentTurn(SessionDetails.PartyCode);
+
+                List<string> otherPlayers = new List<string>();
+                foreach (string player in matchPlayers)
+                {
+                    if (!player.Equals(SessionDetails.Username))
+                    {
+                        otherPlayers.Add(player);
+                    }
+                }
+
+                for (int i = 0; i < otherPlayers.Count; i++)
+                {
+                    _playerIcons[i].Username = otherPlayers[i];
+                    _playerIcons[i].Visibility = Visibility.Visible;
+
+                    if (!_playerIcons[i].Username.Contains("guest"))
+                    {
+                        UserDTO userDTO = new UsersManagerClient().GetUserInfoByUsername(_playerIcons[i].Username);
+                        _playerIcons[i].SetProfilePicture(userDTO.PictureID);
+                    }
+                }
+
+                _gameMenu.LoadPlayers(otherPlayers, client);
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
         }
 
         public bool SelectCard(Card selectedCard)
@@ -54,133 +138,145 @@ namespace ClienteDuo.Pages
             _selectedCards.Remove(unselectedCard);
         }
 
-        void InitializeAttributes()
+        public void PlayerLeftGame(string username, string reason)
         {
-            _cardLabels[0] = _leftCardLabel;
-            _cardLabels[1] = _middleCardLabel;
-            _cardLabels[2] = _rightCardLabel;
+            MusicManager.PlayPlayerLeftSound();
 
-            _cardColors[0] = _leftCardColor;
-            _cardColors[1] = _middleCardColor;
-            _cardColors[2] = _rightCardColor;
-
-            _tableCards[0] = new DataService.Card();
-            _tableCards[1] = new DataService.Card();
-            _tableCards[2] = new DataService.Card();
-
-            _playerIcons[0] = _topPlayerIcon;
-            _playerIcons[1] = _leftPlayerIcon;
-            _playerIcons[2] = _rightPlayerIcon;
-        }
-
-        void LoadSettingsMenu()
-        {
-            _gameMenu = new GameMenu();
-
-            _gameMenu.Margin = new Thickness(550, 0, 0, 0);
-            _gameMenu.Visibility = Visibility.Collapsed;
-            _background.Children.Add(_gameMenu);
-        }
-
-        public void LoadPlayers()
-        {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
-            Dictionary <string, int> playerScores = client.GetPlayerScores(SessionDetails.PartyCode);
-            List<string> players = new List<string>();
-            List<int> scores = new List<int>();
-            _currentTurnLabel.Content = client.GetCurrentTurn(SessionDetails.PartyCode);
-
-            foreach (KeyValuePair<string, int> entry in playerScores)
+            if (username.Equals(SessionDetails.Username))
             {
-                if (entry.Key != SessionDetails.Username)
+                if (SessionDetails.IsGuest)
                 {
-                    players.Add(entry.Key);
-                    scores.Add(entry.Value);
+                    Launcher launcher = new Launcher();
+                    Application.Current.MainWindow.Content = launcher;
                 }
-            }
+                else
+                {
+                    MainMenu mainMenu = new MainMenu();
+                    Application.Current.MainWindow.Content = mainMenu;
+                }
 
-            for (int i = 0; i < players.Count; i++)
+                string message = Properties.Resources.DlgKickedPlayer + Properties.Resources.DlgKickingReason + reason;
+                MainWindow.ShowMessageBox(message, MessageBoxImage.Exclamation);
+            }
+            else
             {
-                _playerIcons[i]._nameLabel.Content = players[i];
-                _playerIcons[i]._scoreLabel.Content = scores[i] + " points";
-                _playerIcons[i].Visibility = Visibility.Visible;
+                _gameMenu.RemovePlayer(username);
+
+                foreach (PlayerIcon playerIcon in _playerIcons)
+                {
+                    if (playerIcon.Username.Equals(username))
+                    {
+                        playerIcon.Visibility = Visibility.Collapsed;
+                    }
+                }
             }
         }
 
         public void UpdateTableCards()
         {
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
-            _tableCards = client.GetCards(SessionDetails.PartyCode);
-
-            for (int i = 0; i < _tableCards.Length; i++)
+            try
             {
-                if (_tableCards[i].Number != "")
+                CardManagerClient client = new CardManagerClient();
+                _tableCards = client.GetCards(SessionDetails.PartyCode);
+
+                for (int i = 0; i < _tableCards.Length; i++)
                 {
-                    _cardLabels[i].Content = _tableCards[i].Number;
-                    _cardColors[i].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_tableCards[i].Color));
-                }
-                else
-                {
-                    _cardLabels[i].Content = "";
-                    _cardColors[i].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF969696"));
+                    if (_tableCards[i].Number != "")
+                    {
+                        _cardLabels[i].Content = _tableCards[i].Number;
+                        _cardColors[i].Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(_tableCards[i].Color);
+                    }
+                    else
+                    {
+                        _cardLabels[i].Content = "";
+                        _cardColors[i].Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF969696");
+                    }
                 }
             }
-
-            _matchingColors = 0;
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
         }
 
         public void TurnFinished(string currentTurn)
         {
-            _currentTurnLabel.Content = currentTurn;
-
-            if (currentTurn.Equals(SessionDetails.Username))
-            {
-                _endTurnButton.Visibility = Visibility.Visible;
-            }
+            LblCurrentTurn.Content = currentTurn;
 
             UpdateTableCards();
         }
 
-        public void GameOver()
+        public async void GameOver()
         {
-            throw new System.NotImplementedException();
+            BtnEndTurn.Visibility = Visibility.Collapsed;
+            _gameMenu.Visibility = Visibility.Collapsed;
+            BtnShowGameMenu.Visibility = Visibility.Collapsed;
+
+            GameOver gameOverScreen = new GameOver();
+            InstanceContext instanceContext = new InstanceContext(this);
+            MatchManagerClient client = new MatchManagerClient(instanceContext);
+            client.SetGameScore(SessionDetails.PartyCode, SessionDetails.Username, PlayerDeck.Children.Count);
+
+            MatchOverLabel matchOverLabel = new MatchOverLabel();
+            matchOverLabel.Visibility = Visibility.Visible;
+
+            TableBackground.Children.Add(matchOverLabel);
+            MusicManager.PlayMatchFinishedSound();
+            
+            await Task.Delay(5000);
+
+            Dictionary<string, int> playerScores = client.GetMatchResults(SessionDetails.PartyCode);
+            gameOverScreen.LoadPlayers(playerScores);
+
+            gameOverScreen.Visibility = Visibility.Visible;
+            TableBackground.Children.Add(gameOverScreen);
         }
 
-        void DealPlayerCard()
+        private void DealPlayerCard()
         {
-            Card card = new Card();
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
-            DataService.Card dealtCard = client.DrawCard();
-            _hasDrawnCard = true;
+            try
+            {
+                Card card = new Card();
+                CardManagerClient client = new CardManagerClient();
+                DataService.Card dealtCard = client.DrawCard();
+                _hasDrawnCard = true;
 
-            card.Number = dealtCard.Number;
-            card.Color = dealtCard.Color;
-            card.Visibility = Visibility.Visible;
-            card.GameTable = this;
+                card.Number = dealtCard.Number;
+                card.Color = dealtCard.Color;
+                card.Visibility = Visibility.Visible;
+                card.GameTable = this;
 
-            _playerDeck.Children.Add(card);
+                PlayerDeck.Children.Add(card);
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
         }
 
-        void _gameMenuButton_Click(object sender, RoutedEventArgs e)
+        private void BtnShowGameMenuEvent(object sender, RoutedEventArgs e)
         {
             _gameMenu.Visibility = Visibility.Visible;
         }
 
-        void Deck_Click(object sender, RoutedEventArgs e)
+        private void BtnDeckEvent(object sender, RoutedEventArgs e)
         {
-            if (_currentTurnLabel.Content.Equals(SessionDetails.Username))
+            if (LblCurrentTurn.Content.Equals(SessionDetails.Username))
             {
                 DealPlayerCard();
             }
         }
 
-        bool isValidMove(int position)
+        private bool isValidMove(int position)
         {
             bool result = false;
             int selectionSum = 0;
 
-            if (_currentTurnLabel.Content.Equals(SessionDetails.Username))
+            if (LblCurrentTurn.Content.Equals(SessionDetails.Username))
             {
                 for (int i = 0; i < _selectedCards.Count; i++)
                 {
@@ -193,7 +289,7 @@ namespace ClienteDuo.Pages
                         _matchingColors = -1;
                     }
 
-                    if (_selectedCards[i].Number.Equals("#"))
+                    if (_selectedCards[i].Number.Equals("#") && !_tableCards[position].Number.Equals(""))
                     {
                         result = true;
                     }
@@ -212,31 +308,50 @@ namespace ClienteDuo.Pages
             return result;
         }
 
-        void PlayCard(int position)
+        private void PlayCard(int position)
         {
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
-            client.PlayCard(SessionDetails.PartyCode, position, _tableCards[position]);
-
-            for (int i = 0; i < _selectedCards.Count; i++)
+            try
             {
-                _tableCards[position].Number = "";
-                _cardLabels[position].Content = _selectedCards[i].Number;
-                _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
-                    
-                _playerDeck.Children.Remove(_selectedCards[i]);
+                DataService.CardManagerClient client = new DataService.CardManagerClient();
+                DataService.Card playedCard = new DataService.Card();
+                playedCard.Number = _selectedCards[0].Number;
+                playedCard.Color = _selectedCards[0].Color;
+
+                client.PlayCard(SessionDetails.PartyCode, position, playedCard);
+                MusicManager.PlayCardFlippedSound();
+
+                for (int i = 0; i < _selectedCards.Count; i++)
+                {
+                    _tableCards[position].Number = "PLAYED CARD";
+                    _cardLabels[position].Content = _selectedCards[i].Number;
+                    _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
+
+                    PlayerDeck.Children.Remove(_selectedCards[i]);
+                }
+
+                _selectedCards.Clear();
+
+                if (PlayerDeck.Children.Count == 0)
+                {
+                    InstanceContext context = new InstanceContext(this);
+                    MatchManagerClient matchClient = new MatchManagerClient(context);
+
+                    matchClient.EndGame(SessionDetails.PartyCode);
+                }
+                else
+                {
+                    BtnEndTurn.Visibility = Visibility.Visible;
+                }
             }
-
-            _selectedCards.Clear();
-
-            if (_playerDeck.Children.Count == 0)
+            catch (CommunicationException)
             {
-                GameOver();
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
             }
-
-            _endTurnButton.Visibility = Visibility.Visible;
         }
 
-        void PlayCardLeft(object sender, RoutedEventArgs e)
+        private void PlayCardLeft(object sender, RoutedEventArgs e)
         {
             if (isValidMove(0)) 
             {
@@ -244,7 +359,7 @@ namespace ClienteDuo.Pages
             }
         }
 
-        void PlayCardMiddle(object sender, RoutedEventArgs e)
+        private void PlayCardMiddle(object sender, RoutedEventArgs e)
         {
             if (isValidMove(1))
             {
@@ -252,9 +367,9 @@ namespace ClienteDuo.Pages
             }
         }
 
-        void PlayCardRight(object sender, RoutedEventArgs e)
+        private void PlayCardRight(object sender, RoutedEventArgs e)
         {
-            if (_tableCards[2].Number.Equals(""))
+            if (_tableCards[2].Number.Equals("") && _selectedCards.Count == 1)
             {
                 if (_matchingColors >= 1 || _hasDrawnCard)
                 {
@@ -270,17 +385,26 @@ namespace ClienteDuo.Pages
             }
         }
 
-        void EndTurnButton_Click(object sender, RoutedEventArgs e)
+        private void BtnEndTurnEvent(object sender, RoutedEventArgs e)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            DataService.MatchManagerClient client = new DataService.MatchManagerClient(instanceContext);
-            _endTurnButton.Visibility = Visibility.Collapsed;
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                MatchManagerClient client = new MatchManagerClient(instanceContext);
+                BtnEndTurn.Visibility = Visibility.Collapsed;
+                _matchingColors = 0;
 
-            Card card = new Card();
-            DataService.CardManagerClient cardClient = new DataService.CardManagerClient();
-            cardClient.DealCards(SessionDetails.PartyCode);
+                CardManagerClient cardClient = new CardManagerClient();
+                cardClient.DealCards(SessionDetails.PartyCode);
 
-            client.EndTurn(SessionDetails.PartyCode);
+                client.EndTurn(SessionDetails.PartyCode);
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
         }
     }
 }

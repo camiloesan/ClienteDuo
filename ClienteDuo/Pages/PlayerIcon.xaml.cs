@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClienteDuo.DataService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,35 @@ namespace ClienteDuo.Pages
     /// </summary>
     public partial class PlayerIcon : UserControl
     {
+        string _username;
+
         public PlayerIcon()
         {
             InitializeComponent();
+
+            
+            _username = "";
+        }
+
+        public string Username 
+        {
+            set {
+                _username = value;
+                LblUsername.Content = _username;
+            }
+
+            get
+            {
+                return _username;
+            }
+        }
+
+        public void SetProfilePicture(int pictureId)
+        {
+            ImageBrush imageBrush = new ImageBrush();
+            imageBrush.ImageSource = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp" + pictureId + ".png"));
+
+            ProfilePicture.Background = imageBrush;
         }
     }
 }
