@@ -285,4 +285,7 @@
   <data name="DlgFriendRequestError" xml:space="preserve">
     <value>Il y avait un echec en envoyant de la demande d'ami</value>
   </data>
+  <data name="DlgNotEnoughPlayers" xml:space="preserve">
+    <value>Échec en commençant, il faut que le Lobby a au moins 2 jeueurs</value>
+  </data>
 </root>

@@ -396,4 +396,7 @@
   <data name="DlgHostHasClosedTheParty" xml:space="preserve">
     <value>El host a abandonado la partida</value>
   </data>
+  <data name="DlgNotEnoughPlayers" xml:space="preserve">
+    <value>No se pudo iniciar la partida, el lobby debe tener al menos 2 jugadores</value>
+  </data>
 </root>

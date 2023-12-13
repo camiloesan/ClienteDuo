@@ -296,14 +296,26 @@ namespace ClienteDuo.Pages
 
         private void StartGameEvent(object sender, RoutedEventArgs e)
         {
-            PartyManagerClient partyManagerClient = new PartyManagerClient(new InstanceContext(this));
-            try
+            PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
+
+            if (partyValidatorClient.GetPlayersInParty(SessionDetails.PartyCode).Length > 1)
             {
-                partyManagerClient.NotifyStartGame(SessionDetails.PartyCode);
+                PartyManagerClient partyManagerClient = new PartyManagerClient(new InstanceContext(this));
+
+                try
+                {
+                    partyManagerClient.NotifyStartGame(SessionDetails.PartyCode);
+                }
+                catch (CommunicationException)
+                {
+                    Launcher launcher = new Launcher();
+                    Application.Current.MainWindow.Content = launcher;
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                }
             }
-            catch (CommunicationException)
+            else
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgNotEnoughPlayers, MessageBoxImage.Exclamation);
             }
         }
 

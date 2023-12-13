@@ -502,6 +502,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot start the game, lobby must have at least 2 players.
+        /// </summary>
+        public static string DlgNotEnoughPlayers {
+            get {
+                return ResourceManager.GetString("DlgNotEnoughPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are now friends!.
         /// </summary>
         public static string DlgNowFriends {

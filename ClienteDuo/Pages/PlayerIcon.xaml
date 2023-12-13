@@ -7,11 +7,11 @@
              mc:Ignorable="d" d:DesignWidth="150" Height="150">
 
     <Grid x:Name="_background" Background="#FFCECECE">
-        <Label x:Name="_playerIcon" Content="" HorizontalAlignment="Center" Margin="0,10,0,10" VerticalAlignment="Top" Height="100" Width="100">
+        <Label x:Name="ProfilePicture" Content="" HorizontalAlignment="Center" Margin="0,10,0,10" VerticalAlignment="Top" Height="100" Width="100">
             <Label.Background>
                 <ImageBrush ImageSource="../Images/profile-user.png"/>
             </Label.Background>
         </Label>
-        <Label x:Name="_nameLabel" Content="[Username]" HorizontalAlignment="Center" Margin="0,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.28" Height="25"/>
+        <Label x:Name="LblUsername" Content="[Username]" HorizontalAlignment="Center" Margin="0,115,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.395,0.28" Height="25"/>
     </Grid>
 </UserControl>

@@ -19,9 +19,6 @@ using System.Windows.Shapes;
 
 namespace ClienteDuo.Pages
 {
-    /// <summary>
-    /// Interaction logic for ModifyProfile.xaml
-    /// </summary>
     public partial class ModifyProfile : Page
     {
         int _selectedPictureId = 0;
@@ -41,22 +38,7 @@ namespace ClienteDuo.Pages
         private void SetCurrentProfilePicturePreview(int pictureId)
         {
             _selectedPictureId = pictureId;
-            BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
-            switch (pictureId)
-            {
-                case 0:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
-                    break;
-                case 1:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp1.jpg"));
-                    break;
-                case 2:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp2.jpg"));
-                    break;
-                case 3:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp3.jpg"));
-                    break;
-            }
+            BitmapImage bitmapImage = bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp" + pictureId + ".png"));
             ImageCurrentProfilePicture.Source = bitmapImage;
             ImageCurrentProfilePicture.Stretch = Stretch.UniformToFill;
         }
@@ -64,9 +46,9 @@ namespace ClienteDuo.Pages
         private void InitializeAvailableProfilePictures()
         {
             ImagePfp0.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
-            ImagePfp1.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp1.jpg"));
-            ImagePfp2.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp2.jpg"));
-            ImagePfp3.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp3.jpg"));
+            ImagePfp1.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp1.png"));
+            ImagePfp2.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp2.png"));
+            ImagePfp3.Source = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp3.png"));
         }
 
         private void BtnContinueEvent(object sender, RoutedEventArgs e)

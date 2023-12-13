@@ -15,14 +15,14 @@ namespace ClienteDuo.Pages
 {
     public partial class CardTable : Page, DataService.IMatchManagerCallback
     {
-        bool _hasDrawnCard;
-        DataService.Card[] _tableCards = new DataService.Card[3];
-        GameMenu _gameMenu;
-        PlayerIcon[] _playerIcons = new PlayerIcon[3];
-        List<Card> _selectedCards = new List<Card>();
-        Label[] _cardLabels = new Label[3];
-        Rectangle[] _cardColors = new Rectangle[3];
-        int _matchingColors;
+        private bool _hasDrawnCard;
+        private DataService.Card[] _tableCards = new DataService.Card[3];
+        private GameMenu _gameMenu;
+        private PlayerIcon[] _playerIcons = new PlayerIcon[3];
+        private List<Card> _selectedCards = new List<Card>();
+        private Label[] _cardLabels = new Label[3];
+        private Rectangle[] _cardColors = new Rectangle[3];
+        private int _matchingColors;
 
         public CardTable()
         {
@@ -60,40 +60,64 @@ namespace ClienteDuo.Pages
 
         private void LoadSettingsMenu()
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            MatchManagerClient client = new MatchManagerClient(instanceContext);
-            
-            _gameMenu = new GameMenu();
-            _gameMenu.setClient(client);
-            _gameMenu.Margin = new Thickness(550, 0, 0, 0);
-            _gameMenu.Visibility = Visibility.Collapsed;
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                MatchManagerClient client = new MatchManagerClient(instanceContext);
 
-            TableBackground.Children.Add(_gameMenu);
+                _gameMenu = new GameMenu();
+                _gameMenu.setClient(client);
+                _gameMenu.Margin = new Thickness(550, 0, 0, 0);
+                _gameMenu.Visibility = Visibility.Collapsed;
+
+                TableBackground.Children.Add(_gameMenu);
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
         }
 
         public void LoadPlayers()
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            MatchManagerClient client = new MatchManagerClient(instanceContext);
-            List<string> matchPlayers = new List<string>(client.GetPlayerList(SessionDetails.PartyCode));
-            LblCurrentTurn.Content = client.GetCurrentTurn(SessionDetails.PartyCode);
-
-            List<string> otherPlayers = new List<string>();
-            foreach (string player in matchPlayers)
+            try
             {
-                if (!player.Equals(SessionDetails.Username))
+                InstanceContext instanceContext = new InstanceContext(this);
+                MatchManagerClient client = new MatchManagerClient(instanceContext);
+                List<string> matchPlayers = new List<string>(client.GetPlayerList(SessionDetails.PartyCode));
+                LblCurrentTurn.Content = client.GetCurrentTurn(SessionDetails.PartyCode);
+
+                List<string> otherPlayers = new List<string>();
+                foreach (string player in matchPlayers)
                 {
-                    otherPlayers.Add(player);
+                    if (!player.Equals(SessionDetails.Username))
+                    {
+                        otherPlayers.Add(player);
+                    }
                 }
-            }
 
-            for (int i = 0; i < otherPlayers.Count; i++)
+                for (int i = 0; i < otherPlayers.Count; i++)
+                {
+                    _playerIcons[i].Username = otherPlayers[i];
+                    _playerIcons[i].Visibility = Visibility.Visible;
+
+                    if (!_playerIcons[i].Username.Contains("guest"))
+                    {
+                        UserDTO userDTO = new UsersManagerClient().GetUserInfoByUsername(_playerIcons[i].Username);
+                        _playerIcons[i].SetProfilePicture(userDTO.PictureID);
+                    }
+                }
+
+                _gameMenu.LoadPlayers(otherPlayers, client);
+            }
+            catch (CommunicationException)
             {
-                _playerIcons[i].Username = otherPlayers[i];
-                _playerIcons[i].Visibility = Visibility.Visible;
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
             }
-
-            _gameMenu.LoadPlayers(otherPlayers, client);
         }
 
         public bool SelectCard(Card selectedCard)
@@ -150,21 +174,30 @@ namespace ClienteDuo.Pages
 
         public void UpdateTableCards()
         {
-            CardManagerClient client = new CardManagerClient();
-            _tableCards = client.GetCards(SessionDetails.PartyCode);
-
-            for (int i = 0; i < _tableCards.Length; i++)
+            try
             {
-                if (_tableCards[i].Number != "")
+                CardManagerClient client = new CardManagerClient();
+                _tableCards = client.GetCards(SessionDetails.PartyCode);
+
+                for (int i = 0; i < _tableCards.Length; i++)
                 {
-                    _cardLabels[i].Content = _tableCards[i].Number;
-                    _cardColors[i].Fill = (SolidColorBrush) new BrushConverter().ConvertFrom(_tableCards[i].Color);
+                    if (_tableCards[i].Number != "")
+                    {
+                        _cardLabels[i].Content = _tableCards[i].Number;
+                        _cardColors[i].Fill = (SolidColorBrush)new BrushConverter().ConvertFrom(_tableCards[i].Color);
+                    }
+                    else
+                    {
+                        _cardLabels[i].Content = "";
+                        _cardColors[i].Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF969696");
+                    }
                 }
-                else
-                {
-                    _cardLabels[i].Content = "";
-                    _cardColors[i].Fill = (SolidColorBrush) new BrushConverter().ConvertFrom("#FF969696");
-                }
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
             }
         }
 
@@ -203,17 +236,26 @@ namespace ClienteDuo.Pages
 
         private void DealPlayerCard()
         {
-            Card card = new Card();
-            CardManagerClient client = new CardManagerClient();
-            DataService.Card dealtCard = client.DrawCard();
-            _hasDrawnCard = true;
+            try
+            {
+                Card card = new Card();
+                CardManagerClient client = new CardManagerClient();
+                DataService.Card dealtCard = client.DrawCard();
+                _hasDrawnCard = true;
 
-            card.Number = dealtCard.Number;
-            card.Color = dealtCard.Color;
-            card.Visibility = Visibility.Visible;
-            card.GameTable = this;
+                card.Number = dealtCard.Number;
+                card.Color = dealtCard.Color;
+                card.Visibility = Visibility.Visible;
+                card.GameTable = this;
 
-            PlayerDeck.Children.Add(card);
+                PlayerDeck.Children.Add(card);
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
         }
 
         private void BtnShowGameMenuEvent(object sender, RoutedEventArgs e)
@@ -268,35 +310,44 @@ namespace ClienteDuo.Pages
 
         private void PlayCard(int position)
         {
-            DataService.CardManagerClient client = new DataService.CardManagerClient();
-            DataService.Card playedCard = new DataService.Card();
-            playedCard.Number = _selectedCards[0].Number;
-            playedCard.Color = _selectedCards[0].Color;
-
-            client.PlayCard(SessionDetails.PartyCode, position, playedCard);
-            MusicManager.PlayCardFlippedSound();
-
-            for (int i = 0; i < _selectedCards.Count; i++)
+            try
             {
-                _tableCards[position].Number = "PLAYED CARD";
-                _cardLabels[position].Content = _selectedCards[i].Number;
-                _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
-                    
-                PlayerDeck.Children.Remove(_selectedCards[i]);
+                DataService.CardManagerClient client = new DataService.CardManagerClient();
+                DataService.Card playedCard = new DataService.Card();
+                playedCard.Number = _selectedCards[0].Number;
+                playedCard.Color = _selectedCards[0].Color;
+
+                client.PlayCard(SessionDetails.PartyCode, position, playedCard);
+                MusicManager.PlayCardFlippedSound();
+
+                for (int i = 0; i < _selectedCards.Count; i++)
+                {
+                    _tableCards[position].Number = "PLAYED CARD";
+                    _cardLabels[position].Content = _selectedCards[i].Number;
+                    _cardColors[position].Fill = (SolidColorBrush)(new BrushConverter().ConvertFrom(_selectedCards[i].Color));
+
+                    PlayerDeck.Children.Remove(_selectedCards[i]);
+                }
+
+                _selectedCards.Clear();
+
+                if (PlayerDeck.Children.Count == 0)
+                {
+                    InstanceContext context = new InstanceContext(this);
+                    MatchManagerClient matchClient = new MatchManagerClient(context);
+
+                    matchClient.EndGame(SessionDetails.PartyCode);
+                }
+                else
+                {
+                    BtnEndTurn.Visibility = Visibility.Visible;
+                }
             }
-
-            _selectedCards.Clear();
-
-            if (PlayerDeck.Children.Count == 0)
+            catch (CommunicationException)
             {
-                InstanceContext context = new InstanceContext(this);
-                MatchManagerClient matchClient = new MatchManagerClient(context);
-
-                matchClient.EndGame(SessionDetails.PartyCode);
-            }
-            else
-            {
-                BtnEndTurn.Visibility = Visibility.Visible;
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
             }
         }
 
@@ -336,15 +387,24 @@ namespace ClienteDuo.Pages
 
         private void BtnEndTurnEvent(object sender, RoutedEventArgs e)
         {
-            InstanceContext instanceContext = new InstanceContext(this);
-            MatchManagerClient client = new MatchManagerClient(instanceContext);
-            BtnEndTurn.Visibility = Visibility.Collapsed;
-            _matchingColors = 0;
+            try
+            {
+                InstanceContext instanceContext = new InstanceContext(this);
+                MatchManagerClient client = new MatchManagerClient(instanceContext);
+                BtnEndTurn.Visibility = Visibility.Collapsed;
+                _matchingColors = 0;
 
-            CardManagerClient cardClient = new CardManagerClient();
-            cardClient.DealCards(SessionDetails.PartyCode);
+                CardManagerClient cardClient = new CardManagerClient();
+                cardClient.DealCards(SessionDetails.PartyCode);
 
-            client.EndTurn(SessionDetails.PartyCode);
+                client.EndTurn(SessionDetails.PartyCode);
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
         }
     }
 }

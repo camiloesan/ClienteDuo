@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ClienteDuo.Pages.Tests
+namespace ClienteDuo.Tests
 {
     [TestClass()]
     public class JoinPartyTests
