@@ -76,7 +76,6 @@
     </Compile>
     <Compile Include="JoinPartyTests.cs" />
     <Compile Include="MatchManagerClientTests.cs" />
-    <Compile Include="MatchManagerTests.cs" />
     <Compile Include="LoginTests.cs" />
     <Compile Include="ModifyProfileTests.cs" />
     <Compile Include="NewAccountTests.cs" />
