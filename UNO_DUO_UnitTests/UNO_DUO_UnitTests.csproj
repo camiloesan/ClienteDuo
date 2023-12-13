@@ -109,12 +109,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClienteDuo\ClienteDuo.csproj">
-      <Project>{bbd33e8b-d17e-463d-a81a-83a7b02019b9}</Project>
-      <Name>ClienteDuo</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DataService\" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +125,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClienteDuo\ClienteDuo.csproj">
+      <Project>{bbd33e8b-d17e-463d-a81a-83a7b02019b9}</Project>
+      <Name>ClienteDuo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

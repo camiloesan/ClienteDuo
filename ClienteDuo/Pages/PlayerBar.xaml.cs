@@ -3,6 +3,8 @@ using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace ClienteDuo.Pages
 {
