@@ -20,7 +20,7 @@
             </Button.Background>
         </Button>
 
-        <Label Content="" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,10,0">
+        <Label x:Name="ProfilePicture" Content="" Width="40" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,10,0">
             <Label.Background>
                 <ImageBrush ImageSource="../Images/profile-user.png"/>
             </Label.Background>

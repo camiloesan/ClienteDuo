@@ -25,25 +25,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void SetProfilePicture()
         {
-            BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
-            switch (SessionDetails.PictureID)
-            {
-                case 0:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
-                    break;
-                case 1:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp1.jpg"));
-                    break;
-                case 2:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp2.jpg"));
-                    break;
-                case 3:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp3.jpg"));
-                    break;
-                default:
-                    bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp0.png"));
-                    break;
-            }
+            BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp " + SessionDetails.PictureID + ".png"));
             ImageProfilePicture.Source = bitmapImage;
             ImageProfilePicture.Stretch = Stretch.UniformToFill;
         }

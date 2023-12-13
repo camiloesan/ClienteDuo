@@ -417,4 +417,7 @@
   <data name="BtnChangePassword" xml:space="preserve">
     <value>Cambiar Contraseña</value>
   </data>
+  <data name="DlgNotEnoughPlayers" xml:space="preserve">
+    <value>No se pudo iniciar la partida, el lobby debe tener al menos 2 jugadores</value>
+  </data>
 </root>

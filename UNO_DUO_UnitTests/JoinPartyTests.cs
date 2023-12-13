@@ -10,7 +10,7 @@ using ClienteDuo.DataService;
 using System.Security.Principal;
 using ClienteDuo.Utilities;
 
-namespace ClienteDuo.Pages.Tests
+namespace ClienteDuo.Tests
 {
     [TestClass()]
     public class JoinPartyTests

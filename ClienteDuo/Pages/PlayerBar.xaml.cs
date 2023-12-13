@@ -34,6 +34,14 @@ namespace ClienteDuo.Pages
             _client = client;
         }
 
+        public void SetProfilePicture(int pictureId)
+        {
+            ImageBrush imageBrush = new ImageBrush();
+            imageBrush.ImageSource = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp" + pictureId + ".png"));
+
+            ProfilePicture.Background = imageBrush;
+        }
+
         private void BtnAddFriendEvent(object sender, RoutedEventArgs e)
         {
             UsersManagerClient client = new UsersManagerClient();

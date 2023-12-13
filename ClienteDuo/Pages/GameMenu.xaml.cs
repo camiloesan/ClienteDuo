@@ -19,6 +19,7 @@ namespace ClienteDuo.Pages
             yourBar.Username = SessionDetails.Username;
             yourBar.BtnAddFriend.Visibility = Visibility.Collapsed;
             yourBar.BtnKick.Visibility = Visibility.Collapsed;
+            yourBar.SetProfilePicture(SessionDetails.PictureID);
             yourBar.Background = new SolidColorBrush(Colors.Gold);
             yourBar.Visibility = Visibility.Visible;
 
@@ -46,13 +47,16 @@ namespace ClienteDuo.Pages
                     }
                     else
                     {
-                        if (playerUsername.Contains("guest"))
+                        if (!playerUsername.Contains("guest"))
                         {
                             UsersManagerClient userClient = new UsersManagerClient();
 
                             if (userClient.IsAlreadyFriend(SessionDetails.Username, playerBar.Username) ||
                                 userClient.IsFriendRequestAlreadyExistent(SessionDetails.Username, playerUsername))
                             {
+                                UserDTO userData = userClient.GetUserInfoByUsername(playerUsername);
+
+                                playerBar.SetProfilePicture(userData.PictureID);
                                 playerBar.BtnAddFriend.Visibility = Visibility.Collapsed;
                             }
                         }

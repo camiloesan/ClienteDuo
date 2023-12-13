@@ -69,8 +69,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CardTableTest.cs" />
+    <Compile Include="Connected Services\DataService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="JoinPartyTests.cs" />
+    <Compile Include="MatchManagerClientTests.cs" />
+    <Compile Include="MatchManagerTests.cs" />
     <Compile Include="LoginTests.cs" />
     <Compile Include="ModifyProfileTests.cs" />
     <Compile Include="NewAccountTests.cs" />
@@ -80,6 +86,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Connected Services\DataService\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DataService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DataService\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DataService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\DataService\ServiceImplementation.wsdl" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ClienteDuo.DataService.Card.datasource" />
     <None Include="Properties\DataSources\ClienteDuo.DataService.FriendRequest.datasource" />
@@ -94,6 +113,24 @@
       <Project>{bbd33e8b-d17e-463d-a81a-83a7b02019b9}</Project>
       <Name>ClienteDuo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\DataService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DataService\item.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DataService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DataService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\DataService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

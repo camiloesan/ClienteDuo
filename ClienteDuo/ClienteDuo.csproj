@@ -173,6 +173,7 @@
       <DependentUpon>Resources.fr.resx</DependentUpon>
     </Compile>
     <Compile Include="TestClasses\TestPartyManager.cs" />
+    <Compile Include="TestClasses\TestGameTable.cs" />
     <Compile Include="Utilities\MusicManager.cs" />
     <Compile Include="Utilities\SessionDetails.cs" />
     <Compile Include="Utilities\Sha256Encryptor.cs" />
@@ -434,15 +435,21 @@
     <Resource Include="Images\france.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\pfp1.jpg" />
-    <Resource Include="Images\pfp2.jpg" />
-    <Resource Include="Images\pfp3.jpg" />
-    <Resource Include="Images\pfp0.png" />
+    <Resource Include="Images\pfp0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\loadingGIF.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\DuoCardPFP.png" />
-    <Resource Include="Images\DuoPFP.png" />
+    <Resource Include="Images\pfp4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pfp5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pfp1.png" />
+    <Resource Include="Images\pfp2.png" />
+    <Resource Include="Images\pfp3.png" />
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -468,5 +475,6 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\DataService\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
