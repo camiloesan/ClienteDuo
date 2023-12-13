@@ -62,7 +62,6 @@ namespace ClienteDuo.Pages
         {
             SessionDetails.PartyCode = GenerateNewPartyCode();
             SessionDetails.Username = hostUsername;
-
             try
             {
                 _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
@@ -295,6 +294,11 @@ namespace ClienteDuo.Pages
         }
 
         private void StartGameEvent(object sender, RoutedEventArgs e)
+        {
+            StartGame();
+        }
+
+        public void StartGame()
         {
             PartyManagerClient partyManagerClient = new PartyManagerClient(new InstanceContext(this));
             try

@@ -213,8 +213,9 @@ namespace ClienteDuo.Tests
         public void AddUserAlreadyExistsTest()
         {
             NewAccount newAccount = new NewAccount();
-            bool result = newAccount.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
-            Assert.IsFalse(result);
+            int result = newAccount.AddUserToDatabase(_initializedUsername, _initializedEmail, _initializedPassword);
+            int expected = 0;
+            Assert.AreEqual(expected, result);
         }
     }
 }

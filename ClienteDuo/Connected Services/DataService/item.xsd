@@ -41,7 +41,7 @@
   <xs:element name="AddUserToDatabaseResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="AddUserToDatabaseResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="AddUserToDatabaseResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

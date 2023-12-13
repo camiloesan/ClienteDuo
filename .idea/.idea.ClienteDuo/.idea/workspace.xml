@@ -9,6 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="088e4d94-a22e-47c8-9a53-2f3b89a108d6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ClienteDuo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ClienteDuo/Pages/Lobby.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +107,7 @@
     ]
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected=".NET Project.ClienteDuo">
     <configuration name="ClienteDuo" type="DotNetProject" factoryName=".NET Project" singleton="false">
       <option name="EXE_PATH" value="$PROJECT_DIR$/ClienteDuo/bin/Debug/ClienteDuo.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -159,6 +160,7 @@
       <workItem from="1702058854564" duration="86000" />
       <workItem from="1702065552747" duration="73000" />
       <workItem from="1702091810126" duration="3085000" />
+      <workItem from="1702264659632" duration="4927000" />
     </task>
     <task id="LOCAL-00001" summary="just one lobby">
       <option name="closed" value="true" />

@@ -47,7 +47,7 @@ namespace ClienteDuo
 
             if (areFieldsValid)
             {
-                bool result = false;
+                int result = 0;
                 try
                 {
                     result = AddUserToDatabase(username, email, password);
@@ -57,7 +57,7 @@ namespace ClienteDuo
                     MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
                 }
 
-                if (result)
+                if (result == 1)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgNewAccountSuccess, MessageBoxImage.Information);
                     var launcher = new Launcher();
@@ -167,7 +167,7 @@ namespace ClienteDuo
             return usersManagerClient.IsEmailTaken(email);
         }
 
-        public bool AddUserToDatabase(string username, string email, string password)
+        public int AddUserToDatabase(string username, string email, string password)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             UserDTO databaseUser = new UserDTO
