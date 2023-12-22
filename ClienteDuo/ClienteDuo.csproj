@@ -139,6 +139,9 @@
     <Compile Include="Pages\Sidebars\PasswordReset.xaml.cs">
       <DependentUpon>PasswordReset.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Sidebars\PopUpMessage.xaml.cs">
+      <DependentUpon>PopUpMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Sidebars\PopUpUserDetails.xaml.cs">
       <DependentUpon>PopUpUserDetails.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Sidebars\PopUpKickPlayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Sidebars\PopUpMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

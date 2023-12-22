@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.DataService;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System.ComponentModel;
 using System.ServiceModel;
@@ -17,7 +18,6 @@ namespace ClienteDuo.Pages
             ResizeMode = ResizeMode.NoResize;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Closing += OnWindowClosing;
-
             _instanceContext = new InstanceContext(this);
             var launcher = new Launcher();
             Content = launcher;
@@ -31,10 +31,15 @@ namespace ClienteDuo.Pages
 
         public static void ShowMessageBox(string message, MessageBoxImage messageBoxImage)
         {
-            string caption = Properties.Resources.TitleAlert;
-
-            const MessageBoxButton okButton = MessageBoxButton.OK;
-            MessageBox.Show(message, caption, okButton, messageBoxImage);
+            Application.Current.MainWindow.IsEnabled = false;
+            PopUpMessage popUpMessage = new PopUpMessage
+            {
+                Height = 220,
+                Width = 370,
+                Message = message,
+                Topmost = true
+            };
+            popUpMessage.Show();
         }
 
         public void UserLogged(string username)
