@@ -186,6 +186,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cerrar Sesión.
+        /// </summary>
+        public static string BtnLogOut {
+            get {
+                return ResourceManager.GetString("BtnLogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modificar Perfil.
         /// </summary>
         public static string BtnModifyProfile {
@@ -438,7 +447,7 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to La contraseña debe contener al menos: 8 caracteres, un símbolo especial, una letra mayúscula y minúscula, y un máximo de 16 caracteres.
+        ///   Looks up a localized string similar to La contraseña debe contener al menos: 8 caracteres, un símbolo especial(!@?#$&amp;$°¬|/%*), una letra mayúscula y minúscula, y un máximo de 16 caracteres.
         /// </summary>
         public static string DlgInsecurePassword {
             get {
@@ -492,6 +501,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Estás seguro de que deseas cerrar esta sesión?.
+        /// </summary>
+        public static string DlgLogOutConfirmation {
+            get {
+                return ResourceManager.GetString("DlgLogOutConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Un mensaje solo puede contener 250 caracteres.
         /// </summary>
         public static string DlgMessageMaxCharacters {
@@ -506,6 +524,15 @@ namespace ClienteDuo.Properties {
         public static string DlgNewAccountSuccess {
             get {
                 return ResourceManager.GetString("DlgNewAccountSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo iniciar la partida, el lobby debe tener al menos 2 jugadores.
+        /// </summary>
+        public static string DlgNotEnoughPlayers {
+            get {
+                return ResourceManager.GetString("DlgNotEnoughPlayers", resourceCulture);
             }
         }
         

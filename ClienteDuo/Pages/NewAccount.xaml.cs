@@ -2,17 +2,16 @@
 using ClienteDuo.Pages;
 using ClienteDuo.Utilities;
 using System.ServiceModel;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Input;
+using Regex = System.Text.RegularExpressions.Regex;
 
 namespace ClienteDuo
 {
     public partial class NewAccount : Page
     {
-        private const int MAX_LENGTH_EMAIL = 30;
-
         public NewAccount()
         {
             InitializeComponent();
@@ -26,10 +25,18 @@ namespace ClienteDuo
 
         private void BtnContinueEvent(object sender, RoutedEventArgs e)
         {
-            LogIn();
+            AddUser();
+        }
+        
+        private void EnterKeyEvent(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                AddUser();
+            }
         }
 
-        private void LogIn()
+        private void AddUser()
         {
             string username = TBoxUsername.Text.Trim();
             string email = TBoxEmail.Text.Trim();
@@ -84,7 +91,7 @@ namespace ClienteDuo
             {
                 TBoxUsername.BorderBrush = new SolidColorBrush(Colors.Red);
                 TBoxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
-                MainWindow.ShowMessageBox(Properties.Resources.DlgEmptyFields, MessageBoxImage.Warning);
+                MainWindow.ShowMessageBox(Properties.Resources.DlgUsernameInvalid, MessageBoxImage.Warning);
             }
             else if (!IsPasswordSecure(password))
             {
@@ -127,8 +134,8 @@ namespace ClienteDuo
 
         public bool IsEmailValid(string email)
         {
-            var regex = new Regex("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
-            return regex.IsMatch(email) && email.Length <= MAX_LENGTH_EMAIL;
+            var regex = new Regex("^(?=. {5,30}$)[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
+            return regex.IsMatch(email);
         }
 
         public bool IsPasswordMatch(string password, string confirmedPassword)

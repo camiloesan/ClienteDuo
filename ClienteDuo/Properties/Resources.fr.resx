@@ -172,7 +172,7 @@
     <value>Le groupe est rempli, réessayer à plus tard</value>
   </data>
   <data name="DlgInsecurePassword" xml:space="preserve">
-    <value>La mot de passe dois contenir au moins: 8 caractères, un caractèr spéciaux, et des lettres majuscules et minuscules</value>
+    <value>La mot de passe dois contenir au moins: 8 caractères, un caractèr spéciaux(!@?#$&amp;$°¬|/%*), et des lettres majuscules et minuscules</value>
   </data>
   <data name="DlgInvalidPartyCodeFormat" xml:space="preserve">
     <value>Le code de groupe doit être un numéro de 4 chiffres comme maximum</value>

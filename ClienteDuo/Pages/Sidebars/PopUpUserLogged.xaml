@@ -8,16 +8,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="200">
 
-    <Grid Background="Black" Name="PopUpGrid">
+    <UserControl.Resources>
+        <Style x:Key="AnimationStyle" TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=IsVisible}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:5" AutoReverse="False" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Style.Triggers>            
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Background="Black" Name="PopUpGrid" Style="{StaticResource AnimationStyle}">
         <Label x:Name="LblMessage" Content="{x:Static p:Resources.DlgIsNowActive}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
-        <Grid.Triggers>
-            <EventTrigger RoutedEvent="Grid.Loaded">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="PopUpGrid" Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:4" AutoReverse="False" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
-        </Grid.Triggers>
     </Grid>
 </UserControl>

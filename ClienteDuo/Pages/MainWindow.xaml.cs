@@ -39,7 +39,7 @@ namespace ClienteDuo.Pages
 
         public void UserLogged(string username)
         {
-            MainMenu.ShowPopUpFriendLogged(username);
+            _ = MainMenu.ShowPopUpFriendLogged(username);
         }
 
         private void OnWindowClosing(object sender, CancelEventArgs e)

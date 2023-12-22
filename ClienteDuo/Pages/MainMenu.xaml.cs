@@ -1,7 +1,9 @@
-﻿using ClienteDuo.Pages.Sidebars;
+﻿using System.Threading.Tasks;
+using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace ClienteDuo.Pages
 {
@@ -19,10 +21,12 @@ namespace ClienteDuo.Pages
             InitializeAddOns();
         }
 
-        public static void ShowPopUpFriendLogged(string username)
+        public static async Task ShowPopUpFriendLogged(string username)
         {
             _popUpUserLogged.SetLabelText(username);
             _popUpUserLogged.Visibility = Visibility.Visible;
+            await Task.Delay(5000);
+            _popUpUserLogged.Visibility = Visibility.Collapsed;
         }
 
         public static void ShowPopUpUserDetails(int friendshipId, string username)
@@ -54,9 +58,15 @@ namespace ClienteDuo.Pages
             MainGrid.Children.Add(_popUpUserDetails);
         }
 
-        private void BtnQuitGameEvent(object sender, RoutedEventArgs e)
+        private void BtnLogOutEvent(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Close();
+            bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgLogOutConfirmation);
+            if (confirmation)
+            {
+                MainWindow.NotifyLogOut(SessionDetails.UserId, false);
+                SessionDetails.CleanSessionDetails();
+                Application.Current.MainWindow.Content = new Launcher();
+            }
         }
 
         private void BtnNewPartyEvent(object sender, RoutedEventArgs e)
