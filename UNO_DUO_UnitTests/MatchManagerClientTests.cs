@@ -20,7 +20,7 @@ namespace ClienteDuo.Tests
         private static InstanceContext _context = new InstanceContext(_gameTable);
         private static MatchManagerClient _client = new MatchManagerClient(_context);
         
-        [ClassInitialize()]
+        [TestInitialize()]
         public void Init()
         {
             _partyCode = _numberGenerator.Next(0, 10000);
@@ -32,7 +32,7 @@ namespace ClienteDuo.Tests
             }
         }
 
-        [ClassCleanup()]
+        [TestCleanup()]
         public void Cleanup()
         {
             _client.EndGame(_partyCode);

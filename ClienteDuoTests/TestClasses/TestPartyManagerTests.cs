@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ClienteDuo.TestClasses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 
 namespace ClienteDuo.TestClasses.Tests
@@ -16,11 +10,11 @@ namespace ClienteDuo.TestClasses.Tests
         public void PartyCreatedTest()
         {
             TestPartyManager testPartyManager = new TestPartyManager();
-            int partyCode = 1111;
+            int partyCode = 1110;
 
             testPartyManager.NotifyCreateParty(partyCode, "camilo");
             int expected = 1;
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
             int result = TestPartyManager.PlayersInParty.Count;
             testPartyManager.NotifyCloseParty(partyCode, "kick");
             Assert.AreEqual(expected, result);
@@ -30,7 +24,7 @@ namespace ClienteDuo.TestClasses.Tests
         public void MessageReceivedTest()
         {
             TestPartyManager testPartyManager = new TestPartyManager();
-            int partyCode = 1111;
+            int partyCode = 1113;
             string expectedMessage = "helloWorld";
             testPartyManager.NotifyCreateParty(partyCode, "camilo");
             testPartyManager.NotifySendMessage("helloWorld");
@@ -47,7 +41,7 @@ namespace ClienteDuo.TestClasses.Tests
         public void PlayerJoinedTest()
         {
             TestPartyManager testPartyManager = new TestPartyManager();
-            int partyCode = 1111;
+            int partyCode = 1114;
             testPartyManager.NotifyCreateParty(partyCode, "camilo");
             testPartyManager.NotifyJoinParty(partyCode, "christian");
 
@@ -64,7 +58,7 @@ namespace ClienteDuo.TestClasses.Tests
         public void PlayerKickedTest()
         {
             TestPartyManager testPartyManager = new TestPartyManager();
-            int partyCode = 1111;
+            int partyCode = 1115;
             string playerToKick = "christian";
             testPartyManager.NotifyCreateParty(partyCode, "camilo");
             testPartyManager.NotifyJoinParty(partyCode, playerToKick);
@@ -82,7 +76,7 @@ namespace ClienteDuo.TestClasses.Tests
         public void PlayerLeftTest()
         {
             TestPartyManager testPartyManager = new TestPartyManager();
-            int partyCode = 1111;
+            int partyCode = 1116;
             string playerToKick = "christian";
             testPartyManager.NotifyCreateParty(partyCode, "camilo");
             testPartyManager.NotifyJoinParty(partyCode, playerToKick);
@@ -100,7 +94,7 @@ namespace ClienteDuo.TestClasses.Tests
         public void GameStartedTest()
         {
             TestPartyManager testPartyManager = new TestPartyManager();
-            int partyCode = 1111;
+            int partyCode = 1112;
             string playerToKick = "christian";
             testPartyManager.NotifyCreateParty(partyCode, "camilo");
             testPartyManager.NotifyJoinParty(partyCode, playerToKick);
@@ -108,8 +102,6 @@ namespace ClienteDuo.TestClasses.Tests
 
             Thread.Sleep(2000);
             bool result = TestPartyManager.IsGameStarted;
-            testPartyManager.NotifyCloseParty(partyCode, "kick");
-
             Assert.IsTrue(result);
         }
     }

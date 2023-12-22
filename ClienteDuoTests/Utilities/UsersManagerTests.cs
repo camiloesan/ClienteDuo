@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ClienteDuo.Utilities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ClienteDuo.DataService;
-using ClienteDuo.Pages;
 
 namespace ClienteDuo.Utilities.Tests
 {
@@ -136,7 +130,7 @@ namespace ClienteDuo.Utilities.Tests
             UsersManager.BlockUserByUsername(_user1, _user2);
             UserDTO user1Object = UsersManager.GetUserInfoByUsername(_user1);
             var result = UsersManager.GetBlockedUsersListByUserId(user1Object.ID);
-            
+
             int expected = 1;
             Assert.AreEqual(expected, result.Count());
         }

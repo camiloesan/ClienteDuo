@@ -68,6 +68,8 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
 
@@ -86,6 +88,8 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
 
@@ -105,6 +109,8 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
         }
@@ -135,14 +141,7 @@ namespace ClienteDuo.Pages
             {
                 string message = SessionDetails.Username + ": " + TBoxMessage.Text;
 
-                try
-                {
-                    SendMessage(SessionDetails.PartyCode, message);
-                }
-                catch (CommunicationException)
-                {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
-                }
+                SendMessage(SessionDetails.PartyCode, message);
 
                 TBoxMessage.Text = "";
             }
@@ -160,6 +159,8 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
         }
@@ -170,8 +171,10 @@ namespace ClienteDuo.Pages
             {
                 _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
             }
-            catch
+            catch (CommunicationException)
             {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
 
@@ -205,6 +208,8 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
             }
         }
@@ -371,12 +376,22 @@ namespace ClienteDuo.Pages
             CardTable cardTable = new CardTable();
             InstanceContext tableContext = new InstanceContext(cardTable);
             MatchManagerClient tableClient = new MatchManagerClient(tableContext);
-            tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
             LblLoading.Visibility = Visibility.Visible;
 
-            await Task.Delay(5000);
-            cardTable.LoadPlayers();
-            cardTable.UpdateTableCards();
+            try
+            {
+                tableClient.Subscribe(SessionDetails.PartyCode, SessionDetails.Username);
+                await Task.Delay(5000);
+                cardTable.LoadPlayers();
+                cardTable.UpdateTableCards();
+            }
+            catch (CommunicationException)
+            {
+                Launcher launcher = new Launcher();
+                Application.Current.MainWindow.Content = launcher;
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+            }
+
             Application.Current.MainWindow.Content = cardTable;
         }
 

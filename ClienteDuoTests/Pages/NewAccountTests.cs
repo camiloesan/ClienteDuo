@@ -1,24 +1,15 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ClienteDuo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ClienteDuo.DataService;
-
-using System.Windows.Media.Animation;
-using System.Security.Cryptography.X509Certificates;
 using ClienteDuo.Utilities;
 
-namespace ClienteDuo.Tests
+namespace ClienteDuo.Pages.Tests
 {
     [TestClass()]
     public class NewAccountTests
     {
-        string _initializedUsername = "demonslayer77";
-        string _initializedEmail = "dprk@gmail.com";
-        string _initializedPassword = "Tokyo2023!";
+        readonly string _initializedUsername = "demonslayer77";
+        readonly string _initializedEmail = "dprk@gmail.com";
+        readonly string _initializedPassword = "Tokyo2023!";
 
         [TestInitialize]
         public void Init()

@@ -138,7 +138,7 @@ namespace ClienteDuo
 
         public bool IsPasswordSecure(string password)
         {
-            var regex = new Regex("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,16}$");
+            var regex = new Regex("^(?=.*[A-Z])(?=.*[!@?#$&$°¬|/%*])(?=.*[0-9].*[0-9])(?=.*[a-z]).{8,16}$");
             return regex.IsMatch(password);
         }
 

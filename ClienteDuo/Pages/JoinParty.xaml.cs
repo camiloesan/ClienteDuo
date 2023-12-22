@@ -117,15 +117,17 @@ namespace ClienteDuo.Pages
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             PartyValidatorClient partyValidatorClient = new PartyValidatorClient();
             var playersInPartyList = partyValidatorClient.GetPlayersInParty(partyCode);
+
+            bool result = false;
             foreach (var player in playersInPartyList)
             {
                 if (usersManagerClient.IsUserBlockedByUsername(usernameBlocker, player)
                     || usersManagerClient.IsUserBlockedByUsername(player, usernameBlocker))
                 {
-                    return true;
+                    result = true;
                 }
             }
-            return false;
+            return result;
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

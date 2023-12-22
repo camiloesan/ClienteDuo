@@ -412,7 +412,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\DataService\item.disco" />
     <None Include="Connected Services\DataService\configuration91.svcinfo" />
     <None Include="Connected Services\DataService\configuration.svcinfo" />
     <None Include="Connected Services\DataService\Reference.svcmap">
@@ -450,6 +449,7 @@
     <Resource Include="Images\pfp1.png" />
     <Resource Include="Images\pfp2.png" />
     <Resource Include="Images\pfp3.png" />
+    <None Include="Connected Services\DataService\item.disco" />
     <Content Include="SFX\cardFlippedSound.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
