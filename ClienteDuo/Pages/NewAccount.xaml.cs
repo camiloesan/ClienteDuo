@@ -134,7 +134,7 @@ namespace ClienteDuo
 
         public bool IsEmailValid(string email)
         {
-            var regex = new Regex("^(?=. {5,30}$)[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
+            var regex = new Regex("^(?=.{5,30}$)[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$");
             return regex.IsMatch(email);
         }
 
