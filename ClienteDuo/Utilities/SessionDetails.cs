@@ -1,4 +1,7 @@
-﻿namespace ClienteDuo.Utilities
+﻿using ClienteDuo.Pages;
+using System.Windows;
+
+namespace ClienteDuo.Utilities
 {
     public sealed class SessionDetails
     {
@@ -25,6 +28,13 @@
             PartyCode = 0;
             TotalWins = 0;
             PictureID = 0;
+        }
+
+        public static void AbortOperation()
+        {
+            CleanSessionDetails();
+            Application.Current.MainWindow.Content = new Launcher();
+            MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
         }
     }
 }
