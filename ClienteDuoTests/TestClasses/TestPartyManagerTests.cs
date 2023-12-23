@@ -6,17 +6,19 @@ namespace ClienteDuo.TestClasses.Tests
     [TestClass()]
     public class TestPartyManagerTests
     {
+        readonly string _hostUsername = "camilo";
+
         [TestMethod()]
         public void PartyCreatedTest()
         {
             TestPartyManager testPartyManager = new TestPartyManager();
             int partyCode = 1110;
 
-            testPartyManager.NotifyCreateParty(partyCode, "camilo");
+            testPartyManager.NotifyCreateParty(partyCode, _hostUsername);
             int expected = 1;
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             int result = TestPartyManager.PlayersInParty.Count;
-            testPartyManager.NotifyCloseParty(partyCode, "kick");
+            testPartyManager.NotifyCloseParty(partyCode, _hostUsername, "kick");
             Assert.AreEqual(expected, result);
         }
 
@@ -32,7 +34,7 @@ namespace ClienteDuo.TestClasses.Tests
             Thread.Sleep(2000);
             string result = TestPartyManager.ReceivedMessage;
 
-            testPartyManager.NotifyCloseParty(partyCode, "kick");
+            testPartyManager.NotifyCloseParty(partyCode, _hostUsername, "kick");
 
             Assert.AreEqual(expectedMessage, result);
         }
@@ -48,7 +50,7 @@ namespace ClienteDuo.TestClasses.Tests
             Thread.Sleep(2000);
             int result = TestPartyManager.PlayersInParty.Count;
 
-            testPartyManager.NotifyCloseParty(partyCode, "kick");
+            testPartyManager.NotifyCloseParty(partyCode, _hostUsername, "kick");
 
             int expected = 2;
             Assert.AreEqual(expected, result);
@@ -66,7 +68,7 @@ namespace ClienteDuo.TestClasses.Tests
 
             Thread.Sleep(2000);
             string result = TestPartyManager.PlayerKickedReason;
-            testPartyManager.NotifyCloseParty(partyCode, "kick");
+            testPartyManager.NotifyCloseParty(partyCode, _hostUsername, "kick");
 
             string expected = "spam";
             Assert.AreEqual(expected, result);
@@ -84,7 +86,7 @@ namespace ClienteDuo.TestClasses.Tests
 
             Thread.Sleep(2000);
             int result = TestPartyManager.PlayersInParty.Count;
-            testPartyManager.NotifyCloseParty(partyCode, "kick");
+            testPartyManager.NotifyCloseParty(partyCode, _hostUsername, "kick");
 
             int expected = 1;
             Assert.AreEqual(expected, result);

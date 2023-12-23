@@ -1,6 +1,7 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
+using System;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,7 +29,7 @@ namespace ClienteDuo.Pages
         private void SetCurrentProfilePicturePreview(int pictureId)
         {
             _selectedPictureId = pictureId;
-            BitmapImage bitmapImage = bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp" + pictureId + ".png"));
+            BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp" + pictureId + ".png"));
             ImageCurrentProfilePicture.Source = bitmapImage;
             ImageCurrentProfilePicture.Stretch = Stretch.UniformToFill;
         }
@@ -50,16 +51,26 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                AbortOperation();
             }
 
             if (result)
             {
                 SessionDetails.PictureID = _selectedPictureId;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgProfilePictureUpdated, MessageBoxImage.Information);
-                MainMenu mainMenu = new MainMenu();
-                Application.Current.MainWindow.Content = mainMenu;
+                Application.Current.MainWindow.Content = new MainMenu();
             }
+        }
+
+        private void AbortOperation()
+        {
+            SessionDetails.CleanSessionDetails();
+            Application.Current.MainWindow.Content = new Launcher();
+            MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
         }
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)

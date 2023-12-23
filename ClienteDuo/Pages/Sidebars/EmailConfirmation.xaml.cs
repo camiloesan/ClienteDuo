@@ -1,5 +1,6 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
+using System;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,11 @@ namespace ClienteDuo.Pages.Sidebars
             }
             catch (CommunicationException)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
         }
 
@@ -38,7 +43,19 @@ namespace ClienteDuo.Pages.Sidebars
             }
             else
             {
-                int confirmationCode = UsersManager.SendConfirmationCode(email, lang);
+                int confirmationCode = -1;
+                try
+                {
+                    confirmationCode = UsersManager.SendConfirmationCode(email, lang);
+                }
+                catch (CommunicationException)
+                {
+                    SessionDetails.AbortOperation();
+                }
+                catch (TimeoutException)
+                {
+                    SessionDetails.AbortOperation();
+                }
 
                 if (confirmationCode != -1)
                 {

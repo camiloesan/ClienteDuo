@@ -1,6 +1,7 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
+using System;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,41 +34,61 @@ namespace ClienteDuo.Pages
             string password = TBoxPassword.Password;
 
             UserDTO loggedUser = null;
+            bool result = true;
             try
             {
                 loggedUser = UsersManager.AreCredentialsValid(username, password);
             }
             catch (CommunicationException)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                result = false;
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                result = false;
+                SessionDetails.AbortOperation();
             }
 
-            if (loggedUser == null)
+            if (result)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
-            }
-            else if (UsersManager.IsUserLoggedIn(loggedUser.ID))
-            {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
-            }
-            else
-            {
-                SessionDetails.UserId = loggedUser.ID;
-                SessionDetails.Username = loggedUser.UserName;
-                SessionDetails.Email = loggedUser.Email;
-                SessionDetails.TotalWins = loggedUser.TotalWins;
-                SessionDetails.PictureID = loggedUser.PictureID;
-                SessionDetails.IsGuest = false;
-
-                UserDTO user = new UserDTO
+                if (loggedUser == null)
                 {
-                    UserName = SessionDetails.Username,
-                    ID = SessionDetails.UserId
-                };
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
+                }
+                else if (UsersManager.IsUserLoggedIn(loggedUser.ID))
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    SessionDetails.UserId = loggedUser.ID;
+                    SessionDetails.Username = loggedUser.UserName;
+                    SessionDetails.Email = loggedUser.Email;
+                    SessionDetails.TotalWins = loggedUser.TotalWins;
+                    SessionDetails.PictureID = loggedUser.PictureID;
+                    SessionDetails.IsGuest = false;
 
-                MainMenu mainMenu = new MainMenu();
-                Application.Current.MainWindow.Content = mainMenu;
-                MainWindow.NotifyLogin(user);
+                    UserDTO user = new UserDTO
+                    {
+                        UserName = SessionDetails.Username,
+                        ID = SessionDetails.UserId
+                    };
+
+                    Application.Current.MainWindow.Content = new MainMenu();
+                    try
+                    {
+                        MainWindow.NotifyLogin(user);
+                    }
+                    catch (CommunicationException)
+                    {
+                        SessionDetails.AbortOperation();
+                    }
+                    catch (TimeoutException)
+                    {
+                        SessionDetails.AbortOperation();
+                    }
+                }
             }
         }
 

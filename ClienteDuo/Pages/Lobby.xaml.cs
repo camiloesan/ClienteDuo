@@ -14,8 +14,6 @@ namespace ClienteDuo.Pages
 {
     public partial class Lobby : Page, IPartyManagerCallback
     {
-        const int MESSAGE_MAX_LENGTH = 64;
-        private readonly bool _isWpfRunning = true;
         private readonly PartyManagerClient _partyManagerClient;
         private readonly PartyValidatorClient _partyValidatorClient = new PartyValidatorClient();
         private PopUpUserDetails _popUpUserDetails;
@@ -27,9 +25,12 @@ namespace ClienteDuo.Pages
             InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
 
-            CreateNewParty(username);
-            LoadVisualComponents();
-            MusicManager.PlayPlayerJoinedSound();
+            int partyCode = CreateNewParty(username);
+            if (partyCode != 0)
+            {
+                LoadVisualComponents();
+                MusicManager.PlayPlayerJoinedSound();
+            }
         }
 
         public Lobby(string username, int partyCode)
@@ -38,24 +39,9 @@ namespace ClienteDuo.Pages
             SessionDetails.IsHost = false;
             InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
-
             JoinGame(partyCode, username);
             LoadVisualComponents();
             MusicManager.PlayPlayerJoinedSound();
-        }
-
-        public Lobby() //test-only constructor
-        {
-            InstanceContext instanceContext = new InstanceContext(this);
-            _partyManagerClient = new PartyManagerClient(instanceContext);
-            try
-            {
-                _ = Application.Current.Windows;
-            }
-            catch
-            {
-                _isWpfRunning = false;
-            }
         }
 
         public int CreateNewParty(string hostUsername)
@@ -68,9 +54,11 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
 
             return SessionDetails.PartyCode;
@@ -88,9 +76,11 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
 
             if (IsPartyExistent)
@@ -109,9 +99,11 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
         }
 
@@ -145,7 +137,7 @@ namespace ClienteDuo.Pages
 
                 TBoxMessage.Text = "";
             }
-            else if (TBoxMessage.Text.Length > MESSAGE_MAX_LENGTH)
+            else if (TBoxMessage.Text.Length > 64)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgMessageMaxCharacters, MessageBoxImage.Warning);
             }
@@ -159,13 +151,20 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
         }
 
         private void BtnExitLobbyEvent(object sender, RoutedEventArgs e)
+        {
+            ExitLobby();
+        }
+
+        public void ExitLobby()
         {
             try
             {
@@ -173,21 +172,22 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
 
+            SessionDetails.PartyCode = 0;
             if (SessionDetails.IsHost)
             {
                 CloseParty(SessionDetails.PartyCode);
                 SessionDetails.IsHost = false;
-                SessionDetails.PartyCode = 0;
             }
 
             if (SessionDetails.IsGuest)
             {
-                SessionDetails.PartyCode = 0;
                 Launcher launcher = new Launcher();
                 Application.Current.MainWindow.Content = launcher;
             }
@@ -204,13 +204,15 @@ namespace ClienteDuo.Pages
         {
             try
             {
-                _partyManagerClient.NotifyCloseParty(partyCode, Properties.Resources.DlgHostHasClosedTheParty);
+                _partyManagerClient.NotifyCloseParty(partyCode, SessionDetails.Username, Properties.Resources.DlgHostHasClosedTheParty);
             }
             catch (CommunicationException)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
         }
 
@@ -317,9 +319,11 @@ namespace ClienteDuo.Pages
                 }
                 catch (CommunicationException)
                 {
-                    Launcher launcher = new Launcher();
-                    Application.Current.MainWindow.Content = launcher;
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                    SessionDetails.AbortOperation();
+                }
+                catch (TimeoutException)
+                {
+                    SessionDetails.AbortOperation();
                 }
             }
             else
@@ -347,28 +351,19 @@ namespace ClienteDuo.Pages
 
         public void PlayerJoined(Dictionary<string, object> playersInLobby)
         {
-            if (_isWpfRunning)
-            {
-                MusicManager.PlayPlayerJoinedSound();
-                UpdatePlayerList(playersInLobby);
-            }
+            MusicManager.PlayPlayerJoinedSound();
+            UpdatePlayerList(playersInLobby);
         }
 
         public void PlayerLeft(Dictionary<string, object> playersInLobby)
         {
-            if (_isWpfRunning)
-            {
-                MusicManager.PlayPlayerLeftSound();
-                UpdatePlayerList(playersInLobby);
-            }
+            MusicManager.PlayPlayerLeftSound();
+            UpdatePlayerList(playersInLobby);
         }
 
         public void PartyCreated(Dictionary<string, object> playersInLobby)
         {
-            if (_isWpfRunning)
-            {
-                UpdatePlayerList(playersInLobby);
-            }
+            UpdatePlayerList(playersInLobby);
         }
 
         public async void GameStarted()
@@ -387,9 +382,11 @@ namespace ClienteDuo.Pages
             }
             catch (CommunicationException)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Exclamation);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
 
             Application.Current.MainWindow.Content = cardTable;
@@ -397,21 +394,16 @@ namespace ClienteDuo.Pages
 
         public void PlayerKicked(string reason)
         {
-            if (_isWpfRunning)
+            if (SessionDetails.IsGuest)
             {
-                if (SessionDetails.IsGuest)
-                {
-                    Launcher launcher = new Launcher();
-                    Application.Current.MainWindow.Content = launcher;
-                }
-                else
-                {
-                    MainMenu mainMenu = new MainMenu();
-                    Application.Current.MainWindow.Content = mainMenu;
-                }
-                string message = Properties.Resources.DlgKickedPlayer + Properties.Resources.DlgKickingReason + reason;
-                MainWindow.ShowMessageBox(message, MessageBoxImage.Exclamation);
+                Application.Current.MainWindow.Content = new Launcher();
             }
+            else
+            {
+                Application.Current.MainWindow.Content = new MainMenu();
+            }
+            string message = Properties.Resources.DlgKickedPlayer + Properties.Resources.DlgKickingReason + reason;
+            MainWindow.ShowMessageBox(message, MessageBoxImage.Exclamation);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Pages.Sidebars;
 using ClienteDuo.Utilities;
+using System;
 using System.ComponentModel;
 using System.ServiceModel;
 using System.Windows;
@@ -59,9 +60,11 @@ namespace ClienteDuo.Pages
                 var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
                 var user = new UserDTO
                 {
-                    ID = userId
+                    ID = userId,
+                    UserName = SessionDetails.Username,
+                    PartyCode = SessionDetails.PartyCode
                 };
-                userConnectionHandlerClient.NotifyLogOut(user);
+                userConnectionHandlerClient.NotifyLogOut(user, SessionDetails.IsHost);
             }
         }
 

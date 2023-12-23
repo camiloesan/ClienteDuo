@@ -1,27 +1,29 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
+using ClienteDuo.TestClasses;
+using System.Threading;
 
 namespace ClienteDuo.Pages.Tests
 {
     [TestClass()]
     public class JoinPartyTests
     {
-        int _partyCode;
+        int _partyCode = 1234;
         readonly string _hostUsername = "camilo";
-        private Lobby _lobby;
 
         [TestInitialize]
         public void Init()
         {
-            _lobby = new Lobby();
-            _partyCode = _lobby.CreateNewParty(_hostUsername);
+            TestPartyManager testPartyManager = new TestPartyManager();
+            testPartyManager.NotifyCreateParty(_partyCode, _hostUsername);
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-            _lobby.CloseParty(_partyCode);
+            TestPartyManager testPartyManager = new TestPartyManager();
+            testPartyManager.NotifyCloseParty(_partyCode, _hostUsername, "");
         }
 
         [TestMethod()]
@@ -68,14 +70,10 @@ namespace ClienteDuo.Pages.Tests
             string player2 = "jorgejuan22";
             string player3 = "towngameplay";
 
-            var inviteeLobby = new Lobby();
-            inviteeLobby.JoinGame(_partyCode, player1);
-
-            var inviteeLobby2 = new Lobby();
-            inviteeLobby2.JoinGame(_partyCode, player2);
-
-            var inviteeLobby3 = new Lobby();
-            inviteeLobby3.JoinGame(_partyCode, player3);
+            TestPartyManager testPartyManager = new TestPartyManager();
+            testPartyManager.NotifyJoinParty(_partyCode, player1);
+            testPartyManager.NotifyJoinParty(_partyCode, player2);
+            testPartyManager.NotifyJoinParty(_partyCode, player3);
 
             Assert.IsFalse(joinParty.IsSpaceAvailable(_partyCode));
         }
@@ -89,8 +87,8 @@ namespace ClienteDuo.Pages.Tests
             UsersManager.AddUserToDatabase(player0Username, "host@gmail.com", "Tokyo11!23");
             UsersManager.AddUserToDatabase(player1Username, "player1mail@gmail.com", "Tokyo11!23");
 
-            Lobby lobby = new Lobby();
-            lobby.JoinGame(_partyCode, player0Username);
+            TestPartyManager testPartyManager = new TestPartyManager();
+            testPartyManager.NotifyJoinParty(_partyCode, player0Username);
 
             usersManagerClient.BlockUserByUsername(player0Username, player1Username);
             JoinParty joinParty = new JoinParty();
@@ -106,7 +104,7 @@ namespace ClienteDuo.Pages.Tests
         public void IsUserBlockedByPlayerInLobbyFalseTest()
         {
             JoinParty joinParty = new JoinParty();
-            bool result = joinParty.IsUserBlockedByPlayerInParty("romeo", _partyCode);
+            bool result = joinParty.IsUserBlockedByPlayerInParty(_hostUsername, _partyCode);
 
             Assert.IsFalse(result);
         }

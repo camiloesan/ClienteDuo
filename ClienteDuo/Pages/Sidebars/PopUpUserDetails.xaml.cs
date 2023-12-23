@@ -1,5 +1,6 @@
 ﻿using ClienteDuo.DataService;
 using ClienteDuo.Utilities;
+using System;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,18 +21,34 @@ namespace ClienteDuo.Pages.Sidebars
             InitializeComponent();
         }
 
-        public void InitializeUserInfo(string username, bool isFriend)
+        public void InitializeUserInfo(string username)
         {
-            UserDTO userInfo = UsersManager.GetUserInfoByUsername(username);
+            UserDTO userInfo = null;
+            try
+            {
+                userInfo = UsersManager.GetUserInfoByUsername(username);
+            }
+            catch (CommunicationException)
+            {
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
+            }
+
             _userSelectedName = username;
 
-            SetProfilePicture(userInfo.PictureID);
-            LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
-            LblTrophies.Content = Properties.Resources.LblTotalWins + ": " + userInfo.TotalWins;
-
-            if (UsersManager.IsAlreadyFriend(SessionDetails.Username, username))
+            if (userInfo != null)
             {
-                BtnAddFriend.Visibility = Visibility.Collapsed;
+                SetProfilePicture(userInfo.PictureID);
+                LblUsername.Content = Properties.Resources.LblUsername + ": " + username;
+                LblTrophies.Content = Properties.Resources.LblTotalWins + ": " + userInfo.TotalWins;
+                bool isFriend = UsersManager.IsAlreadyFriend(SessionDetails.Username, username);
+                if (isFriend)
+                {
+                    BtnAddFriend.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -80,7 +97,11 @@ namespace ClienteDuo.Pages.Sidebars
             }
             catch (CommunicationException)
             {
-                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
             }
         }
 
@@ -112,7 +133,11 @@ namespace ClienteDuo.Pages.Sidebars
                 }
                 catch (CommunicationException)
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+                    SessionDetails.AbortOperation();
+                }
+                catch (TimeoutException)
+                {
+                    SessionDetails.AbortOperation();
                 }
 
                 if (isFriend)

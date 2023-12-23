@@ -4,6 +4,8 @@ using ClienteDuo.Utilities;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using System;
+using System.ServiceModel;
 
 namespace ClienteDuo.Pages
 {
@@ -63,7 +65,18 @@ namespace ClienteDuo.Pages
             bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgLogOutConfirmation);
             if (confirmation)
             {
-                MainWindow.NotifyLogOut(SessionDetails.UserId, false);
+                try
+                {
+                    MainWindow.NotifyLogOut(SessionDetails.UserId, false);
+                }
+                catch (CommunicationException)
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                }
+                catch (TimeoutException)
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+                }
                 SessionDetails.CleanSessionDetails();
                 Application.Current.MainWindow.Content = new Launcher();
             }
@@ -71,8 +84,7 @@ namespace ClienteDuo.Pages
 
         private void BtnNewPartyEvent(object sender, RoutedEventArgs e)
         {
-            Lobby lobby = new Lobby(SessionDetails.Username);
-            Application.Current.MainWindow.Content = lobby;
+            Application.Current.MainWindow.Content = new Lobby(SessionDetails.Username);
         }
 
         private void BtnJoinPartyEvent(object sender, RoutedEventArgs e)

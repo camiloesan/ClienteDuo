@@ -27,9 +27,9 @@ namespace ClienteDuo.TestClasses
             _partyManagerClient.NotifyCreateParty(partyCode, hostUseraname);
         }
 
-        public void NotifyCloseParty(int partyCode, string reason)
+        public void NotifyCloseParty(int partyCode, string hostUsername, string reason)
         {
-            _partyManagerClient.NotifyCloseParty(partyCode, reason);
+            _partyManagerClient.NotifyCloseParty(partyCode, hostUsername , reason);
         }
 
         public void NotifySendMessage(string message)

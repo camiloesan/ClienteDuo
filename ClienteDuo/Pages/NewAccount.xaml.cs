@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Input;
 using Regex = System.Text.RegularExpressions.Regex;
+using System;
 
 namespace ClienteDuo
 {
@@ -19,8 +20,7 @@ namespace ClienteDuo
 
         private void BtnCancelEvent(object sender, RoutedEventArgs e)
         {
-            var launcher = new Launcher();
-            Application.Current.MainWindow.Content = launcher;
+            Application.Current.MainWindow.Content = new Launcher();
         }
 
         private void BtnContinueEvent(object sender, RoutedEventArgs e)
@@ -50,6 +50,10 @@ namespace ClienteDuo
             catch (CommunicationException)
             {
                 MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+            catch (TimeoutException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
             }
 
             if (areFieldsValid)
