@@ -9,7 +9,7 @@ namespace ClienteDuo.Pages.Tests
     [TestClass()]
     public class JoinPartyTests
     {
-        int _partyCode = 1234;
+        readonly int _partyCode = 1234;
         readonly string _hostUsername = "camilo";
 
         [TestInitialize]
