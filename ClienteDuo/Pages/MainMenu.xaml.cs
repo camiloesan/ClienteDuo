@@ -84,7 +84,19 @@ namespace ClienteDuo.Pages
 
         private void BtnNewPartyEvent(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.Content = new Lobby(SessionDetails.Username);
+            try
+            {
+                Lobby lobby = new Lobby(SessionDetails.Username);
+                Application.Current.MainWindow.Content = lobby;
+            }
+            catch (CommunicationException)
+            {
+                SessionDetails.AbortOperation();
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
+            }
         }
 
         private void BtnJoinPartyEvent(object sender, RoutedEventArgs e)

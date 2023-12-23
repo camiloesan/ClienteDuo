@@ -18,14 +18,16 @@ namespace ClienteDuo.Pages
         private readonly PartyValidatorClient _partyValidatorClient = new PartyValidatorClient();
         private PopUpUserDetails _popUpUserDetails;
 
-        public Lobby(string username)
+        public Lobby(string hostUsername)
         {
             InitializeComponent();
             SessionDetails.IsHost = true;
             InstanceContext instanceContext = new InstanceContext(this);
             _partyManagerClient = new PartyManagerClient(instanceContext);
 
-            int partyCode = CreateNewParty(username);
+            int partyCode;
+            partyCode = CreateNewParty(hostUsername);
+
             if (partyCode != 0)
             {
                 LoadVisualComponents();
@@ -48,18 +50,7 @@ namespace ClienteDuo.Pages
         {
             SessionDetails.PartyCode = GenerateNewPartyCode();
             SessionDetails.Username = hostUsername;
-            try
-            {
-                _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
-            }
-            catch (CommunicationException)
-            {
-                SessionDetails.AbortOperation();
-            }
-            catch (TimeoutException)
-            {
-                SessionDetails.AbortOperation();
-            }
+            _partyManagerClient.NotifyCreateParty(SessionDetails.PartyCode, SessionDetails.Username);
 
             return SessionDetails.PartyCode;
         }
@@ -69,18 +60,18 @@ namespace ClienteDuo.Pages
             Random random = new Random();
             int randomCode = random.Next(1000, 10000);
 
-            bool IsPartyExistent = false;
+            bool IsPartyExistent = false; 
             try
             {
                 IsPartyExistent = _partyValidatorClient.IsPartyExistent(randomCode);
             }
             catch (CommunicationException)
             {
-                SessionDetails.AbortOperation();
+                randomCode = 0;
             }
             catch (TimeoutException)
             {
-                SessionDetails.AbortOperation();
+                randomCode = 0;
             }
 
             if (IsPartyExistent)
@@ -166,35 +157,46 @@ namespace ClienteDuo.Pages
 
         public void ExitLobby()
         {
-            try
-            {
-                _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
-            }
-            catch (CommunicationException)
-            {
-                SessionDetails.AbortOperation();
-            }
-            catch (TimeoutException)
-            {
-                SessionDetails.AbortOperation();
-            }
-
-            SessionDetails.PartyCode = 0;
             if (SessionDetails.IsHost)
             {
-                CloseParty(SessionDetails.PartyCode);
                 SessionDetails.IsHost = false;
+                try
+                {
+                    CloseParty(SessionDetails.PartyCode);
+                }
+                catch (CommunicationException)
+                {
+                    SessionDetails.AbortOperation();
+                }
+                catch (TimeoutException)
+                {
+                    SessionDetails.AbortOperation();
+                }
+                SessionDetails.PartyCode = 0;
+            } 
+            else
+            {
+                try
+                {
+                    _partyManagerClient.NotifyLeaveParty(SessionDetails.PartyCode, SessionDetails.Username);
+                }
+                catch (CommunicationException)
+                {
+                    SessionDetails.AbortOperation();
+                }
+                catch (TimeoutException)
+                {
+                    SessionDetails.AbortOperation();
+                }
             }
 
             if (SessionDetails.IsGuest)
             {
-                Launcher launcher = new Launcher();
-                Application.Current.MainWindow.Content = launcher;
+                Application.Current.MainWindow.Content = new Launcher();
             }
             else
             {
-                MainMenu mainMenu = new MainMenu();
-                Application.Current.MainWindow.Content = mainMenu;
+                Application.Current.MainWindow.Content = new MainMenu();
             }
 
             MusicManager.PlayPlayerLeftSound();
