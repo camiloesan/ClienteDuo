@@ -12,7 +12,6 @@ namespace ClienteDuo.Pages
     public partial class MainMenu : Page
     {
         private static PopUpUserDetails _popUpUserDetails;
-        private static PopUpUserLogged _popUpUserLogged;
         private SidebarUserProfile _sidebarUserProfile;
         private SidebarFriends _sidebarFriends;
         private SidebarLeaderboard _sidebarLeaderboard;
@@ -23,14 +22,6 @@ namespace ClienteDuo.Pages
             InitializeAddOns();
         }
 
-        public static async Task ShowPopUpFriendLogged(string username)
-        {
-            _popUpUserLogged.SetLabelText(username);
-            _popUpUserLogged.Visibility = Visibility.Visible;
-            await Task.Delay(5000);
-            _popUpUserLogged.Visibility = Visibility.Collapsed;
-        }
-
         public static void ShowPopUpUserDetails(int friendshipId, string username)
         {
             _popUpUserDetails.InitializeUserInfo(friendshipId, username);
@@ -39,16 +30,6 @@ namespace ClienteDuo.Pages
 
         private void InitializeAddOns()
         {
-            _popUpUserLogged = new PopUpUserLogged
-            {
-                Width = 200,
-                Height = 80,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Visibility = Visibility.Collapsed
-            };
-            MainGrid.Children.Add(_popUpUserLogged);
-
             _popUpUserDetails = new PopUpUserDetails
             {
                 Width = 350,

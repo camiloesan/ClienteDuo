@@ -8,26 +8,16 @@ using System.Windows;
 
 namespace ClienteDuo.Pages
 {
-    public partial class MainWindow : Window, IUserConnectionHandlerCallback
+    public partial class MainWindow : Window
     {
-        private static UserConnectionHandlerClient _userConnectionHandlerClient;
-        private static InstanceContext _instanceContext;
-
         public MainWindow()
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
             Closing += OnWindowClosing;
-            _instanceContext = new InstanceContext(this);
             var launcher = new Launcher();
             Content = launcher;
-        }
-
-        public static void NotifyLogin(UserDTO user)
-        {
-            _userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
-            _userConnectionHandlerClient.NotifyLogIn(user);
         }
 
         public static void ShowMessageBox(string message, MessageBoxImage messageBoxImage)
@@ -43,21 +33,11 @@ namespace ClienteDuo.Pages
             popUpMessage.Show();
         }
 
-        public void UserLogged(string username)
-        {
-            _ = MainMenu.ShowPopUpFriendLogged(username);
-        }
-
-        private void OnWindowClosing(object sender, CancelEventArgs e)
-        {
-            NotifyLogOut(SessionDetails.UserId, SessionDetails.IsGuest);
-        }
-
         public static void NotifyLogOut(int userId, bool isGuest)
         {
             if (!isGuest)
             {
-                var userConnectionHandlerClient = new UserConnectionHandlerClient(_instanceContext);
+                var userConnectionHandlerClient = new UserConnectionHandlerClient();
                 var user = new UserDTO
                 {
                     ID = userId,
@@ -66,6 +46,11 @@ namespace ClienteDuo.Pages
                 };
                 userConnectionHandlerClient.NotifyLogOut(user, SessionDetails.IsHost);
             }
+        }
+
+        private void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            NotifyLogOut(SessionDetails.UserId, SessionDetails.IsGuest);
         }
 
         public static bool ShowConfirmationBox(string message)

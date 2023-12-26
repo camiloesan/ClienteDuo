@@ -157,6 +157,7 @@ namespace ClienteDuo.Pages
 
         public void ExitLobby()
         {
+            SessionDetails.PartyCode = 0;
             if (SessionDetails.IsHost)
             {
                 SessionDetails.IsHost = false;
@@ -172,7 +173,6 @@ namespace ClienteDuo.Pages
                 {
                     SessionDetails.AbortOperation();
                 }
-                SessionDetails.PartyCode = 0;
             } 
             else
             {

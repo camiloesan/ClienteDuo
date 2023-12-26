@@ -74,11 +74,12 @@ namespace ClienteDuo.Pages
                         UserName = SessionDetails.Username,
                         ID = SessionDetails.UserId
                     };
-
                     Application.Current.MainWindow.Content = new MainMenu();
+
+                    var userConnectionHandler = new UserConnectionHandlerClient();
                     try
                     {
-                        MainWindow.NotifyLogin(user);
+                        userConnectionHandler.NotifyLogIn(user);
                     }
                     catch (CommunicationException)
                     {
