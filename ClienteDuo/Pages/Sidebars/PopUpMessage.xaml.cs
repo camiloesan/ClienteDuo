@@ -33,6 +33,6 @@ namespace ClienteDuo.Pages.Sidebars
             Close();
         }
 
-        public string Message { set { LblMessage.Text = value; } }
+        public string Message { get { return LblMessage.Text; } set { LblMessage.Text = value; } }
     }
 }

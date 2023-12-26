@@ -56,7 +56,7 @@ namespace ClienteDuo.Pages
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
                 }
-                else if (UsersManager.IsUserLoggedIn(loggedUser.ID))
+                else if (UsersManager.IsUserLoggedIn(loggedUser.UserName))
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgUserAlreadyLoggedIn, MessageBoxImage.Warning);
                 }

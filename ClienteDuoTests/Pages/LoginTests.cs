@@ -16,25 +16,8 @@ namespace ClienteDuo.Pages.Tests
         [TestMethod()]
         public void IsUserNotLoggedInTest()
         {
-            bool result = UsersManager.IsUserLoggedIn(1300);
+            bool result = UsersManager.IsUserLoggedIn("non-existant");
             Assert.IsFalse(result);
-        }
-
-        [TestMethod()]
-        public void IsUserLoggedInTest()
-        {
-            /*
-            UserDTO user = new UserDTO
-            {
-                ID = 1
-            };
-            MainWindow mainWindow = new MainWindow();
-            MainWindow.NotifyLogin(user);
-            Login login = new Login(true);
-            bool result = login.IsUserLoggedIn(1);
-            MainWindow.NotifyLogOut(1, false);
-            Assert.IsTrue(result);
-            */
         }
 
         [TestMethod()]

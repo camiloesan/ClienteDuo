@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ClienteDuo.Utilities
 {
-    public class UsersManager
+    public static class UsersManager
     {
         public static bool IsUsernameTaken(string username)
         {
@@ -36,10 +36,10 @@ namespace ClienteDuo.Utilities
             return usersManagerClient.UpdateProfilePictureByUserId(userId, pictureId);
         }
 
-        public static bool IsUserLoggedIn(int userId)
+        public static bool IsUserLoggedIn(string username)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
-            return usersManagerClient.IsUserAlreadyLoggedIn(userId);
+            return usersManagerClient.IsUserAlreadyLoggedIn(username);
         }
 
         public static UserDTO AreCredentialsValid(string username, string password)
