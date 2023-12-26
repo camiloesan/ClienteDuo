@@ -35,11 +35,9 @@ namespace ClienteDuo.Utilities
         {
             MainWindow.NotifyLogOut(UserId, IsGuest);
             CleanSessionDetails();
-            PopUpMessage popUpMessage = new PopUpMessage();
-            popUpMessage.Message = Properties.Resources.DlgConnectionError;
-            popUpMessage.Show();
-            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            MessageBox.Show(Properties.Resources.DlgConnectionError);
             Application.Current.Shutdown();
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
         }
     }
 }
