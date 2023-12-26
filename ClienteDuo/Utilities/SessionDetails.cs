@@ -1,4 +1,5 @@
 ﻿using ClienteDuo.Pages;
+using ClienteDuo.Pages.Sidebars;
 using System.Windows;
 
 namespace ClienteDuo.Utilities
@@ -32,9 +33,13 @@ namespace ClienteDuo.Utilities
 
         public static void AbortOperation()
         {
+            MainWindow.NotifyLogOut(UserId, IsGuest);
             CleanSessionDetails();
-            Application.Current.MainWindow.Content = new Launcher();
-            MainWindow.ShowMessageBox(Properties.Resources.DlgConnectionError, MessageBoxImage.Error);
+            PopUpMessage popUpMessage = new PopUpMessage();
+            popUpMessage.Message = Properties.Resources.DlgConnectionError;
+            popUpMessage.Show();
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
     }
 }
