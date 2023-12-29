@@ -112,14 +112,14 @@ namespace ClienteDuo.Utilities.Tests
             UserDTO user1Object = UsersManager.GetUserInfoByUsername(_user1);
             var blockList = UsersManager.GetBlockedUsersListByUserId(user1Object.ID);
 
-            bool result = UsersManager.UnblockUserByBlockId(blockList.First().BlockID);
+            bool result = UsersManager.UnblockUserByBlockId(blockList.First().BlockID) == 1;
             Assert.IsTrue(result);
         }
 
         [TestMethod()]
         public void UnblockUserByBlockIdUserDoesNotExistTest()
         {
-            bool result = UsersManager.UnblockUserByBlockId(0);
+            bool result = UsersManager.UnblockUserByBlockId(0) == 1;
 
             Assert.IsFalse(result);
         }
@@ -310,14 +310,14 @@ namespace ClienteDuo.Utilities.Tests
         [TestMethod()]
         public void ModifyPasswordByEmailDoesNotExistTest()
         {
-            bool result = UsersManager.ModifyPasswordByEmail("eldorado@gmail.com", _password2);
+            bool result = UsersManager.ModifyPasswordByEmail("eldorado@gmail.com", _password2) == 1;
             Assert.IsFalse(result);
         }
 
         [TestMethod()]
         public void ModifyPasswordByEmailSuccessTest()
         {
-            bool result = UsersManager.ModifyPasswordByEmail(_email1, _password2);
+            bool result = UsersManager.ModifyPasswordByEmail(_email1, _password2) == 1;
             Assert.IsTrue(result);
         }
 
@@ -327,6 +327,37 @@ namespace ClienteDuo.Utilities.Tests
             string email = "camiloesan@gmail.com";
             int result = UsersManager.SendConfirmationCode(email, "en");
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod()]
+        public void UserBanTest()
+        {
+            string user1 = "pepe";
+            string user2 = "antonio";
+            string user3 = "jesus";
+            UsersManager.AddUserToDatabase(user1, "degos@gmail.com", "12345");
+            UsersManager.AddUserToDatabase(user2, "degas@gmail.com", "12345");
+            UsersManager.AddUserToDatabase(user3, "degbs@gmail.com", "12345");
+            UsersManager.BlockUserByUsername(user1 ,_user1);
+            UsersManager.BlockUserByUsername(user2, _user1);
+            int result = UsersManager.BlockUserByUsername(user3, _user1);
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod()]
+        public void IsUserBannedTest()
+        {
+            string user1 = "pepe";
+            string user2 = "antonio";
+            string user3 = "jesus";
+            UsersManager.AddUserToDatabase(user1, "degos@gmail.com", "12345");
+            UsersManager.AddUserToDatabase(user2, "degas@gmail.com", "12345");
+            UsersManager.AddUserToDatabase(user3, "degbs@gmail.com", "12345");
+            UsersManager.BlockUserByUsername(user1, _user1);
+            UsersManager.BlockUserByUsername(user2, _user1);
+            UsersManager.BlockUserByUsername(user3, _user1);
+            var userInfo = UsersManager.GetUserInfoByUsername(_user1);
+            Assert.IsTrue(UsersManager.IsUserBanned(userInfo.ID));
         }
     }
 }

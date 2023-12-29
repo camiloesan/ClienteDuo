@@ -30,7 +30,7 @@ namespace ClienteDuo.Utilities
             return usersManagerClient.AddUserToDatabase(databaseUser);
         }
 
-        public static bool UpdateProfilePicture(int userId, int pictureId)
+        public static int UpdateProfilePicture(int userId, int pictureId)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.UpdateProfilePictureByUserId(userId, pictureId);
@@ -72,7 +72,7 @@ namespace ClienteDuo.Utilities
             return usersManagerClient.GetFriendRequestsList(userId);
         }
 
-        public static bool UnblockUserByBlockId(int blockId)
+        public static int UnblockUserByBlockId(int blockId)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.UnblockUserByBlockId(blockId);
@@ -90,7 +90,7 @@ namespace ClienteDuo.Utilities
             return usersManagerClient.IsUserBlockedByUsername(usernameBlocker, usernameBlocked);
         }
 
-        public static bool SendFriendRequest(string usernameSender, string usernameReceiver)
+        public static int SendFriendRequest(string usernameSender, string usernameReceiver)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.SendFriendRequest(usernameSender, usernameReceiver);
@@ -108,7 +108,7 @@ namespace ClienteDuo.Utilities
             return usersManagerClient.IsFriendRequestAlreadyExistent(usernameSender, usernameReceiver);
         }
 
-        public static bool BlockUserByUsername(string blockerUsername, string blockedUsername)
+        public static int BlockUserByUsername(string blockerUsername, string blockedUsername)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.BlockUserByUsername(blockerUsername, blockedUsername);
@@ -138,7 +138,7 @@ namespace ClienteDuo.Utilities
             return usersManagerClient.DeleteFriendshipById(friendshipId);
         }
 
-        public static bool ModifyPasswordByEmail(string email, string newPassword)
+        public static int ModifyPasswordByEmail(string email, string newPassword)
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.ModifyPasswordByEmail(email, newPassword);
@@ -154,6 +154,12 @@ namespace ClienteDuo.Utilities
         {
             UsersManagerClient usersManagerClient = new UsersManagerClient();
             return usersManagerClient.DeleteUserFromDatabaseByUsername(username);
+        }
+
+        public static bool IsUserBanned(int userId)
+        {
+            UsersManagerClient usersManagerClient = new UsersManagerClient();
+            return usersManagerClient.IsUserBanned(userId);
         }
     }
 }

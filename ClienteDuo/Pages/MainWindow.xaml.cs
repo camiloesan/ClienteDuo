@@ -35,9 +35,9 @@ namespace ClienteDuo.Pages
 
         public static void NotifyLogOut(int userId, bool isGuest)
         {
+            var userConnectionHandlerClient = new UserConnectionHandlerClient();
             if (!isGuest)
             {
-                var userConnectionHandlerClient = new UserConnectionHandlerClient();
                 var user = new UserDTO
                 {
                     ID = userId,
@@ -45,6 +45,10 @@ namespace ClienteDuo.Pages
                     PartyCode = SessionDetails.PartyCode
                 };
                 userConnectionHandlerClient.NotifyLogOut(user, SessionDetails.IsHost);
+            } 
+            else
+            {
+                userConnectionHandlerClient.NotifyGuestLeft(SessionDetails.PartyCode, SessionDetails.Username);
             }
         }
 

@@ -313,6 +313,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We couldn&apos;t block this user, try again later.
+        /// </summary>
+        public static string DlgCouldntBlockUser {
+            get {
+                return ResourceManager.GetString("DlgCouldntBlockUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email must have less than 30 characters and a valid format (----@domain.com).
         /// </summary>
         public static string DlgEmailInvalid {
@@ -502,6 +511,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are banned, and you can no longer log into your account.
+        /// </summary>
+        public static string DlgLoginBanned {
+            get {
+                return ResourceManager.GetString("DlgLoginBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to close this session?.
         /// </summary>
         public static string DlgLogOutConfirmation {
@@ -565,6 +583,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your profile picture could&apos;t be updated, try again later.
+        /// </summary>
+        public static string DlgProfilePictureNotUpdated {
+            get {
+                return ResourceManager.GetString("DlgProfilePictureNotUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile picture has been updated.
         /// </summary>
         public static string DlgProfilePictureUpdated {
@@ -615,6 +642,15 @@ namespace ClienteDuo.Properties {
         public static string DlgUserAlreadyLoggedIn {
             get {
                 return ResourceManager.GetString("DlgUserAlreadyLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Due to multiple reports this user has been banned.
+        /// </summary>
+        public static string DlgUserBanned {
+            get {
+                return ResourceManager.GetString("DlgUserBanned", resourceCulture);
             }
         }
         

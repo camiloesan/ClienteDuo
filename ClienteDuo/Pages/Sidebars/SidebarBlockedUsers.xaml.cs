@@ -72,7 +72,7 @@ namespace ClienteDuo.Pages.Sidebars
             bool result = false;
             try
             {
-                result = UsersManager.UnblockUserByBlockId(blockedUser.BlockID);
+                result = UsersManager.UnblockUserByBlockId(blockedUser.BlockID) == 1;
             }
             catch (CommunicationException)
             {

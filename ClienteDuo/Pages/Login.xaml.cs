@@ -35,9 +35,14 @@ namespace ClienteDuo.Pages
 
             UserDTO loggedUser = null;
             bool result = true;
+            bool isUserBanned = false;
             try
             {
                 loggedUser = UsersManager.AreCredentialsValid(username, password);
+                if (loggedUser != null)
+                {
+                    isUserBanned = UsersManager.IsUserBanned(loggedUser.ID);
+                }
             }
             catch (CommunicationException)
             {
@@ -55,6 +60,10 @@ namespace ClienteDuo.Pages
                 if (loggedUser == null)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgFailedLogin, MessageBoxImage.Warning);
+                }
+                else if (isUserBanned)
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgLoginBanned, MessageBoxImage.Warning);
                 }
                 else if (UsersManager.IsUserLoggedIn(loggedUser.UserName))
                 {

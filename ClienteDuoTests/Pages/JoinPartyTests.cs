@@ -17,6 +17,7 @@ namespace ClienteDuo.Pages.Tests
         {
             TestPartyManager testPartyManager = new TestPartyManager();
             testPartyManager.NotifyCreateParty(_partyCode, _hostUsername);
+            Thread.Sleep(2000);
         }
 
         [TestCleanup]
@@ -24,6 +25,7 @@ namespace ClienteDuo.Pages.Tests
         {
             TestPartyManager testPartyManager = new TestPartyManager();
             testPartyManager.NotifyCloseParty(_partyCode, _hostUsername, "");
+            Thread.Sleep(2000);
         }
 
         [TestMethod()]
@@ -89,6 +91,7 @@ namespace ClienteDuo.Pages.Tests
 
             TestPartyManager testPartyManager = new TestPartyManager();
             testPartyManager.NotifyJoinParty(_partyCode, player0Username);
+            Thread.Sleep(2000);
 
             usersManagerClient.BlockUserByUsername(player0Username, player1Username);
             JoinParty joinParty = new JoinParty();
@@ -104,7 +107,7 @@ namespace ClienteDuo.Pages.Tests
         public void IsUserBlockedByPlayerInLobbyFalseTest()
         {
             JoinParty joinParty = new JoinParty();
-            bool result = joinParty.IsUserBlockedByPlayerInParty(_hostUsername, _partyCode);
+            bool result = joinParty.IsUserBlockedByPlayerInParty("cardone", _partyCode);
 
             Assert.IsFalse(result);
         }

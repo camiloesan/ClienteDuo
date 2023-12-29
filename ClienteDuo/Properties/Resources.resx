@@ -427,4 +427,16 @@
   <data name="DlgLogOutConfirmation" xml:space="preserve">
     <value>Are you sure you want to close this session?</value>
   </data>
+  <data name="DlgProfilePictureNotUpdated" xml:space="preserve">
+    <value>Your profile picture could't be updated, try again later</value>
+  </data>
+  <data name="DlgCouldntBlockUser" xml:space="preserve">
+    <value>We couldn't block this user, try again later</value>
+  </data>
+  <data name="DlgLoginBanned" xml:space="preserve">
+    <value>You are banned, and you can no longer log into your account</value>
+  </data>
+  <data name="DlgUserBanned" xml:space="preserve">
+    <value>Due to multiple reports this user has been banned</value>
+  </data>
 </root>

@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System;
 using System.ServiceModel;
+using ClienteDuo.DataService;
 
 namespace ClienteDuo.Pages
 {
@@ -46,9 +47,10 @@ namespace ClienteDuo.Pages
             bool confirmation = MainWindow.ShowConfirmationBox(Properties.Resources.DlgLogOutConfirmation);
             if (confirmation)
             {
+                UserConnectionHandlerClient client = new UserConnectionHandlerClient();
                 try
                 {
-                    MainWindow.NotifyLogOut(SessionDetails.UserId, false);
+                    client.LogOut(SessionDetails.Username);
                 }
                 catch (CommunicationException)
                 {

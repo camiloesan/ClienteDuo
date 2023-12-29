@@ -48,7 +48,7 @@ namespace ClienteDuo.Pages.Sidebars
             bool result = false;
             try
             {
-                result = UsersManager.ModifyPasswordByEmail(email, newPassword);
+                result = UsersManager.ModifyPasswordByEmail(email, newPassword) == 1;
             }
             catch (CommunicationException)
             {

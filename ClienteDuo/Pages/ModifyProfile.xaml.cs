@@ -47,7 +47,7 @@ namespace ClienteDuo.Pages
             bool result = false;
             try
             {
-                result = UsersManager.UpdateProfilePicture(SessionDetails.UserId, _selectedPictureId);
+                result = UsersManager.UpdateProfilePicture(SessionDetails.UserId, _selectedPictureId) == 1;
             }
             catch (CommunicationException)
             {
@@ -63,6 +63,10 @@ namespace ClienteDuo.Pages
                 SessionDetails.PictureID = _selectedPictureId;
                 MainWindow.ShowMessageBox(Properties.Resources.DlgProfilePictureUpdated, MessageBoxImage.Information);
                 Application.Current.MainWindow.Content = new MainMenu();
+            }
+            else
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgProfilePictureNotUpdated, MessageBoxImage.Information);
             }
         }
 

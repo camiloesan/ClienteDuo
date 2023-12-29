@@ -340,7 +340,7 @@
     <value>No se pudo expulsar este usuario, por favor defina una razón de expulsión</value>
   </data>
   <data name="DlgFriendRequestError" xml:space="preserve">
-    <value>Hubo un error al enviar la solicitud de amistar a este usuario</value>
+    <value>Hubo un error al enviar la solicitud de amistad a este usuario</value>
   </data>
   <data name="TitlePasswordReset" xml:space="preserve">
     <value>Reestablecer Contraseña</value>
@@ -425,5 +425,11 @@
   </data>
   <data name="DlgLogOutConfirmation" xml:space="preserve">
     <value>¿Estás seguro de que deseas cerrar esta sesión?</value>
+  </data>
+  <data name="DlgCouldntBlockUser" xml:space="preserve">
+    <value>No se puedo bloquear al usuario en este momento, inténtelo de nuevo mas tarde.</value>
+  </data>
+  <data name="DlgLoginBanned" xml:space="preserve">
+    <value>Estás baneado, ya no podrás iniciar sesión en tu cuenta</value>
   </data>
 </root>

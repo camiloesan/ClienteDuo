@@ -13,9 +13,9 @@ namespace ClienteDuo.Pages.Tests
     [TestClass()]
     public class ModifyProfileTests
     {
-        string _initializedUsername = "demonslayer77";
-        string _initializedEmail = "dprk@gmail.com";
-        string _initializedPassword = "Tokyo2023!";
+        readonly string _initializedUsername = "demonslayer77";
+        readonly string _initializedEmail = "dprk@gmail.com";
+        readonly string _initializedPassword = "Tokyo2023!";
 
         [TestInitialize]
         public void Init()
@@ -37,8 +37,8 @@ namespace ClienteDuo.Pages.Tests
         [TestMethod()]
         public void UpdateProfilePictureExistentUserTest()
         {
-            int pictureId = 0;
-            bool result = UsersManager.UpdateProfilePicture(SessionDetails.UserId, pictureId);
+            int pictureId = 1;
+            bool result = UsersManager.UpdateProfilePicture(SessionDetails.UserId, pictureId) == 1;
             Assert.IsTrue(result);
         }
 
@@ -46,7 +46,7 @@ namespace ClienteDuo.Pages.Tests
         public void UpdateProfilePictureNonExistentUserTest()
         {
             int pictureId = 0;
-            bool result = UsersManager.UpdateProfilePicture(0, pictureId);
+            bool result = UsersManager.UpdateProfilePicture(0, pictureId) == 1;
             Assert.IsFalse(result);
         }
     }

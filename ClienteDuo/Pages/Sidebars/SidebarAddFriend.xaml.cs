@@ -60,7 +60,7 @@ namespace ClienteDuo.Pages.Sidebars
             }
         }
 
-        private bool SendRequest(string usernameSender, string usernameReceiver)
+        private void SendRequest(string usernameSender, string usernameReceiver)
         {
             bool result = false;
             if (usernameReceiver == SessionDetails.Username)
@@ -91,16 +91,32 @@ namespace ClienteDuo.Pages.Sidebars
             }
             else
             {
-                result = UsersManager.SendFriendRequest(usernameSender, usernameReceiver);
+                try
+                {
+                    result = UsersManager.SendFriendRequest(usernameSender, usernameReceiver) == 1;
+                }
+                catch (CommunicationException)
+                {
+                    SessionDetails.AbortOperation();
+                }
+                catch (TimeoutException)
+                {
+                    SessionDetails.AbortOperation();
+                }
+
                 if (result)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent,
                         MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
+                } 
+                else
+                {
+                    MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestError,
+                        MessageBoxImage.Information);
                 }
                 TBoxUserReceiver.Clear();
             }
-            return result;
         }
     }
 }

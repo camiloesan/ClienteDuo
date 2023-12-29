@@ -49,6 +49,11 @@ namespace ClienteDuo.Pages.Sidebars
                 {
                     BtnAddFriend.Visibility = Visibility.Collapsed;
                 }
+                if (SessionDetails.IsGuest)
+                {
+                    BtnAddFriend.Visibility = Visibility.Collapsed;
+                    BtnBlock.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -113,7 +118,7 @@ namespace ClienteDuo.Pages.Sidebars
             }
             else
             {
-                if (UsersManager.SendFriendRequest(usernameSender, usernameReceiver))
+                if (UsersManager.SendFriendRequest(usernameSender, usernameReceiver) == 1)
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgFriendRequestSent, MessageBoxImage.Information);
                     Visibility = Visibility.Collapsed;
@@ -146,7 +151,7 @@ namespace ClienteDuo.Pages.Sidebars
                     UsersManager.DeleteFriendshipById(friendshipId);
                 }
 
-                bool result = false;
+                int result = 0;
                 try
                 {
                     result = BlockUser(SessionDetails.Username, _userSelectedName);
@@ -155,26 +160,47 @@ namespace ClienteDuo.Pages.Sidebars
                 {
                     MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
                 }
-
-                if (result)
+                catch (TimeoutException)
                 {
-                    MainWindow.ShowMessageBox(Properties.Resources.DlgBlockedUser, MessageBoxImage.Exclamation);
+                    SessionDetails.AbortOperation();
+                }
+
+                switch (result) {
+                    case 1:
+                        MainWindow.ShowMessageBox(Properties.Resources.DlgBlockedUser, MessageBoxImage.Exclamation);
+                        break;
+                    case 2:
+                        MainWindow.ShowMessageBox(Properties.Resources.DlgUserBanned, MessageBoxImage.Exclamation);
+                        break;
+                    default:
+                        MainWindow.ShowMessageBox(Properties.Resources.DlgCouldntBlockUser, MessageBoxImage.Exclamation);
+                        break;
                 }
             }
         }
 
-        private bool BlockUser(string usernameSender, string usernameReceiver)
+        private int BlockUser(string usernameSender, string usernameReceiver)
         {
-            if (UsersManager.BlockUserByUsername(usernameSender, usernameReceiver))
+            int result = 0;
+            try
             {
-                if (SessionDetails.PartyCode == 0)
-                {
-                    var mainMenu = new MainMenu();
-                    Application.Current.MainWindow.Content = mainMenu;
-                }
-                return true;
+                result = UsersManager.BlockUserByUsername(usernameSender, usernameReceiver);
             }
-            return false;
+            catch (CommunicationException)
+            {
+                MainWindow.ShowMessageBox(Properties.Resources.DlgServiceException, MessageBoxImage.Error);
+            }
+            catch (TimeoutException)
+            {
+                SessionDetails.AbortOperation();
+            }
+
+            if (result > 0 && SessionDetails.PartyCode == 0)
+            {
+                var mainMenu = new MainMenu();
+                Application.Current.MainWindow.Content = mainMenu;
+            }
+            return result;
         }
 
 
