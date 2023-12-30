@@ -527,10 +527,10 @@ namespace ClienteDuo.DataService {
         System.Threading.Tasks.Task<ClienteDuo.DataService.UserDTO> GetUserInfoByUsernameAsync(string username);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
-        bool AddUserToDatabase(ClienteDuo.DataService.UserDTO user);
+        int AddUserToDatabase(ClienteDuo.DataService.UserDTO user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/AddUserToDatabase", ReplyAction="http://tempuri.org/IUsersManager/AddUserToDatabaseResponse")]
-        System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(ClienteDuo.DataService.UserDTO user);
+        System.Threading.Tasks.Task<int> AddUserToDatabaseAsync(ClienteDuo.DataService.UserDTO user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsername", ReplyAction="http://tempuri.org/IUsersManager/DeleteUserFromDatabaseByUsernameResponse")]
         bool DeleteUserFromDatabaseByUsername(string username);
@@ -702,11 +702,11 @@ namespace ClienteDuo.DataService {
             return base.Channel.GetUserInfoByUsernameAsync(username);
         }
         
-        public bool AddUserToDatabase(ClienteDuo.DataService.UserDTO user) {
+        public int AddUserToDatabase(ClienteDuo.DataService.UserDTO user) {
             return base.Channel.AddUserToDatabase(user);
         }
         
-        public System.Threading.Tasks.Task<bool> AddUserToDatabaseAsync(ClienteDuo.DataService.UserDTO user) {
+        public System.Threading.Tasks.Task<int> AddUserToDatabaseAsync(ClienteDuo.DataService.UserDTO user) {
             return base.Channel.AddUserToDatabaseAsync(user);
         }
         
@@ -901,9 +901,6 @@ namespace ClienteDuo.DataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserConnectionHandler/UserLogged", ReplyAction="http://tempuri.org/IUserConnectionHandler/UserLoggedResponse")]
         void UserLogged(string username);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserConnectionHandler/UserLoggedOut", ReplyAction="http://tempuri.org/IUserConnectionHandler/UserLoggedOutResponse")]
-        void UserLoggedOut(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

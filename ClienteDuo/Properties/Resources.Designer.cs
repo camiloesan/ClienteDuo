@@ -178,11 +178,20 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Login.
+        ///   Looks up a localized string similar to Log In.
         /// </summary>
         public static string BtnLogin {
             get {
                 return ResourceManager.GetString("BtnLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log Out.
+        /// </summary>
+        public static string BtnLogOut {
+            get {
+                return ResourceManager.GetString("BtnLogOut", resourceCulture);
             }
         }
         
@@ -300,6 +309,15 @@ namespace ClienteDuo.Properties {
         public static string DlgConnectionError {
             get {
                 return ResourceManager.GetString("DlgConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We couldn&apos;t block this user, try again later.
+        /// </summary>
+        public static string DlgCouldntBlockUser {
+            get {
+                return ResourceManager.GetString("DlgCouldntBlockUser", resourceCulture);
             }
         }
         
@@ -439,11 +457,20 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password needs to contain at least: 8 characters, one special symbol, one uppercase and lowercase letter, and a maximum of 16 characters.
+        ///   Looks up a localized string similar to Password needs to contain at least: 8 characters, one special symbol(!@?#$&amp;$°¬|/%*), one uppercase and lowercase letter, and a maximum of 16 characters.
         /// </summary>
         public static string DlgInsecurePassword {
             get {
                 return ResourceManager.GetString("DlgInsecurePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid format.
+        /// </summary>
+        public static string DlgInvalidFormat {
+            get {
+                return ResourceManager.GetString("DlgInvalidFormat", resourceCulture);
             }
         }
         
@@ -480,6 +507,24 @@ namespace ClienteDuo.Properties {
         public static string DlgKickingReason {
             get {
                 return ResourceManager.GetString("DlgKickingReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are banned, and you can no longer log into your account.
+        /// </summary>
+        public static string DlgLoginBanned {
+            get {
+                return ResourceManager.GetString("DlgLoginBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to close this session?.
+        /// </summary>
+        public static string DlgLogOutConfirmation {
+            get {
+                return ResourceManager.GetString("DlgLogOutConfirmation", resourceCulture);
             }
         }
         
@@ -538,6 +583,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your profile picture could&apos;t be updated, try again later.
+        /// </summary>
+        public static string DlgProfilePictureNotUpdated {
+            get {
+                return ResourceManager.GetString("DlgProfilePictureNotUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile picture has been updated.
         /// </summary>
         public static string DlgProfilePictureUpdated {
@@ -592,6 +646,15 @@ namespace ClienteDuo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Due to multiple reports this user has been banned.
+        /// </summary>
+        public static string DlgUserBanned {
+            get {
+                return ResourceManager.GetString("DlgUserBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot join this party, a user you have blocked or has you blocked is in party.
         /// </summary>
         public static string DlgUserBlockedInParty {
@@ -633,6 +696,15 @@ namespace ClienteDuo.Properties {
         public static string DlgUsernameTaken {
             get {
                 return ResourceManager.GetString("DlgUsernameTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong code.
+        /// </summary>
+        public static string DlgWrongCode {
+            get {
+                return ResourceManager.GetString("DlgWrongCode", resourceCulture);
             }
         }
         

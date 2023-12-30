@@ -25,7 +25,7 @@ namespace ClienteDuo.Pages.Sidebars
 
         private void SetProfilePicture()
         {
-            BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp " + SessionDetails.PictureID + ".png"));
+            BitmapImage bitmapImage = new BitmapImage(new System.Uri("pack://application:,,,/ClienteDuo;component/Images/pfp" + SessionDetails.PictureID + ".png"));
             ImageProfilePicture.Source = bitmapImage;
             ImageProfilePicture.Stretch = Stretch.UniformToFill;
         }
