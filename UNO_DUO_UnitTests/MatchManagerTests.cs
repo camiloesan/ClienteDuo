@@ -9,9 +9,6 @@ using System.Text;
 
 namespace UNO_DUO_UnitTests
 {
-    /// <summary>
-    /// Summary description for MatchManagerTest
-    /// </summary>
     [TestClass]
     public class MatchManagerTests
     {
